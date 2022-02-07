@@ -1,3 +1,18 @@
+# Medidas para trabajar en colaborativo en Github-DSS
+
+- Comentarios en castellano
+- Nombres de funciones y objetos en castellano
+- Los nombres de funciones, objetos y otros deben ser descriptivos
+- La notación de funciones es: primera letra en **minuscula** y notación camel (palabras separadas por mayusculas)
+- La notación de funciones es: primera letra en **mayuscula** y notación camel (palabras separadas por mayusculas)
+- Priorizar código en limpio y respetar principio de responsabilidad única
+- Los comentarios deberían usarse lo mínimo, a poder ser solo para describir funcionalidad de funciones y objetos
+
+> Para otros apartados comentar y se añaden
+Seguir flujo de trabajo de gitglow: [Atalasian Gitflow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow) 
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
