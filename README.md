@@ -8,6 +8,15 @@
 - Priorizar código en limpio y respetar principio de responsabilidad única
 - Los comentarios deberían usarse lo mínimo, a poder ser solo para describir funcionalidad de funciones y objetos
 
+- Creación de una rama:
+    - Para crear una rama en local y situarnos en ella: git checkout -b nombre_rama
+    - Para pushear la rama al remoto: git push -u origin nombre_rama
+- Flujo de trabajo con respecto al repositorio:
+    - Primero, al inicio de cada sesión de trabajo, hacer un git pull de la rama development.
+    - Segundo, hacer un merge con nuestra rama para asegurarnos de que no haya conflictos luego y si los hay resolverlos.
+    - Tercero, cuando terminemos de trabajar con nuestra rama, hacer push.
+    - Por último, cuando terminemos de implementar una funcionalidad, hacer un merge desde nuestra rama a la development.
+
 > Para otros apartados comentar y se añaden
 Seguir flujo de trabajo de gitglow: [Atalasian Gitflow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow) 
 
