@@ -17,8 +17,10 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('category');
+            $table->float('valoration');
             $table->string('content');
-            $table->foreignId('Author_id')->constrained()->cascadeOnDelete();;
+            $table->boolean('acepted?');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,7 +33,7 @@ class CreateArticlesTable extends Migration
     public function down()
     {
         Schema::table('Articles', function (Blueprint $table) {
-            $table->dropForeign(['Author_id']);
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('Articles');
