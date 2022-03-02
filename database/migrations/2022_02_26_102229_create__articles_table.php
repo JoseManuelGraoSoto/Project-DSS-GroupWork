@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('Articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->enum('category', ['Ciencia', 'Biologia', 'Computación', 'Machine Learning']);
+            $table->string('category');
             $table->float('valoration');
             $table->string('content');
             $table->boolean('acepted?');
