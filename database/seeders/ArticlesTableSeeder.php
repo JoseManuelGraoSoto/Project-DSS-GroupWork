@@ -17,9 +17,9 @@ class ArticlesTableSeeder extends Seeder
         DB::table('Articles')->delete();
         DB::table('Articles')->insert([
             'title' => 'A little Title',
-            'category' => 'Technology',
+            'category' => 'Ciencia',
             'valoration' => 3.5,
-            'content' => 'This is an article about technology',
+            'content' => 'This is an article about sciencie',
             'acepted?' => 1,
             'user_id' => 1
         ]);
