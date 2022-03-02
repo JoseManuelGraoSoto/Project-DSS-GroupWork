@@ -15,7 +15,7 @@ class CreateAccessToArticlesTable extends Migration
     {
         Schema::create('access_to_articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained();
+            $table->foreignId('Article_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
