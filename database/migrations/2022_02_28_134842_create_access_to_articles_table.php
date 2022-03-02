@@ -17,7 +17,7 @@ class CreateAccessToArticlesTable extends Migration
             $table->id();
             $table->foreignId('Article_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
