@@ -25,22 +25,28 @@ class UserTest extends TestCase {
     }
 
     public function testRead() {
-        $user = User::find(1); // select * from articles where id = 1
-        $this->assertEquals($user->name, 'David');
+        $users = User::all();
+        foreach($users as $user) {
+            $this->assertEquals($user->name,'David');
+        }
     }
 
     public function testUpdate(){
-        $user = User::find(1);
-        $user->type = 'Autor';
+        $users = User::all();
+        foreach($users as $user) {
+            if ($user->name == 'David') {
+                $user->type = 'Autor';
+            }
+        }
         $user->save();
 
-        $updated_user = User::find(1);
+        $updated_user = User::first();
         $this->assertEquals($updated_user->type, 'Autor');
     }
 
     public function testDelete(){
         $num_user = User::all()->count();
-        $user = User::find(1);
+        $user = User::first();
         $user->delete();
         $num_user_deleted = User::all()->count();
         $this->assertTrue($num_user > $num_user_deleted);
