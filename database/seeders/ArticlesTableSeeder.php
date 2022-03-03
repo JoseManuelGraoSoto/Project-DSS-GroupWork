@@ -14,13 +14,13 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Articles')->delete();
-        DB::table('Articles')->insert([
+        DB::table('articles')->delete();
+        DB::table('articles')->insert([
             'title' => 'A little Title',
             'category' => 'Ciencia',
             'valoration' => 3.5,
             'content' => 'This is an article about sciencie',
-            'acepted?' => 1,
+            'acepted' => 1,
             'user_id' => 1
         ]);
     }
