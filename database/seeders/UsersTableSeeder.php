@@ -23,4 +23,5 @@ class UsersTableSeeder extends Seeder
         'telephone' => '966999999'
     ]);
     }
+
 }
