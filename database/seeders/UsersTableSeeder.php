@@ -16,11 +16,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         // Añadimos una entrada a esta tabla
         DB::table('users')->insert([
-        'name' => 'Username',
+        'name' => 'David',
         'type' => 'Lector',
-        'email' => 'name@domain.com ',
-        'password' => 'strongpassword',
-        'telephone' => '966999999'
+        'email' => 'david@gmail.com',
+        'password' => 'holaContra',
+        'telephone' => '966354870'
     ]);
     }
 
