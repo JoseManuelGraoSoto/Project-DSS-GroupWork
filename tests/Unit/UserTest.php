@@ -32,14 +32,10 @@ class UserTest extends TestCase {
     }
 
     public function testUpdate(){
-        $users = User::all();
-        foreach($users as $user) {
-            if ($user->name == 'David') {
-                $user->type = 'author';
-                $user->save();
-            }
-        }
-        $updated_user = User::first();
+        $user = User::where('name','David')->first();
+        $user->type = 'author';
+        $user->save();
+        $updated_user = User::where('name','David')->first();
         $this->assertEquals($updated_user->type, 'author');
     }
 
