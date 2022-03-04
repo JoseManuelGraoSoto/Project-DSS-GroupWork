@@ -16,3 +16,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+vendor/composer/autoload_classmap.php
+vendor/composer/autoload_static.php
