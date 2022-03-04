@@ -29,8 +29,17 @@ class ArticleTest extends TestCase
     }
 
     public function testDelete(){
+        $new_article = new Article;
+        $new_article->title = 'Test Article Delete';
+        $new_article->category = 'Computación';
+        $new_article->valoration = 2.3;
+        $new_article->content = 'Testing article delete';
+        $new_article->acepted = 1;
+        $new_article->user_id = 1;
+        $new_article->save();
+
         $num_article = Article::all()->count();
-        $article = Article::find(1);
+        $article = Article::where('title','Test Article Delete')->first();
         $article->delete();
         $num_article_deleted = Article::all()->count();
         $this->assertTrue($num_article > $num_article_deleted);
