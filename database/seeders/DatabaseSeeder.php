@@ -11,9 +11,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run() {
-        // Llamamos a otro fichero de semillas
+        // Llamadas a ficheros de semillas
+        $this->call(UsersTableSeeder::class );
         $this->call( ArticlesTableSeeder::class );
-        // Mostramos información por consola
-        $this->command->info('Article table seeded!' );
     }   
 }
