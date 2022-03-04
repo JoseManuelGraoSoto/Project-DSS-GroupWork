@@ -6,8 +6,6 @@
 /public/storage
 /storage/*.key
 /vendor
-/vendor/composer/autoload_classmap.php
-/vendor/composer/autoload_static.php
 .env
 .env.backup
 .phpunit.result.cache
