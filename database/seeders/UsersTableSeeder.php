@@ -30,6 +30,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'autor123',
             'telephone' => '966323370'
         ]);
+
     }
 
 }
