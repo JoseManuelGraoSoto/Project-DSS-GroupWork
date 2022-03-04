@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
         // Llamadas a ficheros de semillas
         $this->call( UsersTableSeeder::class );
         $this->call( ArticlesTableSeeder::class );
-        $this->call( Access_to_articlesTableSeeder::class );
+        $this->call( Article_userTableSeeder::class );
     }   
 }

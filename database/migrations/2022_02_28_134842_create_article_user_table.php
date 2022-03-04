@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccessToArticlesTable extends Migration
+class CreateArticleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAccessToArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('access_to_articles', function (Blueprint $table) {
+        Schema::create('article_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('article_id')->constrained();
             $table->foreignId('user_id')->constrained();
@@ -28,6 +28,6 @@ class CreateAccessToArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('access_to_articles');
+        Schema::dropIfExists('article_user');
     }
 }
