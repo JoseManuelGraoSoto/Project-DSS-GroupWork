@@ -14,7 +14,7 @@ class UserTest extends TestCase {
     public function testCreate(){
         $new_user = new User;
         $new_user->name = 'David';
-        $new_user->type = 'Lector';
+        $new_user->type = 'reader';
         $new_user->email = 'david@gmail.com';
         $new_user->password = 'holaContra';
         $new_user->telephone = '966354870';
