@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class Access_to_articlesTableSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class Access_to_articlesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('access_to_articles')->delete();
+        DB::table('access_to_articles')->insert([
+            'article_id' => 1,
+            'user_id' => 2
+        ]);
     }
 }
