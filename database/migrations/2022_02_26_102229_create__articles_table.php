@@ -13,13 +13,13 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Articles', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('category');
+            $table->enum('category', ['Ciencia', 'Biologia', 'Computación', 'Machine Learning']);
             $table->float('valoration');
             $table->string('content');
-            $table->boolean('acepted?');
+            $table->boolean('acepted');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -32,10 +32,10 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('Articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
 
-        Schema::dropIfExists('Articles');
+        Schema::dropIfExists('articles');
     }
 }
