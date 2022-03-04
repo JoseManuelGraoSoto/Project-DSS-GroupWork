@@ -35,11 +35,10 @@ class Article_userTest extends TestCase
         $new_article->user_id = 2;
         $new_article->save();
         
-        $new_article->users()->attach($new_user->id);
-        $article_users = Article::where('title','Test access to article')->first()->users;
-        foreach ($article_users as $article_user){
-            $this->assertEquals($article_user->user_id, 2);
-        }
-        //assertEquals(, 2);
+        $new_article->access()->attach($new_user->id);
+        $article_user = Article::find($new_article->id)->access->find($new_user->id);
+        $accessBy = User::where('email','carlos@gmail.com')->first();
+
+        $this->assertEquals($article_user->id, $accessBy->id);
     }
 }

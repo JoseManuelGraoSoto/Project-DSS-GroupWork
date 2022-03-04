@@ -13,22 +13,20 @@ class UserTest extends TestCase {
      */
     public function testCreate(){
         $new_user = new User;
-        $new_user->name = 'David';
+        $new_user->name = 'Óscar';
         $new_user->type = 'reader';
-        $new_user->email = 'david@gmail.com';
+        $new_user->email = 'oscar@gmail.com';
         $new_user->password = 'holaContra';
-        $new_user->telephone = '966354870';
+        $new_user->telephone = '965354870';
         $new_user->save();
 
-        $user = User::where('name', 'David')-> first(); // select * from users where name = 'David'
+        $user = User::where('name', 'Óscar')-> first(); // select * from users where name = 'Óscar'
         $this->assertEquals($new_user->name, $user->name);
     }
 
     public function testRead() {
-        $users = User::all();
-        foreach($users as $user) {
-            $this->assertEquals($user->name,'David');
-        }
+        $user = User::where('email','david@gmail.com')->first();
+        $this->assertEquals($user->name,'David');
     }
 
     public function testUpdate(){
