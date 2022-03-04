@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         // Añadimos una entrada a esta tabla
         DB::table('users')->insert([
         'name' => 'David',
-        'type' => 'Lector',
+        'type' => 'reader',
         'email' => 'david@gmail.com',
         'password' => 'holaContra',
         'telephone' => '966354870'
