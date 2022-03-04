@@ -36,10 +36,9 @@ class UserTest extends TestCase {
         foreach($users as $user) {
             if ($user->name == 'David') {
                 $user->type = 'Autor';
+                $user->save();
             }
         }
-        $user->save();
-
         $updated_user = User::first();
         $this->assertEquals($updated_user->type, 'Autor');
     }
