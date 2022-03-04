@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use DB;
 
-class Access_to_articlesTableSeeder extends Seeder
+class Article_userTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class Access_to_articlesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('access_to_articles')->delete();
-        DB::table('access_to_articles')->insert([
+        DB::table('article_user')->delete();
+        DB::table('article_user')->insert([
             'article_id' => 1,
             'user_id' => 2
         ]);

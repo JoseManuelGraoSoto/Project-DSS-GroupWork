@@ -9,8 +9,11 @@ class Article extends Model
 {
     use HasFactory;
 
-    public function user() {
-        // Product tiene la clave ajena 'category_id'
+    public function users() {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function access() {
+        return $this->belongsToMany('App\Models\User');
     }
 }

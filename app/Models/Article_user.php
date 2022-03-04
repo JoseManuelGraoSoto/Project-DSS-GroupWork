@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Access_to_article extends Model
+class Article_user extends Model
 {
     use HasFactory;
 }
