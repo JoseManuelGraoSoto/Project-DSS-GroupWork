@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Model\Article;
-use App\Model\User;
+use App\Models\Article;
+use App\Models\User;
 class ArticleTest extends TestCase
 {
     /**
@@ -16,14 +16,13 @@ class ArticleTest extends TestCase
      */
     public function testCreate()
     {
-        $new_user = new User([
-            'name' => 'Pedro',
-            'type' => 'author',
-            'email' => 'pedro@gmail.com',
-            'password' => 'holaContra',
-            'telephone' => '966357970'
-        ]);
-        $new_user->save();
+        $new_user = new User;
+        $new_user->name = 'Pedro';
+        $new_user->type = 'reader';
+        $new_user->email = 'pedro@gmail.com';
+        $new_user->password = 'holaContra';
+        $new_user->telephone = '966354870';
+        $new_user->save();        
         $new_article = new Article;
         $new_article->title = 'Test Article Insert';
         $new_article->category = 'Biologia';
