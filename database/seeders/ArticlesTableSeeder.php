@@ -21,7 +21,7 @@ class ArticlesTableSeeder extends Seeder
             'valoration' => 3.5,
             'content' => 'This is an article about sciencie',
             'acepted' => 1,
-            'user_id' => 1
+            'user_id' => 2
         ]);
     }
 }
