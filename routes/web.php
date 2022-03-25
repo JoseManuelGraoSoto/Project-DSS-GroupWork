@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\ArticlesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +25,8 @@ Route::delete('deleteUser/{id}', [UsersController::class, 'delete'])->name('user
 
 
 //Rutas articles
-
+Route::get('article/{id}', [ArticlesController::class, 'show'])->name('article.show');
+Route::get('articles/', [ArticlesController::class, 'showAll'])->name('article.showAll');
 
 
 
