@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Rutas users
 Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
+Route::get('users/', [UsersController::class, 'showAll'])->name('user.showAll');
+Route::delete('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
+
+
+//Rutas articles
+
+
 
 
