@@ -1,0 +1,63 @@
+:root {
+    --primary-color: #2D3436;
+    --secondary-color: white;
+    --accent-color: #219CF5;
+    --outline-color-strong: #96999A;
+    --outline-color-week: #BCBEBE;
+    --bold-weight: 700;
+}
+
+body {
+    font-family: 'Poppins';
+    color: var(--primary-color);
+}
+
+.container {
+    display: flex;
+}
+
+.flex_centered {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex_vertical {
+    flex-direction: column;
+}
+
+.screenfull {
+    height: 100vh; 
+}
+
+.welcome_title {
+    font-size: 64px;
+    font-weight: var(--bold-weight);
+    margin: 0;
+}
+
+.text_inputs {
+    width: 498px;
+    margin: 0.5em;
+}
+
+.text_inputs > * {
+    margin: 0.75em;
+    height: 60px;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    padding: 0 1em;
+    color: var(--primary-color);
+}
+
+.init_button {
+    border-radius: 4px;
+    width: 518px;
+    height: 69px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 24px;
+    font-weight: var(--bold-weight);
+    border: none;
+    cursor: pointer;
+}
