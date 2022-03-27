@@ -96,7 +96,7 @@ body {
     width: 100%;
     opacity: 0;
     pointer-events: none;
-    transition: all 1.5s ease-out;
+    transition: all .5s ease-out;
     margin: 10px;
 }
 
@@ -311,7 +311,7 @@ body {
     height: 4px;
     background: var(--secondary-color);
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255,101,47,.2);
+    opacity: .5;
     transition: all .5s ease-in-out;
 }
 
@@ -323,7 +323,6 @@ body {
     height: 4px;
     background: var(--secondary-color);
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255,101,47,.2);
     transition: all .6s ease-in-out;
 }
 
@@ -338,6 +337,7 @@ body {
 /* ANIMATION */
 .menu-btn.open .menu-btn__burger {
     transform: translateX(-50px);
+    opacity: 1;
     background: transparent;
     box-shadow: none;
 }
