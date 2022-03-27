@@ -9,20 +9,20 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="container flex_centered flex_vertical screenfull" action="" method="POST">
+    <form class="container flex-aligned-centered flex-centered flex-vertical screenfull" action="" method="POST">
         @csrf
         @method('PUT')
         
-        <h1 class="welcome_title">
+        <h1 class="welcome-title">
             Bienvenido de vuelta
         </h1>
 
-        <div class="container flex_vertical text_inputs">
+        <div class="container flex-vertical text-inputs">
             <input type="text" name="email" id="email" placeholder="Correo eléctronico">
             <input type="password" name="password" id="password" placeholder="Contraseña">
         </div>
 
-        <button class="init_button" type="submit">Iniciar Sesión</button>
+        <button class="init-button" type="submit">Iniciar Sesión</button>
     </form>
 </body>
 </html>
