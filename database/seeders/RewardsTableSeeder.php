@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use DB;
 use Illuminate\Database\Seeder;
+use DateTime;
 
 class RewardsTableSeeder extends Seeder
 {
@@ -18,7 +20,7 @@ class RewardsTableSeeder extends Seeder
         // Añadimos una entrada a esta tabla
         DB::table('rewards')->insert([
             'points' => 4,
-            'month' => 5,
+            'month' => new DateTime('2022-03-28'),
             'isModerator' => true,
             'article_id' => 1
         ]);

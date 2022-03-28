@@ -5,6 +5,11 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Models\Valoration;
 
+// Para que funcione el test hay que hacer 
+// php artisan migrate:refresh
+// php artisan migrate --seed
+// vendor/bin/phpunit
+
 class ValorationTest extends TestCase {
     /**
      * A basic unit test example.
@@ -16,9 +21,11 @@ class ValorationTest extends TestCase {
         $new_Valoration->value = 4;
         $new_Valoration->comment = 'Todo perfecto, mucho texto';
         $new_Valoration->isModerator = true;
+        $new_Valoration->article_id = 1;
+        $new_Valoration->user_id = 2;
         $new_Valoration->save();
         $valoration = Valoration::where('value', 4)-> first(); 
-        $this->assertEquals($new_valoration->value, $valoration->value);
+        $this->assertEquals($new_Valoration->value, $valoration->value);
     }
 
     public function testRead() {

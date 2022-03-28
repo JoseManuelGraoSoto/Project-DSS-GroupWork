@@ -11,13 +11,13 @@ class CreateRewardTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('rewards', function (Blueprint $table) {
             $table->id();
             $table->integer('points');
             $table->timestamp('month');
             $table->boolean('isModerator');
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,8 +27,7 @@ class CreateRewardTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('rewards');
     }
 }
