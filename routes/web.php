@@ -21,12 +21,14 @@ Route::get('/', function () {
 //Rutas users
 Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
 Route::get('users/', [UsersController::class, 'showAll'])->name('user.showAll');
-Route::delete('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
-
+Route::get('deleteUser/',[UsersController::class, 'deleteUserFormulary'])->name('user.deleteForm');
+Route::post('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
 
 //Rutas articles
 Route::get('article/{id}', [ArticlesController::class, 'show'])->name('article.show');
 Route::get('articles/', [ArticlesController::class, 'showAll'])->name('article.showAll');
+Route::get('deleteArticle/',[ArticlesController::class, 'deleteArticleFormulary'])->name('article.deleteForm');
+Route::post('deleteArticle/{id}', [ArticlesController::class, 'delete'])->name('article.delete');
 
 
 

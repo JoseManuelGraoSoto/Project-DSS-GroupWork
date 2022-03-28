@@ -18,4 +18,16 @@ class ArticlesController extends Controller
         $articles = Article::all();
         return view('articlesList', ['articles' => $articles]);
     }
+
+    public function deleteArticleFormulary(){
+        $articles = Article::all();
+        return view('deleteArticle', ['articles' => $articles]);
+    }
+
+    public function delete($id){
+        $article = Article::find($id);
+        $title = $article->title;
+        $article->delete();
+        return $title . ' borrado';
+    }
 }

@@ -19,10 +19,16 @@ class UsersController extends Controller
         return view('usersList', ['users' => $users]);
     }
 
+    public function deleteUserFormulary(){
+        $users = User::all();
+        return view('deleteUser', ['users' => $users]);
+    }
+
     public function delete($id){
-        $user = User::where('name', $id)-> first();
+        $user = User::find($id);
+        $name = $user->name;
         $user->delete();
-        return 'Borrado';
+        return $name . ' borrado';
     }
 
     /**
