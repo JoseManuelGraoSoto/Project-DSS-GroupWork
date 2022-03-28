@@ -13,4 +13,8 @@ class Reward extends Model
         'email',
         'password',
     ];
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

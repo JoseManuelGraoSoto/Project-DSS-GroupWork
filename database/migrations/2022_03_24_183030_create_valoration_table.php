@@ -15,9 +15,11 @@ class CreateValorationTable extends Migration
     {
         Schema::create('valorations', function (Blueprint $table) {
             $table->id();
-            $table->int('value');
+            $table->integer('value');
             $table->string('comment');
             $table->boolean('isModerator');
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +33,7 @@ class CreateValorationTable extends Migration
     {
         Schema::table('valorations', function (Blueprint $table) {
             $table->dropForeign(['article_id']);
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('valorations');

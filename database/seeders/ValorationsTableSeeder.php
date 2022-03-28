@@ -19,6 +19,8 @@ class ValorationsTableSeeder extends Seeder
             'value' => 4,
             'comment' => 'I like this papper',
             'isModerator' => true,
+            'article_id' => 1,
+            'user_id' => 2
         ]);
 
     }

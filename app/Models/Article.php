@@ -16,4 +16,9 @@ class Article extends Model
     public function access() {
         return $this->belongsToMany('App\Models\User');
     }
+
+    public function valoration() {
+        return $this->belongsToMany('App\Models\Valoration');
+    }
+
 }

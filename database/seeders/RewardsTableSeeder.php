@@ -20,6 +20,7 @@ class RewardsTableSeeder extends Seeder
             'points' => 4,
             'month' => 5,
             'isModerator' => true,
+            'article_id' => 1
         ]);
     }
 }
