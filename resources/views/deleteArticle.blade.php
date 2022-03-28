@@ -9,7 +9,6 @@
                     <button type="submit">Enviar</button>
                 </form>
             @endforeach
-            
         </div>
     </body>
 </html>
