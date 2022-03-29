@@ -38,7 +38,15 @@ body {
     flex-direction: column;
 }
 
-.screenfull {
+.flex-spaced {
+    justify-content: space-around;
+}
+
+.flex-spaced-separated {
+    justify-content: space-between;
+}
+
+.screenf.nav-listl {
     height: 100vh; 
 }
 
@@ -89,7 +97,7 @@ body {
 
 .sidebar.active {
     width: 240px;
-    box-shadow: 5px 5px 0px 10px rgba(45, 52, 54, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 .sidebar .logo-content .logo {
@@ -117,12 +125,12 @@ body {
     font-weight: var(--bold-weight);
 }
 
-.sidebar ul {
+.sidebar .nav-list {
     margin-top: 20px;
     padding: 0 5px;
 }
 
-.sidebar ul li {
+.sidebar .nav-list li {
     position: relative;
     height: 50px;
     width: 100%;
@@ -130,7 +138,7 @@ body {
     list-style: none;
 }
 
-.sidebar ul li .nav-tooltip {
+.sidebar .nav-list li .nav-tooltip {
     position: absolute;
     left: 122px;
     top: 50%;
@@ -148,28 +156,29 @@ body {
     display: block;
 }
 
-.sidebar.active ul li .nav-tooltip {
+.sidebar.active .nav-list li .nav-tooltip {
     display: none;
 }
 
-.sidebar ul li:hover .nav-tooltip {
+.sidebar .nav-list li:hover .nav-tooltip {
     transition: all 0.5s ease;
     opacity: 1;
     top: 50%;
 }
 
-.sidebar ul li .nav-item {
+.sidebar .nav-list li .nav-item {
     text-decoration: none;  
     transition: all 0.4s ease; 
     border-radius: 4px;
+    margin: 10px 0;
     white-space: nowrap;
 }
 
-.sidebar ul li .nav-item:hover {
+.sidebar .nav-list li .nav-item:hover {
     background-color: var(--secondary-color);
 }
 
-.nav-item i {
+.sidebar .nav-item i {
     color: var(--secondary-color);
     opacity: .5;
     height: 50px;
@@ -198,6 +207,20 @@ body {
 }
 
 .sidebar.active .nav-item:hover .nav-label {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.sidebar .nav-item.selected {
+    background-color: var(--secondary-color);
+}
+
+.sidebar .nav-item.selected i {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.sidebar.active .nav-item.selected .nav-label {
     color: var(--primary-color);
     opacity: 1;
 }
@@ -284,13 +307,6 @@ body {
 .sidebar.active ~ .central-panel {
     width: calc(100% - 240px);
     left: 240px;
-}
-
-.central-panel .override {
-    font-size: 25px;
-    font-weight: var(--bold-weight);
-    color: var(--primary-color);
-    padding: 12px;
 }
 
 .sidebar .menu-btn {

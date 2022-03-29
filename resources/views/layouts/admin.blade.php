@@ -25,52 +25,54 @@
 
         <ul class="nav-list">
             <li>
+                @section('readers-nav')
                 <a href="#" class="nav-item container flex-aligned-center">
                     <i class='bx bxs-face' ></i>
                     <span class="nav-label">Lectores</span>
                 </a>
                 <span class="nav-tooltip">Lectores</span>
+                @show
             </li>
 
             <li>
+                @section('articles-nav')
                 <a href="#" class="nav-item container flex-aligned-center">
                     <i class='bx bxs-file' ></i>
                     <span class="nav-label">Artículos</span>
                 </a>
                 <span class="nav-tooltip">Artículos</span>
+                @show
             </li>
 
             <li>
+                @section('categories-nav')
                 <a href="#" class="nav-item container flex-aligned-center">
                     <i class='bx bxs-category' ></i>
                     <span class="nav-label">Categorías</span>
                 </a>
                 <span class="nav-tooltip">Categorías</span>
+                @show
             </li>
 
             <li>
+                @section('reviews-nav')
                 <a href="#" class="nav-item container flex-aligned-center">
                     <i class='bx bxs-star' ></i>
                     <span class="nav-label">Valoraciones</span>
                 </a>
                 <span class="nav-tooltip">Valoraciones</span>
+                @show
             </li>
 
             <li>
+                @section('rewards-nav')
                 <a href="#" class="nav-item container flex-aligned-center">
                     <i class='bx bxs-trophy' ></i>
                     <span class="nav-label">Recompensas</span>
                 </a>
                 <span class="nav-tooltip">Recompensas</span>
+                @show
             </li>
-
-            <!-- <li>
-                <a href="#" class="nav-item container flex-aligned-centered">
-                    <i class='bx bxs-home' ></i>
-                    <span class="nav-label">Inicio</span>
-                </a>
-                <span class="nav-tooltip">Inicio</span>
-            </li> -->
         </ul>
 
         <div class="profile-content">
@@ -115,5 +117,7 @@
             }
         });
     </script>
+
+    @yield('scripting')
 </body>
 </html>
