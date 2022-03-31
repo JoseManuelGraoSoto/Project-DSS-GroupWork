@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="container flex-aligned-center flex-centered flex-vertical screenfull" action="" method="POST">
+    <form class="container flex-aligned-center flex-center flex-vertical screenfull" action="" method="POST">
         @csrf
         @method('PUT')
         

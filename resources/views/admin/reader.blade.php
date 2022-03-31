@@ -14,7 +14,7 @@
 
 @section('content')
 <div class="override">
-    <div class="search-box container flex-vertical flex-aligned-center">
+    <div class="search-box container flex-vertical flex-aligned-center" style="justify-content: space-between;">
         <span class="search-title">Críterios de búsqueda</span>
 
         <div class="text-inputs container flex-spaced">
@@ -22,15 +22,15 @@
             <input type="text" name="name" id="name" placeholder="Nombre del usuario">
         </div>
 
-        <div class="lower-filter-section container flex-aligned-center flex-center">
+        <div class="lower-filter-section container flex-aligned-center flex-spaced">
             <div class="left-section container">
                 <div class="date container">
                     <i class='bx bx-calendar'></i>
                     <input id="datepicker" type="text" placeholder="Fecha de creación" />
                 </div>
 
-                <div class="user-type container flex-vertical flex-aligned-center flex-spaced-separated">
-                    <div class="types container flex-aligned-center">
+                <div class="user-type container flex-vertical flex-aligned-center">
+                    <div class="types container">
                         <div class="type">
                             <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
                             <label for="reader-type" class="cbx">
@@ -62,7 +62,7 @@
                             <input checked="" type="checkbox" id="administrator-type" class="hidden-xs-up">
                             <label for="administrator-type" class="cbx">
                                 <div class="type-tooltip">
-                                    <span>Administración</span>
+                                    <span>Administrador</span>
                                     <i class='bx bxs-down-arrow'></i>
                                 </div>
                             </label>
@@ -73,20 +73,48 @@
                 </div>
             </div>
 
+            <div class="right-section container flex-aligned-center">
+                <div class="filter-order">
+                    <label class="switch">
+                        <input id="sort" type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
 
-            <div class="right-section">
-                <div class="filter-order"></div>
-                <div class="filter-button"></div>
+                <div class="filter-button">
+                    <button class="cssbuttons-io-button"> Buscar
+                        <div class="icon">
+                            <i class='bx bx-search-alt-2'></i>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="readers">
-        <div class="readers-buttons">
+    <div id="filter-dropdown">
+        <i class='bx bxs-chevrons-down'></i>
+    </div>
 
+    <div class="users">
+        <div class="users-buttons container">
+            <button> 
+                <i class='bx bx-trash'></i>
+                ELIMINAR USUARIOS 
+            </button>
+
+            <button> 
+                <i class='bx bx-rotate-right' ></i>
+                MODIFICAR USUARIO
+            </button>
+
+            <button> 
+                <i class='bx bx-plus' ></i>
+                AÑADIR USUARIO
+            </button>
         </div>
 
-        <div class="readers-display">
+        <div class="users-display">
 
         </div>
     </div>
@@ -116,9 +144,21 @@
         customOkBTN: 'Aceptar',
         customCancelBTN: 'Cancelar',
         customClearBTN: 'Limpiar',
+        dateFormat: 'dddd, dd mmmm yyyy',
         theme: {
             theme_color: '#2D3436'
         }
     });
+</script>
+
+<script>
+    let filter_dropdown = document.querySelector("#filter-dropdown");
+    let filter = document.querySelector(".search-box");
+    let icon_dropdown = document.querySelector('#filter-dropdown i')
+
+    filter_dropdown.onclick = function() {
+        filter.classList.toggle("active");
+        icon_dropdown.classList.toggle("up");
+    }
 </script>
 @endsection

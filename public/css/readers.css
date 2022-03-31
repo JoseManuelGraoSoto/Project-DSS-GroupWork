@@ -2,7 +2,7 @@
     --primary-color: #2D3436;
     --secondary-color: white;
     --terciary-color: #3b4346;
-    --accent-color: #219CF5;
+    --accent-color: #0E6EB8;
     --outline-color-strong: #96999A;
     --outline-color-week: #BCBEBE;
     --bold-weight: 700;
@@ -16,16 +16,50 @@
 }
 
 .search-box {
+    border-bottom: 2px solid var(--outline-color-strong);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    height: 0px;
+    transition: all 1.3s ease;
+}
+
+.search-box.active {
+    height: 250px;
 }
 
 .search-box .search-title {
+    color: var(--terciary-color);
     text-transform: uppercase;
+    font-size: 20px;
+    font-weight: var(--bold-weight);
+    line-height: 50px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+    transition-delay: 0.2s;
+}
+
+.search-box.active .search-title {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 1s ease;
+    transition-delay: .5s;
 }
 
 .search-box .text-inputs {
     margin: 0;
+    padding: 0 15em;
     width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+    transition-delay: 0.1s;
+}
+
+.search-box.active .text-inputs {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 1s ease;
+    transition-delay: .7s;
 }
 
 .search-box .text-inputs > * {
@@ -33,17 +67,39 @@
     color: var(--secondary-color);
     border: none;
     border-radius: 15px;
-    width: 450px;
+    width: 500px;
 }
 
 .search-box .lower-filter-section {
     margin: 20px 0;
+    padding: 0 16em;   
+}
+
+.search-box .lower-filter-section .left-section > *,
+.search-box .lower-filter-section .right-section > * {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+    transition-delay: 0s;
+}
+
+.search-box.active .lower-filter-section .left-section > *,
+.search-box.active .lower-filter-section .right-section > * {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 1s ease;
+    transition-delay: 1s;
 }
 
 .search-box .lower-filter-section .left-section {
     height: 50px;
 }
 
+.lower-filter-section {
+    width: 100%;
+}
+
+/* Date */
 .search-box .lower-filter-section .left-section .date {
     height: inherit;
     background-color: var(--primary-color);
@@ -51,11 +107,12 @@
     border-radius: 4px;
 }
 
-.search-box .lower-filter-section .left-section .date input {
+.search-box .lower-filter-section .left-section .date #datepicker {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     text-align: center;
     border: none;
+    font-size: 16px;
 }
 
 .search-box .lower-filter-section .left-section .date i {
@@ -64,6 +121,11 @@
     font-size: 32px;
 }
 
+.search-box .lower-filter-section .right-section .filter-order {
+    margin-right: 50px;
+}
+
+/* User type */
 .user-type .type-title {
     text-transform: uppercase;
     font-size: 12px;
@@ -186,4 +248,182 @@
 
 .hidden-xs-up {
     display: none!important;    
+}
+
+/* Order toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3C3C3C;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 36px;
+    width: 36px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+#sort:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+#sort:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+#sort:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(155px);
+}
+
+.slider:after {
+    content: 'ASCENDENTE';
+    color: white;
+    display: block;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    font-family: Verdana, sans-serif;
+}
+
+#sort:checked + .slider:after {
+    content: 'DESCENDENTE';
+}
+
+.user-type .type-title {
+    line-height: 30px;
+    font-weight: var(--bold-weight);
+}
+
+/* Search button */
+.cssbuttons-io-button {
+    background: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em var(--accent-color);
+    overflow: hidden;
+    position: relative;
+    height: 2.5em;
+    padding-right: 3.3em;
+}
+   
+.cssbuttons-io-button .icon {
+    background: var(--secondary-color);
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 2.2em;
+    border-radius: 4px;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em var(--accent-color);
+    right: 0.3em;
+    transition: all 0.3s;
+}
+   
+.cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+    cursor: pointer;
+}
+   
+.cssbuttons-io-button .icon i {
+    width: 1.1em;
+    color: var(--accent-color);
+    font-size: 18px;
+    transition: all .5s ease;
+}
+   
+.cssbuttons-io-button:hover .icon i {
+    transform: translateX(0.1em);
+    font-size: 24px;
+}
+   
+.cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+}
+
+#filter-dropdown {
+    margin: 0 auto;
+    border-radius: 0 0 4px 4px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid var(--outline-color-strong);
+    border-top: none;
+    transition: all 2s ease;
+}
+
+#filter-dropdown i {
+    font-size: 28px;
+    color: var(--primary-color);
+    transition: all 1.3s ease;
+}
+
+#filter-dropdown i.up {
+    transform: rotate(180deg);
+}
+
+.users-buttons {
+    justify-content: right;
+}
+
+.users .users-buttons button:first-child {
+    margin-right: auto;
+    background-color: var(--primary-color);
+}
+
+.users .users-buttons > * {
+    height: 50px;
+    width: 250px;
+    margin: 0 80px;
+    font-size: 18px;
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid var(--outline-color-strong);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.users .users-buttons > * i {
+    font-size: 28px;
 }
