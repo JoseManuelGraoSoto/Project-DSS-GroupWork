@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\User;
 
 class ArticlesController extends Controller
 {
@@ -19,6 +20,26 @@ class ArticlesController extends Controller
         return view('articlesList', ['articles' => $articles]);
     }
 
+    //Devuelve el formulario de creación de Article
+    public function createArticleFormulary(){
+        return view('createArticle');
+    }
+
+    //Recibe la información de un artículo y lo añade a la base de datos
+    public function create(Request $request){
+        $user = User::find($request->input('id_usuario'));
+        $new_article = new Article;
+        $new_article->title = $request->input('title');
+        $new_article->category = $request->input('category');
+        $new_article->valoration = $request->input('valoration');
+        $new_article->content = $request->input('content');
+        $new_article->acepted = 0;
+        $new_article->user()->associate($user);
+        $new_article->save();        
+        return view('articuloCreado');
+    }
+
+    //Devuelve el formulario de borrado de Article pasándole como parámetro los artículos
     public function deleteArticleFormulary(){
         $articles = Article::all();
         return view('deleteArticle', ['articles' => $articles]);
