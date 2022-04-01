@@ -1,0 +1,113 @@
+:root {
+    --primary-color: #2D3436;
+    --secondary-color: white;
+    --terciary-color: #3b4346;
+    --accent-color: #0E6EB8;
+    --outline-color-strong: #96999A;
+    --outline-color-week: #BCBEBE;
+    --bold-weight: 700;
+}
+
+.to-fill {
+    margin: 4em 15em;
+}
+
+.to-fill .user-image-selection .user-image {
+    max-width: 400px;
+    border: 4px solid var(--terciary-color);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.to-fill .text-inputs > * {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 15px;
+    width: 500px;
+    margin: 15px 0;
+}
+
+.upload-img #selec-img {
+    display: none;
+}
+
+.upload-img label {
+    position: relative;
+    top: 30px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 80px;
+    font-family: sans-serif;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.upload-img label:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.form-control {
+    font-family: system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    color: var(--primary-color);
+}
+
+.form-control + .form-control {
+    margin-top: 1em;
+}
+
+.form-control:focus-within {
+    color: var(--accent-color);
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: var(--secondary-color);
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--accent-color);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="radio"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+}

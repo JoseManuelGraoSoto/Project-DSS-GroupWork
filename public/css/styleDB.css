@@ -133,7 +133,7 @@
 }
 
 .types {
-    margin: 0 2em;
+    margin: 0 2.75em;
 }
 
 .type {
@@ -400,18 +400,18 @@
     transform: rotate(180deg);
 }
 
-.users-buttons {
+.main-panel .main-buttons {
     justify-content: right;
 }
 
-.users .users-buttons button:first-child {
+.main-panel .main-buttons button:first-child {
     margin-right: auto;
     background-color: var(--primary-color);
 }
 
-.users .users-buttons > * {
+.main-panel .main-buttons > * {
     height: 50px;
-    width: 250px;
+    width: 300px;
     margin: 0 80px;
     font-size: 18px;
     color: var(--secondary-color);
@@ -424,6 +424,6 @@
     cursor: pointer;
 }
 
-.users .users-buttons > * i {
+.main-panel .main-buttons > * i {
     font-size: 28px;
 }

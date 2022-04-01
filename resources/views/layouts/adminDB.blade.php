@@ -1,15 +1,10 @@
 @extends('layouts.admin')
+
 @section('header')
-<link rel="stylesheet" href="{{ URL::asset('css/readers.css'); }}">
+<link rel="stylesheet" href="{{ URL::asset('css/styleDB.css'); }}">
 <link rel="stylesheet" href="{{ URL::asset('calendar/dist/mc-calendar.min.css'); }}">
 <script src="{{ URL::asset('calendar/dist/mc-calendar.min.js'); }}"></script>
-@endsection
-
-@section('readers-nav')
-<div class="nav-item selected container flex-aligned-center">
-    <i class='bx bxs-face'></i>
-    <span class="nav-label">Lectores</span>
-</div>
+@yield('extra-header')
 @endsection
 
 @section('content')
@@ -18,8 +13,7 @@
         <span class="search-title">Críterios de búsqueda</span>
 
         <div class="text-inputs container flex-spaced">
-            <input type="text" name="email" id="email" placeholder="Correo eléctronico">
-            <input type="text" name="name" id="name" placeholder="Nombre del usuario">
+            @yield('text-inputs')
         </div>
 
         <div class="lower-filter-section container flex-aligned-center flex-spaced">
@@ -29,6 +23,7 @@
                     <input id="datepicker" type="text" placeholder="Fecha de creación" />
                 </div>
 
+                @section('user-type')
                 <div class="user-type container flex-vertical flex-aligned-center">
                     <div class="types container">
                         <div class="type">
@@ -71,6 +66,7 @@
 
                     <span class="type-title">Tipo de usuario</span>
                 </div>
+                @show
             </div>
 
             <div class="right-section container flex-aligned-center">
@@ -96,26 +92,13 @@
         <i class='bx bxs-chevrons-down'></i>
     </div>
 
-    <div class="users">
-        <div class="users-buttons container">
-            <button> 
-                <i class='bx bx-trash'></i>
-                ELIMINAR USUARIOS 
-            </button>
-
-            <button> 
-                <i class='bx bx-rotate-right' ></i>
-                MODIFICAR USUARIO
-            </button>
-
-            <button> 
-                <i class='bx bx-plus' ></i>
-                AÑADIR USUARIO
-            </button>
+    <div class="main-panel">
+        <div class="main-buttons container">
+            @yield('main-buttons')
         </div>
 
-        <div class="users-display">
-
+        <div class="display">
+            @yield('display')
         </div>
     </div>
 </div>
