@@ -1,0 +1,110 @@
+:root {
+    --primary-color: #2D3436;
+    --secondary-color: white;
+    --terciary-color: #3b4346;
+    --accent-color: #0E6EB8;
+    --outline-color-strong: #96999A;
+    --outline-color-week: #BCBEBE;
+    --bold-weight: 700;
+}
+
+.override {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    height: 90%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.category-text {
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-right: 1%;
+    background-color: var(--outline-color-strong);
+}
+
+
+.center-category {
+    /*background-color: #0E6EB8;*/
+    height: 50%;
+    width: 95%;
+    display: flex;
+    margin-top: 2%;
+    align-self: center;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.bottom-category{
+    display: flex;
+    height: 10%;
+    width: 95%;
+    margin-top: 2%;
+    flex-wrap: nowrap;
+    align-self: center;
+    justify-content: flex-end;
+    /*background-color: green;*/
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+}
+
+.text-inputs-category {
+    margin: 0.75em;
+    height: 60px;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    padding: 0 1em;
+    color: var(--primary-color);
+    width: 498px;
+}
+
+.main-panel .main-buttons > * {
+    height: 50px;
+    width: 300px;
+    margin: 0 80px;
+    font-size: 18px;
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid var(--outline-color-strong);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.main-panel .main-buttons > * i {
+    font-size: 28px;
+}
+
+.text-inputs {
+    display:flex;
+    justify-content: flex-start;   
+    width: 0px;
+}
+
+.text-inputs > * {
+    margin: 0.75em;
+    height: 60px;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    padding: 0 1em;
+    color: var(--primary-color);
+}
