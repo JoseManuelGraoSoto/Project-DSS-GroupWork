@@ -35,9 +35,29 @@ class ArticlesController extends Controller
         $new_article->content = $request->input('content');
         $new_article->acepted = 0;
         $new_article->user()->associate($user);
-        $new_article->save();        
+        $new_article->save();
         return view('articuloCreado');
     }
+
+    //Devuelve el formulario de actualización de Article
+    public function updateArticleFormulary(){
+        return view('updateArticle');
+    }
+
+    //Recibe la información de un artículo y lo modifica en la base de datos
+    public function update(Request $request){
+        $user = User::find($request->input('id_usuario'));
+        $article = Article::find($request->input('article_id'));
+        $article->title = $request->input('title');
+        $article->category = $request->input('category');
+        $article->valoration = $request->input('valoration');
+        $article->content = $request->input('content');
+        $article->acepted = 0;
+        $article->user()->associate($user);
+        $article->save();
+        return 'Artículo actualizado';
+    }
+
 
     //Devuelve el formulario de borrado de Article pasándole como parámetro los artículos
     public function deleteArticleFormulary(){
@@ -45,6 +65,7 @@ class ArticlesController extends Controller
         return view('deleteArticle', ['articles' => $articles]);
     }
 
+    //Recibe un id de artículo y borra el acceso del usuario al artículo
     public function delete($id){
         $article = Article::find($id);
         $title = $article->title;

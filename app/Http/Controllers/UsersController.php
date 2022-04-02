@@ -36,6 +36,23 @@ class UsersController extends Controller
         return view('usuarioCreado');
     }
 
+    //Devuelve el formulario de actualización de user
+    public function updateUserFormulary(){
+        return view('updateUser');
+    }
+
+    //Recibe la información de un usuario y lo modifica en la base de datos
+    public function update(Request $request){
+        $user = User::find($request->input('user_id'));
+        $user->name = $request->input('name');
+        $user->type = $request->input('type');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->telephone = $request->input('telephone');
+        $user->save();
+        return 'Usuario actualizado';
+    }
+
     //Devuelve el formulario de borrado de User pasándole como parámetro los usuarios
     public function deleteUserFormulary(){
         $users = User::all();
@@ -50,7 +67,4 @@ class UsersController extends Controller
         return $name . ' borrado';
     }
 
-    public function update(){
-        
-    }
 }

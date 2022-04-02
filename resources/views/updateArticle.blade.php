@@ -2,8 +2,11 @@
 <html>
     <body class="antialiased">
         <div>
-            <form action="{{url('createArticle/')}}" method="POST">
+            <form action="{{url('updateArticle/')}}" method="POST">
                 @csrf
+                <label for="article_id">Id artículo:</label>
+                <input type="number" name="article_id" id="article_id">
+                <br>
                 <label for="id_usuario">Id usuario:</label>
                 <input type="number" name="id_usuario" id="id_usuario">
                 <br>
