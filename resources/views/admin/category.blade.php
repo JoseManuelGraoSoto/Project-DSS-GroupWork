@@ -15,15 +15,13 @@
         <div class="container ">
             <h1 class="category-text">Categorias</h1>
             <div class="right main-panel">
-                <div>
-                </div>
                 <div class="main-buttons">
                     <button> 
                         <i class='bx bx-plus' ></i>
                         AÑADIR CATEGORIA
                     </button>
                 </div>
-                <div class="text-inputs">
+                <div>
                     <input type="text" name="categoria" id="categoria" placeholder="Categoría">
                 </div>
             </div>
@@ -33,7 +31,7 @@
         </div>
         <div class="bottom-category main-panel"> 
                 <div class="main-buttons bottom">
-                    <button> 
+                    <button class="basura"> 
                         <i class='bx bx-trash' ></i>
                         AÑADIR CATEGORIA
                     </button>
