@@ -1,0 +1,229 @@
+:root {
+    --primary-color: #2D3436;
+    --secondary-color: white;
+    --terciary-color: #3b4346;
+    --accent-color: #0E6EB8;
+    --outline-color-strong: #96999A;
+    --outline-color-week: #BCBEBE;
+    --bold-weight: 700;
+}
+
+.to-fill {
+    margin: 4em 15em;
+}
+
+.to-fill .user-image-selection .user-image {
+    max-width: 400px;
+    border: 4px solid var(--terciary-color);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.to-fill .text-inputs > * {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 15px;
+    width: 500px;
+    margin: 15px 0;
+}
+
+.upload-img #selec-img {
+    display: none;
+}
+
+.upload-img label {
+    position: relative;
+    top: 30px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 80px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.upload-img label:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.upload-txt #selec-txt {
+    display: none;
+}
+
+.upload-txt label {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 80px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.upload-txt label:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.form-control {
+    font-family: system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    color: var(--primary-color);
+}
+
+.form-control + .form-control {
+    margin-top: 1em;
+}
+
+.form-control:focus-within {
+    color: var(--accent-color);
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: var(--secondary-color);
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--accent-color);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="radio"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+}
+
+.confirm-btn {
+    justify-content: right;
+    margin-right: 300px;
+}
+
+.confirm-btn button:first-child {
+    background-color: var(--primary-color);
+    margin-right: 50px;
+}
+
+.confirm-btn > * {
+    height: 50px;
+    width: 200px;
+    font-size: 18px;
+    color: var(--secondary-color);
+    background-color: var(--accent-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid var(--outline-color-strong);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.confirm-btn > * i {
+    font-size: 28px;
+}
+
+#default-category {
+    opacity: .5;
+}
+
+/* From cssbuttons.io by @varoonrao */
+.checkbox-con {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.checkbox-con input[type="checkbox"] {
+    appearance: none;
+    width: 48px;
+    height: 27px;
+    border: 2px solid #ff0000;
+    border-radius: 20px;
+    background: #f1e1e1;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.checkbox-con input[type="checkbox"]::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: rgba(234, 7, 7, 0.5);
+    border: 2px solid #ea0707;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(13%, 15%);
+    transition: all 0.3s ease-in-out;
+}
+
+.checkbox-con input[type="checkbox"]::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 23 23' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.55021 5.84315L17.1568 16.4498L16.4497 17.1569L5.84311 6.55026L6.55021 5.84315Z' fill='%23EA0707' fill-opacity='0.89'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M17.1567 6.55021L6.55012 17.1568L5.84302 16.4497L16.4496 5.84311L17.1567 6.55021Z' fill='%23EA0707' fill-opacity='0.89'/%3E%3C/svg%3E");
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+
+.checkbox-con input[type="checkbox"]:checked {
+    border: 2px solid #02c202;
+    background: #e2f1e1;
+}
+
+.checkbox-con input[type="checkbox"]:checked::before {
+    background: rgba(2, 194, 2, 0.5);
+    border: 2px solid #02c202;
+    transform: translate(133%, 13%);
+    transition: all 0.3s ease-in-out;
+}
+
+.checkbox-con input[type="checkbox"]:checked::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='13' viewBox='0 0 15 13' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.8185 0.114533C15.0314 0.290403 15.0614 0.605559 14.8855 0.818454L5.00187 12.5L0.113036 6.81663C-0.0618274 6.60291 -0.0303263 6.2879 0.183396 6.11304C0.397119 5.93817 0.71213 5.96967 0.886994 6.18339L5.00187 11L14.1145 0.181573C14.2904 -0.0313222 14.6056 -0.0613371 14.8185 0.114533Z' fill='%2302C202' fill-opacity='0.9'/%3E%3C/svg%3E");
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.checkbox-con label {
+    margin-left: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+   
