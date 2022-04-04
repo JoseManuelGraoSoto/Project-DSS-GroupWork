@@ -15,8 +15,8 @@ class CreateArticleUserTable extends Migration
     {
         Schema::create('article_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps(); 
         });
     }
