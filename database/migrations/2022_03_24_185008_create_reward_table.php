@@ -17,7 +17,7 @@ class CreateRewardTable extends Migration
             $table->integer('points');
             $table->timestamp('month');
             $table->boolean('isModerator');
-            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

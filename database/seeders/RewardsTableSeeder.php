@@ -22,7 +22,7 @@ class RewardsTableSeeder extends Seeder
             'points' => 4,
             'month' => new DateTime('2022-03-28'),
             'isModerator' => true,
-            'article_id' => 1
+            'user_id' => 1
         ]);
     }
 }

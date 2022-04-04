@@ -16,7 +16,7 @@ class RewardTest extends TestCase {    /**
         $new_Reward->points = 4;
         $new_Reward->month = new DateTime('2022-03-29');
         $new_Reward->isModerator = true;
-        $new_Reward->article_id = 1;
+        $new_Reward->user_id = 1;
         $new_Reward->save();
         $Reward = Reward::where('points', 4)-> first(); 
         $this->assertEquals($new_Reward->points, $Reward->points);
