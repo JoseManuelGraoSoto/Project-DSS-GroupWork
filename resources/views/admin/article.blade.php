@@ -7,7 +7,7 @@
 
 @section('articles-nav')
 <div class="nav-item selected container flex-aligned-center">
-    <i class='bx bxs-file' ></i>
+    <i class='bx bxs-file'></i>
     <span class="nav-label">Artículos</span>
 </div>
 @endsection
@@ -17,18 +17,26 @@
 @endsection
 
 @section('main-buttons')
-<button> 
+<button>
     <i class='bx bx-trash'></i>
     ELIMINAR ARTICULOS
 </button>
 
-<button> 
-    <i class='bx bx-rotate-right' ></i>
+<button>
+    <i class='bx bx-rotate-right'></i>
     MODIFICAR ARTICULO
 </button>
 
-<button> 
-    <i class='bx bx-plus' ></i>
+<button>
+    <i class='bx bx-plus'></i>
     AÑADIR ARTICULO
 </button>
+@endsection
+
+@section('display')
+<div>
+    @foreach($articles as $article)
+    <li> {{$article->title}} </li>
+    @endforeach
+</div>
 @endsection

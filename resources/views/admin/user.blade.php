@@ -13,18 +13,27 @@
 @endsection
 
 @section('main-buttons')
-<button> 
+<button>
     <i class='bx bx-trash'></i>
-    ELIMINAR USUARIOS 
+    ELIMINAR USUARIOS
 </button>
 
-<button> 
-    <i class='bx bx-rotate-right' ></i>
+<button>
+    <i class='bx bx-rotate-right'></i>
     MODIFICAR USUARIO
 </button>
 
-<button> 
-    <i class='bx bx-plus' ></i>
+<button>
+    <i class='bx bx-plus'></i>
     AÑADIR USUARIO
 </button>
+@endsection
+
+@section('display')
+<div>
+    @foreach($users as $user)
+    <li> {{$user->name}} </li>
+    @endforeach
+</div>
+
 @endsection

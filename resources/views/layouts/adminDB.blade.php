@@ -20,7 +20,9 @@
             <div class="left-section container">
                 <div class="date container">
                     <i class='bx bx-calendar'></i>
+                    @section('date')
                     <input id="datepicker" type="text" placeholder="Fecha de creación" />
+                    @show
                 </div>
 
                 @section('user-type')
