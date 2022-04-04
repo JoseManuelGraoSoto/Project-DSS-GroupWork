@@ -6,6 +6,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/resources/views/vistaPruebaControladores/*
 .env
 .env.backup
 .phpunit.result.cache
