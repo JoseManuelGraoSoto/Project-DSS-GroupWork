@@ -55,3 +55,10 @@
     AÑADIR RECOMPENSA
 </button>
 @endsection
+@section('display')
+    <div>
+        @foreach($rewards as $reward)
+        <li>{{$reward->points}}</li>
+        @endforeach
+    </div>
+@endsection
