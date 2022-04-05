@@ -2,6 +2,7 @@
 
 @section('header')
 <link rel="stylesheet" href="{{ URL::asset('css/add.css'); }}">
+@yield('extra-header')
 @endsection
 
 @section('content')

@@ -1,5 +1,12 @@
 @extends('layouts.add')
 
+@section('articles-nav')
+<div class="nav-item selected container flex-aligned-center">
+    <i class='bx bxs-file' ></i>
+    <span class="nav-label">Artículos</span>
+</div>
+@endsection
+
 @section('text-inputs')
 <input type="text" name="title" id="title" placeholder="Titulo del artículo">
 <input type="text" name="author" id="author" placeholder="Nombre del autor">
@@ -16,7 +23,7 @@
 
     <div class="upload-txt">
         <input type="file" id="selec-txt"/>
-        <label for="selec-img">Contenido del artículo</label>
+        <label for="selec-txt">Contenido del artículo</label>
     </div>
 </div>
 
@@ -25,7 +32,7 @@
         <span style="color: var(--primary-color);">Valoración general del artículo</span>
         <div class="number-input">
             <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-            <input class="quantity" min="0" max="10" step=".5" name="quantity" value="1" type="number">
+            <input class="quantity" min="0" max="10" step=".5" name="quantity" value="5" type="number">
             <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
         </div>
     </div>
