@@ -13,7 +13,9 @@
 @section('content')
     <div class="override">
         <div class="container ">
-            <h1 class="category-text">Categorias</h1>
+            <div>
+                <h1 class="category-text">Categorias</h1>
+            </div>
             <div class="right main-panel">
                 <div class="main-buttons">
                     <button> 
@@ -30,10 +32,10 @@
 
         </div>
         <div class="bottom-category main-panel"> 
-                <div class="main-buttons bottom">
-                    <button class="basura"> 
+                <div class="main-buttons bottom" id="boton_category">
+                    <button class="basura" id="basura_category"> 
                         <i class='bx bx-trash' ></i>
-                        AÑADIR CATEGORIA
+                        ELIMINAR CATEGORIA 
                     </button>
                 </div>
         </div>
