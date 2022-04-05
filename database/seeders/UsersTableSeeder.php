@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,25 +12,28 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
-        DB::table('users')->delete();
-        // Añadimos una entrada a esta tabla
-        DB::table('users')->insert([
-            'name' => 'David',
-            'type' => 'reader',
-            'email' => 'david@gmail.com',
-            'password' => 'holaContra',
-            'telephone' => '966354870'
-        ]);
+    public function run()
+    {
+        $users = User::all();
 
-        DB::table('users')->insert([
-            'name' => 'Juan',
-            'type' => 'author',
-            'email' => 'juan@gmail.com',
-            'password' => 'autor123',
-            'telephone' => '966323370'
-        ]);
+        foreach ($users as $user) {
+            $user->delete();
+        }
 
+        $new_user = new User;
+        $new_user->name = 'David';
+        $new_user->type = 'reader';
+        $new_user->email = 'david@gmail.com';
+        $new_user->password = 'holaContra';
+        $new_user->telephone = '966354870';
+        $new_user->save();
+
+        $new_user = new User;
+        $new_user->name = 'Juan';
+        $new_user->type = 'author';
+        $new_user->email = 'juan@gmail.com';
+        $new_user->password = 'autor123';
+        $new_user->telephone = '966323370';
+        $new_user->save();
     }
-
 }
