@@ -1,5 +1,12 @@
 @extends('layouts.add')
 
+@section('readers-nav')
+<div class="nav-item selected container flex-aligned-center">
+    <i class='bx bxs-face'></i>
+    <span class="nav-label">Lectores</span>
+</div>
+@endsection
+
 @section('select-img')
 <div class="user-image-selection container flex-vertical flex-aligned-center flex-center">
     <img class="user-image" src="{{ URL::asset('img/default.png'); }}" alt="Imagen del usuario">
