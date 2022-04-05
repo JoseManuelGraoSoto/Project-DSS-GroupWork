@@ -162,7 +162,91 @@ input[type="radio"]:focus {
     opacity: .5;
 }
 
-/* From cssbuttons.io by @varoonrao */
+#category-input {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 340px;
+    height: 45px;
+    border-radius: 4px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+/* Valoration input */
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.number-input {
+    display: inline-flex;
+    margin-top: 5px;
+}
+
+.number-input,
+.number-input * {
+    box-sizing: border-box;
+}
+
+.number-input button:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+
+.number-input button:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.number-input button {
+    outline:none;
+    -webkit-appearance: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    background-color: var(--primary-color);
+    
+}
+
+.number-input button:before,
+.number-input button:after {
+    display: inline-block;
+    position: absolute;
+    content: '';
+    width: 1rem;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transform: translate(-50%, -50%);
+}
+
+.number-input button.plus:after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+    max-width: 5rem;
+    padding: .5rem;
+    font-size: 2rem;
+    height: 3rem;
+    font-weight: var(--bold-weight);
+    text-align: center;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border: none;
+}
+
+/* Switch */
 .checkbox-con {
     margin: 10px;
     display: flex;
@@ -226,4 +310,3 @@ input[type="radio"]:focus {
     cursor: pointer;
     user-select: none;
 }
-   

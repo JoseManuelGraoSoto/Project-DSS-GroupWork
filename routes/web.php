@@ -17,7 +17,7 @@ use App\Http\Controllers\Article_userController;
 */
 
 Route::get('/', function () {
-    return view('admin.add.article');
+    return view('admin.add.review');
 });
 
 //Rutas users
