@@ -6,7 +6,6 @@
     <span class="nav-label">Lectores</span>
 </div>
 @endsection
-
 @section('text-inputs')
 <input type="email" name="email" id="email" placeholder="Correo eléctronico">
 <input type="text" name="name" id="name" placeholder="Nombre del usuario">

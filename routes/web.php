@@ -17,7 +17,7 @@ use App\Http\Controllers\Article_userController;
 */
 
 Route::get('/', function () {
-    return view('admin.add.createUser');
+    return view('admin.init');
 });
 
 //Rutas users

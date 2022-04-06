@@ -25,7 +25,7 @@
                     <div class="date container">
                         <i class='bx bx-calendar'></i>
                         @section('date')
-                        <input id="datepicker" type="text" placeholder="Fecha de creación" />
+                        <input id="datepicker" name="datepicker" type="text" placeholder="Fecha de creación" />
                         @show
                     </div>
 
@@ -33,7 +33,7 @@
                     <div class="user-type container flex-vertical flex-aligned-center">
                         <div class="types container">
                             <div class="type">
-                                <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
+                                <input checked="" type="checkbox" name="readerCheckbox" id="reader-type" class="hidden-xs-up">
                                 <label for="reader-type" class="cbx">
                                     <div class="type-tooltip">
                                         <span>Lector</span>
@@ -42,7 +42,7 @@
                                 </label>
                             </div>
                             <div class="type">
-                                <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
+                                <input checked="" type="checkbox" name="authorCheckbox" id="author-type" class="hidden-xs-up">
                                 <label for="author-type" class="cbx">
                                     <div class="type-tooltip">
                                         <span>Autor</span>
@@ -51,7 +51,7 @@
                                 </label>
                             </div>
                             <div class="type">
-                                <input checked="" type="checkbox" id="moderator-type" class="hidden-xs-up">
+                                <input checked="" type="checkbox" name="moderatorCheckbox" id="moderator-type" class="hidden-xs-up">
                                 <label for="moderator-type" class="cbx">
                                     <div class="type-tooltip">
                                         <span>Moderador</span>
@@ -60,7 +60,7 @@
                                 </label>
                             </div>
                             <div class="type">
-                                <input checked="" type="checkbox" id="administrator-type" class="hidden-xs-up">
+                                <input checked="" type="checkbox" name="administratorCheckbox" id="administrator-type" class="hidden-xs-up">
                                 <label for="administrator-type" class="cbx">
                                     <div class="type-tooltip">
                                         <span>Administrador</span>
@@ -78,7 +78,7 @@
                 <div class="right-section container flex-aligned-center">
                     <div class="filter-order">
                         <label class="switch">
-                            <input id="sort" type="checkbox">
+                            <input id="sort" name="order" type="checkbox">
                             <span class="slider"></span>
                         </label>
                     </div>
