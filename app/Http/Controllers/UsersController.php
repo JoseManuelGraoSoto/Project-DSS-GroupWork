@@ -15,8 +15,10 @@ class UsersController extends Controller
 
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
     public function showAll(){
-        $users = User::all();
+        $users = User::paginate(7);
         return view('admin.user', ['users' => $users]);
+        // $users = User::all();
+        // return view('admin.user', ['users' => $users]);
     }
 
     //Devuelve el formulario de creación de User

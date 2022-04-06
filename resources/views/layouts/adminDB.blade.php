@@ -4,21 +4,22 @@
 <link rel="stylesheet" href="{{ URL::asset('css/styleDB.css'); }}">
 <link rel="stylesheet" href="{{ URL::asset('calendar/dist/mc-calendar.min.css'); }}">
 <script src="{{ URL::asset('calendar/dist/mc-calendar.min.js'); }}"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 @yield('extra-header')
 @endsection
 
 @section('content')
 <div class="override">
-    <div class="search-box container flex-vertical flex-aligned-center" style="justify-content: space-between;">
+    <div class="search-box flex-container flex-vertical flex-aligned-center" style="justify-content: space-between;">
         <span class="search-title">Críterios de búsqueda</span>
 
-        <div class="text-inputs container flex-spaced">
+        <div class="text-inputs flex-container flex-spaced">
             @yield('text-inputs')
         </div>
 
-        <div class="lower-filter-section container flex-aligned-center flex-spaced">
-            <div class="left-section container">
-                <div class="date container">
+        <div class="lower-filter-section flex-container flex-aligned-center flex-spaced">
+            <div class="left-section flex-container">
+                <div class="date flex-container">
                     <i class='bx bx-calendar'></i>
                     @section('date')
                     <input id="datepicker" type="text" placeholder="Fecha de creación" />
@@ -26,8 +27,8 @@
                 </div>
 
                 @section('user-type')
-                <div class="user-type container flex-vertical flex-aligned-center">
-                    <div class="types container">
+                <div class="user-type flex-container flex-vertical flex-aligned-center">
+                    <div class="types flex-container">
                         <div class="type">
                             <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
                             <label for="reader-type" class="cbx">
@@ -71,7 +72,7 @@
                 @show
             </div>
 
-            <div class="right-section container flex-aligned-center">
+            <div class="right-section flex-container flex-aligned-center">
                 <div class="filter-order">
                     <label class="switch">
                         <input id="sort" type="checkbox">
@@ -95,13 +96,15 @@
     </div>
 
     <div class="main-panel">
-        <div class="main-buttons container">
+        <div class="main-buttons flex-container">
             @yield('main-buttons')
         </div>
 
-        <div class="display">
+        <div class="display flex-container flex-vertical">
             @yield('display')
         </div>
+
+        @yield('paginate')
     </div>
 </div>
 @endsection
@@ -139,11 +142,38 @@
 <script>
     let filter_dropdown = document.querySelector("#filter-dropdown");
     let filter = document.querySelector(".search-box");
-    let icon_dropdown = document.querySelector('#filter-dropdown i')
+    let icon_dropdown = document.querySelector('#filter-dropdown i');
 
     filter_dropdown.onclick = function() {
         filter.classList.toggle("active");
         icon_dropdown.classList.toggle("up");
+    }
+</script>
+
+<script>
+    let select = document.querySelectorAll('.user');
+
+    Array.from(select).forEach(instance => {
+        instance.addEventListener('click', function(e) {
+            e.target.classList.toggle('active');
+        });
+    });
+</script>
+
+<script>
+    let eliminate = document.querySelector('#delete-btn');
+
+    eliminate.onclick = function() {
+        let active_selections = document.querySelectorAll('.user.active');
+
+        const to_eliminate = [];
+        let i = 0;
+        Array.from(active_selections).forEach(instance => {
+            to_eliminate[i] = instance.querySelector('#id').textContent;
+            i++;
+        });
+
+        console.log(to_eliminate)
     }
 </script>
 @endsection

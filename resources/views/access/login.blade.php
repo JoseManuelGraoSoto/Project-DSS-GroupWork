@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="container flex-aligned-center flex-center flex-vertical screenfull" action="" method="POST">
+    <form class="flex-container flex-aligned-center flex-center flex-vertical screenfull" action="" method="POST">
         @csrf
         @method('PUT')
         
@@ -17,7 +17,7 @@
             Bienvenido de vuelta
         </h1>
 
-        <div class="container flex-vertical text-inputs">
+        <div class="flex-container flex-vertical text-inputs">
             <input type="text" name="email" id="email" placeholder="Correo eléctronico">
             <input type="password" name="password" id="password" placeholder="Contraseña">
         </div>

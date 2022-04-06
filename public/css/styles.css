@@ -19,10 +19,9 @@ body {
     position: relative;
     min-height: 100vh;
     width: 100%;
-    overflow: hidden;
 }
 
-.container {
+.flex-container {
     display: flex;
 }
 
@@ -108,6 +107,7 @@ body {
     pointer-events: none;
     transition: all .5s ease-out;
     margin: 10px;
+    text-decoration: none;
 }
 
 .sidebar.active .logo-content .logo {
@@ -311,8 +311,9 @@ body {
 
 .sidebar .menu-btn {
     position: absolute;
+    height: 40px;
     left: 50%;
-    top: 40px;
+    top: 20px;
     cursor: pointer;
     transition: all .5s ease-in-out;
     transition: all 0.9s ease;

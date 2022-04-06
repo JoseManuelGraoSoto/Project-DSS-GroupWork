@@ -6,7 +6,7 @@
 @endsection
 
 @section('access-nav')
-<div class="nav-item selected container flex-aligned-center">
+<div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-file-export'></i>
     <span class="nav-label">Acceso de usuarios</span>
 </div>
@@ -17,28 +17,49 @@
 @endsection
 
 @section('main-buttons')
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
-    ELIMINAR ACCESO
-</button>
+    ELIMINAR ACCESOS
+</a>
 
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-rotate-right'></i>
     MODIFICAR ACCESO
-</button>
+</a>
 
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR ACCESO
-</button>
+</a>
 @endsection
 
 @section('display')
-<div>
-    @foreach($articles_user as $article_user)
-    @foreach ($article_user->access as $acceso)
-    <li> Usuario: {{$article_user->name}}, Articulo: {{$acceso->title}}</li>
-    @endforeach
-    @endforeach
+<div class="upper-separator flex-container flex-spaced">
+    <span class="user-data-label">Usuario</span>
+    <span class="user-data-label">Articulo</span>
+    <span class="user-data-label">Tipo de usuario</span>
+    <span class="user-data-label">Fecha de acceso</span>
 </div>
+@foreach($articles_user as $article_user)
+@foreach ($article_user->access as $acceso)
+<div class="user flex-container flex-aligned-center flex-spaced">
+    <span class="user-data">{{$article_user->name}}</span>
+    <span class="user-data">{{$acceso->title}}</span>
+    <span class="user-data">
+        @if ($acceso->user->type == 'reader')
+            Lector
+        @elseif ($acceso->user->type == 'author')
+            Autor
+        @elseif ($acceso->user->type == 'moderator')
+            Moderador
+        @elseif ($acceso->user->type == 'administrator')
+            Administrador
+        @else
+            No se ha identificado el tipo del usuario
+        @endif
+    </span>
+    <span class="user-data">{{$acceso->created_at}}</span>
+</div>
+@endforeach
+@endforeach
 @endsection
