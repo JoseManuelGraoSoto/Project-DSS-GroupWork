@@ -9,91 +9,97 @@
 
 @section('content')
 <div class="override">
-    <div class="search-box container flex-vertical flex-aligned-center" style="justify-content: space-between;">
-        <span class="search-title">Críterios de búsqueda</span>
+    @section('form-start')
+    <form action=" {{ url('searchUser/') }}" method="POST">
+        @csrf
+        @show
+        <div class="search-box container flex-vertical flex-aligned-center" style="justify-content: space-between;">
+            <span class="search-title">Críterios de búsqueda</span>
 
-        <div class="text-inputs container flex-spaced">
-            @yield('text-inputs')
-        </div>
+            <div class="text-inputs container flex-spaced">
+                @yield('text-inputs')
+            </div>
 
-        <div class="lower-filter-section container flex-aligned-center flex-spaced">
-            <div class="left-section container">
-                <div class="date container">
-                    <i class='bx bx-calendar'></i>
-                    @section('date')
-                    <input id="datepicker" type="text" placeholder="Fecha de creación" />
+            <div class="lower-filter-section container flex-aligned-center flex-spaced">
+                <div class="left-section container">
+                    <div class="date container">
+                        <i class='bx bx-calendar'></i>
+                        @section('date')
+                        <input id="datepicker" type="text" placeholder="Fecha de creación" />
+                        @show
+                    </div>
+
+                    @section('user-type')
+                    <div class="user-type container flex-vertical flex-aligned-center">
+                        <div class="types container">
+                            <div class="type">
+                                <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
+                                <label for="reader-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Lector</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
+                                <label for="author-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Autor</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" id="moderator-type" class="hidden-xs-up">
+                                <label for="moderator-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Moderador</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" id="administrator-type" class="hidden-xs-up">
+                                <label for="administrator-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Administrador</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <span class="type-title">Tipo de usuario</span>
+                    </div>
                     @show
                 </div>
 
-                @section('user-type')
-                <div class="user-type container flex-vertical flex-aligned-center">
-                    <div class="types container">
-                        <div class="type">
-                            <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
-                            <label for="reader-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Lector</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
-                            <label for="author-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Autor</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="moderator-type" class="hidden-xs-up">
-                            <label for="moderator-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Moderador</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="administrator-type" class="hidden-xs-up">
-                            <label for="administrator-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Administrador</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
+                <div class="right-section container flex-aligned-center">
+                    <div class="filter-order">
+                        <label class="switch">
+                            <input id="sort" type="checkbox">
+                            <span class="slider"></span>
+                        </label>
                     </div>
 
-                    <span class="type-title">Tipo de usuario</span>
-                </div>
-                @show
-            </div>
-
-            <div class="right-section container flex-aligned-center">
-                <div class="filter-order">
-                    <label class="switch">
-                        <input id="sort" type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
-                <div class="filter-button">
-                    <button class="cssbuttons-io-button"> Buscar
-                        <div class="icon">
-                            <i class='bx bx-search-alt-2'></i>
-                        </div>
-                    </button>
+                    <div class="filter-button">
+                        <button class="cssbuttons-io-button"> Buscar
+                            <div class="icon">
+                                <i class='bx bx-search-alt-2'></i>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="filter-dropdown">
-        <i class='bx bxs-chevrons-down'></i>
-    </div>
-
+        <div id="filter-dropdown">
+            <i class='bx bxs-chevrons-down'></i>
+        </div>
+        @section('form-end')
+    </form>
+    @show
     <div class="main-panel">
         <div class="main-buttons container">
             @yield('main-buttons')

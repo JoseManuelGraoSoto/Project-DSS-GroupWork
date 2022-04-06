@@ -8,7 +8,7 @@
 @endsection
 
 @section('text-inputs')
-<input type="text" name="email" id="email" placeholder="Correo eléctronico">
+<input type="email" name="email" id="email" placeholder="Correo eléctronico">
 <input type="text" name="name" id="name" placeholder="Nombre del usuario">
 @endsection
 
@@ -18,10 +18,10 @@
     ELIMINAR USUARIOS
 </button>
 
-<button>
+<a href='/updateUserForm/' style='text-decoration: none'>
     <i class='bx bx-rotate-right'></i>
     MODIFICAR USUARIO
-</button>
+</a>
 
 <button>
     <i class='bx bx-plus'></i>

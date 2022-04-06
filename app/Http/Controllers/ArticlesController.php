@@ -31,11 +31,11 @@ class ArticlesController extends Controller
     //Recibe la información de un artículo y lo añade a la base de datos
     public function create(Request $request)
     {
-        $user = User::find($request->input('id_usuario'));
+        $user = User::where('name', $request->input('author'))->get();
         $new_article = new Article;
         $new_article->title = $request->input('title');
         $new_article->category = $request->input('category');
-        $new_article->valoration = $request->input('valoration');
+        $new_article->valoration = $request->input('quantity');
         $new_article->content = $request->input('content');
         $new_article->acepted = 0;
         $new_article->user()->associate($user);

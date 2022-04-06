@@ -17,7 +17,7 @@ use App\Http\Controllers\Article_userController;
 */
 
 Route::get('/', function () {
-    return view('admin.init');
+    return view('admin.add.createUser');
 });
 
 //Rutas users
@@ -37,6 +37,10 @@ Route::post('updateUser/', [UsersController::class, 'update'])->name('user.updat
 //Delete
 Route::get('deleteUser/', [UsersController::class, 'deleteUserFormulary'])->name('user.deleteForm');
 Route::post('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
+
+//Search
+Route::get('searchUserForm/', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
+Route::post('searchUser/', [UsersController::class, 'search'])->name('user.search');
 
 //Rutas articles
 
