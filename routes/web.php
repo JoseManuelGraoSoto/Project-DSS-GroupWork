@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
+use App\Http\Controllers\ValorationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,17 @@ Route::post('updateArticle_user/', [Article_userController::class, 'update'])->n
 //Delete
 Route::get('deleteArticle_user/', [Article_userController::class, 'deleteArticleFormulary'])->name('article_user.deleteForm');
 Route::post('deleteArticle_user/{id}', [Article_userController::class, 'delete'])->name('article_user.delete');
+
+//Rutas Valoration
+
+//Getters
+Route::get('valoration_user/{id}', [ValorationController::class, 'show'])->name('valoration.show');
+Route::get('valorations_user/', [ValorationController::class, 'showAll'])->name('valoration.showAll');
+
+//Create
+Route::get('createValoration_Form/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
+Route::post('createValoration/', [ValorationController::class, 'create'])->name('valoration.create');
+
+//Delete
+Route::get('deleteArticle_user/', [ValorationController::class, 'deleteValorationFormulary'])->name('valoration.deleteForm');
+Route::post('deleteArticle_user/{id}', [ValorationController::class, 'delete'])->name('valoration.delete');
