@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use App\Models\User;
 
 class UsersTableSeeder extends Seeder
@@ -12,28 +13,25 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $users = User::all();
+        $faker = Faker::create();
+        $faker->seed(1234);
 
         foreach ($users as $user) {
             $user->delete();
         }
-
-        $new_user = new User;
-        $new_user->name = 'David';
-        $new_user->type = 'reader';
-        $new_user->email = 'david@gmail.com';
-        $new_user->password = 'holaContra';
-        $new_user->telephone = '966354870';
-        $new_user->save();
-
-        $new_user = new User;
-        $new_user->name = 'Juan';
-        $new_user->type = 'author';
-        $new_user->email = 'juan@gmail.com';
-        $new_user->password = 'autor123';
-        $new_user->telephone = '966323370';
-        $new_user->save();
+        
+    	foreach (range(1,500) as $index) {
+            $new_user = new User;
+            $new_user->name = $faker->firstName;
+            $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
+            $new_user->email = $faker->freeEmail;
+            $new_user->password = $faker->password;
+            $new_user->telephone = $faker->mobileNumber;
+            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->save();
+        }
     }
+
 }

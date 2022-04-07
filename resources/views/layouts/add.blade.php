@@ -7,15 +7,16 @@
 
 @section('content')
 <div class="override">
+
     @section('form-start')
     <form action=" {{ url('createUser/') }}" method="POST">
         @csrf
         @show
 
-        <div class="to-fill container flex-spaced">
+        <div class="to-fill flex-container flex-spaced">
             @yield('select-img')
 
-            <div class=" text-inputs container flex-vertical flex-aligned-center flex-center">
+            <div class=" text-inputs flex-container flex-vertical flex-aligned-center flex-center">
                 @yield('text-inputs')
             </div>
 
@@ -23,7 +24,7 @@
         </div>
 
 
-        <div class="confirm-btn container">
+        <div class="confirm-btn flex-container">
             <button type="button">
                 <i class='bx bxs-x-circle'></i>
                 CANCELAR

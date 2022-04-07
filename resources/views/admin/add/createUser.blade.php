@@ -1,14 +1,14 @@
 @extends('layouts.add')
 
-@section('readers-nav')
-<div class="nav-item selected container flex-aligned-center">
+@section('users-nav')
+<div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-face'></i>
-    <span class="nav-label">Lectores</span>
+    <span class="nav-label">Usuarios</span>
 </div>
 @endsection
 
 @section('select-img')
-<div class="user-image-selection container flex-vertical flex-aligned-center flex-center">
+<div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center">
     <img class="user-image" src="{{ URL::asset('img/default.png'); }}" alt="Imagen del usuario">
     <div class="upload-img">
         <input type="file" id="selec-img" />
@@ -27,11 +27,11 @@
 @endsection
 
 @section('other-inputs')
-<div class="text-inputs container flex-aligned-center flex-center flex-vertical">
+<div class="text-inputs flex-container flex-aligned-center flex-center flex-vertical">
     <input type="text" name="email" id="email" placeholder="Correo del usuario">
     <input type="text" name="telephone" id="telephone" placeholder="Teléfono del usuario">
 </div>
-<div class="user-type container flex-vertical flex-center">
+<div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">
         <input type="radio" name="radio" value="reader" id="radio_button1" checked />
         Lector

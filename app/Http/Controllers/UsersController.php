@@ -18,10 +18,13 @@ class UsersController extends Controller
     }
 
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
+
     public function showAll()
     {
-        $users = User::all();
+        $users = User::paginate(7);
         return view('admin.user', ['users' => $users]);
+        // $users = User::all();
+        // return view('admin.user', ['users' => $users]);
     }
 
     //Devuelve el formulario de creación de User
@@ -211,5 +214,17 @@ class UsersController extends Controller
         }
 
         return view('vistaPruebaControladores.searchUser', ['users' => $users]);
+
+    //Recibe un id de usuario y borra el usuario
+    public function delete_multiple(Request $request){
+        $users = json_decode($request->input('users'));
+
+        foreach ($users as $id){ 
+            $user = User::find($id);
+            $user->delete();
+        }
+
+        return redirect()->action([UsersController::class, 'showAll']);
+
     }
 }
