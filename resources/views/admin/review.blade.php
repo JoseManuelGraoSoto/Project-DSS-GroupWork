@@ -6,25 +6,25 @@
 @endsection
 
 @section('reviews-nav')
-<div class="nav-item selected container flex-aligned-center">
+<div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-star' ></i>
     <span class="nav-label">Valoraciones</span>
 </div>
 @endsection
 
 @section('main-buttons')
-<button> 
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
     ELIMINAR VALORACIÓN
-</button>
+</a>
 
-<button> 
-    <i class='bx bx-rotate-right' ></i>
+<a href="/" style="text-decoration: none;">
+    <i class='bx bx-rotate-right'></i>
     MODIFICAR VALORACIÓN
-</button>
+</a>
 
-<button> 
-    <i class='bx bx-plus' ></i>
+<a href="/" style="text-decoration: none;">
+    <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
-</button>
+</a>
 @endsection

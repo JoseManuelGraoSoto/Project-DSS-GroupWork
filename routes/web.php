@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 //Getters
 Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
-Route::get('users/', [UsersController::class, 'showAll'])->name('user.showAll');
+Route::get('users/', [UsersController::class, 'showAll'])->name('users');
 
 //Create
 Route::get('createUserForm/', [UsersController::class, 'createUserFormulary'])->name('user.createForm');
@@ -35,8 +35,7 @@ Route::get('updateUserForm/', [UsersController::class, 'updateUserFormulary'])->
 Route::post('updateUser/', [UsersController::class, 'update'])->name('user.update');
 
 //Delete
-Route::get('deleteUser/', [UsersController::class, 'deleteUserFormulary'])->name('user.deleteForm');
-Route::post('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
+Route::get('/delete_users', [UsersController::class, 'delete_multiple']);
 
 //Rutas articles
 
