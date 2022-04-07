@@ -1,7 +1,7 @@
 @extends('layouts.add')
 
 @section('reviews-nav')
-<div class="nav-item selected container flex-aligned-center">
+<div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-star' ></i>
     <span class="nav-label">Valoraciones</span>
 </div>
@@ -13,7 +13,7 @@
 @endsection
 
 @section('other-inputs')
-<div class="inputs container flex-vertical flex-center flex-aligned-center">
+<div class="inputs flex-container flex-vertical flex-center flex-aligned-center">
     <div class="number-input">
         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
         <input class="quantity" min="0" max="10" name="quantity" value="5" type="number">
@@ -25,7 +25,7 @@
         <label for="selec-txt">Contenido del artículo</label>
     </div>
 </div>
-<div class="checkbox-con container flex-vertical flex-center flex-aligned-center">
+<div class="checkbox-con flex-container flex-vertical flex-center flex-aligned-center">
     <input id="checkbox" type="checkbox">
     <span style="color: var(--primary-color);">¿Moderador?</span>
 </div>
