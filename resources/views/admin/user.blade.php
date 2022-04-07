@@ -31,14 +31,15 @@
 
 @section('display')
 <div class="upper-separator flex-container flex-spaced flex-aligned-center">
-    <span class="separator"></span>
+    <div class="separator"></div>
     <span class="user-data-label">ID</span>
     <span class="user-data-label">Nombre</span>
-    <span class="user-data-label">Tipo de usuario</span>
+    <span class="user-data-label">Tipo Usuario</span>
     <span class="user-data-label">Correo eléctronico</span>
     <span class="user-data-label">Teléfono</span>
     <span class="user-data-label">Fecha de creación</span>
 </div>
+
 @foreach($users as $user)
 <div class="user flex-container flex-aligned-center flex-spaced">
     <div class="img-container">

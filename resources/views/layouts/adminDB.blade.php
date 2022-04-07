@@ -107,6 +107,8 @@
         @yield('paginate')
     </div>
 </div>
+
+<input id="hidden" type="text" hidden>
 @endsection
 
 @section('scripting')
@@ -173,7 +175,8 @@
             i++;
         });
 
-        console.log(to_eliminate)
+        let redirect = encodeURIComponent(JSON.stringify(to_eliminate));
+        window.location.replace("delete_{{ request()->route()->getName() }}?{{ request()->route()->getName() }}=" + redirect);
     }
 </script>
 @endsection

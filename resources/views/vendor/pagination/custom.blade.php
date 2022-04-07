@@ -9,7 +9,7 @@
      
         @foreach ($elements as $element)
             @if (is_string($element))
-                <li class="disabled"><span>{{ $element }}</span></li>
+                <li class="disabled"><span class="triple-dots" style="cursor: default">{{ $element }}</span></li>
             @endif
 
             @if (is_array($element))

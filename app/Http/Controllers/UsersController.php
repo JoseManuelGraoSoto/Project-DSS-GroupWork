@@ -69,4 +69,15 @@ class UsersController extends Controller
         return $name . ' borrado';
     }
 
+    //Recibe un id de usuario y borra el usuario
+    public function delete_multiple(Request $request){
+        $users = json_decode($request->input('users'));
+
+        foreach ($users as $id){ 
+            $user = User::find($id);
+            $user->delete();
+        }
+
+        return redirect()->action([UsersController::class, 'showAll']);
+    }
 }
