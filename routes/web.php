@@ -59,6 +59,7 @@ Route::post('updateArticle/', [ArticlesController::class, 'update'])->name('arti
 //Delete
 Route::get('deleteArticle/', [ArticlesController::class, 'deleteArticleFormulary'])->name('article.deleteForm');
 Route::post('deleteArticle/{id}', [ArticlesController::class, 'delete'])->name('article.delete');
+Route::post('searchArticle/', [ArticlesController::class, 'search'])->name('article.search');
 
 //Rutas 
 

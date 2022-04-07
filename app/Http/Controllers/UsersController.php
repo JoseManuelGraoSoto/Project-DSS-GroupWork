@@ -180,14 +180,17 @@ class UsersController extends Controller
             $primeraParteEmail .= $email[$i];
         }
 
+        //TODO: MODIFICAR PARA AÑADIR QUE SI EL $TYPES ESTÁ VACÍO SE HAGA UNA COSA O LA OTRA
+
+
         $users = null;
-        if ($nombre === null && $email !== null) {
+        if ($nombre === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
                 $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->get();
             }
-        } elseif ($nombre !== null && $email === null) {
+        } elseif ($nombre !== null && $email === null && !empty($types)) {
             if ($fecha !== null) {
                 $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
@@ -210,6 +213,6 @@ class UsersController extends Controller
             $users = $users->sortBy('id');
         }
 
-        return view('vistaPruebaControladores.searchUser', ['users' => $users]);
+        return view('admin.user', ['users' => $users]);
     }
 }
