@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         $users = User::all();
         $faker = Faker::create();
         $faker->seed(1234);
@@ -21,17 +22,16 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             $user->delete();
         }
-        
-    	foreach (range(1,500) as $index) {
+
+        foreach (range(1, 500) as $index) {
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
-            $new_user->email = $faker->freeEmail;
+            $new_user->email = $faker->unique()->freeEmail;
             $new_user->password = $faker->password;
-            $new_user->telephone = $faker->mobileNumber;
+            $new_user->telephone = $faker->e164PhoneNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
         }
     }
-
 }

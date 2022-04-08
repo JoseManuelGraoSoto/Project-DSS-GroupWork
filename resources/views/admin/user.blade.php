@@ -23,7 +23,7 @@
     MODIFICAR USUARIO
 </a>
 
-<a href="/" style="text-decoration: none;">
+<a href="/createUserForm" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR USUARIO
 </a>
@@ -49,15 +49,15 @@
     <span class="user-data">{{$user->name}}</span>
     <span class="user-data">
         @if ($user->type == 'reader')
-            Lector
+        Lector
         @elseif ($user->type == 'author')
-            Autor
+        Autor
         @elseif ($user->type == 'moderator')
-            Moderador
+        Moderador
         @elseif ($user->type == 'administrator')
-            Administrador
+        Administrador
         @else
-            No se ha identificado el tipo del usuario
+        No se ha identificado el tipo del usuario
         @endif
     </span>
     <span class="user-data">{{$user->email}}</span>

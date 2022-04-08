@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-
+use Illuminate\Support\Facades\Log;
 use function Ramsey\Uuid\v1;
 
 class UsersController extends Controller
@@ -19,7 +19,7 @@ class UsersController extends Controller
 
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
 
-    public function showAll()
+    public function showAll($users)
     {
         $users = User::paginate(7);
         return view('admin.user', ['users' => $users]);
@@ -45,8 +45,9 @@ class UsersController extends Controller
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         //TODO: cambiar a redirect
-        $users = User::all();
-        return view('admin.user', ['users' => $users]);
+        return redirect()->action([UsersController::class, 'search'])->withInput();
+        /*$users = User::paginate(7);
+        return view('admin.user', ['users' => $users]);*/
     }
 
     //Devuelve el formulario de actualización de user
@@ -91,11 +92,18 @@ class UsersController extends Controller
         return view('vistaPruebaControladores.searchUserForm');
     }
 
-    /*
-    public function redirectUserSearch(Collection $users)
+
+    public function showSearchResults(Collection $users)
     {
+
+        $ids = [];
+        foreach ($users as $user) {
+            $ids[] = $user->id;
+        }
+
+        $users = User::whereIn('id', $ids)->paginate(7);
         return view('admin.user', ['users' => $users]);
-    }*/
+    }
 
     public function extraerMes($mes)
     {
@@ -129,6 +137,8 @@ class UsersController extends Controller
 
     public function search(Request $request)
     {
+
+        $descendente = $request->has('order');
         $fecha = $request->input('datepicker');
         $dia = '';
         $mes = '';
@@ -187,33 +197,52 @@ class UsersController extends Controller
 
 
         $users = null;
+        error_log('Fecha');
+
         if ($nombre === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
-                $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($descendente) {
+                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                }
             } else {
-                $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->get();
+                if ($descendente) {
+                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
+                }
             }
         } elseif ($nombre !== null && $email === null && !empty($types)) {
             if ($fecha !== null) {
-                $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($descendente) {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                }
             } else {
-                $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->get();
+                if ($descendente) {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
+                }
             }
         } else {
             if ($fecha !== null) {
-                $usersName = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
-                $usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($descendente) {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                }
+                //$usersName = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                //$usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
-                $usersName = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->get();
-                $usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->get();
+                if ($descendente) {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                } else {
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id')->paginate(7)->withQueryString();
+                }
             }
-            $users = $usersName->concat($usersEmail)->unique();
-        }
-
-        if ($request->has('order')) {
-            $users = $users->sortByDesc('id');
-        } else {
-            $users = $users->sortBy('id');
         }
         return view('admin.user', ['users' => $users]);
     }
@@ -227,6 +256,6 @@ class UsersController extends Controller
             $user->delete();
         }
 
-        return redirect()->action([UsersController::class, 'showAll']);
+        return back()->withInput();
     }
 }

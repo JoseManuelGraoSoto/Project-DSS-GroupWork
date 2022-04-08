@@ -12,7 +12,7 @@
 <div class="override">
 
     @section('form-start')
-    <form action=" {{ url('searchUser/') }}" method="POST">
+    <form action=" {{ url('users/') }}" method="GET">
         @csrf
         @show
         <div class="search-box flex-container flex-vertical flex-aligned-center" style="justify-content: space-between;">
@@ -78,13 +78,13 @@
                     @show
                 </div>
 
-            <div class="right-section flex-container flex-aligned-center">
-                <div class="filter-order">
-                    <label class="switch">
-                        <input id="sort" name="order" type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>
+                <div class="right-section flex-container flex-aligned-center">
+                    <div class="filter-order">
+                        <label class="switch">
+                            <input id="sort" name="order" type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
 
                     <div class="filter-button">
                         <button class="cssbuttons-io-button"> Buscar
