@@ -22,7 +22,7 @@
                 <div class="date flex-container">
                     <i class='bx bx-calendar'></i>
                     @section('date')
-                    <input id="datepicker" type="text" placeholder="Fecha de creación" />
+                    <input readonly id="datepicker" type="text" placeholder="Fecha de creación" />
                     @show
                 </div>
 
@@ -33,7 +33,7 @@
                             <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
                             <label for="reader-type" class="cbx">
                                 <div class="type-tooltip">
-                                    <span>Lector</span>
+                                    <span>Usuario</span>
                                     <i class='bx bxs-down-arrow'></i>
                                 </div>
                             </label>
@@ -107,8 +107,6 @@
         @yield('paginate')
     </div>
 </div>
-
-<input id="hidden" type="text" hidden>
 @endsection
 
 @section('scripting')
