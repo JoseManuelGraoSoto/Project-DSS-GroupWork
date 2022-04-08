@@ -26,9 +26,9 @@ class UsersTableSeeder extends Seeder
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
-            $new_user->email = $faker->freeEmail;
-            $new_user->password = $faker->password;
-            $new_user->telephone = $faker->mobileNumber;
+            $new_user->email = $faker->unique()->freeEmail;
+            $new_user->password = $faker->userName;
+            $new_user->telephone = $faker->e164PhoneNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
         }

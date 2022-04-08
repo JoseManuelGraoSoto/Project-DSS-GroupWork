@@ -430,6 +430,7 @@
 
 .display {
     margin-top: 80px;
+    display: grid;
 }
 
 .display > * {
@@ -437,23 +438,21 @@
 }
 
 .upper-separator {
+    display: grid;
+    grid-template-columns: .5fr .5fr 1.7fr .75fr .75fr .75fr .9fr 1.15fr .75fr;
     border-bottom: 3px solid var(--primary-color);
 }
 
 .upper-separator > * {
-    width: 500px;
     text-align: center;
     font-size: 20px;
     color: var(--accent-color);
     font-weight: var(--bold-weight);
-    align-self: center;
-}
-
-.separator {
-    width: 200px;
 }
 
 .user {
+    display: grid;
+    grid-template-columns: .5fr .5fr 1.7fr .75fr .75fr .75fr .9fr 1.15fr .75fr;
     border-bottom: 2px solid var(--outline-color-week);
     font-size: 20px;
     cursor: default;
@@ -473,14 +472,7 @@
 }
 
 .user > * {
-    text-align: center;
-    margin: 0 5px;
-    width: 500px;
-}
-
-.img-container {
-    pointer-events: none;
-    width: 200px;
+    margin: auto;
 }
 
 .user-img {
@@ -488,10 +480,46 @@
     height: 60px;
     border-radius: 10px;
     border: 2px solid var(--outline-color-strong);
+    pointer-events: none;
+}
+
+.show-container {
+    position: relative;
+}
+
+#show {
+    color: var(--primary-color);
+    font-size: 28px;
+    transition: all 0.5s ease;
+}
+
+#password {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+#show:hover {
+    opacity: 0;
+}
+
+#show:hover + #password {
+    opacity: 1;
 }
 
 .user-data {
     pointer-events: none;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+}
+
+.edit-btn:hover {
+    opacity: .65;
 }
 
 .my-active span{
