@@ -42,11 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function articles() {
+    public function articles()
+    {
         return $this->hasMany('App\Models\Article');
     }
 
-    public function access() {
-        return $this->belongsToMany('App\Models\Article');
+    public function access()
+    {
+        return $this->belongsToMany('App\Models\Article')->withTimestamps();
     }
 }

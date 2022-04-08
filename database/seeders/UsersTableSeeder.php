@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         $users = User::all();
         $faker = Faker::create();
         $faker->seed(1234);
@@ -21,8 +22,8 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             $user->delete();
         }
-        
-    	foreach (range(1,500) as $index) {
+
+        foreach (range(1, 500) as $index) {
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
@@ -33,5 +34,4 @@ class UsersTableSeeder extends Seeder
             $new_user->save();
         }
     }
-
 }
