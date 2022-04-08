@@ -9,12 +9,14 @@ class Article extends Model
 {
     use HasFactory;
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function access() {
-        return $this->belongsToMany('App\Models\User');
+    public function access()
+    {
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
     }
 
     public function valoration() {

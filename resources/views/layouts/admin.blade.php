@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,35 +10,36 @@
     @yield('header')
     <title>Document</title>
 </head>
+
 <body>
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <div class="logo container flex-aligned-center">
-                <i class='bx bxs-face' ></i>
+            <a href="/" class="logo flex-container flex-aligned-center">
+                <i class='bx bxs-face'></i>
                 <div class="logo-name">Invent</div>
-            </div>
+            </a>
         </div>
 
-        <div class="menu-btn container flex-center flex-aligned-center">
+        <div class="menu-btn flex-container flex-center flex-aligned-center">
             <div class="menu-btn__burger"></div>
         </div>
 
         <ul class="nav-list">
             <li>
-                @section('readers-nav')
-                <a href="#" class="nav-item container flex-aligned-center">
-                    <i class='bx bxs-face' ></i>
-                    <span class="nav-label">Lectores</span>
+                @section('users-nav')
+                <a href="/users" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-face'></i>
+                    <span class="nav-label">Usuarios</span>
                 </a>
-                <span class="nav-tooltip">Lectores</span>
+                <span class="nav-tooltip">Usuarios</span>
                 @show
             </li>
 
             <li>
                 @section('articles-nav')
-                <a href="#" class="nav-item container flex-aligned-center">
-                    <i class='bx bxs-file' ></i>
+                <a href="/articles" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-file'></i>
                     <span class="nav-label">Artículos</span>
                 </a>
                 <span class="nav-tooltip">Artículos</span>
@@ -45,9 +47,19 @@
             </li>
 
             <li>
+                @section('access-nav')
+                <a href="/articles_user" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-file-export'></i>
+                    <span class="nav-label">Acceso de usuarios</span>
+                </a>
+                <span class="nav-tooltip">Acceso</span>
+                @show
+            </li>
+
+            <li>
                 @section('categories-nav')
-                <a href="#" class="nav-item container flex-aligned-center">
-                    <i class='bx bxs-category' ></i>
+                <a href="#" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-category'></i>
                     <span class="nav-label">Categorías</span>
                 </a>
                 <span class="nav-tooltip">Categorías</span>
@@ -56,8 +68,8 @@
 
             <li>
                 @section('reviews-nav')
-                <a href="#" class="nav-item container flex-aligned-center">
-                    <i class='bx bxs-star' ></i>
+                <a href="#" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-star'></i>
                     <span class="nav-label">Valoraciones</span>
                 </a>
                 <span class="nav-tooltip">Valoraciones</span>
@@ -66,8 +78,8 @@
 
             <li>
                 @section('rewards-nav')
-                <a href="#" class="nav-item container flex-aligned-center">
-                    <i class='bx bxs-trophy' ></i>
+                <a href="/" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bxs-trophy'></i>
                     <span class="nav-label">Recompensas</span>
                 </a>
                 <span class="nav-tooltip">Recompensas</span>
@@ -77,7 +89,7 @@
 
         <div class="profile-content">
             <div class="profile">
-                <div class="profile-details container flex-aligned-center">
+                <div class="profile-details flex-container flex-aligned-center">
                     <img src="{{ URL::asset('img/default.png'); }}" alt="Default user picture">
                     <div class="labels">
                         <div class="name">Temporal</div>
@@ -107,8 +119,8 @@
         const menuBtn = document.querySelector('.menu-btn');
         let menuOpen = false;
 
-        menuBtn.addEventListener('click', () => {            
-            if(!menuOpen) {
+        menuBtn.addEventListener('click', () => {
+            if (!menuOpen) {
                 menuBtn.classList.add('open');
                 menuOpen = true;
             } else {
@@ -120,4 +132,5 @@
 
     @yield('scripting')
 </body>
+
 </html>

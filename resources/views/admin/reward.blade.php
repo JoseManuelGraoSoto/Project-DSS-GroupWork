@@ -6,15 +6,15 @@
 @endsection
 
 @section('rewards-nav')
-<div class="nav-item selected container flex-aligned-center">
+<div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-trophy' ></i>
     <span class="nav-label">Recompensas</span>
 </div>
 @endsection
 
 @section('user-type')
-<div class="user-type container flex-vertical flex-aligned-center">
-    <div class="types container">
+<div class="user-type flex-container flex-vertical flex-aligned-center">
+    <div class="types flex-container">
         <div class="type">
             <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
             <label for="author-type" class="cbx">
@@ -40,25 +40,19 @@
 @endsection
 
 @section('main-buttons')
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
     ELIMINAR RECOMPENSAS
-</button>
+</a>
 
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-rotate-right'></i>
     MODIFICAR RECOMPENSA
-</button>
+</a>
 
-<button>
+<a href="/" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR RECOMPENSA
-</button>
-@endsection
-@section('display')
-    <div>
-        @foreach($rewards as $reward)
-        <li>{{$reward->points}}</li>
-        @endforeach
-    </div>
+
+</a>
 @endsection
