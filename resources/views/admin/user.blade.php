@@ -18,12 +18,6 @@
     ELIMINAR USUARIOS
 </button>
 
-
-<a href="/" style="text-decoration: none;">
-    <i class='bx bx-rotate-right'></i>
-    MODIFICAR USUARIO
-</a>
-
 <a id="add-btn" href="/createUserForm" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR USUARIO
