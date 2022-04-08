@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->enum('category', ['Ciencia', 'Biologia', 'Computación', 'Machine Learning']);
             $table->float('valoration');
-            $table->string('content');
+            $table->string('content',10000);
             $table->boolean('acepted');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
