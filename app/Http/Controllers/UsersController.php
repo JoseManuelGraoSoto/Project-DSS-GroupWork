@@ -94,19 +94,6 @@ class UsersController extends Controller
         return view('vistaPruebaControladores.searchUserForm');
     }
 
-
-    public function showSearchResults(Collection $users)
-    {
-
-        $ids = [];
-        foreach ($users as $user) {
-            $ids[] = $user->id;
-        }
-
-        $users = User::whereIn('id', $ids)->paginate(7);
-        return view('admin.user', ['users' => $users]);
-    }
-
     public function extraerMes($mes)
     {
         switch ($mes) {

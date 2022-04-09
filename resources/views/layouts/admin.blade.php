@@ -78,7 +78,7 @@
 
             <li>
                 @section('rewards-nav')
-                <a href="/" class="nav-item flex-container flex-aligned-center">
+                <a href="/rewards" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-trophy'></i>
                     <span class="nav-label">Recompensas</span>
                 </a>
