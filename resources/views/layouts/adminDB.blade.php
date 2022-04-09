@@ -23,59 +23,59 @@
             </div>
 
             <div class="lower-filter-section flex-container flex-aligned-center flex-spaced">
-            <div class="left-section flex-container">
-                <div class="date flex-container">
-                    <i class='bx bx-calendar'></i>
-                    @section('date')
-                    <input readonly id="datepicker" type="text" placeholder="Fecha de creación" />
-                    @show
-                </div>
-
-                @section('user-type')
-                <div class="user-type flex-container flex-vertical flex-aligned-center">
-                    <div class="types flex-container">
-                        <div class="type">
-                            <input checked="" type="checkbox" id="reader-type" class="hidden-xs-up">
-                            <label for="reader-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Usuario</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
-                            <label for="author-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Autor</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="moderator-type" class="hidden-xs-up">
-                            <label for="moderator-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Moderador</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="type">
-                            <input checked="" type="checkbox" id="administrator-type" class="hidden-xs-up">
-                            <label for="administrator-type" class="cbx">
-                                <div class="type-tooltip">
-                                    <span>Administrador</span>
-                                    <i class='bx bxs-down-arrow'></i>
-                                </div>
-                            </label>
-                        </div>
+                <div class="left-section flex-container">
+                    <div class="date flex-container">
+                        <i class='bx bx-calendar'></i>
+                        @section('date')
+                        <input readonly id="datepicker" name="datepicker" type="text" placeholder="Fecha de creación" />
+                        @show
                     </div>
 
-                    <span class="type-title">Tipo de usuario</span>
+                    @section('user-type')
+                    <div class="user-type flex-container flex-vertical flex-aligned-center">
+                        <div class="types flex-container">
+                            <div class="type">
+                                <input checked="" type="checkbox" name="readerCheckbox" id="reader-type" class="hidden-xs-up">
+                                <label for="reader-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Usuario</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" name="authorCheckbox" id="author-type" class="hidden-xs-up">
+                                <label for="author-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Autor</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" name="moderatorCheckbox" id="moderator-type" class="hidden-xs-up">
+                                <label for="moderator-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Moderador</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="type">
+                                <input checked="" type="checkbox" name="administratorCheckbox" id="administrator-type" class="hidden-xs-up">
+                                <label for="administrator-type" class="cbx">
+                                    <div class="type-tooltip">
+                                        <span>Administrador</span>
+                                        <i class='bx bxs-down-arrow'></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <span class="type-title">Tipo de usuario</span>
+                    </div>
+                    @show
                 </div>
-                @show
-            </div>
 
                 <div class="right-section flex-container flex-aligned-center">
                     <div class="filter-order">

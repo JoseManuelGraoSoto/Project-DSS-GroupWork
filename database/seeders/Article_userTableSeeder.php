@@ -9,7 +9,8 @@ use App\Models\User;
 use App\Models\Article;
 use App\Models\Article_user;
 
-class Article_userTableSeeder extends Seeder {
+class Article_userTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
@@ -17,14 +18,15 @@ class Article_userTableSeeder extends Seeder {
      * @return void
      */
 
-    public function run() {
+    public function run()
+    {
 
         $faker = Faker::create();
         $faker->seed(1234);
 
-    	foreach (range(1,500) as $index) {
-            $article_user = Article::find($faker->numberBetween(1,500));
-            $user = User::find($faker->numberBetween(1,700));
+        foreach (range(1, 500) as $index) {
+            $article_user = Article::find($faker->numberBetween(1, 500));
+            $user = User::find($faker->numberBetween(1, 700));
             $article_user->access()->attach($user->id);
             $article_user->save();
         }

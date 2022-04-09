@@ -64,12 +64,14 @@
     <span class="display-data">{{$user->telephone}}</span>
     <span class="display-data">{{$user->created_at}}</span>
     <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <input type="hidden" name="user_id" value="{{$user->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>
             EDITAR
         </button>
     </form>
 </div>
+
 @endforeach
 @endsection
 

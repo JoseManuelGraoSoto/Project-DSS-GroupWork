@@ -135,9 +135,10 @@ input[type="radio"]:focus {
     margin-right: 300px;
 }
 
-.confirm-btn button:first-child {
+.confirm-btn a:first-child {
     background-color: var(--primary-color);
     margin-right: 50px;
+    text-decoration: none;
 }
 
 .confirm-btn > * {

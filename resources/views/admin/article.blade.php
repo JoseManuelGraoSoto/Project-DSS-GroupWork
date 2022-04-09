@@ -1,9 +1,13 @@
 @extends('layouts.adminDB')
 
 @section('form-start')
-<form action=" {{ url('searchArticle/') }}" method="POST">
-@csrf
-@endsection
+<form action=" {{ url('articles/') }}" method="GET">
+    @csrf
+    @endsection
+    @section('text-inputs')
+    <input type="text" name="title" id="title" placeholder="Titulo del artículo">
+    <input type="text" name="author" id="author" placeholder="Nombre del autor">
+    @endsection
 
 @section('text-inputs')
 <input type="text" name="title" id="title" placeholder="Titulo del artículo">
@@ -27,7 +31,7 @@
     ELIMINAR ARTICULOS
 </button>
 
-<a href="/" style="text-decoration: none;">
+<a href="/createArticleForm" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR ARTICULO
 </a>

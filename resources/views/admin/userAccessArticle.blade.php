@@ -47,13 +47,13 @@
         <span class="display-data">{{$article_user->email}}</span>
         <span class="display-data">{{$acceso->title}}</span>
         <span class="display-data">
-            @if ($acceso->user->type == 'reader')
+            @if ($article_user->type == 'reader')
                 Lector
-            @elseif ($acceso->user->type == 'author')
+            @elseif ($article_user->type == 'author')
                 Autor
-            @elseif ($acceso->user->type == 'moderator')
+            @elseif ($article_user->type == 'moderator')
                 Moderador
-            @elseif ($acceso->user->type == 'administrator')
+            @elseif ($article_user->type == 'administrator')
                 Administrador
             @else
                 No se ha identificado el tipo del usuario
