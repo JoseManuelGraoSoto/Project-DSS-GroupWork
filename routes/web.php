@@ -98,11 +98,23 @@ Route::post('updateArticle_user/', [Article_userController::class, 'update'])->n
 Route::get('deleteArticle_user/', [Article_userController::class, 'deleteArticleFormulary'])->name('article_user.deleteForm');
 Route::post('deleteArticle_user/{id}', [Article_userController::class, 'delete'])->name('article_user.delete');
 
-//Rutas Valoration
+//Rutas Reward
 
 //Getters
-Route::get('valoration_user/{id}', [ValorationController::class, 'show'])->name('valoration.show');
-Route::get('valorations_user/', [ValorationController::class, 'showAll'])->name('valoration.showAll');
+Route::get('rewards/{id}', [RewardController::class, 'show'])->name('Reward.show');
+Route::get('rewards/', [RewardController::class, 'showAll'])->name('Reward.showAll');
+
+//Create
+Route::get('createReward_userForm/',[RewardController::class, 'createRewardFormulary'])->name('Reward.createForm');
+Route::post('createReward_user/', [RewardController::class, 'create'])->name('Reward.create');
+
+//Update
+Route::get('updateReward_userForm/',[RewardController::class, 'updateRewardFormulary'])->name('Reward.updateForm');
+Route::post('updateReward_user/',[RewardController::class, 'update'])->name('Reward.update');
+
+//Delete
+Route::get('deleteRewardForm/',[RewardController::class, 'deleteRewardFormulary'])->name('Reward.deleteForm');
+Route::post('deleteReward_user/{id}', [RewardController::class, 'delete'])->name('Reward.delete');
 
 //Create
 Route::get('createValoration_Form/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
