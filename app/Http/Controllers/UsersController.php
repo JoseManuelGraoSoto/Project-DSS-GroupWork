@@ -215,9 +215,6 @@ class UsersController extends Controller
                 }
             }
         } else {
-            if (empty($types)) {
-                $types[] = " ";
-            }
             if ($fecha !== null) {
                 if ($descendente) {
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
@@ -228,9 +225,9 @@ class UsersController extends Controller
                 //$usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
                 if ($descendente) {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id')->paginate(7)->withQueryString();
                 }
             }
         }
