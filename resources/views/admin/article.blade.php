@@ -1,4 +1,5 @@
 @extends('layouts.adminDB')
+
 @section('form-start')
 <form action=" {{ url('articles/') }}" method="GET">
     @csrf
@@ -8,65 +9,72 @@
     <input type="text" name="author" id="author" placeholder="Nombre del autor">
     @endsection
 
-    @section('articles-nav')
-    <div class="nav-item selected flex-container flex-aligned-center">
-        <i class='bx bxs-file'></i>
-        <span class="nav-label">Artículos</span>
-    </div>
-    @endsection
+@section('text-inputs')
+<input type="text" name="title" id="title" placeholder="Titulo del artículo">
+<input type="text" name="author" id="author" placeholder="Nombre del autor">
+@endsection
 
-    @section('user-type')
+@section('articles-nav')
+<div class="nav-item selected flex-container flex-aligned-center">
+    <i class='bx bxs-file'></i>
+    <span class="nav-label">Artículos</span>
+</div>
+@endsection
 
-    @endsection
+@section('user-type')
 
-    @section('main-buttons')
-    <a href="/" style="text-decoration: none;">
-        <i class='bx bx-trash'></i>
-        ELIMINAR ARTICULOS
-    </a>
+@endsection
 
-    <a href="/" style="text-decoration: none;">
-        <i class='bx bx-rotate-right'></i>
-        MODIFICAR ARTICULO
-    </a>
+@section('main-buttons')
+<button id="delete-btn" style="text-decoration: none;">
+    <i class='bx bx-trash'></i>
+    ELIMINAR ARTICULOS
+</button>
 
-    <a href="/createArticleForm" style="text-decoration: none;">
-        <i class='bx bx-plus'></i>
-        AÑADIR ARTICULO
-    </a>
-    @endsection
+<a href="/createArticleForm" style="text-decoration: none;">
+    <i class='bx bx-plus'></i>
+    AÑADIR ARTICULO
+</a>
+@endsection
 
-    @section('display')
-    <div class="upper-separator flex-container flex-spaced">
-        <span class="user-data-label">ID</span>
-        <span class="user-data-label">Titulo</span>
-        <span class="user-data-label">Categoría</span>
-        <span class="user-data-label">Valoración</span>
-        <span class="user-data-label">¿Aceptado?</span>
-        <span class="user-data-label">Autor</span>
-        <span class="user-data-label">Fecha de creación</span>
-        <span class="user-data-label">Última modificación</span>
-    </div>
-    @foreach($articles as $article)
-    <div class="user flex-container flex-aligned-center flex-spaced">
-        <span class="user-data">{{$article->id}}</span>
-        <span class="user-data">{{$article->title}}</span>
-        <span class="user-data">{{$article->category}}</span>
-        <span class="user-data">{{$article->valoration}}</span>
-        <span class="user-data">
-            @if($article->acepted)
+@section('display')
+<div class="upper-separator article">
+    <span class="display-data-label">ID</span>
+    <span class="display-data-label">Titulo</span>
+    <span class="display-data-label">Autor</span>
+    <span class="display-data-label">Categoría</span>
+    <span class="display-data-label">Valoración</span>
+    <span class="display-data-label">¿Aceptado?</span>
+    <span class="display-data-label">Fecha de creación</span>
+    <span class="display-data-label">Última modificación</span>
+    <div class="separator"></div>
+</div>
+@foreach($articles as $article)
+<div class="info-db article">
+    <span id="id" class="display-data">{{$article->id}}</span>
+    <span class="display-data">{{$article->title}}</span>
+    <span class="display-data">{{$article->user->email}}</span>
+    <span class="display-data">{{$article->category}}</span>
+    <span class="display-data">{{$article->valoration}}</span>
+    <span class="display-data">
+        @if($article->acepted)
             Aceptado
-            @else
+        @else
             No Aceptado
-            @endif
-        </span>
-        <span class="user-data">{{$article->user->email}}</span>
-        <span class="user-data">{{$article->created_at}}</span>
-        <span class="user-data">{{$article->updated_at}}</span>
-    </div>
-    @endforeach
-    @endsection
+        @endif
+    </span>
+    <span class="display-data">{{$article->created_at}}</span>
+    <span class="display-data">{{$article->updated_at}}</span>
+    <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <button class="edit-btn">
+            <i class='bx bx-rotate-right'></i>
+            EDITAR
+        </button>
+    </form>
+</div>
+@endforeach
+@endsection
 
-    @section('paginate')
-    {{ $articles->links('vendor.pagination.custom') }}
-    @endsection
+@section('paginate')
+{{ $articles->links('vendor.pagination.custom') }}
+@endsection

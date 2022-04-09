@@ -23,7 +23,16 @@ class UsersTableSeeder extends Seeder
             $user->delete();
         }
 
-        foreach (range(1, 500) as $index) {
+        $new_user = new User;
+        $new_user->name = 'admin';
+        $new_user->type = 'administrator';
+        $new_user->email = 'admin';
+        $new_user->password = 'admin'; 
+        $new_user->telephone = $faker->e164PhoneNumber;
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+        $new_user->save();
+
+        foreach (range(2, 500) as $index) {
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);

@@ -39,20 +39,59 @@
 </div>
 @endsection
 
+@section('date')
+<input readonly id="datepicker" type="text" placeholder="Fecha de registro" />
+@endsection
+
 @section('main-buttons')
-<a href="/" style="text-decoration: none;">
+<button id="delete-btn" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
     ELIMINAR RECOMPENSAS
-</a>
-
-<a href="/" style="text-decoration: none;">
-    <i class='bx bx-rotate-right'></i>
-    MODIFICAR RECOMPENSA
-</a>
+</button>
 
 <a href="/" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR RECOMPENSA
 
 </a>
+@endsection
+
+@section('display')
+
+<div class="upper-separator reward">
+    <span class="display-data-label">ID</span>
+    <span class="display-data-label">Correo eléctronico</span>
+    <span class="display-data-label">Nombre</span>
+    <span class="display-data-label">Puntos</span>
+    <span class="display-data-label">Tipo Recompensa</span>
+    <span class="display-data-label">Fecha de registro</span>
+    <div class="separator"></div>
+</div>
+
+@foreach($rewards as $reward)
+<div class="info-db reward">
+    <span id="id" class="display-data">{{$reward->id}}</span>
+    <span class="display-data">{{$reward->user->email}}</span>
+    <span class="display-data">{{$reward->user->name}}</span>
+    <span class="display-data">{{$reward->points}}</span>
+    <span class="display-data">
+        @if($reward->isModerator)
+            Moderador
+        @else
+            Autor
+        @endif
+    </span>
+    <span class="display-data">{{$reward->created_at}}</span>
+    <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <button class="edit-btn">
+            <i class='bx bx-rotate-right'></i>
+            EDITAR
+        </button>
+    </form>
+</div>
+@endforeach
+@endsection
+
+@section('paginate')
+{{ $rewards->links('vendor.pagination.custom') }}
 @endsection
