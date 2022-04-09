@@ -20,6 +20,8 @@ class ArticlesController extends Controller
     {
         $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
+        // $articles = Article::all();
+        // return view('admin.article', ['articles' => $articles]);
     }
 
     //Devuelve el formulario de creación de Article

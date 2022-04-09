@@ -26,44 +26,43 @@
 
 @section('display')
 
-<div class="upper-separator">
+<div class="upper-separator user">
     <div class="separator"></div>
-    <span class="user-data-label">ID</span>
-    <span class="user-data-label">Correo eléctronico</span>
-    <span class="user-data-label">Contraseña</span>
-    <span class="user-data-label">Nombre</span>
-    <span class="user-data-label">Tipo Usuario</span>
-    <span class="user-data-label">Teléfono</span>
-    <span class="user-data-label">Fecha de creación</span>
+    <span class="display-data-label">ID</span>
+    <span class="display-data-label">Correo eléctronico</span>
+    <span class="display-data-label">Contraseña</span>
+    <span class="display-data-label">Nombre</span>
+    <span class="display-data-label">Tipo Usuario</span>
+    <span class="display-data-label">Teléfono</span>
+    <span class="display-data-label">Fecha de creación</span>
     <div class="separator"></div>
 </div>
 
 @foreach($users as $user)
-
-<div class="user">
+<div class="info-db user">
     <img src="{{ URL::asset('img/default.png'); }}" class="user-img" alt="Default user picture">
-    <span id="id" class="user-data">{{$user->id}}</span>
-    <span class="user-data">{{$user->email}}</span>
+    <span id="id" class="display-data">{{$user->id}}</span>
+    <span class="display-data">{{$user->email}}</span>
     <div class="show-container flex-container flex-center">
         <i id="show" class='bx bx-low-vision'></i>
         <div id="password">{{$user->password}}</div>
     </div>
-    <span class="user-data">{{$user->name}}</span>
-    <span class="user-data">
+    <span class="display-data">{{$user->name}}</span>
+    <span class="display-data">
         @if ($user->type == 'reader')
-        Lector
+            Lector
         @elseif ($user->type == 'author')
-        Autor
+            Autor
         @elseif ($user->type == 'moderator')
-        Moderador
+            Moderador
         @elseif ($user->type == 'administrator')
-        Administrador
+            Administrador
         @else
-        No se ha identificado el tipo del usuario
+            No se ha identificado el tipo del usuario
         @endif
     </span>
-    <span class="user-data">{{$user->telephone}}</span>
-    <span class="user-data">{{$user->created_at}}</span>
+    <span class="display-data">{{$user->telephone}}</span>
+    <span class="display-data">{{$user->created_at}}</span>
     <form action=" {{ url('updateUserForm/') }}" method="GET">
         <input type="hidden" name="user_id" value="{{$user->id}}">
         <button class="edit-btn">
