@@ -19,7 +19,7 @@ use App\Http\Controllers\ValorationController;
 */
 
 Route::get('/', function () {
-    return view('admin.init');
+    return view('access.login');
 });
 
 //Rutas rewards
@@ -44,6 +44,7 @@ Route::post('deleteReward/{id}', [RewardController::class, 'delete'])->name('rew
 //Getters
 Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
 Route::get('users/', [UsersController::class, 'search'])->name('users');
+Route::get('logged/', [UsersController::class, 'logged'])->name('logged');
 
 //Create
 Route::get('createUserForm/', [UsersController::class, 'createUserFormulary'])->name('user.createForm');
@@ -59,6 +60,7 @@ Route::get('/delete_users', [UsersController::class, 'delete_multiple']);
 
 //Search
 Route::get('searchUserForm/', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
+Route::get('comprobarUser/', [UsersController::class, 'comprobarLogin'])->name('user.comprobarLogin');
 //Route::get('searchUser/', [UsersController::class, 'search'])->name('user.search');
 
 //Rutas articles

@@ -96,7 +96,7 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log-out"></i>
+                <a href="logged/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
             </div>
         </div>
     </nav>

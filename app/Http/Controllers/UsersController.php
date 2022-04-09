@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use function Ramsey\Uuid\v1;
 
-class UsersController extends Controller
-{
+class UsersController extends Controller {
     //Devuelve la vista userProfile pasándole como parámetro el usuario con el id requerido en la url
     public function show($id)
     {
@@ -246,9 +245,31 @@ class UsersController extends Controller
         return back()->withInput();
     }
 
-    public function volver()
-    {
+    public function volver() {
         error_log('HOLAAAAAAAAA');
         return redirect()->action([UsersController::class, 'search'])->withInput();
+    }
+
+    public function comprobarLogin(Request $request) {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            if (strcmp($password, $user->password) === 0) {
+                if (strcmp($user->type,'administrator') === 0) {
+                    return redirect()->action([UsersController::class, 'logged']);
+                } else {
+                    return back()->withInput()->withErrors(['type' => 'No es administrador']);
+                }
+            } else {
+                return back()->withInput()->withErrors(['password' => 'Contraseña incorrecta']);
+            }
+        } else {
+            return back()->withInput()->withErrors(['email' => 'Email incorrecto']);
+        }
+    }
+
+    public function logged() {
+        return view('admin.init');
     }
 }

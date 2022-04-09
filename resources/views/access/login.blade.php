@@ -9,10 +9,8 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="flex-container flex-aligned-center flex-center flex-vertical screenfull" action="" method="POST">
+    <form class="flex-container flex-aligned-center flex-center flex-vertical screenfull" action="{{ url('comprobarUser/') }}" method="PUT">
         @csrf
-        @method('PUT')
-        
         <h1 class="welcome-title">
             Bienvenido de vuelta
         </h1>
@@ -22,7 +20,11 @@
             <input type="password" name="password" id="password" placeholder="Contraseña">
         </div>
 
-        <button class="init-button" type="submit">Iniciar Sesión</button>
+        <button class="init-button">Iniciar Sesión</button>
     </form>
 </body>
 </html>
+
+<script>
+    
+</script>
