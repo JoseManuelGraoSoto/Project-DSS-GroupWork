@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reward;
+use App\Models\User;
 
 class RewardController extends Controller {
     //Devuelve la vista rewardProfile pasándole como parámetro el reward con el id requerido en la url
@@ -23,13 +24,12 @@ class RewardController extends Controller {
         return view('createReward');
     }
 
-    //Recibe la información de un reward y lo añade a la base de datos
+  //Recibe la información de un reward y lo añade a la base de datos
     public function create(Request $request){
         $new_reward = new Reward;
         $new_reward->points = $request->input('points');
         $new_reward->month = $request->input('month');
         $new_reward->isModerator = $request->input('isModerator');
-        $new_reward->user_id = $request->input('user_id');
         $new_reward->save();
         return view('rewardCreado');
     }
