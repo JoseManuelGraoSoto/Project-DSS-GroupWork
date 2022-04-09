@@ -39,6 +39,7 @@
 </div>
 
 @foreach($users as $user)
+
 <div class="user">
     <img src="{{ URL::asset('img/default.png'); }}" class="user-img" alt="Default user picture">
     <span id="id" class="user-data">{{$user->id}}</span>
@@ -64,12 +65,14 @@
     <span class="user-data">{{$user->telephone}}</span>
     <span class="user-data">{{$user->created_at}}</span>
     <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <input type="hidden" name="user_id" value="{{$user->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>
             EDITAR
         </button>
     </form>
 </div>
+
 @endforeach
 @endsection
 

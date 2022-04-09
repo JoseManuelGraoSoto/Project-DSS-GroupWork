@@ -34,6 +34,7 @@ Route::post('createUser/', [UsersController::class, 'create'])->name('user.creat
 //Update
 Route::get('updateUserForm/', [UsersController::class, 'updateUserFormulary'])->name('user.updateForm');
 Route::post('updateUser/', [UsersController::class, 'update'])->name('user.update');
+Route::get('volver/', [UsersController::class, 'volver']);
 
 //Delete
 Route::get('/delete_users', [UsersController::class, 'delete_multiple']);
