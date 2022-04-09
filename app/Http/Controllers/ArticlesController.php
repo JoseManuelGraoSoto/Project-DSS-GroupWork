@@ -46,24 +46,26 @@ class ArticlesController extends Controller
     }
 
     //Devuelve el formulario de actualización de Article
-    public function updateArticleFormulary()
+    public function updateArticleFormulary(Request $request)
     {
-        return view('updateArticle');
+        $article = Article::find($request->input('article_id'));
+        return view('admin.add.updateArticle', ['article' => $article]);
     }
 
     //Recibe la información de un artículo y lo modifica en la base de datos
     public function update(Request $request)
     {
-        $user = User::find($request->input('id_usuario'));
-        $article = Article::find($request->input('article_id'));
-        $article->title = $request->input('title');
-        $article->category = $request->input('category');
-        $article->valoration = $request->input('valoration');
-        $article->content = $request->input('content');
-        $article->acepted = 0;
+        $inputs = $request->all();
+        $user = User::where('email', $inputs['author'])->first();
+        $article = Article::find($inputs['article_id']);
+        $article->title = $inputs['title'];
+        $article->category = $inputs['category'];
+        $article->valoration = $inputs['quantity'];
+        $article->content = 'Contenido temporal de prueba';
+        $article->acepted = $request->has('accepted');
         $article->user()->associate($user);
         $article->save();
-        return 'Artículo actualizado';
+        return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
 
 
@@ -206,7 +208,7 @@ class ArticlesController extends Controller
         return view('admin.article', ['articles' => $articles]);
     }
 
-    public function delete_multiple(Request $request) 
+    public function delete_multiple(Request $request)
     {
         $articles = json_decode($request->input('articles'));
 
