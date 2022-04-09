@@ -53,5 +53,6 @@
 <a href="/" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR RECOMPENSA
+
 </a>
 @endsection
