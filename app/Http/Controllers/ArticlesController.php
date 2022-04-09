@@ -18,8 +18,10 @@ class ArticlesController extends Controller
     //Devuelve la vista articlesList pasándole como parámetro todos los articulos
     public function showAll()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
+        // $articles = Article::all();
+        // return view('admin.article', ['articles' => $articles]);
     }
 
     //Devuelve el formulario de creación de Article

@@ -16,7 +16,7 @@
     <nav class="sidebar">
         <div class="logo-content">
             <a href="/" class="logo flex-container flex-aligned-center">
-                <i class='bx bxs-face'></i>
+                <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
         </div>

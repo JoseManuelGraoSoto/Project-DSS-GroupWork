@@ -22,8 +22,10 @@ class Article_userController extends Controller
     //Devuelve la vista articles_userList pasándole como parámetro todos los usuarios
     public function showAll()
     {
-        $articles_user = User::all();
+        $articles_user = User::paginate(7);
         return view('admin.userAccessArticle', ['articles_user' => $articles_user]);
+        // $articles_user = User::all();
+        // return view('admin.userAccessArticle', ['articles_user' => $articles_user]);
     }
 
     //Devuelve el formulario de creación de article_user pasándole como parámetros tanto los usuarios como los artículos existentes
