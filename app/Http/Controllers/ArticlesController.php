@@ -25,18 +25,18 @@ class ArticlesController extends Controller
     //Devuelve el formulario de creación de Article
     public function createArticleFormulary()
     {
-        return view('createArticle');
+        return view('admin.add.createArticle');
     }
 
     //Recibe la información de un artículo y lo añade a la base de datos
     public function create(Request $request)
     {
-        $user = User::find($request->input('id_usuario'));
+        $user = User::where('name', $request->input('author'))->first();
         $new_article = new Article;
         $new_article->title = $request->input('title');
         $new_article->category = $request->input('category');
-        $new_article->valoration = $request->input('valoration');
-        $new_article->content = $request->input('content');
+        $new_article->valoration = $request->input('quantity');
+        $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = 0;
         $new_article->user()->associate($user);
         $new_article->save();
@@ -79,5 +79,118 @@ class ArticlesController extends Controller
         $title = $article->title;
         $article->delete();
         return $title . ' borrado';
+    }
+
+
+    public function extraerMes($mes)
+    {
+        switch ($mes) {
+            case 'Enero':
+                return '01';
+            case 'Febrero':
+                return '02';
+            case 'Marzo':
+                return '03';
+            case 'Abril':
+                return '04';
+            case 'Mayo':
+                return '05';
+            case 'Junio':
+                return '06';
+            case 'Julio':
+                return '07';
+            case 'Agosto':
+                return '08';
+            case 'Septiembre':
+                return '09';
+            case 'Octubre':
+                return '10';
+            case 'Noviembre':
+                return '11';
+            case 'Diciembre':
+                return '12';
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $nombre = $request->input('name');
+        $users = User::where('name', 'LIKE', '%' . $nombre . '%')->get();
+        $ids = [];
+        foreach ($users as $users) {
+            $ids[] = $users->id;
+        }
+        $titulo = $request->input('title');
+        $fecha = $request->input('datepicker');
+        $dia = '';
+        $mes = '';
+        $anyo = '';
+        if ($fecha !== null) {
+            $j = 0;
+            for ($j = 0; $j < strlen($fecha); $j++) {
+                if ($fecha[$j] === ' ') {
+                    $j++;
+                    break;
+                }
+            }
+            $dia = $fecha[$j] . $fecha[$j + 1];
+            $j += 3;
+            $mes = '';
+            for ($j; $j < strlen($fecha); $j++) {
+                if (
+                    $fecha[$j] === ' '
+                ) {
+                    $j++;
+                    break;
+                } else {
+                    $mes .= $fecha[$j];
+                }
+            }
+            $mes = $this->extraerMes($mes);
+            $anyo = $fecha[$j] . $fecha[$j + 1] . $fecha[$j + 2] . $fecha[$j + 3];
+
+            $fecha = $anyo . '-' . $mes . '-' . $dia;
+        }
+
+        $nombre = $request->input('name');
+        $titulo = $request->input('title');
+
+        $articles = null;
+        if ($nombre === null && $titulo !== null) {
+            if (
+                $fecha !== null
+            ) {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->get();
+            }
+        } elseif ($nombre !== null && $titulo === null) {
+            if ($fecha !== null) {
+                $articles = Article::whereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('user_id', $ids)->get();
+            }
+        } elseif ($nombre !== null && $titulo !== null) {
+            if ($fecha !== null) {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->get();
+            }
+        } else {
+            if ($fecha !== null) {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->get();
+            }
+        }
+        $articles = $articles->unique();
+
+
+        if ($request->has('order')) {
+            $articles = $articles->sortByDesc('id');
+        } else {
+            $articles = $articles->sortBy('id');
+        }
+        return view('admin.article', ['articles' => $articles]);
     }
 }

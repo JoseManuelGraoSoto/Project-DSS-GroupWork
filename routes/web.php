@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RewardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
@@ -21,11 +22,29 @@ Route::get('/', function () {
     return view('admin.init');
 });
 
+//Rutas rewards
+
+//Getters
+Route::get('reward/', [RewardController::class, 'showAll'])->name('reward.showAll');
+
+//Create
+Route::get('createRewardForm/', [RewardController::class, 'createRewardFormulary'])->name('reward.createForm');
+Route::post('createReward/', [RewardController::class, 'create'])->name('reward.create');
+
+//Update
+Route::get('updateRewardForm/', [RewardController::class, 'updateRewardFormulary'])->name('reward.updateForm');
+Route::post('updateReward/', [RewardController::class, 'update'])->name('reward.update');
+
+//Delete
+Route::get('deleteReward/', [RewardController::class, 'deleteRewardFormulary'])->name('reward.deleteForm');
+Route::post('deleteReward/{id}', [RewardController::class, 'delete'])->name('reward.delete');
+
 //Rutas users
 
 //Getters
 Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
-Route::get('users/', [UsersController::class, 'showAll'])->name('user.showAll');
+Route::get('users/', [UsersController::class, 'search'])->name('users');
+Route::get('usersSearchResults/', [UsersController::class, 'showSearchResults'])->name('users.searchResults');
 
 //Create
 Route::get('createUserForm/', [UsersController::class, 'createUserFormulary'])->name('user.createForm');
@@ -36,8 +55,11 @@ Route::get('updateUserForm/', [UsersController::class, 'updateUserFormulary'])->
 Route::post('updateUser/', [UsersController::class, 'update'])->name('user.update');
 
 //Delete
-Route::get('deleteUser/', [UsersController::class, 'deleteUserFormulary'])->name('user.deleteForm');
-Route::post('deleteUser/{id}', [UsersController::class, 'delete'])->name('user.delete');
+Route::get('/delete_users', [UsersController::class, 'delete_multiple']);
+
+//Search
+Route::get('searchUserForm/', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
+//Route::get('searchUser/', [UsersController::class, 'search'])->name('user.search');
 
 //Rutas articles
 
@@ -56,6 +78,7 @@ Route::post('updateArticle/', [ArticlesController::class, 'update'])->name('arti
 //Delete
 Route::get('deleteArticle/', [ArticlesController::class, 'deleteArticleFormulary'])->name('article.deleteForm');
 Route::post('deleteArticle/{id}', [ArticlesController::class, 'delete'])->name('article.delete');
+Route::post('searchArticle/', [ArticlesController::class, 'search'])->name('article.search');
 
 //Rutas 
 

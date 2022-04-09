@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticlesTable extends Migration
+class CreateValorationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('valorations', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->enum('category', ['Ciencia', 'Biologia', 'Computación', 'Machine Learning']);
-            $table->float('valoration');
-            $table->string('content',16000);
-            $table->boolean('acepted');
+            $table->integer('value');
+            $table->string('comment');
+            $table->boolean('isModerator');
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
@@ -32,10 +31,11 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function (Blueprint $table) {
+        Schema::table('valorations', function (Blueprint $table) {
+            $table->dropForeign(['article_id']);
             $table->dropForeign(['user_id']);
         });
 
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('valorations');
     }
 }
