@@ -28,9 +28,10 @@ class UsersController extends Controller
     }
 
     //Devuelve el formulario de creación de User
-    public function createUserFormulary()
+    public function createUserFormulary(Request $request)
     {
-        return view('admin.add.createUser');
+        $user = User::find($request->input('user_id'));
+        return view('admin.add.createUser', ['user' => $user]);
     }
 
     //Recibe la información de un usuario y lo añade a la base de datos
@@ -60,14 +61,15 @@ class UsersController extends Controller
     //Recibe la información de un usuario y lo modifica en la base de datos
     public function update(Request $request)
     {
-        $user = User::find($request->input('user_id'));
-        $user->name = $request->input('name');
-        $user->type = $request->input('type');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->telephone = $request->input('telephone');
-        $user->save();
-        return 'Usuario actualizado';
+        $inputs = $request->all();
+        $new_user = User::find($inputs['user_id']);
+        $new_user->name = $inputs['name'];
+        $new_user->type = $inputs['radio'];
+        $new_user->email = $inputs['email'];
+        $new_user->password = $inputs['password'];
+        $new_user->telephone = $inputs['telephone'];
+        $new_user->save();
+        return redirect()->action([UsersController::class, 'search'])->withInput();
     }
 
     //Devuelve el formulario de borrado de User pasándole como parámetro los usuarios
@@ -90,19 +92,6 @@ class UsersController extends Controller
     public function searchUserFormulary()
     {
         return view('vistaPruebaControladores.searchUserForm');
-    }
-
-
-    public function showSearchResults(Collection $users)
-    {
-
-        $ids = [];
-        foreach ($users as $user) {
-            $ids[] = $user->id;
-        }
-
-        $users = User::whereIn('id', $ids)->paginate(7);
-        return view('admin.user', ['users' => $users]);
     }
 
     public function extraerMes($mes)
@@ -197,7 +186,6 @@ class UsersController extends Controller
 
 
         $users = null;
-
         if ($nombre === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
@@ -227,6 +215,9 @@ class UsersController extends Controller
                 }
             }
         } else {
+            if (empty($types)) {
+                $types[] = " ";
+            }
             if ($fecha !== null) {
                 if ($descendente) {
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
@@ -237,9 +228,9 @@ class UsersController extends Controller
                 //$usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
                 if ($descendente) {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
                 }
             }
         }
@@ -256,5 +247,11 @@ class UsersController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function volver()
+    {
+        error_log('HOLAAAAAAAAA');
+        return redirect()->action([UsersController::class, 'search'])->withInput();
     }
 }

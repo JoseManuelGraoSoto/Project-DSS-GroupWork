@@ -25,10 +25,11 @@
 
 
         <div class="confirm-btn flex-container">
-            <button type="button">
+
+            <a href="{{action('App\Http\Controllers\UsersController@volver')}}">
                 <i class='bx bxs-x-circle'></i>
                 CANCELAR
-            </button>
+            </a>
 
             <button type="submit">
                 <i class='bx bx-check-double'></i>

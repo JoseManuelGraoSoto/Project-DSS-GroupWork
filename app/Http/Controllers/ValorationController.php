@@ -10,24 +10,28 @@ use App\Models\Article;
 class ValorationController extends Controller
 {
     //Devuelve la vista articleInfo pasándole como parámetro el articulo con el id requerido en la url
-    public function show($id) {
+    public function show($id)
+    {
         $valoration = Valoration::find($id);
         return view('valorationInfo', ['comment' => $valoration]);
     }
 
     //Devuelve la vista articlesList pasándole como parámetro todos los articulos
-    public function showAll(){
+    public function showAll()
+    {
         $valoration = Valoration::all();
         return view('valorationList', ['comment' => $valoration]);
     }
 
     //Devuelve el formulario de creación de Reward
-    public function createValorationFormulary(){
+    public function createValorationFormulary()
+    {
         return view('createValoration');
     }
 
     //Recibe la información de un Reward y lo añade a la base de datos
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $user = User::find($request->input('user_id'));
         $article = Article::find($request->input('article_id'));
         $new_Valoration = new Valoration;
@@ -42,14 +46,16 @@ class ValorationController extends Controller
     }
 
     //Devuelve el formulario de borrado de Reward pasándole como parámetro los reward
-    public function deleteValorationFormulary(){
+    public function deleteValorationFormulary()
+    {
         $valo = Valoration::all();
         return view('deleteValorations', ['comment' => $valo]);
     }
 
     //Recibe un id de usuario y borra la reward
-    public function delete(Request $request){
-        $valo = User::find($request->input('user_id'));
+    public function delete(Request $request)
+    {
+        $valo = Valoration::where('user_id', $request->input('user_id'))->where('article_id', $request->input('article_id'));
         $valo->delete();
     }
 }
