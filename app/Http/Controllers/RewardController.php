@@ -6,18 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Reward;
 use App\Models\User;
 
-class RewardController extends Controller
-{
-    //Devuelve la vista articleInfo pasándole como parámetro el articulo con el id requerido en la url
+class RewardController extends Controller {
+    //Devuelve la vista rewardProfile pasándole como parámetro el reward con el id requerido en la url
     public function show($id) {
-        $reward = Reward::find($id);
-        return view('rewardInfo', ['reward' => $reward]);
+        $reward = Reward::where('points', $id)-> first();
+        return view('rewardProfile', ['reward' => $reward]);
     }
 
-    //Devuelve la vista articlesList pasándole como parámetro todos los articulos
+    //Devuelve la vista rewardsProfile pasándole como parámetro todos los rewards
     public function showAll(){
         $rewards = Reward::all();
-        return view('rewardList', ['reward' => $rewards]);
+        return view('admin.reward', ['rewards' => $rewards]);
     }
 
     //Devuelve el formulario de creación de Reward
@@ -25,9 +24,8 @@ class RewardController extends Controller
         return view('createReward');
     }
 
-    //Recibe la información de un Reward y lo añade a la base de datos
+  //Recibe la información de un reward y lo añade a la base de datos
     public function create(Request $request){
-        $user = User::find($request->input('user_id'));
         $new_reward = new Reward;
         $new_reward->points = $request->input('points');
         $new_reward->month = $request->input('month');
@@ -36,32 +34,35 @@ class RewardController extends Controller
         return view('rewardCreado');
     }
 
-    //Devuelve el formulario de actualización de Article
+    //Devuelve el formulario de actualización de reward
     public function updateRewardFormulary(){
         return view('updateReward');
     }
 
     //Recibe la información de un reward y lo modifica en la base de datos
     public function update(Request $request){
-        $user_Reward = User::find($request->input('user_id'));
-        $user_Reward->points = $request->input('points');
-        $user_Reward->month = $request->input('month');
-        $user_Reward->isModerator = $request->input('isModerator');
-        $user_Reward->save();
-        return 'Reward actualizado';
+        $reward = Reward::find($request->input('reward_id'));
+        $reward->points = $request->input('points');
+        $reward->month = $request->input('month');
+        $reward->isModerator = $request->input('isModerator');
+        $reward->user_id = $request->input('user_id');
+        $reward->telephone = $request->input('telephone');
+        $reward->save();
+        return 'Usuario actualizado';
     }
 
-    //Devuelve el formulario de borrado de Reward pasándole como parámetro los reward
+    //Devuelve el formulario de borrado de Reward pasándole como parámetro los rewards
     public function deleteRewardFormulary(){
         $rewards = Reward::all();
-        return view('deleteRewards', ['reward' => $rewards]);
+        return view('deleteReward', ['rewards' => $rewards]);
     }
 
-    //Recibe un id de usuario y borra la reward
-    public function delete(Request $request){
-        $reward = User::find($request->input('user_id'));
-        $fecha = $reward->Fecha;
+    //Recibe un id de reward y borra el reward
+    public function delete($id){
+        $reward = Reward::find($id);
+        $points = $reward->points;
         $reward->delete();
-        return $fecha . ' borrado';
+        return $points . ' borrado';
     }
+
 }
