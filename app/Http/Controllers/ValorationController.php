@@ -19,8 +19,8 @@ class ValorationController extends Controller
     //Devuelve la vista articlesList pasándole como parámetro todos los articulos
     public function showAll()
     {
-        $valoration = Valoration::all();
-        return view('valorationList', ['comment' => $valoration]);
+        $valorations = Valoration::paginate(7);
+        return view('admin.valoration', ['valorations' => $valorations]);
     }
 
     //Devuelve el formulario de creación de Reward
@@ -57,5 +57,17 @@ class ValorationController extends Controller
     {
         $valo = Valoration::where('user_id', $request->input('user_id'))->where('article_id', $request->input('article_id'));
         $valo->delete();
+    }
+
+    public function delete_multiple(Request $request)
+    {
+        $valorations = json_decode($request->input('valorations'));
+
+        foreach ($valorations as $id) {
+            $valorations = Valoration::find($id);
+            $valorations->delete();
+        }
+
+        return back()->withInput();
     }
 }

@@ -205,4 +205,16 @@ class ArticlesController extends Controller
         //$articles = $articles->unique();
         return view('admin.article', ['articles' => $articles]);
     }
+
+    public function delete_multiple(Request $request) 
+    {
+        $articles = json_decode($request->input('articles'));
+
+        foreach ($articles as $id) {
+            $articles = Article::find($id);
+            $articles->delete();
+        }
+
+        return back()->withInput();
+    }
 }

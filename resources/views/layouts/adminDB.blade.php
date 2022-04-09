@@ -171,7 +171,7 @@
     let eliminate = document.querySelector('#delete-btn');
 
     eliminate.onclick = function() {
-        let active_selections = document.querySelectorAll('.user.active');
+        let active_selections = document.querySelectorAll('.info-db.active');
 
         const to_eliminate = [];
         let i = 0;
