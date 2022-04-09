@@ -51,7 +51,7 @@
 </div>
 @foreach($articles as $article)
 <div class="info-db article">
-    <span class="display-data">{{$article->id}}</span>
+    <span id="id" class="display-data">{{$article->id}}</span>
     <span class="display-data">{{$article->title}}</span>
     <span class="display-data">{{$article->user->email}}</span>
     <span class="display-data">{{$article->category}}</span>

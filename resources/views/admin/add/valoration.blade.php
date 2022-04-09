@@ -1,6 +1,6 @@
 @extends('layouts.add')
 
-@section('reviews-nav')
+@section('valorations-nav')
 <div class="nav-item selected flex-container flex-aligned-center">
     <i class='bx bxs-star' ></i>
     <span class="nav-label">Valoraciones</span>

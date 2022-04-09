@@ -44,7 +44,7 @@
 @endsection
 
 @section('main-buttons')
-<button href="/" style="text-decoration: none;">
+<button id="delete-btn" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
     ELIMINAR RECOMPENSAS
 </button>
@@ -70,7 +70,7 @@
 
 @foreach($rewards as $reward)
 <div class="info-db reward">
-    <span class="display-data">{{$reward->id}}</span>
+    <span id="id" class="display-data">{{$reward->id}}</span>
     <span class="display-data">{{$reward->user->email}}</span>
     <span class="display-data">{{$reward->user->name}}</span>
     <span class="display-data">{{$reward->points}}</span>
@@ -90,4 +90,8 @@
     </form>
 </div>
 @endforeach
+@endsection
+
+@section('paginate')
+{{ $rewards->links('vendor.pagination.custom') }}
 @endsection

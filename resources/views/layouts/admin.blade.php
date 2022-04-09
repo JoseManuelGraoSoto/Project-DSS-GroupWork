@@ -15,7 +15,7 @@
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <a href="/" class="logo flex-container flex-aligned-center">
+            <a href="logged/" class="logo flex-container flex-aligned-center">
                 <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
@@ -58,7 +58,7 @@
 
             <li>
                 @section('categories-nav')
-                <a href="#" class="nav-item flex-container flex-aligned-center">
+                <a href="/category" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-category'></i>
                     <span class="nav-label">Categorías</span>
                 </a>
@@ -67,8 +67,8 @@
             </li>
 
             <li>
-                @section('reviews-nav')
-                <a href="#" class="nav-item flex-container flex-aligned-center">
+                @section('valorations-nav')
+                <a href="/valorations" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-star'></i>
                     <span class="nav-label">Valoraciones</span>
                 </a>
@@ -96,7 +96,7 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <a href="logged/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
+                <a href="/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
             </div>
         </div>
     </nav>

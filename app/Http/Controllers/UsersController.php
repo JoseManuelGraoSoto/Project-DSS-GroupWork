@@ -246,7 +246,6 @@ class UsersController extends Controller {
     }
 
     public function volver() {
-        error_log('HOLAAAAAAAAA');
         return redirect()->action([UsersController::class, 'search'])->withInput();
     }
 

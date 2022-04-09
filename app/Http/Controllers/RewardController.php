@@ -18,8 +18,10 @@ class RewardController extends Controller
     //Devuelve la vista rewardsProfile pasándole como parámetro todos los rewards
     public function showAll()
     {
-        $rewards = Reward::all();
+        $rewards = Reward::paginate(7);
         return view('admin.reward', ['rewards' => $rewards]);
+        // $rewards = Reward::all();
+        // return view('admin.reward', ['rewards' => $rewards]);
     }
 
     //Devuelve el formulario de creación de Reward
@@ -80,5 +82,17 @@ class RewardController extends Controller
         $reward = Reward::find($request->input('reward_id'));
         $reward->delete();
         return 'Recompensa borrada';
+    }
+
+    public function delete_multiple(Request $request) 
+    {
+        $rewards = json_decode($request->input('rewards'));
+
+        foreach ($rewards as $id) {
+            $rewards = Reward::find($id);
+            $rewards->delete();
+        }
+
+        return back()->withInput();
     }
 }
