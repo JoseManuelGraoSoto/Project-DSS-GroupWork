@@ -19,7 +19,7 @@ use App\Http\Controllers\ValorationController;
 */
 
 Route::get('/', function () {
-    return view('admin.add.reward');
+    return view('admin.init');
 });
 
 //Rutas rewards
@@ -65,7 +65,7 @@ Route::get('searchUserForm/', [UsersController::class, 'searchUserFormulary'])->
 
 //Getters
 Route::get('article/{id}', [ArticlesController::class, 'show'])->name('article.show');
-Route::get('articles/', [ArticlesController::class, 'showAll'])->name('article.showAll');
+Route::get('articles/', [ArticlesController::class, 'search'])->name('article.showAll');
 
 //Create
 Route::get('createArticleForm/', [ArticlesController::class, 'createArticleFormulary'])->name('article.createForm');
@@ -78,7 +78,7 @@ Route::post('updateArticle/', [ArticlesController::class, 'update'])->name('arti
 //Delete
 Route::get('deleteArticle/', [ArticlesController::class, 'deleteArticleFormulary'])->name('article.deleteForm');
 Route::post('deleteArticle/{id}', [ArticlesController::class, 'delete'])->name('article.delete');
-Route::post('searchArticle/', [ArticlesController::class, 'search'])->name('article.search');
+//Route::post('searchArticle/', [ArticlesController::class, 'search'])->name('article.search');
 
 //Rutas 
 

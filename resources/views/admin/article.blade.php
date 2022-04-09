@@ -1,6 +1,6 @@
 @extends('layouts.adminDB')
 @section('form-start')
-<form action=" {{ url('searchArticle/') }}" method="POST">
+<form action=" {{ url('articles/') }}" method="GET">
     @csrf
     @endsection
     @section('text-inputs')
@@ -30,7 +30,7 @@
         MODIFICAR ARTICULO
     </a>
 
-    <a href="/" style="text-decoration: none;">
+    <a href="/createArticleForm" style="text-decoration: none;">
         <i class='bx bx-plus'></i>
         AÑADIR ARTICULO
     </a>
@@ -65,4 +65,8 @@
         <span class="user-data">{{$article->updated_at}}</span>
     </div>
     @endforeach
+    @endsection
+
+    @section('paginate')
+    {{ $articles->links('vendor.pagination.custom') }}
     @endsection
