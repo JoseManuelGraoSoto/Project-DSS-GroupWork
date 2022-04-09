@@ -51,4 +51,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Article')->withTimestamps();
     }
+
+    public function valoration() {
+        return $this->hasMany('App\Models\Valoration');
+    }
+
+    public function reward() {
+        return $this->hasMany('App\Models\Reward');
+    }
 }
