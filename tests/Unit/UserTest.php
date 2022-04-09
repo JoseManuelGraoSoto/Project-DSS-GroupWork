@@ -39,7 +39,7 @@ class UserTest extends TestCase {
 
     public function testDelete(){
         $num_user = User::all()->count();
-        $user = User::first();
+        $user = User::where('name','Oscar')->first();
         $user->delete();
         $num_user_deleted = User::all()->count();
         $this->assertTrue($num_user > $num_user_deleted);
