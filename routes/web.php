@@ -78,18 +78,17 @@ Route::get('updateArticle_userForm/', [Article_userController::class, 'updateArt
 Route::post('updateArticle_user/', [Article_userController::class, 'update'])->name('article_user.update');
 
 //Rutas Reward
-
 //Getters
 Route::get('rewards/{id}', [RewardController::class, 'show'])->name('Reward.show');
 Route::get('rewards/', [RewardController::class, 'showAll'])->name('rewards');
 
 //Create
-Route::get('createReward_userForm/', [RewardController::class, 'createRewardFormulary'])->name('Reward.createForm');
-Route::post('createReward_user/', [RewardController::class, 'create'])->name('Reward.create');
+Route::get('createRewardForm/', [RewardController::class, 'createRewardFormulary'])->name('Reward.createForm');
+Route::post('createReward/', [RewardController::class, 'create'])->name('Reward.create');
 
 //Update
-Route::get('updateReward_userForm/', [RewardController::class, 'updateRewardFormulary'])->name('Reward.updateForm');
-Route::post('updateReward_user/', [RewardController::class, 'update'])->name('Reward.update');
+Route::get('updateRewardForm/', [RewardController::class, 'updateRewardFormulary'])->name('Reward.updateForm');
+Route::post('updateReward/', [RewardController::class, 'update'])->name('Reward.update');
 
 //Deleteg
 Route::get('/delete_rewards', [RewardController::class, 'delete_multiple']);
