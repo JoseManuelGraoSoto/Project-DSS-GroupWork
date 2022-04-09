@@ -16,19 +16,14 @@
     @endsection
 
     @section('date')
-    <input id="datepicker" type="text" placeholder="Fecha de acceso" />
+    <input readonly id="datepicker" type="text" placeholder="Fecha de acceso" />
     @endsection
 
     @section('main-buttons')
-    <a href="/" style="text-decoration: none;">
+    <button href="/" style="text-decoration: none;">
         <i class='bx bx-trash'></i>
         ELIMINAR ACCESOS
-    </a>
-
-    <a href="/" style="text-decoration: none;">
-        <i class='bx bx-rotate-right'></i>
-        MODIFICAR ACCESO
-    </a>
+    </button>
 
     <a href="/" style="text-decoration: none;">
         <i class='bx bx-plus'></i>
@@ -37,31 +32,40 @@
     @endsection
 
     @section('display')
-    <div class="upper-separator flex-container flex-spaced">
-        <span class="user-data-label">Usuario</span>
-        <span class="user-data-label">Articulo</span>
-        <span class="user-data-label">Tipo de usuario</span>
-        <span class="user-data-label">Fecha de acceso</span>
+    <div class="upper-separator access">
+        <span class="display-data-label">Usuario</span>
+        <span class="display-data-label">Correo eléctronico</span>
+        <span class="display-data-label">Articulo</span>
+        <span class="display-data-label">Tipo de usuario</span>
+        <span class="display-data-label">Fecha de acceso</span>
+        <div class="separator"></div>
     </div>
     @foreach($articles_user as $article_user)
     @foreach ($article_user->access as $acceso)
-    <div class="user flex-container flex-aligned-center flex-spaced">
-        <span class="user-data">{{$article_user->name}}</span>
-        <span class="user-data">{{$acceso->title}}</span>
-        <span class="user-data">
+    <div class="info-db access">
+        <span class="display-data">{{$article_user->name}}</span>
+        <span class="display-data">{{$article_user->email}}</span>
+        <span class="display-data">{{$acceso->title}}</span>
+        <span class="display-data">
             @if ($article_user->type == 'reader')
-            Lector
+                Lector
             @elseif ($article_user->type == 'author')
-            Autor
+                Autor
             @elseif ($article_user->type == 'moderator')
-            Moderador
+                Moderador
             @elseif ($article_user->type == 'administrator')
-            Administrador
+                Administrador
             @else
-            No se ha identificado el tipo del usuario
+                No se ha identificado el tipo del usuario
             @endif
         </span>
-        <span class="user-data">{{$acceso->created_at}}</span>
+        <span class="display-data">{{$acceso->created_at}}</span>
+        <form action=" {{ url('updateUserForm/') }}" method="GET">
+            <button class="edit-btn">
+                <i class='bx bx-rotate-right'></i>
+                EDITAR
+            </button>
+        </form>
     </div>
     @endforeach
     @endforeach

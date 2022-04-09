@@ -15,8 +15,8 @@
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <a href="logged/" class="logo flex-container flex-aligned-center">
-                <i class='bx bxs-face'></i>
+            <a href="/" class="logo flex-container flex-aligned-center">
+                <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
         </div>
@@ -96,7 +96,7 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <a href="/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
+                <a href="logged/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
             </div>
         </div>
     </nav>
