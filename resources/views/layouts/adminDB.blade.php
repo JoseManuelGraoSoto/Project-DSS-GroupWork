@@ -158,7 +158,7 @@
 </script>
 
 <script>
-    let select = document.querySelectorAll('.user');
+    let select = document.querySelectorAll('.info-db');
 
     Array.from(select).forEach(instance => {
         instance.addEventListener('click', function(e) {

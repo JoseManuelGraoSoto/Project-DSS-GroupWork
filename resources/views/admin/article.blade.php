@@ -22,7 +22,7 @@
 @endsection
 
 @section('main-buttons')
-<button style="text-decoration: none;">
+<button id="delete-btn" style="text-decoration: none;">
     <i class='bx bx-trash'></i>
     ELIMINAR ARTICULOS
 </button>

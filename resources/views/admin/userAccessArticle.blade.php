@@ -16,7 +16,7 @@
     @endsection
 
     @section('date')
-    <input id="datepicker" type="text" placeholder="Fecha de acceso" />
+    <input readonly id="datepicker" type="text" placeholder="Fecha de acceso" />
     @endsection
 
     @section('main-buttons')
