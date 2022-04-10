@@ -21,16 +21,16 @@
     @endsection
 
     @section('text-inputs')
-    <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
-    <input type="text" name="name" id="name" placeholder="Nombre del usuario" value="{{$user->name}}">
-    <input type="password" name="password" id="password" placeholder="Contraseña del usuario" value="{{$user->password}}">
+    <input type="hidden" name="user_id" id="user_id" value="{{($user) ? $user->id : old('user_id')}}">
+    <input type="text" name="name" id="name" placeholder="Nombre del usuario" value="{{($user) ? $user->name : old('name')}}">
+    <input type="password" name="password" id="password" placeholder="Contraseña del usuario" value="{{($user) ? $user->password : old('password')}}">
 
     @endsection
 
     @section('other-inputs')
     <div class=" text-inputs flex-container flex-aligned-center flex-center flex-vertical">
-        <input type="text" name="email" id="email" placeholder="Correo del usuario" value="{{$user->email}}">
-        <input type="text" name="telephone" id="telephone" placeholder="Teléfono del usuario" value="{{$user->telephone}}">
+        <input type="text" name="email" id="email" placeholder="Correo del usuario" value="{{($user) ? $user->email : old('email')}}">
+        <input type="text" name="telephone" id="telephone" placeholder="Teléfono del usuario" value="{{($user) ? $user->telephone : old('telephone')}}">
     </div>
     <div class="user-type flex-container flex-vertical flex-center">
         <label class="form-control">

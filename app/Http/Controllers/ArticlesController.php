@@ -37,7 +37,7 @@ class ArticlesController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             // Cambiar a email en vez de nombre?
-            'author' => 'required|exists:users,name',
+            'author' => 'required|exists:users,email',
             'category' => 'required',
             'quantity' => 'required|numeric|between:0,10'
             // Falta de terminar
@@ -45,18 +45,18 @@ class ArticlesController extends Controller
 
         if ($validator->fails()) {
             return redirect('createArticleForm')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inputs = $validator->validated();
-        $user = User::where('name', $inputs['author'])->first();
+        $user = User::where('email', $inputs['author'])->first();
         $new_article = new Article;
         $new_article->title = $inputs['title'];
         $new_article->category = $inputs['category'];
         $new_article->valoration = $inputs['quantity'];
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
-        $new_article->acepted = 0;
+        $new_article->acepted = $request->has('accepted');
         $new_article->user()->associate($user);
         $new_article->save();
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
@@ -72,16 +72,32 @@ class ArticlesController extends Controller
     //Recibe la información de un artículo y lo modifica en la base de datos
     public function update(Request $request)
     {
-        $inputs = $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            // Cambiar a email en vez de nombre?
+            'author' => 'required|exists:users,email',
+            'category' => 'required',
+            'quantity' => 'required|numeric|between:0,10'
+            // Falta de terminar
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('updateArticleForm')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $inputs = $validator->validated();
         $user = User::where('email', $inputs['author'])->first();
-        $article = Article::find($inputs['article_id']);
-        $article->title = $inputs['title'];
-        $article->category = $inputs['category'];
-        $article->valoration = $inputs['quantity'];
-        $article->content = 'Contenido temporal de prueba';
-        $article->acepted = $request->has('accepted');
-        $article->user()->associate($user);
-        $article->save();
+        $new_article = Article::find($request->input('article_id'));
+        $new_article->title = $inputs['title'];
+        $new_article->category = $inputs['category'];
+        $new_article->valoration = $inputs['quantity'];
+        $new_article->content = 'Contenido de prueba'; //$request->input('content');
+        $new_article->acepted = $request->has('accepted');
+        $new_article->user()->associate($user);
+        $new_article->save();
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
 
@@ -235,5 +251,10 @@ class ArticlesController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function volver()
+    {
+        return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
 }
