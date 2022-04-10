@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reward;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class RewardController extends Controller
 {
@@ -33,13 +34,28 @@ class RewardController extends Controller
     //Recibe la información de un reward y lo añade a la base de datos
     public function create(Request $request)
     {
-        $user = User::where('email', $request->input('email'))->first();
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'quantity' => 'required|numeric|min:0',
+            'isModerator' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createArticleForm')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $inputs = $validator->validated();
         $new_reward = new Reward;
-        $new_reward->points = $request->input('quantity');
+        $new_reward->points = $inputs['quantity'];
+        // La fecha debería ser la actual
         $month = date('m');
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
-        $new_reward->isModerator = $request->has('isModerator');
+        // He cambiado el has pero no se si funciona así
+        $new_reward->isModerator = $inputs['isModerator'];
+        $user = User::where('email', $inputs['email'])->first();
         $new_reward->user()->associate($user);
         $new_reward->save();
         return redirect()->action([RewardController::class, 'showAll'])->withInput();
