@@ -23,92 +23,90 @@ Route::get('/', function () {
 });
 
 //Rutas users
-
 //Getters
-Route::get('user/{id}', [UsersController::class, 'show'])->name('user.show');
-Route::get('users/', [UsersController::class, 'search'])->name('users');
-Route::get('logged/', [UsersController::class, 'logged'])->name('logged');
+Route::get('/users', [UsersController::class, 'search'])->name('users');
+Route::get('/logged', [UsersController::class, 'logged'])->name('logged');
 
 //Create
-Route::get('createUserForm/', [UsersController::class, 'createUserFormulary'])->name('user.createForm');
-Route::post('createUser/', [UsersController::class, 'create'])->name('user.create');
+Route::get('/users/addForm', [UsersController::class, 'createUserFormulary'])->name('user.createForm');
+Route::post('/users/add', [UsersController::class, 'create'])->name('user.create');
 
 //Update
-Route::get('updateUserForm/', [UsersController::class, 'updateUserFormulary'])->name('user.updateForm');
-Route::post('updateUser/', [UsersController::class, 'update'])->name('user.update');
-Route::get('volver/', [UsersController::class, 'volver']);
+Route::get('/users/updateForm', [UsersController::class, 'updateUserFormulary'])->name('user.updateForm');
+Route::post('/users/update', [UsersController::class, 'update'])->name('user.update');
+Route::get('/volver', [UsersController::class, 'volver']);
 
 //Delete
-Route::get('/delete_users', [UsersController::class, 'delete_multiple']);
+Route::get('/users/delete', [UsersController::class, 'delete']);
 
 //Search
-Route::get('searchUserForm/', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
-Route::get('comprobarUser/', [UsersController::class, 'comprobarLogin'])->name('user.comprobarLogin');
-//Route::get('searchUser/', [UsersController::class, 'search'])->name('user.search');
+Route::get('/searchUserForm', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
+Route::get('/comprobarUser', [UsersController::class, 'comprobarLogin'])->name('user.comprobarLogin');
+
 
 //Rutas articles
-
 //Getters
-Route::get('article/{id}', [ArticlesController::class, 'show'])->name('article.show');
 Route::get('articles/', [ArticlesController::class, 'search'])->name('articles');
 
 //Create
-Route::get('createArticleForm/', [ArticlesController::class, 'createArticleFormulary'])->name('article.createForm');
-Route::post('createArticle/', [ArticlesController::class, 'create'])->name('article.create');
+Route::get('/articles/addForm', [ArticlesController::class, 'createArticleFormulary'])->name('article.createForm');
+Route::post('/articles/add', [ArticlesController::class, 'create'])->name('article.create');
 
 //Update
-Route::get('updateArticleForm/', [ArticlesController::class, 'updateArticleFormulary'])->name('article.updateForm');
-Route::post('updateArticle/', [ArticlesController::class, 'update'])->name('article.update');
-Route::get('volverArticle/', [ArticlesController::class, 'volver']);
+Route::get('/articles/updateForm', [ArticlesController::class, 'updateArticleFormulary'])->name('article.updateForm');
+Route::post('/articles/update', [ArticlesController::class, 'update'])->name('article.update');
+Route::get('/volverArticle', [ArticlesController::class, 'volver']);
 
 //Delete
-Route::get('/delete_articles', [ArticlesController::class, 'delete_multiple']);
+Route::get('/articles/delete', [ArticlesController::class, 'delete']);
 
-//Rutas 
 
+//Rutas accesos
 //Getters
-Route::get('article_user/{id}', [Article_userController::class, 'show'])->name('article_user.show');
-Route::get('articles_user/', [Article_userController::class, 'showAll'])->name('article_user.showAll');
+Route::get('/access', [Article_userController::class, 'showAll'])->name('access');
 
 //Create
-Route::get('createArticle_userForm/', [Article_userController::class, 'createArticle_userFormulary'])->name('article_user.createForm');
-Route::post('createArticle_user/', [Article_userController::class, 'create'])->name('article_user.create');
+Route::get('/access/addForm', [Article_userController::class, 'createArticle_userFormulary'])->name('access.createForm');
+Route::post('/access/add', [Article_userController::class, 'create'])->name('access.create');
 
 //Update
-Route::get('updateArticle_userForm/', [Article_userController::class, 'updateArticle_userFormulary'])->name('article_user.updateForm');
-Route::post('updateArticle_user/', [Article_userController::class, 'update'])->name('article_user.update');
+Route::get('/access/updateForm', [Article_userController::class, 'updateArticle_userFormulary'])->name('access.updateForm');
+Route::post('/access/update', [Article_userController::class, 'update'])->name('access.update');
+
+//Delete
+Route::get('/access/delete', [ArticlesController::class, 'delete']);
+
+
+// Rutas Valorations
+//Getters
+Route::get('/valorations', [ValorationController::class, 'showAll'])->name('valorations');
+
+//Create: implementado en prácticas posteriores
+// Route::get('createValorationForm/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
+// Route::post('createValoration/', [ValorationController::class, 'create'])->name('valoration.create');
+
+//Delete
+Route::get('/valorations/delete', [ValorationController::class, 'delete']);
+
 
 //Rutas Reward
 //Getters
-Route::get('rewards/{id}', [RewardController::class, 'show'])->name('Reward.show');
 Route::get('rewards/', [RewardController::class, 'showAll'])->name('rewards');
-Route::get('volverReward/', [RewardController::class, 'volver']);
-
 
 //Create
-Route::get('createRewardForm/', [RewardController::class, 'createRewardFormulary'])->name('Reward.createForm');
-Route::post('createReward/', [RewardController::class, 'create'])->name('Reward.create');
+Route::get('/rewards/addForm', [RewardController::class, 'createRewardFormulary'])->name('reward.createForm');
+Route::post('/rewards/add', [RewardController::class, 'create'])->name('reward.create');
 
 //Update
-Route::get('updateRewardForm/', [RewardController::class, 'updateRewardFormulary'])->name('Reward.updateForm');
-Route::post('updateReward/', [RewardController::class, 'update'])->name('Reward.update');
-
-//Deleteg
-Route::get('/delete_rewards', [RewardController::class, 'delete_multiple']);
-
-// Valorations
-
-//Getters
-Route::get('valorations/', [ValorationController::class, 'showAll'])->name('valorations');
-
-//Create
-Route::get('createValorationForm/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
-Route::post('createValoration/', [ValorationController::class, 'create'])->name('valoration.create');
+Route::get('/rewards/updateForm', [RewardController::class, 'updateRewardFormulary'])->name('reward.updateForm');
+Route::post('/rewards/update', [RewardController::class, 'update'])->name('reward.update');
+Route::get('/volverReward', [RewardController::class, 'volver']);
 
 //Delete
-Route::get('/delete_valorations', [ValorationController::class, 'delete_multiple']);
+Route::get('/rewards/delete', [RewardController::class, 'delete']);
 
 
+// Rutas category
 Route::get('/category', function () {
     return view('admin.category');
 });

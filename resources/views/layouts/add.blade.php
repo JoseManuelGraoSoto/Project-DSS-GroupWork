@@ -19,11 +19,12 @@
         </div>
     @endif
 
-    @section('form-start')
-    <form action=" {{ url('createUser/') }}" method="POST">
+    @if (strpos(request()->route()->getName(), '.createForm'))
+    <form action="add" method="POST">
+    @else
+    <form action="update" method="POST">
+    @endif
         @csrf
-        @show
-
         <div class="to-fill flex-container flex-spaced">
             @yield('select-img')
 

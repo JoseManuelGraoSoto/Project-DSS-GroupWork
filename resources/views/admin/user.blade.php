@@ -18,7 +18,7 @@
     ELIMINAR USUARIOS
 </button>
 
-<a id="add-btn" href="/createUserForm" style="text-decoration: none;">
+<a id="add-btn" href="{{ route('user.createForm') }}" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR USUARIO
 </a>
@@ -63,7 +63,7 @@
     </span>
     <span class="display-data">{{$user->telephone}}</span>
     <span class="display-data">{{$user->created_at}}</span>
-    <form action=" {{ url('updateUserForm/') }}" method="GET">
+    <form action=" {{ route('user.updateForm') }}" method="GET">
         <input type="hidden" name="user_id" value="{{$user->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>

@@ -28,6 +28,7 @@
     <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Correo del usuario">
     <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="Teléfono del usuario">
 </div>
+
 <div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">
         <input type="radio" name="radio" value="reader" id="radio_button1" checked />

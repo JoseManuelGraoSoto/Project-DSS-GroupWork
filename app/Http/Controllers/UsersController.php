@@ -9,21 +9,11 @@ use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
-    //Devuelve la vista userProfile pasándole como parámetro el usuario con el id requerido en la url
-    public function show($id)
-    {
-        $user = User::where('name', $id)->first();
-        return view('userProfile', ['user' => $user]);
-    }
-
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
-
     public function showAll($users)
     {
         $users = User::paginate(7);
         return view('admin.user', ['users' => $users]);
-        // $users = User::all();
-        // return view('admin.user', ['users' => $users]);
     }
 
     //Devuelve el formulario de creación de User
@@ -50,7 +40,7 @@ class UsersController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('createUserForm')
+            return redirect(route('user.createForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -92,9 +82,8 @@ class UsersController extends Controller
             'telephone' => 'required|regex:/(01)[0-9][+]]{9}/'
         ]);
 
-        $user = User::find($request->input('user_id'));
         if ($validator->fails()) {
-            return redirect('updateUserForm')
+            return redirect(route('user.updateForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -108,22 +97,6 @@ class UsersController extends Controller
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         return redirect()->action([UsersController::class, 'search'])->withInput();
-    }
-
-    //Devuelve el formulario de borrado de User pasándole como parámetro los usuarios
-    public function deleteUserFormulary()
-    {
-        $users = User::all();
-        return view('deleteUser', ['users' => $users]);
-    }
-
-    //Recibe un id de usuario y borra el usuario
-    public function delete($id)
-    {
-        $user = User::find($id);
-        $name = $user->name;
-        $user->delete();
-        return $name . ' borrado';
     }
 
     //Devuelve el formulario de borrado de User pasándole como parámetro los usuarios
@@ -272,7 +245,7 @@ class UsersController extends Controller
         return view('admin.user', ['users' => $users]);
     }
 
-    public function delete_multiple(Request $request)
+    public function delete(Request $request)
     {
         $users = json_decode($request->input('users'));
 

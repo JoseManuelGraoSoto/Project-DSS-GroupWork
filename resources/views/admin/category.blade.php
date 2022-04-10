@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('header')
 <link rel="stylesheet" href="{{ URL::asset('css/category.css'); }}">
 @endsection
@@ -40,7 +41,6 @@
                 </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripting')

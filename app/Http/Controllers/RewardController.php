@@ -9,20 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class RewardController extends Controller
 {
-    //Devuelve la vista rewardProfile pasándole como parámetro el reward con el id requerido en la url
-    public function show($id)
-    {
-        $reward = Reward::where('points', $id)->first();
-        return view('rewardProfile', ['reward' => $reward]);
-    }
 
     //Devuelve la vista rewardsProfile pasándole como parámetro todos los rewards
     public function showAll()
     {
         $rewards = Reward::paginate(7);
         return view('admin.reward', ['rewards' => $rewards]);
-        // $rewards = Reward::all();
-        // return view('admin.reward', ['rewards' => $rewards]);
     }
 
     //Devuelve el formulario de creación de Reward
@@ -40,7 +32,7 @@ class RewardController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('createRewardForm')
+            return redirect(route('reward.createForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -76,7 +68,7 @@ class RewardController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('createRewardForm')
+            return redirect(route('reward.createForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -119,21 +111,13 @@ class RewardController extends Controller
         return view('admin.reward', ['reward' => '']);
     }
 
-    //Recibe un id de reward y borra el reward
     public function delete(Request $request)
-    {
-        $reward = Reward::find($request->input('reward_id'));
-        $reward->delete();
-        return 'Recompensa borrada';
-    }
-
-    public function delete_multiple(Request $request)
     {
         $rewards = json_decode($request->input('rewards'));
 
         foreach ($rewards as $id) {
-            $rewards = Reward::find($id);
-            $rewards->delete();
+            $reward = Reward::find($id);
+            $reward->delete();
         }
 
         return back()->withInput();
