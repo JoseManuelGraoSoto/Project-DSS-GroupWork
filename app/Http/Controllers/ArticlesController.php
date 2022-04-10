@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class ArticlesController extends Controller
 {
@@ -33,11 +34,26 @@ class ArticlesController extends Controller
     //Recibe la información de un artículo y lo añade a la base de datos
     public function create(Request $request)
     {
-        $user = User::where('name', $request->input('author'))->first();
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'author' => 'required|exists:users,name',
+            'category' => 'required',
+            'quantity' => 'required|numeric|between:0,10'
+            // Falta de terminar
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createArticleForm')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $inputs = $validator->validated();
+        $user = User::where('name', $inputs['author'])->first();
         $new_article = new Article;
-        $new_article->title = $request->input('title');
-        $new_article->category = $request->input('category');
-        $new_article->valoration = $request->input('quantity');
+        $new_article->title = $inputs['title'];
+        $new_article->category = $inputs['category'];
+        $new_article->valoration = $inputs['quantity'];
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = 0;
         $new_article->user()->associate($user);
