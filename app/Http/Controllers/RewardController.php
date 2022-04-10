@@ -27,40 +27,45 @@ class RewardController extends Controller
     //Devuelve el formulario de creación de Reward
     public function createRewardFormulary()
     {
-        return view('createReward');
+        return view('admin.add.createReward');
     }
 
     //Recibe la información de un reward y lo añade a la base de datos
     public function create(Request $request)
     {
-        $user = User::where('email', $request->input('email'));
+        $user = User::where('email', $request->input('email'))->first();
         $new_reward = new Reward;
-        $new_reward->points = $request->input('points');
-        $new_reward->month = $request->input('month');
-        $new_reward->isModerator = $request->input('isModerator');
+        $new_reward->points = $request->input('quantity');
+        $month = date('m');
+        $fecha = '2022-' . $month . '-01 00:00:00';
+        $new_reward->month = $fecha;
+        $new_reward->isModerator = $request->has('isModerator');
         $new_reward->user()->associate($user);
         $new_reward->save();
-        return redirect()->action([RewardController::class, 'search'])->withInput();
+        return redirect()->action([RewardController::class, 'showAll'])->withInput();
     }
 
     //Devuelve el formulario de actualización de reward
-    public function updateRewardFormulary()
+    public function updateRewardFormulary(Request $request)
     {
-        return view('updateReward');
+        $reward = Reward::find($request->input('reward_id'));
+        return view('admin.add.updateReward', ['reward' => $reward]);
     }
 
     //Recibe la información de un reward y lo modifica en la base de datos
     public function update(Request $request)
     {
-        $user = User::where('email', $request->input('email'));
-        $reward = Reward::find($request->input('reward_id'));
-        $reward->points = $request->input('points');
-        $reward->month = $request->input('month');
-        $reward->isModerator = $request->input('isModerator');
-        $reward->user()->associate($user);
-
-        $reward->save();
-        return 'Usuario actualizado';
+        $user = User::where('email', $request->input('email'))->first();
+        error_log($request->input('reward_id'));
+        $new_reward = Reward::find($request->input('reward_id'));
+        $new_reward->points = $request->input('quantity');
+        $month = date('m');
+        $fecha = '2022-' . $month . '-01 00:00:00';
+        $new_reward->month = $fecha;
+        $new_reward->isModerator = $request->has('isModerator');
+        $new_reward->user()->associate($user);
+        $new_reward->save();
+        return redirect()->action([RewardController::class, 'showAll'])->withInput();
     }
 
     //Devuelve el formulario de borrado de Reward pasándole como parámetro los rewards
@@ -84,7 +89,7 @@ class RewardController extends Controller
         return 'Recompensa borrada';
     }
 
-    public function delete_multiple(Request $request) 
+    public function delete_multiple(Request $request)
     {
         $rewards = json_decode($request->input('rewards'));
 
@@ -94,5 +99,10 @@ class RewardController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function volver()
+    {
+        return redirect()->action([RewardController::class, 'showAll'])->withInput();
     }
 }

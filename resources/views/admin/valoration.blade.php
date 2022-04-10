@@ -7,7 +7,7 @@
 
 @section('valorations-nav')
 <div class="nav-item selected flex-container flex-aligned-center">
-    <i class='bx bxs-star' ></i>
+    <i class='bx bxs-star'></i>
     <span class="nav-label">Valoraciones</span>
 </div>
 @endsection
@@ -42,20 +42,20 @@
     <span class="display-data">{{$valoration->value}}</span>
     <span class="display-data">
         @if ($valoration->user->type == 'reader')
-            Lector
+        Lector
         @elseif ($valoration->user->type == 'author')
-            Autor
+        Autor
         @elseif ($valoration->user->type == 'moderator')
-            Moderador
+        Moderador
         @elseif ($valoration->user->type == 'administrator')
-            Administrador
+        Administrador
         @else
-            No se ha identificado el tipo del usuario
+        No se ha identificado el tipo del usuario
         @endif
     </span>
     <span class="display-data">{{$valoration->comment}}</span>
     <span class="display-data">{{$valoration->created_at}}</span>
-    <form action=" {{ url('updateValorationForm/') }}" method="GET">
+    <form action=" {{ url('valorations/') }}" method="GET">
         <input type="hidden" name="valoration_id" value="{{$valoration->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>
