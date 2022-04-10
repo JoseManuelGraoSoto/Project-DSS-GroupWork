@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = User::all();
         $faker = Faker::create('es_ES');
-        $faker->seed(1234);
+        $faker->seed(1235);
         foreach ($users as $user) {
             $user->delete();
         }
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         $new_user->type = 'administrator';
         $new_user->email = 'admin@admin.com';
         $new_user->password = 'admin';
-        $new_user->telephone = $faker->e164PhoneNumber;
+        $new_user->telephone = $faker->tollFreeNumber;
         $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
         $new_user->save();
 
@@ -48,8 +48,8 @@ class UsersTableSeeder extends Seeder
             $new_user->name = $faker->firstName;
             $new_user->type = 'author';
             $new_user->email = $faker->unique()->freeEmail;
-            $new_user->password = $faker->password;
-            $new_user->telephone = $faker->e164PhoneNumber;
+            $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
+            $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
         }
@@ -59,8 +59,8 @@ class UsersTableSeeder extends Seeder
             $new_user->name = $faker->firstName;
             $new_user->type = 'moderator';
             $new_user->email = $faker->unique()->freeEmail;
-            $new_user->password = $faker->password;
-            $new_user->telephone = $faker->e164PhoneNumber;
+            $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
+            $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
         }

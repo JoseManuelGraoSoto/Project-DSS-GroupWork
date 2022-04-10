@@ -20,7 +20,7 @@
 @section('text-inputs')
 <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Nombre del usuario">
 <input type="password" name="password" id="password" placeholder="Contraseña del usuario">
-<input type="password_confirmation " name="password_confirmation" id="password_confirmation " placeholder="Repita la contraseña">
+<input type="password" name="password_confirmation" id="password_confirmation " placeholder="Repita la contraseña">
 @endsection
 
 @section('other-inputs')

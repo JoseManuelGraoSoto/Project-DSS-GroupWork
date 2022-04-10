@@ -15,7 +15,7 @@
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <a href="logged/" class="logo flex-container flex-aligned-center">
+            <a href="{{ route('loggin') }}" class="logo flex-container flex-aligned-center">
                 <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
@@ -28,7 +28,7 @@
         <ul class="nav-list">
             <li>
                 @section('users-nav')
-                <a href="/users" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('users') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-face'></i>
                     <span class="nav-label">Usuarios</span>
                 </a>
@@ -38,7 +38,7 @@
 
             <li>
                 @section('articles-nav')
-                <a href="/articles" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('articles') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-file'></i>
                     <span class="nav-label">Artículos</span>
                 </a>
@@ -58,7 +58,7 @@
 
             <li>
                 @section('categories-nav')
-                <a href="/category" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('category') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-category'></i>
                     <span class="nav-label">Categorías</span>
                 </a>
@@ -68,7 +68,7 @@
 
             <li>
                 @section('valorations-nav')
-                <a href="/valorations" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('valorations') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-star'></i>
                     <span class="nav-label">Valoraciones</span>
                 </a>
@@ -78,7 +78,7 @@
 
             <li>
                 @section('rewards-nav')
-                <a href="/rewards" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('rewards') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-trophy'></i>
                     <span class="nav-label">Recompensas</span>
                 </a>
@@ -96,7 +96,7 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <a href="/" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
+                <a href="{{ route('loggin') }}" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
             </div>
         </div>
     </nav>

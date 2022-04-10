@@ -52,7 +52,7 @@ class Article_userController extends Controller
     {
         $selected = json_decode($request->input('access'));
 
-        foreach ($$selected as $id) {
+        foreach ($selected as $id) {
             $access = Article_user::find($id);
             $access->delete();
         }
