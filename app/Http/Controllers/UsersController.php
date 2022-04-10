@@ -79,7 +79,7 @@ class UsersController extends Controller
                 ->numbers()
                 ->symbols()
                 ->uncompromised()],
-            'telephone' => 'required|regex:/(01)[0-9][+]]{9}/'
+            'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
         if ($validator->fails()) {
@@ -89,7 +89,7 @@ class UsersController extends Controller
         }
 
         $inputs = $validator->validated();
-        $new_user = User::find($inputs['user_id']);
+        $new_user = User::find($request->input('user_id'));
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
