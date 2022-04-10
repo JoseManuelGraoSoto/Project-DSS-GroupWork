@@ -60,7 +60,7 @@
             @endif
         </span>
         <span class="display-data">{{$article_user->created_at}}</span>
-        <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <form action=" {{ url('articles_user/') }}" method="GET">
             <button class="edit-btn">
                 <i class='bx bx-rotate-right'></i>
                 EDITAR
