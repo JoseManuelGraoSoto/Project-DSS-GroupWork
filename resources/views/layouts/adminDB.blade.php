@@ -10,11 +10,8 @@
 
 @section('content')
 <div class="override">
-
-    @section('form-start')
-    <form action=" {{ url('users/') }}" method="GET">
+    <form action=" {{ request()->route()->getName() }}" method="GET">
         @csrf
-        @show
         <div class="search-box flex-container flex-vertical flex-aligned-center" style="justify-content: space-between;">
             <span class="search-title">Críterios de búsqueda</span>
 
@@ -99,9 +96,7 @@
         <div id="filter-dropdown">
             <i class='bx bxs-chevrons-down'></i>
         </div>
-        @section('form-end')
     </form>
-    @show
     <div class="main-panel">
         <div class="main-buttons flex-container">
             @yield('main-buttons')
@@ -181,7 +176,7 @@
         });
 
         let redirect = encodeURIComponent(JSON.stringify(to_eliminate));
-        window.location.replace("delete_{{ request()->route()->getName() }}?{{ request()->route()->getName() }}=" + redirect);
+        window.location.replace("{{ request()->route()->getName() }}/delete?{{ request()->route()->getName() }}=" + redirect);
     }
 </script>
 @endsection

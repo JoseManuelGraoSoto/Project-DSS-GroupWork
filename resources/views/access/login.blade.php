@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="flex-container flex-aligned-center flex-center flex-vertical screenfull" action="{{ url('comprobarUser/') }}" method="PUT">
+    <form class="flex-container flex-aligned-center flex-center flex-vertical screenfull" style="height: 80vh;" action="{{ url('comprobarUser/') }}" method="PUT">
         @csrf
         <h1 class="welcome-title">
             Bienvenido de vuelta

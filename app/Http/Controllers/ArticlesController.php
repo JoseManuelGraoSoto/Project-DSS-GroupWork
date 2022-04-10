@@ -9,29 +9,19 @@ use Illuminate\Support\Facades\Validator;
 
 class ArticlesController extends Controller
 {
-    //Devuelve la vista articleInfo pasándole como parámetro el articulo con el id requerido en la url
-    public function show($id)
-    {
-        $article = Article::find($id);
-        return view('articleInfo', ['article' => $article]);
-    }
-
-    //Devuelve la vista articlesList pasándole como parámetro todos los articulos
-    public function showAll()
-    {
+    // Devuelve la vista articlesList pasándole como parámetro todos los articulos
+    public function showAll() {
         $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
-        // $articles = Article::all();
-        // return view('admin.article', ['articles' => $articles]);
     }
 
-    //Devuelve el formulario de creación de Article
+    // Devuelve el formulario de creación de Article
     public function createArticleFormulary()
     {
         return view('admin.add.createArticle');
     }
 
-    //Recibe la información de un artículo y lo añade a la base de datos
+    // Recibe la información de un artículo y lo añade a la base de datos
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -44,7 +34,7 @@ class ArticlesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('createArticleForm')
+            return redirect(route('article.createForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -62,14 +52,14 @@ class ArticlesController extends Controller
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
 
-    //Devuelve el formulario de actualización de Article
+    // Devuelve el formulario de actualización de Article
     public function updateArticleFormulary(Request $request)
     {
         $article = Article::find($request->input('article_id'));
         return view('admin.add.updateArticle', ['article' => $article]);
     }
 
-    //Recibe la información de un artículo y lo modifica en la base de datos
+    // Recibe la información de un artículo y lo modifica en la base de datos
     public function update(Request $request)
     {
 
@@ -83,7 +73,7 @@ class ArticlesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('updateArticleForm')
+            return redirect(route('article.updateForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -100,24 +90,6 @@ class ArticlesController extends Controller
         $new_article->save();
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
-
-
-    //Devuelve el formulario de borrado de Article pasándole como parámetro los artículos
-    public function deleteArticleFormulary()
-    {
-        $articles = Article::all();
-        return view('deleteArticle', ['articles' => $articles]);
-    }
-
-    //Recibe un id de artículo y borra el acceso del usuario al artículo
-    public function delete($id)
-    {
-        $article = Article::find($id);
-        $title = $article->title;
-        $article->delete();
-        return $title . ' borrado';
-    }
-
 
     public function extraerMes($mes)
     {
@@ -241,13 +213,13 @@ class ArticlesController extends Controller
         return view('admin.article', ['articles' => $articles]);
     }
 
-    public function delete_multiple(Request $request)
+    public function delete(Request $request)
     {
         $articles = json_decode($request->input('articles'));
 
         foreach ($articles as $id) {
-            $articles = Article::find($id);
-            $articles->delete();
+            $article = Article::find($id);
+            $article->delete();
         }
 
         return back()->withInput();

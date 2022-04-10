@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ValorationController extends Controller
 {
-    //Devuelve la vista articleInfo pasándole como parámetro el articulo con el id requerido en la url
-    public function show($id)
-    {
-        $valoration = Valoration::find($id);
-        return view('valorationInfo', ['comment' => $valoration]);
-    }
-
     //Devuelve la vista articlesList pasándole como parámetro todos los articulos
     public function showAll()
     {
@@ -32,7 +25,7 @@ class ValorationController extends Controller
         return view('admin.add.createValoration', ['valoration' => $valoration]);
     }
 
-    //Recibe la información de un Reward y lo añade a la base de datos
+    //Recibe la información de un Reward y lo añade a la base de datos: no integrado
     public function create(Request $request)
     {
         // $validator = Validator::make($request->all(), [
@@ -71,20 +64,13 @@ class ValorationController extends Controller
         return view('deleteValorations', ['comment' => $valo]);
     }
 
-    //Recibe un id de usuario y borra la reward
     public function delete(Request $request)
-    {
-        $valo = Valoration::where('user_id', $request->input('user_id'))->where('article_id', $request->input('article_id'));
-        $valo->delete();
-    }
-
-    public function delete_multiple(Request $request)
     {
         $valorations = json_decode($request->input('valorations'));
 
         foreach ($valorations as $id) {
-            $valorations = Valoration::find($id);
-            $valorations->delete();
+            $valoration = Valoration::find($id);
+            $valoration->delete();
         }
 
         return back()->withInput();

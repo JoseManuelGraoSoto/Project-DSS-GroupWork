@@ -1,7 +1,9 @@
 @extends('layouts.admin')
+
 @section('header')
 <link rel="stylesheet" href="{{ URL::asset('css/3DAnimation.css'); }}">
 @endsection
+
 @section('content')
 <div class="override">
     <ul class="Words">

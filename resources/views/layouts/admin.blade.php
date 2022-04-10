@@ -48,7 +48,7 @@
 
             <li>
                 @section('access-nav')
-                <a href="/articles_user" class="nav-item flex-container flex-aligned-center">
+                <a href="{{ route('access') }}" class="nav-item flex-container flex-aligned-center">
                     <i class='bx bxs-file-export'></i>
                     <span class="nav-label">Acceso de usuarios</span>
                 </a>

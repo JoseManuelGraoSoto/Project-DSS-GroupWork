@@ -18,7 +18,7 @@
     ELIMINAR VALORACIÓN
 </button>
 
-<a href="/createValorationForm" style="text-decoration: none;">
+<a href="/createValorationForm" style="text-decoration: none; display: none;">
     <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
 </a>
@@ -42,20 +42,20 @@
     <span class="display-data">{{$valoration->value}}</span>
     <span class="display-data">
         @if ($valoration->user->type == 'reader')
-        Lector
+            Lector
         @elseif ($valoration->user->type == 'author')
-        Autor
+            Autor
         @elseif ($valoration->user->type == 'moderator')
-        Moderador
+            Moderador
         @elseif ($valoration->user->type == 'administrator')
-        Administrador
+            Administrador
         @else
-        No se ha identificado el tipo del usuario
+            No se ha identificado el tipo del usuario
         @endif
     </span>
     <span class="display-data">{{$valoration->comment}}</span>
     <span class="display-data">{{$valoration->created_at}}</span>
-    <form action=" {{ url('valorations/') }}" method="GET">
+    <form hidden action=" {{ route('valorations') }}" method="GET">
         <input type="hidden" name="valoration_id" value="{{$valoration->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>

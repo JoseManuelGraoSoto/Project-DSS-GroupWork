@@ -49,15 +49,13 @@
     ELIMINAR RECOMPENSAS
 </button>
 
-<a href="/createRewardForm" style="text-decoration: none;">
+<a href="{{ route('reward.createForm') }}" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR RECOMPENSA
-
 </a>
 @endsection
 
 @section('display')
-
 <div class="upper-separator reward">
     <span class="display-data-label">ID</span>
     <span class="display-data-label">Correo eléctronico</span>
@@ -82,7 +80,7 @@
         @endif
     </span>
     <span class="display-data">{{$reward->created_at}}</span>
-    <form action=" {{ url('updateRewardForm/') }}" method="GET">
+    <form action=" {{ route('reward.updateForm') }}" method="GET">
         <input type="hidden" name="reward_id" value="{{$reward->id}}">
 
         <button class="edit-btn">

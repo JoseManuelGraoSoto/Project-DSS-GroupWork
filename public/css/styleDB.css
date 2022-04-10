@@ -401,6 +401,7 @@
 }
 
 .main-panel .main-buttons {
+    margin-top: 20px;
     justify-content: right;
 }
 
@@ -465,10 +466,7 @@
     grid-template-columns: .5fr 1fr 1.7fr .75fr .5fr .75fr .9fr 1.15fr .75fr;
 }
 
-.access {
-    grid-template-columns: repeat(6, 1fr);
-}
-
+.access,
 .reward {
     grid-template-columns: repeat(7, 1fr);
 }
