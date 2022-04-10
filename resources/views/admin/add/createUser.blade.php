@@ -18,18 +18,15 @@
 @endsection
 
 @section('text-inputs')
-
-<input type="text" name="name" id="name" placeholder="Nombre del usuario">
+<input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Nombre del usuario">
 <input type="password" name="password" id="password" placeholder="Contraseña del usuario">
-
-
-
+<input type="password_confirmation " name="password_confirmation" id="password_confirmation " placeholder="Repita la contraseña">
 @endsection
 
 @section('other-inputs')
 <div class="text-inputs flex-container flex-aligned-center flex-center flex-vertical">
-    <input type="text" name="email" id="email" placeholder="Correo del usuario">
-    <input type="text" name="telephone" id="telephone" placeholder="Teléfono del usuario">
+    <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Correo del usuario">
+    <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="Teléfono del usuario">
 </div>
 <div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">

@@ -4,7 +4,7 @@
     --terciary-color: #3b4346;
     --accent-color: #0E6EB8;
     --outline-color-strong: #96999A;
-    --outline-color-week: #d3d4d4;
+    --outline-color-weak: #d3d4d4;
     --bold-weight: 700;
 }
 
@@ -43,7 +43,7 @@
     display: flex;
     margin: 0% 5% 0% 5%;
     align-self: center;
-    background-color: var(--outline-color-week);
+    background-color: var(--outline-color-weak);
 }
 
 .right {
