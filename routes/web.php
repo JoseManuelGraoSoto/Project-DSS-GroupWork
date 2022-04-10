@@ -95,13 +95,13 @@ Route::post('updateReward/', [RewardController::class, 'update'])->name('Reward.
 //Deleteg
 Route::get('/delete_rewards', [RewardController::class, 'delete_multiple']);
 
-// ValorationsggS
+// Valorations
 
 //Getters
 Route::get('valorations/', [ValorationController::class, 'showAll'])->name('valorations');
 
 //Create
-Route::get('createValoration_Form/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
+Route::get('createValorationForm/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
 Route::post('createValoration/', [ValorationController::class, 'create'])->name('valoration.create');
 
 //Delete

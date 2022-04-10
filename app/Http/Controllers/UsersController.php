@@ -78,7 +78,26 @@ class UsersController extends Controller {
     //Recibe la información de un usuario y lo modifica en la base de datos
     public function update(Request $request)
     {
-        $inputs = $request->all();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'radio' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', Password::min(8)
+                                                        ->letters()
+                                                        ->mixedCase()
+                                                        ->numbers()
+                                                        ->symbols()
+                                                        ->uncompromised()],
+            'telephone' => 'required|regex:/(01)[0-9][+]]{9}/'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createUserForm')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $inputs = $validator->validated();
         $new_user = User::find($inputs['user_id']);
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];

@@ -36,6 +36,7 @@ class ArticlesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            // Cambiar a email en vez de nombre?
             'author' => 'required|exists:users,name',
             'category' => 'required',
             'quantity' => 'required|numeric|between:0,10'

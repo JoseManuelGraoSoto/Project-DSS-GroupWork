@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Valoration;
 use App\Models\User;
 use App\Models\Article;
+use Illuminate\Support\Facades\Validator;
 
 class ValorationController extends Controller
 {
@@ -24,14 +25,32 @@ class ValorationController extends Controller
     }
 
     //Devuelve el formulario de creación de Reward
-    public function createValorationFormulary()
+    public function createValorationFormulary(Request $request)
     {
-        return view('createValoration');
+        // No funciona, no está implementado obviamente, no es uno de los 3
+        $valoration = Valoration::find($request->input('valoration_id'));
+        return view('admin.add.createValoration', ['valoration' => $valoration]);
     }
 
     //Recibe la información de un Reward y lo añade a la base de datos
     public function create(Request $request)
     {
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required',
+        //     // Cambiar a email en vez de nombre?
+        //     'author' => 'required|exists:users,name',
+        //     'category' => 'required',
+        //     'quantity' => 'required|numeric|between:0,10'
+        //     // Falta de terminar
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect('createArticleForm')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
+
+        // $inputs = $validator->validated();
         $user = User::find($request->input('user_id'));
         $article = Article::find($request->input('article_id'));
         $new_Valoration = new Valoration;

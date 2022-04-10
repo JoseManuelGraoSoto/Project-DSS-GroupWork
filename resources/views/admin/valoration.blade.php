@@ -18,7 +18,7 @@
     ELIMINAR VALORACIÓN
 </button>
 
-<a href="/" style="text-decoration: none;">
+<a href="/createValorationForm" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
 </a>
