@@ -36,11 +36,12 @@
 
 
         <div class="confirm-btn flex-container">
-
+            @section('btn-cancel')
             <a href="{{action('App\Http\Controllers\UsersController@volver')}}">
                 <i class='bx bxs-x-circle'></i>
                 CANCELAR
             </a>
+            @show
 
             <button type="submit">
                 <i class='bx bx-check-double'></i>

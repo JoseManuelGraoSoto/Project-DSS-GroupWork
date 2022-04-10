@@ -42,33 +42,31 @@
         <div class="separator"></div>
     </div>
     @foreach($articles_user as $article_user)
-    @foreach ($article_user->access as $acceso)
     <div class="info-db access">
-        <span class="display-data">{{$article_user->name}}</span>
-        <span class="display-data">{{$article_user->email}}</span>
-        <span class="display-data">{{$acceso->title}}</span>
+        <span class="display-data">{{($user = App\Models\User::find($article_user->user_id))->name}}</span>
+        <span class="display-data">{{($user = App\Models\User::find($article_user->user_id))->email}}</span>
+        <span class="display-data">{{($user = App\Models\Article::find($article_user->article_id))->title}}</span>
         <span class="display-data">
-            @if ($article_user->type == 'reader')
+            @if (($user = App\Models\User::find($article_user->user_id))->type === 'reader')
             Lector
-            @elseif ($article_user->type == 'author')
+            @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'author')
             Autor
-            @elseif ($article_user->type == 'moderator')
+            @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'moderator')
             Moderador
-            @elseif ($article_user->type == 'administrator')
+            @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'administrator')
             Administrador
             @else
             No se ha identificado el tipo del usuario
             @endif
         </span>
-        <span class="display-data">{{$acceso->created_at}}</span>
-        <form action=" {{ url('updateUserForm/') }}" method="GET">
+        <span class="display-data">{{$article_user->created_at}}</span>
+        <form action=" {{ url('articles_user/') }}" method="GET">
             <button class="edit-btn">
                 <i class='bx bx-rotate-right'></i>
                 EDITAR
             </button>
         </form>
     </div>
-    @endforeach
     @endforeach
     @endsection
 

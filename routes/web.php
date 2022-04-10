@@ -81,6 +81,8 @@ Route::post('updateArticle_user/', [Article_userController::class, 'update'])->n
 //Getters
 Route::get('rewards/{id}', [RewardController::class, 'show'])->name('Reward.show');
 Route::get('rewards/', [RewardController::class, 'showAll'])->name('rewards');
+Route::get('volverReward/', [RewardController::class, 'volver']);
+
 
 //Create
 Route::get('createRewardForm/', [RewardController::class, 'createRewardFormulary'])->name('Reward.createForm');

@@ -7,7 +7,7 @@
 
 @section('rewards-nav')
 <div class="nav-item selected flex-container flex-aligned-center">
-    <i class='bx bxs-trophy' ></i>
+    <i class='bx bxs-trophy'></i>
     <span class="nav-label">Recompensas</span>
 </div>
 @endsection
@@ -49,7 +49,7 @@
     ELIMINAR RECOMPENSAS
 </button>
 
-<a href="/" style="text-decoration: none;">
+<a href="/createRewardForm" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR RECOMPENSA
 
@@ -76,13 +76,15 @@
     <span class="display-data">{{$reward->points}}</span>
     <span class="display-data">
         @if($reward->isModerator)
-            Moderador
+        Moderador
         @else
-            Autor
+        Autor
         @endif
     </span>
     <span class="display-data">{{$reward->created_at}}</span>
-    <form action=" {{ url('updateUserForm/') }}" method="GET">
+    <form action=" {{ url('updateRewardForm/') }}" method="GET">
+        <input type="hidden" name="reward_id" value="{{$reward->id}}">
+
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>
             EDITAR

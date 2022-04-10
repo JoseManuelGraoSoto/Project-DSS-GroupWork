@@ -49,14 +49,16 @@ class User extends Authenticatable
 
     public function access()
     {
-        return $this->belongsToMany('App\Models\Article')->withTimestamps();
+        return $this->belongsToMany('App\Models\Article')->withTimestamps()->using('App\Models\Article_user');
     }
 
-    public function valoration() {
+    public function valoration()
+    {
         return $this->hasMany('App\Models\Valoration');
     }
 
-    public function reward() {
+    public function reward()
+    {
         return $this->hasMany('App\Models\Reward');
     }
 }
