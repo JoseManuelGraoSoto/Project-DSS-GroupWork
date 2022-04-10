@@ -4,7 +4,7 @@
     --terciary-color: #3b4346;
     --accent-color: #0E6EB8;
     --outline-color-strong: #96999A;
-    --outline-color-week: #BCBEBE;
+    --outline-color-weak: #BCBEBE;
     --bold-weight: 700;
 }
 
@@ -163,8 +163,8 @@
     height: 14px;
     opacity: 0;
     transform: rotate(45deg) scale(0);
-    border-right: 2px solid var(--outline-color-week);
-    border-bottom: 2px solid var(--outline-color-week);
+    border-right: 2px solid var(--outline-color-weak);
+    border-bottom: 2px solid var(--outline-color-weak);
     transition: all 0.3s ease;
     transition-delay: 0.15s;
 }
@@ -451,7 +451,7 @@
 
 .info-db {
     display: grid;
-    border-bottom: 2px solid var(--outline-color-week);
+    border-bottom: 2px solid var(--outline-color-weak);
     font-size: 20px;
     cursor: default;
     min-height: 80px;
@@ -558,7 +558,7 @@
 }
 
 .no-more span {
-    background-color: var(--outline-color-week) !important;
+    background-color: var(--outline-color-weak) !important;
     color: var(--secondary-color) !important;
     cursor: none;
 }

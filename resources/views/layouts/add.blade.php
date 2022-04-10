@@ -7,6 +7,17 @@
 
 @section('content')
 <div class="override">
+    {{-- Error messages --}}
+    @if (count($errors) > 0)
+        <div class="errors flex-vertical flex-container flex-center flex-aligned-center">
+            @foreach ($errors->all() as $error)
+                <div class="error-box flex-container flex-center flex-aligned-center">
+                    <i class='close bx bx-x'></i>
+                    <span class="error-msg">{{ $error }}</span>
+                </div>
+            @endforeach
+        </div>
+    @endif
 
     @section('form-start')
     <form action=" {{ url('createUser/') }}" method="POST">
@@ -42,4 +53,16 @@
     @show
 
 </div>
+@endsection
+
+@section('scripting')
+<script>
+    let close_btns = document.querySelectorAll('.close');
+
+    close_btns.forEach(close_btn => {
+        close_btn.onclick = function() {
+            close_btn.parentElement.remove();
+        }
+    });
+</script>
 @endsection

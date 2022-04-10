@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Article_user;
 use App\Models\User;
 use App\Models\Article;
-
-
-
+use Illuminate\Support\Facades\Validator;
 
 class Article_userController extends Controller
 {
@@ -39,8 +37,22 @@ class Article_userController extends Controller
     //Recibe un id de artículo y un id de usuario y crea un acceso del usuario al artículo
     public function create(Request $request)
     {
-        $article_user = Article::find($request->input('article_id'));
-        $article_user->access()->attach($request->input('user_id'));
+        $validator = Validator::make($request->all(), [
+            // Cambiar id si luego se cambian a otras cosas
+            'article_id' => 'required|exists:articles,id',
+            'user_id' => 'required|exists:users,id'
+            // Falta de terminar
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createArticleForm')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $inputs = $validator->validated();
+        $article_user = Article::find($inputs['article_id']);
+        $article_user->access()->attach($inputs['user_id']);
         $article_user->save();
         return view('article_userCreado');
     }
