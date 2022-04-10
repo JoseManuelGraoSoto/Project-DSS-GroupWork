@@ -59,6 +59,7 @@ Route::post('createArticle/', [ArticlesController::class, 'create'])->name('arti
 //Update
 Route::get('updateArticleForm/', [ArticlesController::class, 'updateArticleFormulary'])->name('article.updateForm');
 Route::post('updateArticle/', [ArticlesController::class, 'update'])->name('article.update');
+Route::get('volverArticle/', [ArticlesController::class, 'volver']);
 
 //Delete
 Route::get('/delete_articles', [ArticlesController::class, 'delete_multiple']);

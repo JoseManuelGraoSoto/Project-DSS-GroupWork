@@ -37,13 +37,12 @@ class RewardController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
             'quantity' => 'required|numeric|min:0',
-            'isModerator' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return redirect('createArticleForm')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect('createRewardForm')
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inputs = $validator->validated();
@@ -53,8 +52,7 @@ class RewardController extends Controller
         $month = date('m');
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
-        // He cambiado el has pero no se si funciona así
-        $new_reward->isModerator = $inputs['isModerator'];
+        $new_reward->isModerator = $request->has('isModerator');
         $user = User::where('email', $inputs['email'])->first();
         $new_reward->user()->associate($user);
         $new_reward->save();
@@ -71,9 +69,33 @@ class RewardController extends Controller
     //Recibe la información de un reward y lo modifica en la base de datos
     public function update(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'quantity' => 'required|numeric|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createRewardForm')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $inputs = $validator->validated();
+        $new_reward = Reward::find($request->input('reward_id'));
+        $new_reward->points = $inputs['quantity'];
+        // La fecha debería ser la actual
+        $month = date('m');
+        $fecha = '2022-' . $month . '-01 00:00:00';
+        $new_reward->month = $fecha;
+        $new_reward->isModerator = $request->has('isModerator');
+        $user = User::where('email', $inputs['email'])->first();
+        $new_reward->user()->associate($user);
+        $new_reward->save();
+        return redirect()->action([RewardController::class, 'showAll'])->withInput();
+        /*
         $user = User::where('email', $request->input('email'))->first();
         error_log($request->input('reward_id'));
-        $new_reward = Reward::find($request->input('reward_id'));
         $new_reward->points = $request->input('quantity');
         $month = date('m');
         $fecha = '2022-' . $month . '-01 00:00:00';
@@ -81,7 +103,7 @@ class RewardController extends Controller
         $new_reward->isModerator = $request->has('isModerator');
         $new_reward->user()->associate($user);
         $new_reward->save();
-        return redirect()->action([RewardController::class, 'showAll'])->withInput();
+        return redirect()->action([RewardController::class, 'showAll'])->withInput();*/
     }
 
     //Devuelve el formulario de borrado de Reward pasándole como parámetro los rewards

@@ -11,7 +11,7 @@
     @csrf
     @show
     @section('text-inputs')
-    <input type="text" name="email" id="email" placeholder="Correo del usuario">
+    <input type="text" name="email" id="email" placeholder="Correo del usuario" value="{{$reward->user->email}}">
     @endsection
 
     @section('other-inputs')
@@ -20,12 +20,12 @@
     <div class="inputs flex-container flex-vertical flex-center flex-aligned-center">
         <div class="number-input" style="width: 300px;">
             <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
-            <input class="quantity" min="0" name="quantity" value="100" type="number" style="max-width: 200px">
+            <input class="quantity" min="0" name="quantity" value="{{$reward->points}}" type="number" style="max-width: 200px">
             <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
         </div>
 
         <div class="checkbox-con flex-container flex-vertical flex-center flex-aligned-center">
-            <input id="checkbox" name="isModerator" type="checkbox">
+            <input id="checkbox" name="isModerator" type="checkbox" {{($reward->isModerator) ? 'checked' : ''}}>
             <span style="color: var(--primary-color);">¿Moderador?</span>
         </div>
     </div>
