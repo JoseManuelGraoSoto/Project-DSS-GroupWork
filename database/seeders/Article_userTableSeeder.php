@@ -3,21 +3,32 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use DB;
+use App\Models\User;
+use App\Models\Article;
+use App\Models\Article_user;
 
 class Article_userTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
+
     public function run()
     {
-        DB::table('article_user')->delete();
-        DB::table('article_user')->insert([
-            'article_id' => 1,
-            'user_id' => 2
-        ]);
+
+        $faker = Faker::create();
+        $faker->seed(1234);
+
+        foreach (range(1, 500) as $index) {
+            $article_user = Article::find($faker->numberBetween(1, 500));
+            $user = User::find($faker->numberBetween(1, 700));
+            $article_user->access()->attach($user->id);
+            $article_user->save();
+        }
     }
 }
