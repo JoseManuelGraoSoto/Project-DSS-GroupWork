@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
-use function Ramsey\Uuid\v1;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller {
     //Devuelve la vista userProfile pasándole como parámetro el usuario con el id requerido en la url
@@ -36,7 +35,26 @@ class UsersController extends Controller {
     //Recibe la información de un usuario y lo añade a la base de datos
     public function create(Request $request)
     {
-        $inputs = $request->all();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'radio' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed', Password::min(8)
+                                                        ->letters()
+                                                        ->mixedCase()
+                                                        ->numbers()
+                                                        ->symbols()
+                                                        ->uncompromised()],
+            'telephone' => 'required|regex:/(01)[0-9]{9}/'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('createUserForm')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $inputs = $validator->validated();
         $new_user = new User;
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
