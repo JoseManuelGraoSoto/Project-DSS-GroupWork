@@ -16,11 +16,11 @@ class Article extends Model
 
     public function access()
     {
-        return $this->belongsToMany('App\Models\User')->withTimestamps();
+        return $this->belongsToMany('App\Models\User')->withTimestamps()->using('App\Models\Article_user');
     }
 
-    public function valoration() {
+    public function valoration()
+    {
         return $this->belongsToMany('App\Models\Valoration');
     }
-
 }
