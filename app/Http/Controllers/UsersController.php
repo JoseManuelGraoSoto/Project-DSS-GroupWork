@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
-class UsersController extends Controller {
+class UsersController extends Controller
+{
     //Devuelve la vista userProfile pasándole como parámetro el usuario con el id requerido en la url
     public function show($id)
     {
@@ -40,18 +41,18 @@ class UsersController extends Controller {
             'radio' => 'required',
             'email' => 'required|email',
             'password' => ['required', 'confirmed', Password::min(8)
-                                                        ->letters()
-                                                        ->mixedCase()
-                                                        ->numbers()
-                                                        ->symbols()
-                                                        ->uncompromised()],
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()],
             'telephone' => 'required|regex:/(01)[0-9]{9}/'
         ]);
 
         if ($validator->fails()) {
             return redirect('createUserForm')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inputs = $validator->validated();
@@ -83,18 +84,19 @@ class UsersController extends Controller {
             'radio' => 'required',
             'email' => 'required|email',
             'password' => ['required', Password::min(8)
-                                                        ->letters()
-                                                        ->mixedCase()
-                                                        ->numbers()
-                                                        ->symbols()
-                                                        ->uncompromised()],
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()],
             'telephone' => 'required|regex:/(01)[0-9][+]]{9}/'
         ]);
 
+        $user = User::find($request->input('user_id'));
         if ($validator->fails()) {
-            return redirect('createUserForm')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect('updateUserForm')
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inputs = $validator->validated();
@@ -282,17 +284,19 @@ class UsersController extends Controller {
         return back()->withInput();
     }
 
-    public function volver() {
+    public function volver()
+    {
         return redirect()->action([UsersController::class, 'search'])->withInput();
     }
 
-    public function comprobarLogin(Request $request) {
+    public function comprobarLogin(Request $request)
+    {
         $email = $request->input('email');
         $password = $request->input('password');
         $user = User::where('email', $email)->first();
         if ($user) {
             if (strcmp($password, $user->password) === 0) {
-                if (strcmp($user->type,'administrator') === 0) {
+                if (strcmp($user->type, 'administrator') === 0) {
                     return redirect()->action([UsersController::class, 'logged']);
                 } else {
                     return back()->withInput()->withErrors(['type' => 'No es administrador']);
@@ -305,7 +309,8 @@ class UsersController extends Controller {
         }
     }
 
-    public function logged() {
+    public function logged()
+    {
         return view('admin.init');
     }
 }
