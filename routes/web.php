@@ -20,7 +20,7 @@ use App\Http\Controllers\ValorationController;
 
 Route::get('/', function () {
     return view('access.login');
-});
+})->name('loggin');
 
 //Rutas users
 //Getters
@@ -74,7 +74,7 @@ Route::get('/access/updateForm', [Article_userController::class, 'updateArticle_
 Route::post('/access/update', [Article_userController::class, 'update'])->name('access.update');
 
 //Delete
-Route::get('/access/delete', [ArticlesController::class, 'delete']);
+Route::get('/access/delete', [Article_userController::class, 'delete']);
 
 
 // Rutas Valorations
@@ -109,4 +109,4 @@ Route::get('/rewards/delete', [RewardController::class, 'delete']);
 // Rutas category
 Route::get('/category', function () {
     return view('admin.category');
-});
+})->name('category');
