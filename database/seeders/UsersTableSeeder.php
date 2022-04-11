@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = User::all();
         $faker = Faker::create('es_ES');
-        $faker->seed(1234);
+        $faker->seed(1235);
         foreach ($users as $user) {
             $user->delete();
         }
