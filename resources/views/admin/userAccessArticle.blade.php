@@ -1,8 +1,8 @@
 @extends('layouts.adminDB')
 
 @section('text-inputs')
-<input type="text" name="user" id="user" placeholder="Titulo del artículo">
-<input type="text" name="name" id="name" placeholder="Nombre del usuario">
+<input type="text" name="title" id="title" placeholder="Titulo del artículo">
+<input type="text" name="email" id="email" placeholder="Email del usuario">
 @endsection
 
 @section('access-nav')

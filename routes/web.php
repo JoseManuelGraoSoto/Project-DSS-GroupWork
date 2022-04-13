@@ -63,7 +63,7 @@ Route::get('/articles/delete', [ArticlesController::class, 'delete']);
 
 //Rutas accesos
 //Getters
-Route::get('/access', [Article_userController::class, 'showAll'])->name('access');
+Route::get('/access', [Article_userController::class, 'search'])->name('access');
 
 //Create
 Route::get('/access/addForm', [Article_userController::class, 'createArticle_userFormulary'])->name('access.createForm');

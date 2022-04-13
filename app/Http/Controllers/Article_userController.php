@@ -37,8 +37,8 @@ class Article_userController extends Controller
 
         if ($validator->fails()) {
             return redirect(route('article.createForm'))
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $inputs = $validator->validated();
@@ -46,6 +46,136 @@ class Article_userController extends Controller
         $article_user->access()->attach($inputs['user_id']);
         $article_user->save();
         return view('article_userCreado');
+    }
+
+    public function extraerMes($mes)
+    {
+        switch ($mes) {
+            case 'Enero':
+                return '01';
+            case 'Febrero':
+                return '02';
+            case 'Marzo':
+                return '03';
+            case 'Abril':
+                return '04';
+            case 'Mayo':
+                return '05';
+            case 'Junio':
+                return '06';
+            case 'Julio':
+                return '07';
+            case 'Agosto':
+                return '08';
+            case 'Septiembre':
+                return '09';
+            case 'Octubre':
+                return '10';
+            case 'Noviembre':
+                return '11';
+            case 'Diciembre':
+                return '12';
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $descendente = $request->has('order');
+        $fecha = $request->input('datepicker');
+        $dia = '';
+        $mes = '';
+        $anyo = '';
+        if ($fecha !== null) {
+            $j = 0;
+            for ($j = 0; $j < strlen($fecha); $j++) {
+                if ($fecha[$j] === ' ') {
+                    $j++;
+                    break;
+                }
+            }
+            $dia = $fecha[$j] . $fecha[$j + 1];
+            $j += 3;
+            $mes = '';
+            for ($j; $j < strlen($fecha); $j++) {
+                if ($fecha[$j] === ' ') {
+                    $j++;
+                    break;
+                } else {
+                    $mes .= $fecha[$j];
+                }
+            }
+            $mes = $this->extraerMes($mes);
+            $anyo = $fecha[$j] . $fecha[$j + 1] . $fecha[$j + 2] . $fecha[$j + 3];
+
+            $fecha = $anyo . '-' . $mes . '-' . $dia;
+        }
+
+        $types = array('reader', 'author', 'moderator', 'administrator');
+        if ($request->has('readerCheckbox') || $request->has('authorCheckbox') || $request->has('moderatorCheckbox') || $request->has('administratorCheckbox')) {
+            $types = array();
+        }
+        if ($request->has('readerCheckbox')) {
+            $types[] = 'reader';
+        }
+        if ($request->has('authorCheckbox')) {
+            $types[] = 'author';
+        }
+        if ($request->has('moderatorCheckbox')) {
+            $types[] = 'moderator';
+        }
+        if ($request->has('administratorCheckbox')) {
+            $types[] = 'administrator';
+        }
+
+        $title = $request->input('title');
+        $email = $request->input('author');
+
+
+
+
+        $articles_user = null;
+        $users = null;
+        $articles = null;
+        if ($title === null && $email !== null && !empty($types)) {
+            if ($fecha !== null) {
+                $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->get();
+            }
+        } elseif ($title !== null && $email === null && !empty($types)) {
+
+            if ($fecha !== null) {
+                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+            }
+        } else {
+            if ($fecha !== null) {
+                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+            } else {
+                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+                $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->get();
+            }
+        }
+
+        $idsUsers = [];
+        foreach ($users as $users) {
+            $idsUsers[] = $users->id;
+        }
+
+        $idsArticles = [];
+        foreach ($articles as $articles) {
+            $idsArticles[] = $articles->id;
+        }
+        if (!empty($types)) {
+            if ($descendente) {
+                $articles_user = Article_user::whereIn('user_id', $idsUsers)->orWhereIn('article_id', $idsArticles)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+            } else {
+                $articles_user = Article_user::whereIn('user_id', $idsUsers)->orWhereIn('article_id', $idsArticles)->orderBy('id')->paginate(7)->withQueryString();
+            }
+        }
+        return view('admin.userAccessArticle', ['articles_user' => $articles_user]);
     }
 
     public function delete(Request $request)
