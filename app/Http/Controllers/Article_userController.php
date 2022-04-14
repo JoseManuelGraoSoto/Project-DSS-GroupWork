@@ -130,9 +130,6 @@ class Article_userController extends Controller
         $title = $request->input('title');
         $email = $request->input('author');
 
-
-
-
         $articles_user = null;
         $users = null;
         $articles = null;
@@ -145,29 +142,48 @@ class Article_userController extends Controller
         } elseif ($title !== null && $email === null && !empty($types)) {
 
             if ($fecha !== null) {
-                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                $users = User::whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($users !== null) {
+                    $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                }
             } else {
-                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+                $users = User::whereIn('type', $types)->get();
+                if ($users !== null) {
+                    $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+                }
             }
         } else {
             if ($fecha !== null) {
-                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
                 $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($users !== null) {
+                    $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                }
             } else {
-                $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
                 $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->get();
+                if ($users !== null) {
+                    $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+                }
             }
         }
 
         $idsUsers = [];
-        foreach ($users as $users) {
-            $idsUsers[] = $users->id;
+        if ($users !== null) {
+            foreach ($users as $users) {
+                $idsUsers[] = $users->id;
+            }
         }
 
+        error_log(count($idsUsers));
+
         $idsArticles = [];
-        foreach ($articles as $articles) {
-            $idsArticles[] = $articles->id;
+        if ($articles !== null) {
+
+            foreach ($articles as $articles) {
+                $idsArticles[] = $articles->id;
+            }
         }
+        error_log(count($idsArticles));
+
         if (!empty($types)) {
             if ($descendente) {
                 $articles_user = Article_user::whereIn('user_id', $idsUsers)->orWhereIn('article_id', $idsArticles)->orderBy('id', 'desc')->paginate(7)->withQueryString();

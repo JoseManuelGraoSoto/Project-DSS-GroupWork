@@ -2,7 +2,7 @@
 
 @section('text-inputs')
 <input type="text" name="title" id="title" placeholder="Titulo del artículo">
-<input type="text" name="email" id="email" placeholder="Email del usuario">
+<input type="text" name="author" id="email" placeholder="Email del usuario">
 @endsection
 
 @section('access-nav')
