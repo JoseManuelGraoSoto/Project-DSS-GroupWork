@@ -40,7 +40,7 @@ class ArticlesController extends Controller
         }
 
         $inputs = $validator->validated();
-        $user = User::where('email', $inputs['author'])->first();
+        $user = User::where('email', $inputs['author'])->firstOrFail();
         $new_article = new Article;
         $new_article->title = $inputs['title'];
         $new_article->category = $inputs['category'];
@@ -79,7 +79,7 @@ class ArticlesController extends Controller
         }
 
         $inputs = $validator->validated();
-        $user = User::where('email', $inputs['author'])->first();
+        $user = User::where('email', $inputs['author'])->firstOrFail();
         $new_article = Article::find($request->input('article_id'));
         $new_article->title = $inputs['title'];
         $new_article->category = $inputs['category'];

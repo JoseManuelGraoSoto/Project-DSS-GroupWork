@@ -24,27 +24,27 @@ class ValorationTest extends TestCase {
         $new_Valoration->article_id = 1;
         $new_Valoration->user_id = 2;
         $new_Valoration->save();
-        $valoration = Valoration::where('value', 4)-> first(); 
+        $valoration = Valoration::where('value', 4)-> firstOrFail(); 
         $this->assertEquals($new_Valoration->value, $valoration->value);
     }
 
     public function testRead() {
-        $valoration = Valoration::where('comment','Todo perfecto, mucho texto')->first();
+        $valoration = Valoration::where('comment','Todo perfecto, mucho texto')->firstOrFail();
         $this->assertEquals($valoration->comment,'Todo perfecto, mucho texto');
     }
 
     public function testUpdate(){
-        $valoration = Valoration::where('value',4)->first();
+        $valoration = Valoration::where('value',4)->firstOrFail();
         $valoration->value = 5;
         $valoration->comment = 'Perfecto';
         $valoration->save();
-        $updated_valoration = Valoration::where('value',5)->first();
+        $updated_valoration = Valoration::where('value',5)->firstOrFail();
         $this->assertEquals($updated_valoration->comment, 'Perfecto');
     }
 
     public function testDelete(){
         $num_valoration = Valoration::all()->count();
-        $valoration = Valoration::first();
+        $valoration = Valoration::firstOrFail();
         $valoration->delete();
         $num_valoration_deleted = Valoration::all()->count();
         $this->assertTrue($num_valoration > $num_valoration_deleted);

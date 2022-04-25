@@ -45,7 +45,7 @@ class RewardController extends Controller
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
         $new_reward->isModerator = $request->has('isModerator');
-        $user = User::where('email', $inputs['email'])->first();
+        $user = User::where('email', $inputs['email'])->firstOrFail();
         $new_reward->user()->associate($user);
         $new_reward->save();
         return redirect()->action([RewardController::class, 'showAll'])->withInput();
@@ -81,12 +81,12 @@ class RewardController extends Controller
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
         $new_reward->isModerator = $request->has('isModerator');
-        $user = User::where('email', $inputs['email'])->first();
+        $user = User::where('email', $inputs['email'])->firstOrFail();
         $new_reward->user()->associate($user);
         $new_reward->save();
         return redirect()->action([RewardController::class, 'showAll'])->withInput();
         /*
-        $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('email', $request->input('email'))->firstOrFail();
         error_log($request->input('reward_id'));
         $new_reward->points = $request->input('quantity');
         $month = date('m');

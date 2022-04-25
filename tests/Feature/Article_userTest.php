@@ -37,7 +37,7 @@ class Article_userTest extends TestCase
         
         $new_article->access()->attach($new_user->id);
         $article_user = Article::find($new_article->id)->access->find($new_user->id);
-        $accessBy = User::where('email','carlos@gmail.com')->first();
+        $accessBy = User::where('email','carlos@gmail.com')->firstOrFail();
 
         $this->assertEquals($article_user->id, $accessBy->id);
     }
