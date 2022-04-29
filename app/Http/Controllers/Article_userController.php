@@ -140,16 +140,30 @@ class Article_userController extends Controller
                 $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->get();
             }
         } elseif ($title !== null && $email === null && !empty($types)) {
-
             if ($fecha !== null) {
                 $users = User::whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
                 if ($users !== null) {
                     $articles = Article::where('title', 'LIKE', '%' . $title . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
                 }
             } else {
+                $articles_user = Article_user::join('articles', 'articles.id', '=', 'article_user.article_id')->join('users', 'users.id', '=', 'article_user.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->paginate($perPage = 7, $columns = ['article_user.id', 'article_user.article_id', 'article_user.user_id', 'article_user.created_at', 'users.name', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+
+                /*
                 $users = User::whereIn('type', $types)->get();
                 if ($users !== null) {
                     $articles = Article::where('title', 'LIKE', '%' . $title . '%')->get();
+                }*/
+            }
+        } elseif ($title === null && $email === null && !empty($types)) {
+            if ($fecha !== null) {
+                $users = User::whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                if ($users !== null) {
+                    $articles = Article::whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                }
+            } else {
+                $users = User::whereIn('type', $types)->get();
+                if ($users !== null) {
+                    $articles = Article::all();
                 }
             }
         } else {
@@ -173,7 +187,7 @@ class Article_userController extends Controller
             }
         }
 
-        error_log(count($idsUsers));
+        #error_log(count($idsUsers));
 
         $idsArticles = [];
         if ($articles !== null) {
@@ -182,16 +196,19 @@ class Article_userController extends Controller
                 $idsArticles[] = $articles->id;
             }
         }
-        error_log(count($idsArticles));
-
+        #error_log(count($idsArticles));
+        if ($articles_user === null) {
+            $articles_user = Article_user::paginate(7);
+        }
+        /*
         if (!empty($types)) {
             if ($descendente) {
                 $articles_user = Article_user::whereIn('user_id', $idsUsers)->orWhereIn('article_id', $idsArticles)->orderBy('id', 'desc')->paginate(7)->withQueryString();
             } else {
                 $articles_user = Article_user::whereIn('user_id', $idsUsers)->orWhereIn('article_id', $idsArticles)->orderBy('id')->paginate(7)->withQueryString();
             }
-        }
-        return view('admin.userAccessArticle', ['articles_user' => $articles_user]);
+        }*/
+        return view('admin.userAccessArticle', compact('articles_user')); //['articles_user' => $articles_user]);
     }
 
     public function delete(Request $request)
