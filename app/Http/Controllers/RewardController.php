@@ -137,8 +137,10 @@ class RewardController extends Controller
             $fecha = $anyo . '-' . $mes . '-' . $dia;
         }
 
-        $types = array();
-
+        $types = array(0, 1);
+        if ($request->has('authorCheckbox') || $request->has('moderatorCheckbox')) {
+            $types = array();
+        }
         if ($request->has('authorCheckbox')) {
             $types[] = 0;
         }

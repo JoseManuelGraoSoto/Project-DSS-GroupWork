@@ -79,7 +79,7 @@ Route::get('/access/delete', [Article_userController::class, 'delete']);
 
 // Rutas Valorations
 //Getters
-Route::get('/valorations', [ValorationController::class, 'showAll'])->name('valorations');
+Route::get('/valorations', [ValorationController::class, 'search'])->name('valorations');
 
 //Create: implementado en prácticas posteriores
 // Route::get('createValorationForm/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
