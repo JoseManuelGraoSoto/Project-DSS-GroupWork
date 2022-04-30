@@ -91,7 +91,7 @@ Route::get('/valorations/delete', [ValorationController::class, 'delete']);
 
 //Rutas Reward
 //Getters
-Route::get('rewards/', [RewardController::class, 'showAll'])->name('rewards');
+Route::get('rewards/', [RewardController::class, 'search'])->name('rewards');
 
 //Create
 Route::get('/rewards/addForm', [RewardController::class, 'createRewardFormulary'])->name('reward.createForm');
