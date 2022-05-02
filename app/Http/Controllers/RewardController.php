@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reward;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class RewardController extends Controller
@@ -26,7 +27,7 @@ class RewardController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:rewards,email',
+            'email' => 'required|email|exists:users,email',
             'quantity' => 'required|numeric|min:0',
         ]);
 
@@ -44,10 +45,10 @@ class RewardController extends Controller
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
         $new_reward->isModerator = $request->has('isModerator');
-        $Reward = Reward::where('email', $inputs['email'])->first();
-        $new_reward->Reward()->associate($Reward);
+        $user = User::where('email', $inputs['email'])->first();
+        $new_reward->user()->associate($user);
         $new_reward->save();
-        return redirect()->action([RewardController::class, 'showAll'])->withInput();
+        return redirect()->action([RewardController::class, 'search'])->withInput();
     }
 
     //Devuelve el formulario de actualización de reward
@@ -62,7 +63,7 @@ class RewardController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:rewards,email',
+            'email' => 'required|email|exists:users,email',
             'quantity' => 'required|numeric|min:0',
         ]);
 
@@ -80,10 +81,10 @@ class RewardController extends Controller
         $fecha = '2022-' . $month . '-01 00:00:00';
         $new_reward->month = $fecha;
         $new_reward->isModerator = $request->has('isModerator');
-        $Reward = Reward::where('email', $inputs['email'])->first();
-        $new_reward->Reward()->associate($Reward);
+        $user = User::where('email', $inputs['email'])->first();
+        $new_reward->user()->associate($user);
         $new_reward->save();
-        return redirect()->action([RewardController::class, 'showAll'])->withInput();
+        return redirect()->action([RewardController::class, 'search'])->withInput();
         /*
         $Reward = Reward::where('email', $request->input('email'))->first();
         error_log($request->input('reward_id'));
@@ -243,6 +244,6 @@ class RewardController extends Controller
 
     public function volver()
     {
-        return redirect()->action([RewardController::class, 'showAll'])->withInput();
+        return redirect()->action([RewardController::class, 'search'])->withInput();
     }
 }
