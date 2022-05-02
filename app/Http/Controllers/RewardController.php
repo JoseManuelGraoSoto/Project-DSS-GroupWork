@@ -104,6 +104,36 @@ class RewardController extends Controller
         return view('deleteReward', ['rewards' => $rewards]);
     }
 
+    public function extraerMes($mes)
+    {
+        switch ($mes) {
+            case 'Enero':
+                return '01';
+            case 'Febrero':
+                return '02';
+            case 'Marzo':
+                return '03';
+            case 'Abril':
+                return '04';
+            case 'Mayo':
+                return '05';
+            case 'Junio':
+                return '06';
+            case 'Julio':
+                return '07';
+            case 'Agosto':
+                return '08';
+            case 'Septiembre':
+                return '09';
+            case 'Octubre':
+                return '10';
+            case 'Noviembre':
+                return '11';
+            case 'Diciembre':
+                return '12';
+        }
+    }
+
     //TODO:
     public function search(Request $request)
     {
@@ -155,9 +185,9 @@ class RewardController extends Controller
         if ($nombre === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('rewards.isModerator', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('rewards.isModerator', $types)->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 } else {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('rewards.isModerator', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('rewards.isModerator', $types)->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
@@ -169,9 +199,9 @@ class RewardController extends Controller
         } elseif ($nombre !== null && $email === null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereIn('rewards.isModerator', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereIn('rewards.isModerator', $types)->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 } else {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereIn('rewards.isModerator', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereIn('rewards.isModerator', $types)->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
@@ -183,9 +213,9 @@ class RewardController extends Controller
         } else {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orderBy('rewards.id', 'desc')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 } else {
-                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
+                    $rewards = Reward::join('users', 'users.id', '=', 'rewards.user_id')->where('users.name', 'LIKE', '%' . $nombre . '%')->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereBetween('rewards.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->whereIn('rewards.isModerator', $types)->orderBy('rewards.id')->paginate($perPage = 7, $columns = ['rewards.id', 'users.email', 'users.name', 'rewards.points', 'rewards.isModerator', 'rewards.created_at'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
