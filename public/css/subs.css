@@ -1,0 +1,35 @@
+.background_propio {
+    background-color: #2D3436;
+}
+
+.caja_propia {
+    background-color: #FFFFFF;
+    color:#2D3436;
+    height: 350px;
+}
+
+.oferta_propia {
+    background-color: #3F53BA;
+}
+
+.text-propio {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    font-weight: 800;
+}
+
+.text-sec-propio {
+    font-family: 'Poppins', sans-serif;
+    color: #2D3436;
+    font-weight: 800;
+}
+
+.img_propio {
+    float:inline-start;
+}
+
+.flex-aligned-center {
+    align-items: center;
+    justify-content: center; 
+    display: flex;   
+}
