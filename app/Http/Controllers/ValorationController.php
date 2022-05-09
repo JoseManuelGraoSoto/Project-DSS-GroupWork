@@ -22,7 +22,7 @@ class ValorationController extends Controller
     {
         // No funciona, no está implementado obviamente, no es uno de los 3
         $valoration = Valoration::find($request->input('valoration_id'));
-        return view('admin.add.createvaloration', ['valoration' => $valoration]);
+        return view('admin.add.createValoration', ['valoration' => $valoration]);
     }
 
     //Recibe la información de un valoration y lo añade a la base de datos: no integrado
@@ -225,5 +225,10 @@ class ValorationController extends Controller
         }
 
         return back()->withInput();
+    }
+
+    public function volver()
+    {
+        return redirect()->action([ValorationController::class, 'search'])->withInput();
     }
 }

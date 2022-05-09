@@ -18,7 +18,7 @@
     ELIMINAR VALORACIÓN
 </button>
 
-<a href="/createValorationForm" style="text-decoration: none; display: none;">
+<a href="{{ route('valoration.createForm') }}" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
 </a>
