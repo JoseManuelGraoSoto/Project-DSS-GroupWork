@@ -20,9 +20,10 @@
         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
     </div>
 
-    <div class="upload-txt" style="margin-top: 20px;">
-        <input type="file" id="selec-txt" />
-        <label for="selec-txt">Contenido del artículo</label>
+    <div style="margin-top: 20px;">
+        <div style="margin-top: 20px;">
+            <textarea class=" textbox flex-container flex-vertical flex-aligned-center flex-center" style="resize:none" name="texto" id="texto" rows="6" maxlength="300" cols="50" placeholder="Comentario de valoración"></textarea>
+        </div>
     </div>
 </div>
 <div class="checkbox-con flex-container flex-vertical flex-center flex-aligned-center">

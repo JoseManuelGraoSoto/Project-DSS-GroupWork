@@ -2,7 +2,7 @@
 
 @section('valorations-nav')
 <div class="nav-item selected flex-container flex-aligned-center">
-    <i class='bx bxs-star' ></i>
+    <i class='bx bxs-star'></i>
     <span class="nav-label">Valoraciones</span>
 </div>
 @endsection
@@ -15,13 +15,13 @@
 @section('other-inputs')
 <div class="inputs flex-container flex-vertical flex-center flex-aligned-center">
     <div class="number-input">
-        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
         <input class="quantity" min="0" max="10" name="quantity" value="5" type="number">
         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
     </div>
 
     <div class="upload-txt" style="margin-top: 20px;">
-        <input type="file" id="selec-txt"/>
+        <input type="file" id="selec-txt" />
         <label for="selec-txt">Contenido del artículo</label>
     </div>
 </div>
