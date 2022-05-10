@@ -1,39 +1,6 @@
 @extends('layouts.general')
 
 @section('body-section')
-
-<nav class="navbar navbar-dark sticky-top navbar-expand-lg navbar-light bg-primary px-5">
-    <a href="#" class="d-flex align-items-center gap-3 navbar-brand">
-        <i class='bx bx-pen fs-1'></i>
-        <h1 class="fw-bold">Invent</h1>
-    </a>
-    
-    <button class="navbar-toggler bg-terciary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse text-center justify-content-right align-content-sm-right" id="navbarSupportedContent">
-        <ul class="navbar-nav gap-lg-5 gap-3 pb-3 pb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow-none p-0" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <h3 class="bg-accent text-secondary py-1 text-center d-lg-none fs-5 rounded">Perfil</h3>    
-                    <img src="{{ URL::asset('img/default.png'); }}" class="d-none d-lg-inline rounded" width="40" height="38" alt="Default user picture">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <div class="dropdown-divider"></div>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-
 <div class="row mt-5">
     <div class="col-11 col-sm-10 mx-auto">
         <div class="shadow bg-terciary text-secondary p-3">
