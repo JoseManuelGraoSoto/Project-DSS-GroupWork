@@ -28,33 +28,29 @@ class ValorationController extends Controller
     //Recibe la información de un valoration y lo añade a la base de datos: no integrado
     public function create(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'title' => 'required',
-        //     // Cambiar a email en vez de nombre?
-        //     'author' => 'required|exists:users,name',
-        //     'category' => 'required',
-        //     'quantity' => 'required|numeric|between:0,10'
-        //     // Falta de terminar
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'title' => 'required|exists:articles,title',
+            'quantity' => 'required|numeric|min:0',
+        ]);
 
-        // if ($validator->fails()) {
-        //     return redirect('createArticleForm')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
-
-        // $inputs = $validator->validated();
-        $user = User::find($request->input('user_id'));
-        $article = Article::find($request->input('article_id'));
+        if ($validator->fails()) {
+            return redirect(route('valoration.createForm'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $inputs = $validator->validated();
+        $user = User::where('email', $inputs['email'])->first();
+        $article = Article::where('title', $inputs['title'])->first();
         $new_valoration = new Valoration;
-        $new_valoration->points = $request->input('value');
-        $new_valoration->month = $request->input('comment');
-        $new_valoration->isModerator = $request->input('isModerator');
-        $new_valoration->acepted = 0;
+        $new_valoration->value = $inputs['quantity'];
+        $new_valoration->comment = $request->input('comment');
+        $new_valoration->isModerator = $request->has('isModerator');
         $new_valoration->user()->associate($user);
         $new_valoration->article()->associate($article);
         $new_valoration->save();
-        return view('valorationCreada');
+        return
+            redirect()->action([ValorationController::class, 'search'])->withInput();
     }
 
     public function extraerMes($mes)
