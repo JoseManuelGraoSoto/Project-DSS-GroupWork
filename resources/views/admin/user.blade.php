@@ -50,15 +50,15 @@
     <span class="display-data">{{$user->name}}</span>
     <span class="display-data">
         @if ($user->type == 'reader')
-            Lector
+        Lector
         @elseif ($user->type == 'author')
-            Autor
+        Autor
         @elseif ($user->type == 'moderator')
-            Moderador
+        Moderador
         @elseif ($user->type == 'administrator')
-            Administrador
+        Administrador
         @else
-            No se ha identificado el tipo del usuario
+        No se ha identificado el tipo del usuario
         @endif
     </span>
     <span class="display-data">{{$user->telephone}}</span>
