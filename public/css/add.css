@@ -57,7 +57,7 @@
 .textbox{
     background: var(--primary-color);
     color: var(--secondary-color);
-    padding: 5px;
+    padding: 10px;
     overflow: auto;
     border-radius: 12px;
     border:1px;

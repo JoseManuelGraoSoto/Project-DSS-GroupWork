@@ -18,11 +18,10 @@ class ValorationController extends Controller
     }
 
     //Devuelve el formulario de creación de valoration
-    public function createvalorationFormulary(Request $request)
+    public function createValorationFormulary(Request $request)
     {
-        // No funciona, no está implementado obviamente, no es uno de los 3
-        $valoration = Valoration::find($request->input('valoration_id'));
-        return view('admin.add.createValoration', ['valoration' => $valoration]);
+
+        return view('admin.add.createValoration');
     }
 
     //Recibe la información de un valoration y lo añade a la base de datos: no integrado
@@ -39,13 +38,70 @@ class ValorationController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $moderador = $request->has('isModerator');
         $inputs = $validator->validated();
         $user = User::where('email', $inputs['email'])->first();
         $article = Article::where('title', $inputs['title'])->first();
         $new_valoration = new Valoration;
         $new_valoration->value = $inputs['quantity'];
-        $new_valoration->comment = $request->input('comment');
+        if (!$moderador) {
+            $new_valoration->comment = '';
+        } else {
+            if ($request->input('comment') == null) {
+                $new_valoration->comment = '';
+            } else {
+                $new_valoration->comment = $request->input('comment');
+            }
+        }
         $new_valoration->isModerator = $request->has('isModerator');
+        $new_valoration->user()->associate($user);
+        $new_valoration->article()->associate($article);
+        $new_valoration->save();
+        return
+            redirect()->action([ValorationController::class, 'search'])->withInput();
+    }
+
+    //Devuelve el formulario de edición de valoration
+    public function updateValorationFormulary(Request $request)
+    {
+        // No funciona, no está implementado obviamente, no es uno de los 3
+        $valoration = Valoration::find($request->input('valoration_id'));
+        return view('admin.add.updateValoration', ['valoration' => $valoration]);
+    }
+
+    //Recibe la información de un valoration y lo añade a la base de datos: no integrado
+    public function update(Request $request)
+    {
+
+        $validator = null;
+        $moderador = $request->has('isModerator');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'title' => 'required|exists:articles,title',
+            'quantity' => 'required|numeric|between:0,10',
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect(route('valoration.updateForm'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $inputs = $validator->validated();
+        $user = User::where('email', $inputs['email'])->first();
+        $article = Article::where('title', $inputs['title'])->first();
+        $new_valoration = Valoration::find($request->input('valoration_id'));
+        $new_valoration->value = $inputs['quantity'];
+        $new_valoration->isModerator = $moderador;
+        if (!$moderador) {
+            $new_valoration->comment = '';
+        } else {
+            if ($request->input('comment') == null) {
+                $new_valoration->comment = '';
+            } else {
+                $new_valoration->comment = $request->input('comment');
+            }
+        }
         $new_valoration->user()->associate($user);
         $new_valoration->article()->associate($article);
         $new_valoration->save();
