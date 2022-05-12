@@ -18,7 +18,10 @@ use App\Http\Controllers\ValorationController;
 |
 */
 
-Route::get('/', function () {
+// Prueba
+Route::get('/', function () { return view('common.library'); });
+
+Route::get('/loggin', function () {
     return view('access.login');
 })->name('loggin');
 
