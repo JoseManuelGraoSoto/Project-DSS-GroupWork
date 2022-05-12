@@ -1,8 +1,8 @@
 @extends('layouts.adminDB')
 
 @section('text-inputs')
-<input type="text" name="user" id="user" placeholder="Titulo del artículo">
-<input type="text" name="name" id="name" placeholder="Nombre del usuario">
+<input type="text" name="title" id="title" placeholder="Titulo del artículo">
+<input type="text" name="author" id="email" placeholder="Email del usuario">
 @endsection
 
 @section('access-nav')
@@ -42,17 +42,17 @@
 @foreach($articles_user as $article_user)
 <div class="info-db access">
     <span id="id" class="display-data">{{$article_user->id}}</span>
-    <span class="display-data">{{($user = App\Models\User::find($article_user->user_id))->name}}</span>
-    <span class="display-data">{{($user = App\Models\User::find($article_user->user_id))->email}}</span>
-    <span class="display-data">{{($user = App\Models\Article::find($article_user->article_id))->title}}</span>
+    <span class="display-data">{{$article_user->name}}</span>
+    <span class="display-data">{{$article_user->email}}</span>
+    <span class="display-data">{{$article_user->title}}</span>
     <span class="display-data">
-        @if (($user = App\Models\User::find($article_user->user_id))->type === 'reader')
+        @if ($article_user->type === 'reader')
         Lector
-        @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'author')
+        @elseif ($article_user->type === 'author')
         Autor
-        @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'moderator')
+        @elseif ($article_user->type === 'moderator')
         Moderador
-        @elseif (($user = App\Models\User::find($article_user->user_id))->type === 'administrator')
+        @elseif ($article_user->type === 'administrator')
         Administrador
         @else
         No se ha identificado el tipo del usuario
