@@ -260,7 +260,7 @@ class UsersController extends Controller
     {
         $email = $request->input('email');
         $password = $request->input('password');
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $email)->firstOrFail();
         if ($user) {
             if (strcmp($password, $user->password) === 0) {
                 if (strcmp($user->type, 'administrator') === 0) {
