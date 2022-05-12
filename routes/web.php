@@ -18,7 +18,10 @@ use App\Http\Controllers\ValorationController;
 |
 */
 
-Route::get('/', function () {
+// Prueba
+Route::get('/', function () { return view('common.library'); });
+
+Route::get('/loggin', function () {
     return view('access.login');
 })->name('loggin');
 
@@ -63,7 +66,7 @@ Route::get('/articles/delete', [ArticlesController::class, 'delete']);
 
 //Rutas accesos
 //Getters
-Route::get('/access', [Article_userController::class, 'showAll'])->name('access');
+Route::get('/access', [Article_userController::class, 'search'])->name('access');
 
 //Create
 Route::get('/access/addForm', [Article_userController::class, 'createArticle_userFormulary'])->name('access.createForm');
@@ -79,19 +82,26 @@ Route::get('/access/delete', [Article_userController::class, 'delete']);
 
 // Rutas Valorations
 //Getters
-Route::get('/valorations', [ValorationController::class, 'showAll'])->name('valorations');
+Route::get('/valorations', [ValorationController::class, 'search'])->name('valorations');
+//Create
+Route::get('/valorations/addForm', [ValorationController::class, 'createValorationFormulary'])->name('valoration.createForm');
+Route::post('/valorations/add', [ValorationController::class, 'create'])->name('valoration.create');
 
+//Update
+Route::get('/valorations/updateForm', [ValorationController::class, 'updateValorationFormulary'])->name('valoration.updateForm');
+Route::post('/valorations/update', [ValorationController::class, 'update'])->name('valoration.update');
+Route::get('/volverValoration', [ValorationController::class, 'volver']);
+
+//Delete
+Route::get('/valorations/delete', [ValorationController::class, 'delete']);
 //Create: implementado en prácticas posteriores
 // Route::get('createValorationForm/', [ValorationController::class, 'createValorationFormulary'])->name('valorationcreateForm');
 // Route::post('createValoration/', [ValorationController::class, 'create'])->name('valoration.create');
 
-//Delete
-Route::get('/valorations/delete', [ValorationController::class, 'delete']);
-
 
 //Rutas Reward
 //Getters
-Route::get('rewards/', [RewardController::class, 'showAll'])->name('rewards');
+Route::get('rewards/', [RewardController::class, 'search'])->name('rewards');
 
 //Create
 Route::get('/rewards/addForm', [RewardController::class, 'createRewardFormulary'])->name('reward.createForm');

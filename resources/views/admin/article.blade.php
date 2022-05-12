@@ -2,12 +2,7 @@
 
 @section('text-inputs')
 <input type="text" name="title" id="title" placeholder="Titulo del artículo">
-<input type="text" name="author" id="author" placeholder="Nombre del autor">
-@endsection
-
-@section('text-inputs')
-<input type="text" name="title" id="title" placeholder="Titulo del artículo">
-<input type="text" name="author" id="author" placeholder="Nombre del autor">
+<input type="text" name="author" id="author" placeholder="Email del autor">
 @endsection
 
 @section('articles-nav')
@@ -53,9 +48,9 @@
     <span class="display-data">{{$article->valoration}}</span>
     <span class="display-data">
         @if($article->acepted)
-            Aceptado
+        Aceptado
         @else
-            No Aceptado
+        No Aceptado
         @endif
     </span>
     <span class="display-data">{{$article->created_at}}</span>

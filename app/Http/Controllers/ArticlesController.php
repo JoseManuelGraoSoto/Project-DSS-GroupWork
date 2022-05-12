@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 class ArticlesController extends Controller
 {
     // Devuelve la vista articlesList pasándole como parámetro todos los articulos
-    public function showAll() {
+    public function showAll()
+    {
         $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
     }
@@ -123,8 +124,8 @@ class ArticlesController extends Controller
 
     public function search(Request $request)
     {
-        $nombre = $request->input('name');
-        $users = User::where('name', 'LIKE', '%' . $nombre . '%')->get();
+        $email = $request->input('author');
+        $users = User::where('email', 'LIKE', '%' . $email . '%')->get();
         $ids = [];
         foreach ($users as $users) {
             $ids[] = $users->id;
@@ -164,7 +165,7 @@ class ArticlesController extends Controller
         $descendente = $request->has('order');
 
         $articles = null;
-        if ($nombre === null && $titulo !== null) {
+        if ($email === null && $titulo !== null) {
             if (
                 $fecha !== null
             ) {
@@ -180,7 +181,7 @@ class ArticlesController extends Controller
                     $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->orderBy('id')->paginate(7)->withQueryString();;
                 }
             }
-        } elseif ($nombre !== null && $titulo === null) {
+        } elseif ($email !== null && $titulo === null) {
             if ($fecha !== null) {
                 if ($descendente) {
                     $articles = Article::whereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
@@ -197,15 +198,15 @@ class ArticlesController extends Controller
         } else {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhereIn('user_id', $ids)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->orWhereIn('user_id', $ids)->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->whereIn('user_id', $ids)->orderBy('id')->paginate(7)->withQueryString();
+                    $articles = Article::where('title', 'LIKE', '%' . $titulo . '%')->orWhereIn('user_id', $ids)->orderBy('id')->paginate(7)->withQueryString();
                 }
             }
         }
