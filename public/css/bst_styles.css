@@ -21,6 +21,10 @@
     background-color: var(--accent-color) !important;
 }
 
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
 .text-secondary {
     color: var(--secondary-color) !important;
 }
@@ -31,6 +35,10 @@
 
 .text-accent {
     color: var(--accent-color) !important;
+}
+
+.border-primary {
+    border-color: var(--primary-color) !important;
 }
 
 .border-accent {
@@ -73,6 +81,11 @@
 
 .form-dark:focus {
     background-color: var(--terciary-color);
+}
+
+.small-card-scrollable {
+    max-height: 200px !important;
+    overflow-y: auto !important;
 }
 
 .animate {
