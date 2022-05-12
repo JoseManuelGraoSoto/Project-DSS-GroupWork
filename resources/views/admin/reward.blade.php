@@ -1,7 +1,7 @@
 @extends('layouts.adminDB')
 
 @section('text-inputs')
-<input type="text" name="user" id="user" placeholder="Titulo del artículo">
+<input type="text" name="email" id="email" placeholder="Email del usuario">
 <input type="text" name="name" id="name" placeholder="Nombre del usuario">
 @endsection
 
@@ -16,7 +16,7 @@
 <div class="user-type flex-container flex-vertical flex-aligned-center">
     <div class="types flex-container">
         <div class="type">
-            <input checked="" type="checkbox" id="author-type" class="hidden-xs-up">
+            <input checked="" type="checkbox" name="authorCheckbox" id="author-type" class="hidden-xs-up">
             <label for="author-type" class="cbx">
                 <div class="type-tooltip">
                     <span>Autor</span>
@@ -25,7 +25,7 @@
             </label>
         </div>
         <div class="type">
-            <input checked="" type="checkbox" id="moderator-type" class="hidden-xs-up">
+            <input checked="" type="checkbox" name="moderatorCheckbox" id="moderator-type" class="hidden-xs-up">
             <label for="moderator-type" class="cbx">
                 <div class="type-tooltip">
                     <span>Moderador</span>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <span class="type-title">Tipo de usuario</span>
+    <span class="type-title">Tipo de recompensa</span>
 </div>
 @endsection
 
@@ -69,8 +69,8 @@
 @foreach($rewards as $reward)
 <div class="info-db reward">
     <span id="id" class="display-data">{{$reward->id}}</span>
-    <span class="display-data">{{$reward->user->email}}</span>
-    <span class="display-data">{{$reward->user->name}}</span>
+    <span class="display-data">{{$reward->email}}</span>
+    <span class="display-data">{{$reward->name}}</span>
     <span class="display-data">{{$reward->points}}</span>
     <span class="display-data">
         @if($reward->isModerator)

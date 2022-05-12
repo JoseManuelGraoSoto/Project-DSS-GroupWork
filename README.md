@@ -1,5 +1,26 @@
 # Medidas para trabajar en colaborativo en Github-DSS
 
+## Comandos necesarios
+Para ejecutar el servidor
+~~~
+php artisan serve
+~~~
+Dirección en el navegador: http://localhost:8000  
+Para modificar los seeders
+~~~
+php artisan migrate:refresh --seed
+~~~
+Para ejecutar los tests
+~~~
+vendor/bin/phpunit
+~~~
+Descargar controlador de auth
+~~~
+composer require laravel/ui
+php artisan ui bootstrap --auth
+~~~
+# Medidas para trabajar en colaborativo en Github-DSS
+
 - Comentarios en castellano
 - Nombres de funciones y objetos en castellano
 - Los nombres de funciones, objetos y otros deben ser descriptivos
