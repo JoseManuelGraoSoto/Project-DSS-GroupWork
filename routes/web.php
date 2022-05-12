@@ -110,3 +110,7 @@ Route::get('/rewards/delete', [RewardController::class, 'delete']);
 Route::get('/category', function () {
     return view('admin.category');
 })->name('category');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
