@@ -45,6 +45,15 @@
     border-color: var(--accent-color) !important;
 }
 
+.inactive {
+    background-color: var(--accent-color-weak) !important; 
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--terciary-color) !important;
+}
+
 .btn-outline-accent {
     color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
@@ -55,6 +64,20 @@
     color: var(--secondary-color) !important;
     border-color: var(--accent-color) !important;
     background-color: var(--accent-color) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color) !important;
+    border-color: var(--terciary-color) !important;
+}
+
+.nav-link {
+    color: var(--accent-color) !important;
+}
+
+.nav-link.active {
+    color: var(--secondary-color) !important;
+    background-color: var(--primary-color) !important;
 }
 
 .justify-content-right {

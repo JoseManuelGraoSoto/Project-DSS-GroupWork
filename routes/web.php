@@ -21,10 +21,6 @@ use App\Http\Controllers\ValorationController;
 // Prueba
 Route::get('/', function () { return view('common.profile'); });
 
-Route::get('/loggin', function () {
-    return view('access.login');
-})->name('loggin');
-
 //Rutas users
 //Getters
 Route::get('/users', [UsersController::class, 'search'])->name('users');
