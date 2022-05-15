@@ -45,11 +45,11 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                            <label class="d-sm-none form-check-label" for="remember">
+                            <label class="d-lg-none form-check-label" for="remember">
                                 {{ __('Recordar') }}
                             </label>
 
-                            <label class="d-none d-sm-inline form-check-label" for="remember">
+                            <label class="d-none d-lg-inline form-check-label" for="remember">
                                 {{ __('Recordar usuario') }}
                             </label>
                         </div>

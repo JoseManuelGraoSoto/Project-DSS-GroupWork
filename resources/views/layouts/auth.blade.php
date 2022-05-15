@@ -23,12 +23,12 @@
 </head>
 
 <body>
-    <div class="container-fluid vh-100">
+    <div class="container-fluid my-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
             @yield('illustration')
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                @if(Route::is('login') )                   
-                <h1 class="display-4 mb-4 text-center">Iniciar sesión</h1>
+            <div class="card col-10 col-md-8 col-lg-6 col-xl-4 offset-lg-1 shadow">
+                @if(Route::is('login'))          
+                <h1 class="display-4 my-4 text-center">Iniciar sesión</h1>
                 
                 <ul class="nav nav-pills nav-justified mb-3 gap-3" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -39,7 +39,7 @@
                     </li>
                 </ul>
                 @elseif(Route::is('register') )
-                <h1 class="display-4 mb-4 text-center">Registrarse</h1>
+                <h1 class="display-4 my-4 text-center">Registrarse</h1>
                 <ul class="nav nav-pills nav-justified mb-3 gap-3" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link inactive" id="tab-login" data-mdb-toggle="pill" href="{{ route('login') }}" role="tab" aria-controls="pills-login" aria-selected="true">Iniciar sesión</a>
@@ -50,9 +50,7 @@
                 </ul>
                 @endif
                 
-                <div class="tab-content mt-4">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
         </div>
     </div>
