@@ -27,9 +27,9 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             @yield('illustration')
             <div class="card col-10 col-md-8 col-lg-6 col-xl-4 offset-lg-1 shadow">
-                @if(Route::is('login'))          
+                @if(Route::is('login'))
                 <h1 class="display-4 my-4 text-center">Iniciar sesión</h1>
-                
+
                 <ul class="nav nav-pills nav-justified mb-3 gap-3" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="{{ route('login') }}" role="tab" aria-controls="pills-login" aria-selected="true">Iniciar sesión</a>
@@ -49,7 +49,7 @@
                     </li>
                 </ul>
                 @endif
-                
+
                 @yield('content')
             </div>
         </div>

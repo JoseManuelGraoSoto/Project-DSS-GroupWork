@@ -18,8 +18,13 @@ use App\Http\Controllers\ValorationController;
 |
 */
 
+Auth::routes();
+
 // Prueba
-Route::get('/', function () { return view('common.profile'); });
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Home Controller
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', function () { return view('common.profile'); });
 
 //Rutas users
 //Getters
@@ -109,7 +114,3 @@ Route::get('/rewards/delete', [RewardController::class, 'delete']);
 Route::get('/category', function () {
     return view('admin.category');
 })->name('category');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
