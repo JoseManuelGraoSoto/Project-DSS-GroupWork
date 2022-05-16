@@ -26,8 +26,8 @@ class Article_userTableSeeder extends Seeder
 
         foreach (range(1, 500) as $index) {
             $article_user = Article::find($faker->numberBetween(1, 500));
-            $user = User::inRandomOrder()->first()->id;
-            $article_user->access()->attach($user->id);
+            $user = User::inRandomOrder()->first();
+            $article_user->access()->attach($user);
             $article_user->save();
         }
     }
