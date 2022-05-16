@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Faker\Provider\es_ES\PhoneNumber;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -27,7 +29,7 @@ class UsersTableSeeder extends Seeder
         $new_user->name = 'admin';
         $new_user->type = 'administrator';
         $new_user->email = 'admin@admin.com';
-        $new_user->password = 'admin';
+        $new_user->password = Hash::make('admin');
         $new_user->telephone = $faker->tollFreeNumber;
         $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
         $new_user->save();
@@ -37,7 +39,7 @@ class UsersTableSeeder extends Seeder
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
             $new_user->email = $faker->unique()->freeEmail;
-            $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
+            $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
@@ -48,7 +50,7 @@ class UsersTableSeeder extends Seeder
             $new_user->name = $faker->firstName;
             $new_user->type = 'author';
             $new_user->email = $faker->unique()->freeEmail;
-            $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
+            $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
@@ -59,7 +61,7 @@ class UsersTableSeeder extends Seeder
             $new_user->name = $faker->firstName;
             $new_user->type = 'moderator';
             $new_user->email = $faker->unique()->freeEmail;
-            $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
+            $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();

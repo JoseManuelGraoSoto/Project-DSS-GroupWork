@@ -18,9 +18,13 @@ use App\Http\Controllers\ValorationController;
 |
 */
 
-Route::get('/', function () {
-    return view('access.login');
-})->name('loggin');
+Auth::routes();
+
+// Prueba
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Home Controller
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', function () { return view('common.profile'); });
 
 //Rutas users
 //Getters
