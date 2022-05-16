@@ -120,3 +120,8 @@ Route::get('/rewards/delete', [RewardController::class, 'delete']);
 Route::get('/category', function () {
     return view('admin.category');
 })->name('category');
+
+// Rutas suscripcion
+Route::get('/subscrip', function () {
+    return view('cliente.susbscrip');
+})->name('suscripcion');
