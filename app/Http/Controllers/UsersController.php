@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsersController extends Controller
 {
@@ -50,7 +52,7 @@ class UsersController extends Controller
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         //TODO: cambiar a redirect
@@ -93,7 +95,7 @@ class UsersController extends Controller
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         return redirect()->action([UsersController::class, 'search'])->withInput();
@@ -232,7 +234,6 @@ class UsersController extends Controller
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id')->paginate(7)->withQueryString();
-
                 }
             }
         }
@@ -262,7 +263,7 @@ class UsersController extends Controller
         $password = $request->input('password');
         $user = User::where('email', $email)->first();
         if ($user) {
-            if (strcmp($password, $user->password) === 0) {
+            if (Hash::check($password, $user->password)) {
                 if (strcmp($user->type, 'administrator') === 0) {
                     return redirect()->action([UsersController::class, 'logged']);
                 } else {
