@@ -2,7 +2,7 @@
 
 @section('text-inputs')
 <input type="text" name="title" id="title" placeholder="Titulo del artículo">
-<input type="text" name="name" id="name" placeholder="Nombre del usuario">
+<input type="text" name="email" id="email" placeholder="Email del usuario">
 @endsection
 
 @section('valorations-nav')
@@ -18,7 +18,7 @@
     ELIMINAR VALORACIÓN
 </button>
 
-<a href="/createValorationForm" style="text-decoration: none; display: none;">
+<a href="{{ route('valoration.createForm') }}" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
 </a>
@@ -27,6 +27,7 @@
 @section('display')
 <div class="upper-separator valoration">
     <span class="display-data-label">ID</span>
+    <span class="display-data-label">Artículo</span>
     <span class="display-data-label">Usuario</span>
     <span class="display-data-label">Valoración</span>
     <span class="display-data-label">Tipo Usuario</span>
@@ -38,24 +39,25 @@
 @foreach($valorations as $valoration)
 <div class="info-db valoration">
     <span id="id" class="display-data">{{$valoration->id}}</span>
+    <span class="display-data">{{$valoration->article->title}}</span>
     <span class="display-data">{{$valoration->user->email}}</span>
     <span class="display-data">{{$valoration->value}}</span>
     <span class="display-data">
-        @if ($valoration->user->type == 'reader')
-            Lector
-        @elseif ($valoration->user->type == 'author')
-            Autor
-        @elseif ($valoration->user->type == 'moderator')
-            Moderador
-        @elseif ($valoration->user->type == 'administrator')
-            Administrador
+        @if ($valoration->type == 'reader')
+        Lector
+        @elseif ($valoration->type == 'author')
+        Autor
+        @elseif ($valoration->type == 'moderator')
+        Moderador
+        @elseif ($valoration->type == 'administrator')
+        Administrador
         @else
-            No se ha identificado el tipo del usuario
+        No se ha identificado el tipo del usuario
         @endif
     </span>
     <span class="display-data">{{$valoration->comment}}</span>
     <span class="display-data">{{$valoration->created_at}}</span>
-    <form hidden action=" {{ route('valorations') }}" method="GET">
+    <form action=" {{ route('valoration.updateForm') }}" method="GET">
         <input type="hidden" name="valoration_id" value="{{$valoration->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>

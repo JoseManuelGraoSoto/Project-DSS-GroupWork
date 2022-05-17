@@ -35,7 +35,7 @@
                                 <input checked="" type="checkbox" name="readerCheckbox" id="reader-type" class="hidden-xs-up">
                                 <label for="reader-type" class="cbx">
                                     <div class="type-tooltip">
-                                        <span>Usuario</span>
+                                        <span>Lector</span>
                                         <i class='bx bxs-down-arrow'></i>
                                     </div>
                                 </label>
