@@ -80,6 +80,10 @@
     background-color: var(--primary-color) !important;
 }
 
+.badge {
+    width: 75px;
+}
+
 .justify-content-right {
     justify-content: right;
 }
