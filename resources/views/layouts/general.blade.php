@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg navbar-light bg-primary px-5">
+    <nav class="navbar sticky-top navbar-expand-lg bg-primary px-5">
         <a href="#" class="d-flex align-items-center gap-3 navbar-brand">
             <i class='bx bx-pen fs-1'></i>
             <h1 class="fw-bold">Invent</h1>
