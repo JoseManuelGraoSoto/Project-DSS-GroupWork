@@ -26,7 +26,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::get('/', function () { return view('common.profile'); });
 
-// Route::get('/test', function () { return view('welcome.landingpage'); });
+Route::get('/test', function () { return view('welcome.landingpage'); });
 
 //Rutas users
 //Getters

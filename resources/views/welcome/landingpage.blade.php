@@ -50,29 +50,6 @@
         </div>
     </section>
 
-    @guest
-    <!-- ======= Access section ======= -->
-    <div id="access" class="cutout">
-        <div class="container access-container">
-            <div class="section-title">
-                <div class="d-lg-inline d-none">
-                    <span>Obten acceso ilimitado</span>
-                    <h2>Obten acceso ilimitado</h2>
-                </div>
-            </div>
-            <div class="d-flex gap-5 justify-content-center align-items-center">
-                <svg class="icon" style="min-height: 300px; min-width: 260px;">
-                    <path stroke="white" fill="none" class="is-active" d="M 220.848 35.976 c -9.084 -9.048 -24.924 -9.012 -33.936 0.06 l -21.408 21.492 L 139.032 84 H 84 a 11.976 11.976 90 0 0 -11.268 7.896 l -48 132 c -1.596 4.38 -0.504 9.288 2.784 12.588 l 24 24 a 11.964 11.964 90 0 0 12.588 2.784 l 132 -48 A 11.976 11.976 90 0 0 204 204 v -55.032 l 26.484 -26.484 v -0.012 h 0.012 L 252 100.908 c 4.536 -4.536 7.032 -10.572 7.02 -16.98 c 0 -6.42 -2.508 -12.456 -7.056 -16.98 l -31.116 -30.972 z m -37.332 99.54 A 11.952 11.952 90 0 0 180 144 v 51.6 l -110.988 40.356 l 56.052 -56.052 c 0.312 0.012 0.624 0.096 0.936 0.096 A 18 18 90 1 0 108 162 c 0 0.312 0.084 0.624 0.096 0.936 l -56.052 56.052 L 92.4 108 H 144 c 3.192 0 6.24 -1.26 8.484 -3.516 L 174 82.968 L 205.032 114 l -21.516 21.516 z m 38.472 -38.496 l -31.032 -31.032 l 12.948 -13.008 l 31.116 30.972 l -13.032 13.068 z" />
-                </svg>
-                <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-                    <span class="btn-sign-in"><a href="#"></a></span>
-                    <a href="#">O inicia sesión si ya estás registrado</a>
-                </div>
-            </div>
-        </div>
-    </div><!-- End Access -->
-    @endguest
-
     <!-- ======= Articles section ======= -->
     <section id="articles" class="mt-5 py-5">
         <div class="container py-4">
@@ -152,6 +129,29 @@
             </article>
         </div>
     </section><!-- End Articles -->
+
+    @guest
+    <!-- ======= Access section ======= -->
+    <div id="access" class="cutout">
+        <div class="container access-container">
+            <div class="section-title">
+                <div class="d-lg-inline d-none">
+                    <span>Obten acceso ilimitado</span>
+                    <h2>Obten acceso ilimitado</h2>
+                </div>
+            </div>
+            <div class="d-flex gap-5 justify-content-center align-items-center">
+                <svg class="icon" style="min-height: 300px; min-width: 260px;">
+                    <path stroke="white" fill="none" class="is-active" d="M 220.848 35.976 c -9.084 -9.048 -24.924 -9.012 -33.936 0.06 l -21.408 21.492 L 139.032 84 H 84 a 11.976 11.976 90 0 0 -11.268 7.896 l -48 132 c -1.596 4.38 -0.504 9.288 2.784 12.588 l 24 24 a 11.964 11.964 90 0 0 12.588 2.784 l 132 -48 A 11.976 11.976 90 0 0 204 204 v -55.032 l 26.484 -26.484 v -0.012 h 0.012 L 252 100.908 c 4.536 -4.536 7.032 -10.572 7.02 -16.98 c 0 -6.42 -2.508 -12.456 -7.056 -16.98 l -31.116 -30.972 z m -37.332 99.54 A 11.952 11.952 90 0 0 180 144 v 51.6 l -110.988 40.356 l 56.052 -56.052 c 0.312 0.012 0.624 0.096 0.936 0.096 A 18 18 90 1 0 108 162 c 0 0.312 0.084 0.624 0.096 0.936 l -56.052 56.052 L 92.4 108 H 144 c 3.192 0 6.24 -1.26 8.484 -3.516 L 174 82.968 L 205.032 114 l -21.516 21.516 z m 38.472 -38.496 l -31.032 -31.032 l 12.948 -13.008 l 31.116 30.972 l -13.032 13.068 z" />
+                </svg>
+                <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+                    <span class="btn-sign-in"><a href="#"></a></span>
+                    <a href="#">O inicia sesión si ya estás registrado</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Access -->
+    @endguest
 
     <!-- ======= Scores section ======= -->
     <section id="scores" class="py-5">
