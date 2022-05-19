@@ -6,6 +6,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/vendor/*
+composer.lock
 /resources/views/vistaPruebaControladores/*
 .env
 .env.backup
