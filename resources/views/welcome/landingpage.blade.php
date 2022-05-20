@@ -22,7 +22,31 @@
         </ul>
         
         @guest
-            <a href="#access" class="btn small btn-primary access-btn">Acceso</a>
+            <a href="#access" class="btn small btn-primary top-right-btn">Acceso</a>
+        @else
+        <div class="profile">
+            <a class="nav-link dropdown-toggle arrow-none p-0" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="bg-accent text-secondary p-2 text-center d-lg-none rounded">Opciones</span>
+                <img src="{{ URL::asset('img/default.png'); }}" class="d-none d-lg-inline rounded" width="40" height="38" alt="Default user picture">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-lg-start animate slideIn" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href=" {{ route('profile') }} ">Perfil</a></li>
+                @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
+                    <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
+                @endif
+                <div class="dropdown-divider"></div>
+                <li>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Cerrar sesión') }}
+                    </a>
+    
+                    <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <a href="{{ route('library') }}" class="btn small btn-primary top-right-btn">biblioteca</a>
         @endguest
     </nav>
 
@@ -145,8 +169,8 @@
                     <path stroke="white" fill="none" class="is-active" d="M 220.848 35.976 c -9.084 -9.048 -24.924 -9.012 -33.936 0.06 l -21.408 21.492 L 139.032 84 H 84 a 11.976 11.976 90 0 0 -11.268 7.896 l -48 132 c -1.596 4.38 -0.504 9.288 2.784 12.588 l 24 24 a 11.964 11.964 90 0 0 12.588 2.784 l 132 -48 A 11.976 11.976 90 0 0 204 204 v -55.032 l 26.484 -26.484 v -0.012 h 0.012 L 252 100.908 c 4.536 -4.536 7.032 -10.572 7.02 -16.98 c 0 -6.42 -2.508 -12.456 -7.056 -16.98 l -31.116 -30.972 z m -37.332 99.54 A 11.952 11.952 90 0 0 180 144 v 51.6 l -110.988 40.356 l 56.052 -56.052 c 0.312 0.012 0.624 0.096 0.936 0.096 A 18 18 90 1 0 108 162 c 0 0.312 0.084 0.624 0.096 0.936 l -56.052 56.052 L 92.4 108 H 144 c 3.192 0 6.24 -1.26 8.484 -3.516 L 174 82.968 L 205.032 114 l -21.516 21.516 z m 38.472 -38.496 l -31.032 -31.032 l 12.948 -13.008 l 31.116 30.972 l -13.032 13.068 z" />
                 </svg>
                 <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-                    <span class="btn-sign-in"><a href="#"></a></span>
-                    <a href="#">O inicia sesión si ya estás registrado</a>
+                    <span class="btn-sign-in"><a href="{{ route('register') }}"></a></span>
+                    <a href="{{ route('login') }}">O inicia sesión si ya estás registrado</a>
                 </div>
             </div>
         </div>
@@ -324,7 +348,6 @@
     
     <script>
         let selectHeader = document.querySelector('#navbar')
-        
         
         if(selectHeader) {
             const headerScrolled = () => {

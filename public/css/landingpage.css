@@ -97,24 +97,22 @@ html {
   opacity: 1;
 }
 
-.navbar a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 15px;
-  color: #fff;
-  white-space: nowrap;
-  transition: 0.3s;
-  font-size: 14px;
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 1px;
+.profile {
+  position: absolute;
+  left: 2%;
 }
 
-.access-btn {
+.top-right-btn {
   position: absolute;
   right: 2%;
+}
+
+@media screen and (max-width: 769px) {
+  .profile {
+    left: auto;
+    top: 110%;
+    right: 2%;
+  }
 }
 
 /*

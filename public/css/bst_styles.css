@@ -80,6 +80,21 @@
     background-color: var(--primary-color) !important;
 }
 
+.navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
 .badge {
     width: 75px;
 }
@@ -108,6 +123,18 @@
 
 .form-dark:focus {
     background-color: var(--terciary-color);
+}
+
+.form-control-plaintext {
+    color: var(--terciary-color) !important;
+}
+
+.form-control-plaintext::placeholder {
+    color: var(--accent-color) !important;
+}
+
+.form-control-plaintext:focus {
+    outline: none;
 }
 
 .small-card-scrollable {
