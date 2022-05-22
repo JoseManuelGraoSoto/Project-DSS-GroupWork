@@ -20,9 +20,9 @@
             <li class="nav-item"><a class="nav-link articles" href="#articles">Articulos</a></li>
             <li class="nav-item"><a class="nav-link scores" href="#scores">Ranking</a></li>
         </ul>
-        
+
         @guest
-            <a href="#access" class="btn small btn-primary top-right-btn">Acceso</a>
+        <a href="#access" class="btn small btn-primary top-right-btn">Acceso</a>
         @else
         <div class="profile">
             <a class="nav-link dropdown-toggle arrow-none p-0" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,14 +32,14 @@
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-lg-start animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href=" {{ route('profile') }} ">Perfil</a></li>
                 @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
-                    <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
+                <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
                 @endif
                 <div class="dropdown-divider"></div>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Cerrar sesión') }}
                     </a>
-    
+
                     <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
                         @csrf
                     </form>
@@ -64,7 +64,7 @@
                     </svg>
                 </div>
             </div>
-            
+
 
             <a href="#articles" class="arrow">
                 <span></span>
@@ -82,7 +82,28 @@
                 <h2>Articulos</h2>
                 <p>Una serie de articulos mensuales disponibles al público general.</p>
             </div>
-
+            @foreach($articles as $article)
+            <article class="postcard dark blue">
+                <a class="postcard__img_link" href="#">
+                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
+                </a>
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue"><a href="#">{{$article->title}}</a></h1>
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>{{$article->created_at}}
+                        </time>
+                    </div>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">{{$article->content}}</div>
+                    <ul class="list-inline small">
+                        @for($i = 0; $i < $article->value/2; $i++) <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                            @endfor
+                    </ul>
+                </div>
+            </article>
+            @endforeach
+            <!--
             <article class="postcard dark blue">
                 <a class="postcard__img_link" href="#">
                     <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
@@ -150,7 +171,7 @@
                         <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
                     </ul>
                 </div>
-            </article>
+            </article>-->
         </div>
     </section><!-- End Articles -->
 
@@ -264,7 +285,7 @@
                         </li>
                     </ul>
                 </div>
-    
+
                 <div class="container moderators-scores">
                     <h4 class="text-center fw-bold text-terciary mb-3">MODERADORES</h4>
                     <ul class="list-group organized-list">
@@ -342,14 +363,14 @@
                         </li>
                     </ul>
                 </div>
-            </div>            
+            </div>
         </div>
     </section><!-- End Scores -->
-    
+
     <script>
         let selectHeader = document.querySelector('#navbar')
-        
-        if(selectHeader) {
+
+        if (selectHeader) {
             const headerScrolled = () => {
                 if (window.scrollY > 100) {
                     selectHeader.classList.add('navbar-scrolled')
@@ -371,7 +392,8 @@
                 sections.forEach((section) => {
                     const sectionTop = section.offsetTop;
                     if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute("id"); }
+                        current = section.getAttribute("id");
+                    }
                 });
 
                 navLi.forEach((li) => {
