@@ -10,7 +10,7 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="border border-2 border-primary rounded-circle" width="150">
                         <div class="mt-3">
-                            <h4>Adrián Roselló</h4>
+                            <h4>{{ ($user ?? '') ? $user ?? ''->name : Auth::user()->name}}</h4>
                             @switch(Auth::user()->type)
                             @case('author')
                             <p class="text-accent mb-1">Autor</p>
@@ -92,14 +92,15 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form>
+                    <form action=" {{ route('updateProfile') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <div class="row d-flex align-items-center">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Nombre</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control-plaintext" id="name" placeholder="{{ Auth::user()->name }}" readonly>
+                                    <input type="text" class="form-control-plaintext" id="name" name="name" placeholder="{{ ($user ?? '') ? $user ?? ''->name : Auth::user()->name }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -108,7 +109,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control-plaintext" id="email" placeholder="{{ Auth::user()->email }}" readonly>
+                                    <input type="email" class="form-control-plaintext" id="email" name="email" placeholder="{{ ($user ?? '') ? $user ?? ''->email : Auth::user()->email }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -117,7 +118,7 @@
                                     <h6 class="mb-0">Teléfono</h6>
                                 </div>
                                 <div class="col-sm-9 text-accent">
-                                    <input type="tel" class="form-control-plaintext" id="telephone" placeholder="{{ Auth::user()->telephone }}" readonly>
+                                    <input type="tel" class="form-control-plaintext" id="telephone" name="telephone" placeholder="{{ ($user ?? '') ? $user ?? ''->telephone : Auth::user()->telephone }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -127,7 +128,7 @@
                                         <h6 class="mb-0">Contraseña</h6>
                                     </div>
                                     <div class="col-sm-9 text-accent">
-                                        <input type="password" class="form-control-plaintext" id="password" readonly>
+                                        <input type="password" class="form-control-plaintext" id="password" name="password" readonly>
                                     </div>
                                 </div>
                                 <hr>
@@ -141,9 +142,12 @@
                                 </div>
                                 <hr>
                             </div>
+                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary" type="button" id="edit-btn" data-bs-toggle="collapse" data-bs-target="#password-fields" aria-expanded="false" aria-controls="password-fields">Editar</button>
+                                    <button hidden class="btn btn-primary" type="submit" id="actualizar-btn" data-bs-toggle="collapse" data-bs-target="#password-fields" aria-expanded="false" aria-controls="password-fields">Actualizar</button>
                                 </div>
                             </div>
                         </div>
@@ -281,6 +285,7 @@
 
 <script>
     let edit = document.querySelector('#edit-btn')
+    let actualizar = document.querySelector('#actualizar-btn')
 
     edit.onclick = function() {
         let form_elems = document.querySelectorAll('form input')
@@ -290,12 +295,8 @@
             instance.classList.toggle('form-control')
             instance.toggleAttribute("readonly")
         });
-
-        if (edit.innerHTML == "Editar") {
-            edit.innerHTML = "Actualizar"
-        } else {
-            edit.innerHTML = "Editar"
-        }
+        edit.toggleAttribute('hidden')
+        actualizar.toggleAttribute('hidden')
     }
 </script>
 
