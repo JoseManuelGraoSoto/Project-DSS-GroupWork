@@ -10,6 +10,7 @@ use App\Models\Article;
 class ArticlesTableSeeder extends Seeder
 {
 
+    const FILE_SRC = '/public/pdfs/';
     /**
      * 
      * Run the database seeds.
@@ -34,6 +35,8 @@ class ArticlesTableSeeder extends Seeder
             $new_article->valoration = $faker->randomFloat(1, 0, 10);
             $new_article->content = $faker->paragraph;
             $new_article->acepted = $faker->boolean;
+            $name = $faker->bankAccountNumber;
+            $new_article->pdf_path = self::FILE_SRC. $name . '.pdf';
             $new_article->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_article->user()->associate($faker->numberBetween(501, 700));
             $new_article->save();

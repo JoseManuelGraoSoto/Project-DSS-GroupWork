@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\ValorationController;
@@ -19,7 +20,7 @@ use App\Http\Controllers\ValorationController;
 */
 
 // Prueba
-Route::get('/', function () { return view('common.profile'); });
+Route::get('/', function () { return view('layouts.prueba'); });
 
 Route::get('/loggin', function () {
     return view('access.login');
@@ -125,3 +126,5 @@ Route::get('/category', function () {
 Route::get('/subscrip', function () {
     return view('cliente.susbscrip');
 })->name('suscripcion');
+
+Route::resource('/prueba', ImageController::class); 

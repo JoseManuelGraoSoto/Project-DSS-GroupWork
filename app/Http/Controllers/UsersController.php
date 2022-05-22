@@ -9,6 +9,8 @@ use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
+    const LOCATION = "storage/app/public/users/";
+    const GUARDAR = "public/users/";
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
     public function showAll($users)
     {
@@ -46,6 +48,15 @@ class UsersController extends Controller
         }
 
         $inputs = $validator->validated();
+        //$request->file('selec-img')->storeAs(public_path('images'), $inputs['selec-img']);
+        $img = $inputs['selec-img'];
+        if ($img == null) {
+            $nombreImagen = "default.png";
+        } else {
+            $nombreImagen = $request->file('selec-img')->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
+        $nombreImagen = self::LOCATION . $nombreImagen;
         $new_user = new User;
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];

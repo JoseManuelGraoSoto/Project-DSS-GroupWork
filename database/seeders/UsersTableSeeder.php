@@ -9,13 +9,13 @@ use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
+    const FILE_SRC = '/public/images/';
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $users = User::all();
         $faker = Faker::create('es_ES');
         $faker->seed(1235);
@@ -30,6 +30,8 @@ class UsersTableSeeder extends Seeder
         $new_user->password = 'admin';
         $new_user->telephone = $faker->tollFreeNumber;
         $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+        $new_user->numberDaysSuscripted = 365;
+        $new_user->imagen_path = self::FILE_SRC . 'prueba.pdf';
         $new_user->save();
 
         foreach (range(2, 500) as $index) {
@@ -40,6 +42,9 @@ class UsersTableSeeder extends Seeder
             $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = $faker->bankAccountNumber;
+            $new_user->imagen_path = self::FILE_SRC. $name . '.jpg';
             $new_user->save();
         }
 
@@ -51,6 +56,9 @@ class UsersTableSeeder extends Seeder
             $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = $faker->bankAccountNumber;
+            $new_user->imagen_path = self::FILE_SRC. $name . '.jpg';
             $new_user->save();
         }
 
@@ -61,6 +69,9 @@ class UsersTableSeeder extends Seeder
             $new_user->email = $faker->unique()->freeEmail;
             $new_user->password = $faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}');
             $new_user->telephone = $faker->tollFreeNumber;
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = $faker->bankAccountNumber;
+            $new_user->imagen_path = self::FILE_SRC. $name . '.jpg';
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
             $new_user->save();
         }

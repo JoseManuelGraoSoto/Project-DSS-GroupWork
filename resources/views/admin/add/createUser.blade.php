@@ -9,7 +9,7 @@
 
 @section('select-img')
 <div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center">
-    <img class="user-image" src="{{ URL::asset('img/default.png'); }}" alt="Imagen del usuario">
+    <img class="user-image" src="getVideo()" id="foto_add" alt="Imagen del usuario">
     <div class="upload-img">
         <input type="file" id="selec-img" />
         <label for="selec-img">Selecciona imagen</label>
@@ -51,3 +51,16 @@
     </label>
 </div>
 @endsection
+<script>
+
+function getVideo() {
+
+    var imagen = document.getElementById("foto_add").src;
+    ver anyadir = document.getElementById("selec-img").src;
+    if(anyadir == "") {
+        imagen.src = "public/img/default.png";
+    } else {
+        imagen.src = anyadir; 
+    }
+}
+</script>

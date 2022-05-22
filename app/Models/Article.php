@@ -23,4 +23,9 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Models\Valoration');
     }
+        public function image()
+    {
+        return $this->belongsTo('App\Models\Image');
+    }
+
 }

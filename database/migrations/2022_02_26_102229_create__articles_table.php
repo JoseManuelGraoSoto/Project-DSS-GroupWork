@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('content',16000);
             $table->boolean('acepted');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->binary('pdf_path');
             $table->timestamps();
         });
     }
