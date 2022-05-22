@@ -83,34 +83,36 @@
                 <p>Una serie de articulos mensuales disponibles al público general.</p>
             </div>
             @foreach($articles as $article)
-            {{$article}}
             <article class="postcard dark blue">
                 <a class="postcard__img_link" href="#">
                     <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="{{$article->title}}" />
                 </a>
                 <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="#">{{$article->title}}</a></h1>
+                    <h1 class="postcard__title blue ps-1"><a href="#">{{$article->title}}</a></h1>
                     <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>{{$article->created_at}}
+                        <time datetime="{{ date('d/m/Y', strtotime($article->created_at)) }}" class="d-flex align-items-center gap-2">
+                            <i class='bx bx-calendar-alt fs-5' ></i>
+                            {{ date('d/m/Y', strtotime($article->created_at)) }}
                         </time>
                     </div>
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{$article->content}}</div>
-                    <ul class="list-inline small">
-                        @for($i = 0; $i < $article->value; $i++) 
-                        {{$article->value}}
-                            <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        @endfor
+                    <div class="d-flex justify-content-between">
+                        <ul class="list-inline small">
+                            @for($i = 0; $i < $article->value; $i++)
+                                <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                            @endfor
 
-                        @if(($article->value*10)%10 != 0)
-                            <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
-                        @endif
+                            @if(($article->value*10)%10 != 0)
+                                <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
+                            @endif
 
-                        @for($i = 0; $i < (10-$article->value); $i++) 
-                            <li class="list-inline-item m-0"><i class='bx bx-star' ></i></li>
-                        @endfor
-                    </ul>
+                            @for($i = 0; $i < (10-$article->value); $i++) 
+                                <li class="list-inline-item m-0"><i class='bx bx-star' ></i></li>
+                            @endfor
+                        </ul>
+                        <span>{{ $article->name }}</span>
+                    </div>
                 </div>
             </article>
             @endforeach
