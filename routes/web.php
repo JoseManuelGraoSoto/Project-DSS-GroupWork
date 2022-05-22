@@ -5,6 +5,7 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ValorationController;
 
 /*
@@ -21,7 +22,7 @@ use App\Http\Controllers\ValorationController;
 Auth::routes();
 
 // Home Controller
-Route::get('/', [ArticlesController::class, 'showAccessibleArticles'])->name('home');
+Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
 Route::get('/article/{id}', function () {

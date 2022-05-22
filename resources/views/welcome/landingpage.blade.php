@@ -83,9 +83,10 @@
                 <p>Una serie de articulos mensuales disponibles al público general.</p>
             </div>
             @foreach($articles as $article)
+            {{$article}}
             <article class="postcard dark blue">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
+                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="{{$article->title}}" />
                 </a>
                 <div class="postcard__text">
                     <h1 class="postcard__title blue"><a href="#">{{$article->title}}</a></h1>
@@ -97,81 +98,22 @@
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{$article->content}}</div>
                     <ul class="list-inline small">
-                        @for($i = 0; $i < $article->value/2; $i++) <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                            @endfor
+                        @for($i = 0; $i < $article->value; $i++) 
+                        {{$article->value}}
+                            <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                        @endfor
+
+                        @if(($article->value*10)%10 != 0)
+                            <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
+                        @endif
+
+                        @for($i = 0; $i < (10-$article->value); $i++) 
+                            <li class="list-inline-item m-0"><i class='bx bx-star' ></i></li>
+                        @endfor
                     </ul>
                 </div>
             </article>
             @endforeach
-            <!--
-            <article class="postcard dark blue">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
-                </a>
-                <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
-                    </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-                    <ul class="list-inline small">
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="postcard dark blue">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
-                </a>
-                <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
-                    </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-                    <ul class="list-inline small">
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="postcard dark blue">
-                <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="Sample Paper" />
-                </a>
-                <div class="postcard__text">
-                    <h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-                        </time>
-                    </div>
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-                    <ul class="list-inline small">
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                    </ul>
-                </div>
-            </article>-->
         </div>
     </section><!-- End Articles -->
 
@@ -211,156 +153,24 @@
                 <div class="container authors-scores">
                     <h4 class="text-center fw-bold text-terciary mb-3">AUTORES</h4>
                     <ul class="list-group organized-list">
+                        @foreach($rewardsAuthors as $reward)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
+                            <span class="organized-item">{{ $reward->name }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ $reward->points }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
                 <div class="container moderators-scores">
                     <h4 class="text-center fw-bold text-terciary mb-3">MODERADORES</h4>
                     <ul class="list-group organized-list">
+                        @foreach($rewardsModerators as $reward)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
+                            <span class="organized-item">{{ $reward->name }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ $reward->points }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Mariano Francisco Ramón</span>
-                            <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Marisa Asturiano Soler</span>
-                            <span class="badge bg-primary rounded-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="organized-item">Andrés Perez</span>
-                            <span class="badge bg-primary rounded-pill">1</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
