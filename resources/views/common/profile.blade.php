@@ -40,46 +40,13 @@
                 </div>
                 <div class="card-body small-card-scrollable">
                     <ul class="list-group list-group-flush">
+                        @foreach($articles as $article)
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <a href="#" class="text-decoration-none">
-                                <h6>Artículo 1</h6>
+                                <h6>{{$article->title}}</h6>
                             </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 2</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 3</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 4</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 5</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 6</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 7</h6>
-                            </a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
-                                <h6>Artículo 8</h6>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -192,7 +159,7 @@
                             <h6>Estadísticas Autor</h6>
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Artículos escritos</small>
-                                <small>23</small>
+                                <small>{{ ($numArticle !== null) ? $numArticle : 0}}</small>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
@@ -206,19 +173,10 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
+                                <small>Recompensas (?)</small>
                                 <small>3</small>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>40</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>60</small>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,7 +189,7 @@
                             <h6>Estadísticas Autor</h6>
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Artículos escritos</small>
-                                <small>23</small>
+                                <small>{{ ($numArticle !== null) ? $numArticle : 0}}</small>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
@@ -245,44 +203,33 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
+                                <small>Recompensas (?)</small>
                                 <small>3</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>40</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>60</small>
                             </div>
                         </div>
                     </div>
+                    @break
+                    @endswitch
                 </div>
-                @break
-                @endswitch
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    let edit = document.querySelector('#edit-btn')
-    let actualizar = document.querySelector('#actualizar-btn')
+    <script>
+        let edit = document.querySelector('#edit-btn')
+        let actualizar = document.querySelector('#actualizar-btn')
 
-    edit.onclick = function() {
-        let form_elems = document.querySelectorAll('form input')
+        edit.onclick = function() {
+            let form_elems = document.querySelectorAll('form input')
 
-        Array.from(form_elems).forEach(instance => {
-            instance.classList.toggle('form-control-plaintext')
-            instance.classList.toggle('form-control')
-            instance.toggleAttribute("readonly")
-        });
-        edit.toggleAttribute('hidden')
-        actualizar.toggleAttribute('hidden')
-    }
-</script>
+            Array.from(form_elems).forEach(instance => {
+                instance.classList.toggle('form-control-plaintext')
+                instance.classList.toggle('form-control')
+                instance.toggleAttribute("readonly")
+            });
+            edit.toggleAttribute('hidden')
+            actualizar.toggleAttribute('hidden')
+        }
+    </script>
 
-@endsection
+    @endsection

@@ -25,7 +25,9 @@ class ProfileController extends Controller
         $numValorations = $valorations->count();
         $articleAccess = Article_user::where('user_id', $user->id)->get();
         $numArticleAccess = $articleAccess->count();
-        return view('common.profile', ['user' => $user, 'numValorations' => $numValorations, 'numArticleAccess' => $numArticleAccess]);
+        $articles = Article::where('user_id', $user->id)->get();
+        $numArticle = $articles->count();
+        return view('common.profile', ['user' => $user, 'articles' => $articles, 'numValorations' => $numValorations, 'numArticleAccess' => $numArticleAccess, 'numArticle' => $numArticle]);
     }
 
     public function updateProfile(Request $request)
