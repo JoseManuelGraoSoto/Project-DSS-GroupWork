@@ -5,6 +5,7 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ValorationController;
 
 /*
@@ -21,9 +22,7 @@ use App\Http\Controllers\ValorationController;
 Auth::routes();
 
 // Home Controller
-Route::get('/', function () {
-    return view('welcome.landingpage');
-})->name('home');
+Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
 Route::get('/article/{id}', function () {
@@ -39,6 +38,7 @@ Route::middleware('auth')->group(function () {
     // Ruta perfil
     Route::get('/profile', [UsersController::class, 'updateProfileFormulary'])->name('profile');
     Route::post('/profileUpdate', [UsersController::class, 'updateProfile'])->name('updateProfile');
+
 
     /**************** RUTAS ADMIN ***************/
 

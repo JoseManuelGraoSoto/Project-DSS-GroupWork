@@ -490,6 +490,7 @@ text.is-active {
 }
 
 .organized-list .organized-item::before {
+  width: 50px;
   background-color: var(--primary-color);
   border-radius: 3px 8px;
   padding: 3px 8px;

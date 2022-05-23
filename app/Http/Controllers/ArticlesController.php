@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class ArticlesController extends Controller
 {
@@ -14,6 +15,12 @@ class ArticlesController extends Controller
     {
         $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
+    }
+
+    public function showAccessibleArticles()
+    {
+        $articles = Article::select('articles.title', 'articles.content', 'articles.id', 'articles.created_at', DB::raw('AVG(valorations.value) as value'), 'users.name')->leftjoin('valorations', 'valorations.article_id', '=', 'articles.id')->leftjoin('users', 'users.id', '=', 'articles.user_id')->where('guestAccessible', 1)->where('acepted', 1)->groupby('articles.id')->get();
+        return view('welcome.landingpage', ['articles' => $articles]);
     }
 
     // Devuelve el formulario de creación de Article
