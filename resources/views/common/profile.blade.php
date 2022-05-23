@@ -10,7 +10,7 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="border border-2 border-primary rounded-circle" width="150">
                         <div class="mt-3">
-                            <h4>{{ ($user ?? '') ? $user ?? ''->name : Auth::user()->name}}</h4>
+                            <h4>{{ $user ? $user->name : Auth::user()->name}}</h4>
                             @switch(Auth::user()->type)
                             @case('author')
                             <p class="text-accent mb-1">Autor</p>
@@ -100,7 +100,7 @@
                                     <h6 class="mb-0">Nombre</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control-plaintext" id="name" name="name" placeholder="{{ ($user ?? '') ? $user ?? ''->name : Auth::user()->name }}" readonly>
+                                    <input type="text" class="form-control-plaintext" id="name" name="name" placeholder="{{ $user ? $user->name : Auth::user()->name }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -109,7 +109,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control-plaintext" id="email" name="email" placeholder="{{ ($user ?? '') ? $user ?? ''->email : Auth::user()->email }}" readonly>
+                                    <input type="email" class="form-control-plaintext" id="email" name="email" placeholder="{{ $user ? $user->email : Auth::user()->email }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -118,7 +118,7 @@
                                     <h6 class="mb-0">Teléfono</h6>
                                 </div>
                                 <div class="col-sm-9 text-accent">
-                                    <input type="tel" class="form-control-plaintext" id="telephone" name="telephone" placeholder="{{ ($user ?? '') ? $user ?? ''->telephone : Auth::user()->telephone }}" readonly>
+                                    <input type="tel" class="form-control-plaintext" id="telephone" name="telephone" placeholder="{{ $user ? $user->telephone : Auth::user()->telephone }}" readonly>
                                 </div>
                             </div>
                             <hr>
@@ -142,7 +142,6 @@
                                 </div>
                                 <hr>
                             </div>
-                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
                             <div class="row">
                                 <div class="col-sm-12">
@@ -166,33 +165,19 @@
                             <h6 class="mb-3">Estadísticas Generales</h6>
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Valoraciones</small>
-                                <small>23</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Valoraciones</small>
-                                <small>23</small>
+                                <small>{{ ($numValorations !== null) ? $numValorations : 0}}</small>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Articulos visitados</small>
-                                <small>12</small>
+                                <small>{{ ($numArticleAccess !== null) ? $numArticleAccess : 0}}</small>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>3</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
+                                <small>Meses suscrito</small>
                                 <small>40</small>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Otra estadística</small>
-                                <small>60</small>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\ValorationController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,8 @@ Route::middleware('auth')->group(function () {
     })->name('library');
 
     // Ruta perfil
-    Route::get('/profile', [UsersController::class, 'updateProfileFormulary'])->name('profile');
-    Route::post('/profileUpdate', [UsersController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
+    Route::post('/profileUpdate', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 
     /**************** RUTAS ADMIN ***************/
 
