@@ -7,6 +7,8 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ValorationController;
+use App\Http\Controllers\LibraryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +33,10 @@ Route::get('/article/{id}', function () {
 
 Route::middleware('auth')->group(function () {
     // Ruta biblioteca
-    Route::get('/library', function () {
-        return view('common.library');
-    })->name('library');
+    Route::get(
+        '/library',
+        [LibraryController::class, 'search']
+    )->name('library');
 
     // Ruta perfil
     Route::get('/profile', function () {
