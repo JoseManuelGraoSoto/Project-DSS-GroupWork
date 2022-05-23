@@ -9,7 +9,7 @@ use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
-    const FILE_SRC = 'storage/app/public/users/';
+    const FILE_SRC = '';
     /**
      * Run the database seeds.
      *

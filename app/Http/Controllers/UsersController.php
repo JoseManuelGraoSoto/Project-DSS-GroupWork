@@ -58,7 +58,7 @@ class UsersController extends Controller
             $nombreImagen = $request->file('selec-img')->getClientOriginalName();
             \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
         }
-        $nombreImagen = self::LOCATION . $nombreImagen;
+        //$nombreImagen = self::LOCATION . $nombreImagen;
         $new_user = new User;
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
