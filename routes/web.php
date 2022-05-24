@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\ValorationController;
@@ -126,5 +125,3 @@ Route::get('/category', function () {
 Route::get('/subscrip', function () {
     return view('cliente.susbscrip');
 })->name('suscripcion');
-
-Route::resource('/prueba', ImageController::class); 
