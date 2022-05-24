@@ -36,10 +36,10 @@ class ProfileController extends Controller
         $validator = null;
         if (empty($request->input('email')) && empty($request->input('telephone')) && empty($request->input('password'))) {
             if (empty($request->input('name'))) {
-                $user = User::find($request->input('user_id'));
+                $user = Auth::user();
                 return redirect()->route('profile', ['user' => $user]);
             } else {
-                $user = User::find($request->input('user_id'));
+                $user = User::find(Auth::user()->id);
                 $user->name = $request->input('name');
                 $user->save();
                 return redirect()->route('profile', ['user' => $user]);
@@ -106,7 +106,7 @@ class ProfileController extends Controller
         }
 
         $inputs = $validator->validated();
-        $new_user = User::find($request->input('user_id'));
+        $new_user = User::find(Auth::user()->id);
         if (!empty($request->input('name'))) {
             $new_user->name = $request->input('name');
         }
@@ -120,7 +120,7 @@ class ProfileController extends Controller
             $new_user->telephone = $inputs['telephone'];
         }
         $new_user->save();
-        $user = User::find($request->input('user_id'));
+        $user = Auth::user();
         return redirect()->route('profile', ['user' => $user]);
     }
 }
