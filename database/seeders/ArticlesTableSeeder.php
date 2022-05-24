@@ -26,7 +26,7 @@ class ArticlesTableSeeder extends Seeder
         foreach ($articles as $article) {
             $article->delete();
         }
-
+        $contador = 0;
         foreach (range(1, 500) as $index) {
             $new_article = new Article;
             $new_article->title = $faker->text(15);
@@ -34,6 +34,12 @@ class ArticlesTableSeeder extends Seeder
             $new_article->valoration = $faker->randomFloat(1, 0, 10);
             $new_article->content = $faker->paragraph;
             $new_article->acepted = $faker->boolean;
+            if ($contador < 6) {
+                $new_article->guestAccessible = 1;
+                $contador++;
+            } else {
+                $new_article->guestAccessible = 0;
+            }
             $name = $faker->bankAccountNumber;
             $new_article->pdf_path = $name . '.pdf';
             $new_article->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);

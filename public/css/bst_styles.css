@@ -45,6 +45,15 @@
     border-color: var(--accent-color) !important;
 }
 
+.inactive {
+    background-color: var(--accent-color-weak) !important; 
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--terciary-color) !important;
+}
+
 .btn-outline-accent {
     color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
@@ -55,6 +64,39 @@
     color: var(--secondary-color) !important;
     border-color: var(--accent-color) !important;
     background-color: var(--accent-color) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color) !important;
+    border-color: var(--terciary-color) !important;
+}
+
+.nav-link {
+    color: var(--accent-color) !important;
+}
+
+.nav-link.active {
+    color: var(--secondary-color) !important;
+    background-color: var(--primary-color) !important;
+}
+
+.navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.badge {
+    width: 75px;
 }
 
 .justify-content-right {
@@ -81,6 +123,18 @@
 
 .form-dark:focus {
     background-color: var(--terciary-color);
+}
+
+.form-control-plaintext {
+    color: var(--terciary-color) !important;
+}
+
+.form-control-plaintext::placeholder {
+    color: var(--accent-color) !important;
+}
+
+.form-control-plaintext:focus {
+    outline: none;
 }
 
 .small-card-scrollable {

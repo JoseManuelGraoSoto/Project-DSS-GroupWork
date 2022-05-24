@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -62,7 +65,7 @@ class UsersController extends Controller
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
         $new_user->telephone = $inputs['telephone'];
         $new_user->imagen_path = $nombreImagen;
         $new_user->numberDaysSuscripted = $inputs['number_days'];
@@ -76,7 +79,7 @@ class UsersController extends Controller
     //Devuelve el formulario de actualización de user
     public function updateUserFormulary(Request $request)
     {
-        $user = User::find($request->input('user_id'));
+        $user = Auth::user();
         return view('admin.add.updateUser', ['user' => $user]);
     }
 
@@ -115,7 +118,7 @@ class UsersController extends Controller
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
         $new_user->imagen_path = $nombreImagen;
         $new_user->numberDaysSuscripted = $inputs['number_days'];
         $new_user->telephone = $inputs['telephone'];
@@ -256,7 +259,6 @@ class UsersController extends Controller
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
                     $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id')->paginate(7)->withQueryString();
-
                 }
             }
         }
@@ -286,7 +288,7 @@ class UsersController extends Controller
         $password = $request->input('password');
         $user = User::where('email', $email)->firstOrFail();
         if ($user) {
-            if (strcmp($password, $user->password) === 0) {
+            if (Hash::check($password, $user->password)) {
                 if (strcmp($user->type, 'administrator') === 0) {
                     return redirect()->action([UsersController::class, 'logged']);
                 } else {
