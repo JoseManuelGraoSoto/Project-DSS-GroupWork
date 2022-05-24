@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Config;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use PayPal\Api\Transaction;
-use Paypal\Api\Payer;
+use PayPal\Api\Payer;
 use PayPal\Api\Amount;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use Paypal\Exception\PayPalConnectionException;
-use phpDocumentor\Reflection\Types\Null_;
 
 class PaymentController extends Controller
 {
@@ -31,15 +30,15 @@ class PaymentController extends Controller
         );
     }
 
-    public function payWithPayPal(){
+    public function payWithPayPal(Request $request){
         // After Step 2
-        $payer = new \PayPal\Api\Payer();
+        $payer = new Payer();
         $payer->setPaymentMethod('paypal');
-
+        
 
         //Solo hay que cambiar esto, dependiendo el boton que se seleccione, el precio de la suscrpción cambiará
         $amount = new Amount();
-        $amount->setTotal('20000');
+        $amount->setTotal($request->input('precio'));
         $amount->setCurrency('EUR');
 
         $transaction = new Transaction();

@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\ValorationController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,5 +124,9 @@ Route::get('/category', function () {
 
 // Rutas suscripcion
 Route::get('/subscrip', function () {
-    return view('cliente.susbscrip');
+    return view('client.subscrip');
 })->name('suscripcion');
+
+//Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
+Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
+Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('status');
