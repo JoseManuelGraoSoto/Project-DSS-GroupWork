@@ -41,8 +41,6 @@
 
 @foreach($users as $user)
 <div class="info-db user">
-    <!-- <img src="getVideo()" id="foto" class="user-img" alt="Default user picture"> -->
-    <!-- <img src="{{ $user->imagen_path }}" id="foto" class="user-img" alt="Default user picture"> -->
     <img src="{{ URL::asset('storage/users/'. $user->imagen_path); }}" id="foto" class="user-img" alt="Default user picture">
     <p>{{$user->imagen_path}}</p>
     <span id="id" class="display-data">{{$user->id}}</span>
