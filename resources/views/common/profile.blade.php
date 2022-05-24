@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="border border-2 border-primary rounded-circle" width="150">
+                        <img src="{{ URL::asset('storage/users/'. $user->imagen_path); }}" alt="Admin" class="border border-2 border-primary rounded-circle" width="150">
                         <div class="mt-3">
                             <h4>Adrián Roselló</h4>
                             <p class="text-accent mb-1">Autor</p>

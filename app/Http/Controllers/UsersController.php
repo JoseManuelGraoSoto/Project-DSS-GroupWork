@@ -9,6 +9,8 @@ use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
+    const LOCATION = "storage/app/public/users/";
+    const GUARDAR = "public/users/";
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
     public function showAll($users)
     {
@@ -36,6 +38,8 @@ class UsersController extends Controller
                 ->numbers()
                 ->symbols()
                 ->uncompromised()],
+            'selec-img' => 'mimes:jpg,png,jpeg,webp|max:5048',
+            'number_days' => 'required|max:365|min:0',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -46,12 +50,22 @@ class UsersController extends Controller
         }
 
         $inputs = $validator->validated();
+        //$request->file('selec-img')->storeAs(public_path('images'), $inputs['selec-img']);
+        $img = $inputs['selec-img'];
+        if ($img == null) {
+            $nombreImagen = "default.png";
+        } else {
+            $nombreImagen = $request->file('selec-img')->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
         $new_user = new User;
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
         $new_user->password = $inputs['password'];
         $new_user->telephone = $inputs['telephone'];
+        $new_user->imagen_path = $nombreImagen;
+        $new_user->numberDaysSuscripted = $inputs['number_days'];
         $new_user->save();
         //TODO: cambiar a redirect
         return redirect()->action([UsersController::class, 'search'])->withInput();
@@ -79,6 +93,8 @@ class UsersController extends Controller
                 ->numbers()
                 ->symbols()
                 ->uncompromised()],
+            'selec-img' => 'required|mimes:jpg,png,jpeg,webp|max:5048',
+            'number_days' => 'required|max:365|min:0',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -87,13 +103,21 @@ class UsersController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        $img = $inputs['selec-img'];
+        if ($img == null) {
+            $nombreImagen = "default.png";
+        } else {
+            $nombreImagen = $request->file('selec-img')->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
         $inputs = $validator->validated();
         $new_user = User::find($request->input('user_id'));
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
         $new_user->password = $inputs['password'];
+        $new_user->imagen_path = $nombreImagen;
+        $new_user->numberDaysSuscripted = $inputs['number_days'];
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         return redirect()->action([UsersController::class, 'search'])->withInput();
