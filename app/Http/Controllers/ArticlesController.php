@@ -37,6 +37,7 @@ class ArticlesController extends Controller
             // Cambiar a email en vez de nombre?
             'author' => 'required|exists:users,email',
             'category' => 'required',
+            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
             'quantity' => 'required|numeric|between:0,10'
             // Falta de terminar
         ]);
@@ -48,11 +49,13 @@ class ArticlesController extends Controller
         }
 
         $inputs = $validator->validated();
-        $user = User::where('email', $inputs['author'])->first();
+        $user = User::where('email', $inputs['author'])->firstOrFail();
+        $image = Image::where('', $inputs['author'])->firstOrFail();
         $new_article = new Article;
         $new_article->title = $inputs['title'];
         $new_article->category = $inputs['category'];
         $new_article->valoration = $inputs['quantity'];
+        $new_article->image()->associate($image);
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = $request->has('accepted');
         $new_article->user()->associate($user);
@@ -87,7 +90,7 @@ class ArticlesController extends Controller
         }
 
         $inputs = $validator->validated();
-        $user = User::where('email', $inputs['author'])->first();
+        $user = User::where('email', $inputs['author'])->firstOrFail();
         $new_article = Article::find($request->input('article_id'));
         $new_article->title = $inputs['title'];
         $new_article->category = $inputs['category'];
