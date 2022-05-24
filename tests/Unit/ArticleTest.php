@@ -39,7 +39,7 @@ class ArticleTest extends TestCase
         $new_article->save();
 
         $num_article = Article::all()->count();
-        $article = Article::where('title','Test Article Delete')->first();
+        $article = Article::where('title','Test Article Delete')->firstOrFail();
         $article->delete();
         $num_article_deleted = Article::all()->count();
         $this->assertTrue($num_article > $num_article_deleted);

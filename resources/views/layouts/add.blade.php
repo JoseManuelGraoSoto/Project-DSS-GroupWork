@@ -20,9 +20,9 @@
     @endif
 
     @if (strpos(request()->route()->getName(), '.createForm'))
-    <form action="add" method="POST">
+    <form action="add" method="POST" enctype="multipart/form-data">
     @else
-    <form action="update" method="POST">
+    <form action="update" method="POST" enctype="multipart/form-data">
     @endif
         @csrf
         <div class="to-fill flex-container flex-spaced">
