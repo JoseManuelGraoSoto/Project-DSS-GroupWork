@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
-
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -64,7 +65,7 @@ class UsersController extends Controller
     //Devuelve el formulario de actualización de user
     public function updateUserFormulary(Request $request)
     {
-        $user = User::find($request->input('user_id'));
+        $user = Auth::user();
         return view('admin.add.updateUser', ['user' => $user]);
     }
 

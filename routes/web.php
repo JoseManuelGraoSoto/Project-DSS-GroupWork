@@ -7,6 +7,7 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Article_userController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ValorationController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,9 @@ Route::middleware('auth')->group(function () {
     })->name('library');
 
     // Ruta perfil
-    Route::get('/profile', function () {
-        return view('common.profile');
-    })->name('profile');
+    Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
+    Route::post('/profileUpdate', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+
 
     /**************** RUTAS ADMIN ***************/
 

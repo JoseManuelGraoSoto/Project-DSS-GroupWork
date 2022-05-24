@@ -26,7 +26,7 @@
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href=" {{ route('profile') }} ">Perfil</a></li>
                 @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
-                    <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
+                <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
                 @endif
                 <div class="dropdown-divider"></div>
                 <li>
