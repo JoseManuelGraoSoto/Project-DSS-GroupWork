@@ -10,6 +10,7 @@ use App\Http\Controllers\ValorationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,10 +131,11 @@ Route::middleware('auth')->group(function () {
 
 
     // Rutas category
-    Route::get('/category', function () {
+/*     Route::get('/category', function () {
         return view('admin.category');
-    })->name('category');
+    })->name('category'); */
   
+    Route::get('/category', [CategoryController::class, 'search'])->name('category');
     // Rutas suscripcion
     Route::get('/subscrip', function () {
         return view('client.subscrip');
