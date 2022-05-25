@@ -39,8 +39,8 @@
 @foreach($valorations as $valoration)
 <div class="info-db valoration">
     <span id="id" class="display-data">{{$valoration->id}}</span>
-    <span class="display-data">{{$valoration->article->title}}</span>
-    <span class="display-data">{{$valoration->user->email}}</span>
+    <span class="display-data">{{$valoration->title}}</span>
+    <span class="display-data">{{$valoration->email}}</span>
     <span class="display-data">{{$valoration->value}}</span>
     <span class="display-data">
         @if ($valoration->type == 'reader')
