@@ -142,7 +142,12 @@
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Meses suscrito</small>
-                                <small>40</small>
+                                <small>{{Auth::user()->numberDaysSuscripted}}</small>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
+                                <small>Fecha de caducidad de suscripción</small>
+                                <small>{{Auth::user()->endSubscriptionDate}}</small>
                             </div>
 
                         </div>
