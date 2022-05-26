@@ -138,6 +138,7 @@ Route::middleware('auth')->group(function () {
         return view('admin.category');
     })->name('category');
 
+
     // Rutas suscripcion
     Route::get('/subscrip', function () {
         return view('client.subscrip');
