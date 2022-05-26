@@ -18,11 +18,13 @@ class CategoryController extends Controller {
         $validator = Validator::make($request->all(), [
             'categoria' => 'required',
         ]);
-/*         if ($validator->fails()) {
-            return redirect(route('category.showAll'))
+        $nombre = $request->input('categoria');
+        dd($nombre);
+        if ($validator->fails()) {
+            return redirect(route('category'))
                 ->withErrors($validator)
                 ->withInput();
-        } */
+        }
         $inputs = $validator->validated();
         $nombre = $request->input('categoria');
         if(!$this->buscar($nombre)) {
