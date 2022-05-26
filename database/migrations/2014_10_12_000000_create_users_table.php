@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('telephone');
             $table->integer('numberDaysSuscripted')->default(0);
+            $table->date('endSubscriptionDate')->nullable();
             $table->string('imagen_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
