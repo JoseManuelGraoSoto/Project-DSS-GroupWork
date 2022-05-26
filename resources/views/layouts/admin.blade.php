@@ -15,7 +15,7 @@
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <a href="{{ route('home') }}" class="logo flex-container flex-aligned-center">
+            <a href="{{ route('adminHome') }}" class="logo flex-container flex-aligned-center">
                 <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
@@ -96,7 +96,12 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <a href="{{ route('home') }}" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
+
+                <a href="{{ route('logout') }}" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                    @csrf
+                </form>
             </div>
         </div>
     </nav>
