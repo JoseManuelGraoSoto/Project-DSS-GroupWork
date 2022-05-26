@@ -10,6 +10,7 @@ use App\Http\Controllers\ValorationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,10 +147,16 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Rutas suscripcion
-Route::get('/subscrip', function () {
-    return view('client.subscrip');
-})->name('suscripcion');
+    // Rutas category
+/*     Route::get('/category', function () {
+        return view('admin.category');
+    })->name('category'); */
+  
+    Route::get('/category', [CategoryController::class, 'search'])->name('category');
+    // Rutas suscripcion
+    Route::get('/subscrip', function () {
+        return view('client.subscrip');
+    })->name('suscripcion');
 
 //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
 Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
