@@ -1,86 +1,148 @@
-/* 
-** Change this if you need to modify
-** the amount of lines displayed
-*/
-/*
-** Leave these unless you want
-** to open a whole can of worms
-*/
-/*
-** Set up the experiment
-*/
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --color-red: #ec1840;
+  --color-purple: #7a18ec;
+  --color-white: #fff;
+  --color-black-1: #111;
+  --color-black-2: #222;
+  --color-black-3: #444;
+  --speed-normal: 0.5s;
+  --speed-fast: 0.8s;
+}
+
+html, body {
+  color: #0E6EB8;
+}
+
 .override {
   background-color: #3b4346;
-  height: 100%;
-  margin: 0;
-  display: flex;
+  height: 100vh;
 }
 
-/*
-** Apply styles to the parent element
-*/
-.Words {
+.jt {
+  position: relative;
+  top: 30%;
+  font-size: 20vmin;
+  font-family: 'Staatliches', sans-serif;
+  text-transform: uppercase;
+  font-display: swap;
+  text-shadow: 0 0 10px #0E6EB8;
+  width: fit-content;
+  margin: auto;
+}
+
+.jt__row {
+  display: block;
+}
+.jt__row:nth-child(1) {
+  clip-path: polygon(-10% 75%, 110% 75%, 110% 110%, -10% 110%);
+}
+.jt__row:nth-child(2) {
+  clip-path: polygon(-10% 50%, 110% 50%, 110% 75.3%, -10% 75.3%);
+}
+.jt__row:nth-child(3) {
+  clip-path: polygon(-10% 25%, 110% 25%, 110% 50.3%, -10% 50.3%);
+}
+.jt__row:nth-child(4) {
+  clip-path: polygon(-10% 0%, 110% 0%, 110% 25.3%, -10% 25.3%);
+}
+
+.jt__row.jt__row--sibling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+  witdh:800px;
+}
+
+.jt__text {
+  display: block;
+  transform-origin: bottom left;
+  animation: moveIn 2s 0s cubic-bezier(.36,0,.06,1) alternate infinite ;
+}
+.jt__row:nth-child(1) .jt__text {
+  transform: translateY(-0.1em);
+}
+.jt__row:nth-child(2) .jt__text {
+  transform: translateY(-0.3em) scaleY(1.1);
+}
+.jt__row:nth-child(3) .jt__text {
+  transform: translateY(-0.5em) scaleY(1.2) ;
+}
+.jt__row:nth-child(4) .jt__text {
+  transform: translateY(-0.7em) scaleY(1.3) ;
+}
+.jt__row:nth-child(5) .jt__text {
+  transform: translateY(-0.9em) scaleY(1.4) ;
+}
+.jt__row:nth-child(6) .jt__text {
+  transform: translateY(-1.1em) scaleY(1.5) ;
+}
+
+@keyframes moveIn {
+  50%, 100% { 
+    transform: translateY(0em)
+  }
+  0%   { 
+  opacity: 0; 
+  filter: blur(10px);
+  
+  }
+  100% { 
+  opacity: 1; 
+  filter: blur(0px);
+  }
+}
+
+.button {
   position: relative;
   top: 25%;
-  left: 30%;
-  height: 50px;
-  padding: 80px 0;
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  font-size: 68px;
-  font-weight: 900;
-  color: #FFFFFF;
-  letter-spacing: -2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 50px;
+}
+
+.button a {
+  position: relative;
+  width: 400px;
+  height: 60px;
+  margin: 20px;
+  line-height: 60px;
+  letter-spacing: 2px;
+  text-decoration: none;
   text-transform: uppercase;
-  transform: translate3d(0, 0, 0);
-  -webkit-font-smoothing: antialiased;
-  -webkit-font-kerning: normal;
-  -webkit-text-size-adjust: 100%; 
+  text-align: center;
+  color: var(--color-white);
+  trasnition: var(--speed-normal);
+  border: 1px solid var(--color-red);
 }
 
-/*
-** Apply common styles to each line of text
-*/
-.Words-line {
-  height: 50px;
-  overflow: hidden;
-  position: relative; }
-  .Words-line:nth-child(odd) {
-    transform: skew(60deg, -30deg) scaleY(0.66667); }
-  .Words-line:nth-child(even) {
-    transform: skew(0deg, -30deg) scaleY(1.33333); }
-  .Words-line:nth-child(1) {
-    left: 29px; }
-  .Words-line:nth-child(2) {
-    left: 58px; }
-  .Words-line:nth-child(3) {
-    left: 87px; }
-  .Words-line:nth-child(4) {
-    left: 116px; }
-  .Words-line:nth-child(5) {
-    left: 145px; }
-  .Words-line:nth-child(6) {
-    left: 174px; }
-  .Words-line:nth-child(7) {
-    left: 203px; }
-
-/*
-** Fine-grained text styles
-*/
-p {
-  height: 50px;
-  line-height: 50px;
-  padding: 0 10px;
-  transition: all .4s ease-in-out;
-  transform: translate3d(0, 0, 0);
-  vertical-align: top;
-  white-space: nowrap; 
-  cursor: none;
+.button a:hover {
+  border: 1px solid transparent;
+  background: var(--color-red) url(https://i.postimg.cc/wBXGXbWN/pixel.png);
+  transition-delay: 0.8s;
+  background-size: 180px;
+  animation: animate var(--speed-fast) steps(8) forwards;
 }
 
-/*
-** The hover interaction
-*/
-.Words:hover p {
-  transform: translate3d(0, -50px, 0); }
+.button a:last-of-type {
+  border: 1px solid var(--color-purple);
+  
+}
 
-/*# sourceMappingURL=3DAnimation.css.map */
+.button a:last-of-type:hover {
+  background: var(--color-purple) url(https://i.postimg.cc/FzBWFtKM/pixel2.png);
+}
+
+@keyframes animate {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: -480px;
+  }
+}
