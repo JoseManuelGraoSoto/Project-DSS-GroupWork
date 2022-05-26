@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Article_user;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 use DB;
 
 class ArticlesController extends Controller
@@ -20,6 +23,7 @@ class ArticlesController extends Controller
     public function showArticle($id)
     {
         $article = Article::find($id);
+        $article->access()->attach(Auth::id());
         return view('common.article', ['article' => $article]);
     }
 
