@@ -18,17 +18,19 @@
             <h1 class="category-text">Categorias</h1>
         </div>
         <div class="right main-panel">
-            <div class="main-buttons">
-                <button>
-                    <a href="{{ route('category.create') }}" target="_blanck" style=" text-decoration: none; color: #fff;">
-                        <i class='bx bx-plus' id="mas"></i>
-                        AÑADIR CATEGORIA
-                    </a>
-                </button>
-            </div>
-            <div>
-                <input type="text" name="categoria" id="categoria" placeholder="Categoría">
-            </div>
+            <form action="{{ route('category.create') }}" method="GET">
+                <div class="main-buttons">
+                    <button>
+                        <a target="_blanck" style=" text-decoration: none; color: #fff;">
+                            <i class='bx bx-plus' id="mas"></i>
+                            AÑADIR CATEGORIA
+                        </a>
+                    </button>
+                </div>
+                <div>
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoría">
+                </div>
+            </form>
         </div>
     </div>
     <div class="center-category">

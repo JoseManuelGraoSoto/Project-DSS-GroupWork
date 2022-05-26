@@ -18,8 +18,6 @@ class CategoryController extends Controller {
         $validator = Validator::make($request->all(), [
             'categoria' => 'required',
         ]);
-        $nombre = $request->input('categoria');
-        dd($nombre);
         if ($validator->fails()) {
             return redirect(route('category'))
                 ->withErrors($validator)
@@ -28,11 +26,13 @@ class CategoryController extends Controller {
         $inputs = $validator->validated();
         $nombre = $request->input('categoria');
         if(!$this->buscar($nombre)) {
+            dd(TRUE);
             $new_category = new Category;
             //$new_category = Category::find($request->input('category_id'));
             $new_category->category = $nombre;
             $new_category->save();
         }
+            dd(FALSE);
         return redirect()->action([CategoryController::class, 'search'])->withInput();
     }
     
@@ -42,12 +42,15 @@ class CategoryController extends Controller {
 
     public function buscar($nombre) {
         //$category =  Category::where('category', '==', $nombre)->withQueryString();
-        $category =  Category::where('category',$nombre)->firstOrFail();
-        if ($category.count() == 1) {
-            print("True");
-            return true;
-        } else {
-            print("False");
+        try{
+            $category =  Category::where('category',$nombre);
+            if ($category.wheres.count()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (QueryException $e) {
+                dd(TRUE);
             return false;
         }
     }
