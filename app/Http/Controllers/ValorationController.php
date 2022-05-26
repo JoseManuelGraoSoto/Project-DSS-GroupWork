@@ -192,8 +192,6 @@ class ValorationController extends Controller
         $email = $request->input('email');
 
         $valorations = null;
-        $users = null;
-        $articles = null;
         if ($title === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
