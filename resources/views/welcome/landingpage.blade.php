@@ -34,6 +34,9 @@
                 @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
                 <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
                 @endif
+                @if(Auth::user()->type == 'administrator')
+                <li><a class="dropdown-item bg-accent" href=" {{ route('adminHome') }} ">Panel de administrador</a></li>
+                @endif
                 <div class="dropdown-divider"></div>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
