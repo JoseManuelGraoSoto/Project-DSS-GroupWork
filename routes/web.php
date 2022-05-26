@@ -34,9 +34,7 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
-Route::get('/article/{id}', function () {
-    return view('common.article');
-})->name('article');
+Route::get('/article/{id}', [ArticlesController::class, 'showArticle'])->name('article');
 
 Route::middleware('auth')->group(function () {
     // Ruta biblioteca
@@ -53,7 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('is_admin')->group(function () {
         //Rutas users
         //Getters
-        Route::get('/admin', function () { return view('admin.init'); })->name('adminHome');
+        Route::get('/admin', function () {
+            return view('admin.init');
+        })->name('adminHome');
 
         //Rutas users
         //Getters
@@ -143,20 +143,22 @@ Route::middleware('auth')->group(function () {
 
 
         // Rutas category
-        Route::get('/category', function () { return view('admin.category'); })->name('category');
+        Route::get('/category', function () {
+            return view('admin.category');
+        })->name('category');
     });
 });
 
-    // Rutas category
+// Rutas category
 /*     Route::get('/category', function () {
         return view('admin.category');
     })->name('category'); */
-  
-    Route::get('/category', [CategoryController::class, 'search'])->name('category');
-    // Rutas suscripcion
-    Route::get('/subscrip', function () {
-        return view('client.subscrip');
-    })->name('suscripcion');
+
+Route::get('/category', [CategoryController::class, 'search'])->name('category');
+// Rutas suscripcion
+Route::get('/subscrip', function () {
+    return view('client.subscrip');
+})->name('suscripcion');
 
 //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
 Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
