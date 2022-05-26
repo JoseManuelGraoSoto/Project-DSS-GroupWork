@@ -6,7 +6,7 @@
 
 @section('categories-nav')
 <div class="nav-item selected container flex-aligned-center">
-    <i class='bx bxs-category'></i>
+    <i class='bx bxs-face'></i>
     <span class="nav-label">Categorias</span>
 </div>
 @endsection
@@ -20,8 +20,10 @@
         <div class="right main-panel">
             <div class="main-buttons">
                 <button>
-                    <i class='bx bx-plus'></i>
-                    AÑADIR CATEGORIA
+                    <a href="{{ route('category.create') }}" target="_blanck" style=" text-decoration: none; color: #fff;">
+                        <i class='bx bx-plus' id="mas"></i>
+                        AÑADIR CATEGORIA
+                    </a>
                 </button>
             </div>
             <div>
@@ -30,22 +32,18 @@
         </div>
     </div>
     <div class="center-category">
-        <div class="upper-separator user">
+        <div class="upper-separator category">
             <div class="separator">
                 <span class="display-data-label">Nombre</span>
             </div>
         </div>
-        @foreach($categorys as $category)
-        <div class="info-db user">
-            <span class="display-data">{{$category->name}}</span>
-            <form action=" {{ route('user.updateForm') }}" method="GET">
-                <input type="hidden" name="user_id" value="{{$category->id}}">
-                <button class="edit-btn">
-                    <i class='bx bx-rotate-right'></i>
-                    EDITAR
-                </button>
-            </form>
-        </div>
+        <form action="">
+            @foreach($categorys as $category)
+            <div class="info-db category">
+                <input type="radio" id="{{$category}}" name="{{$category}}" value="{{$category}}" class="display-data">
+                <label for="{{$category}}">{{$category->category}}</label>
+            </div>
+        </form>
 
         @endforeach
     </div>
