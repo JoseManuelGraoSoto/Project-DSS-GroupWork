@@ -15,10 +15,30 @@
             </div>
 
             <div class="collapse mt-3" id="filter">
-                <form action="{{ request()->route()->getName() }}" method="GET" class=" d-flex gap-1 gap-lg-5 justify-content-center mx-lg-5">
-                    <input class="form-control border-secondary form-dark text-secondary" name="title" type="text" placeholder="Artículo" aria-label="Search">
-                    <input class="form-control border-secondary form-dark text-secondary" name="author" type="text" placeholder="Autor" aria-label="Search">
-                    <button class="btn btn-outline-accent" type="submit">Buscar</button>
+                <form action="{{ request()->route()->getName() }}" method="GET" class="d-flex gap-4 gap-lg-5 justify-content-center align-items-center mx-lg-5">
+                    @if(Auth::user()->type == 'moderator')
+                        <div class="d-flex flex-column flex-lg-row gap-4 w-100">
+                            <div class="d-flex gap-4 w-100">
+                                <input class="form-control border-secondary form-dark text-secondary" name="title" type="text" placeholder="Artículo" aria-label="Search">
+                                <input class="form-control border-secondary form-dark text-secondary" name="author" type="text" placeholder="Autor" aria-label="Search">
+                            </div>
+                            <div>
+                                
+                                <select class="selectpicker" title="Filtrar por estado..." multiple data-width="300px" multiple data-actions-box="true" data-style="btn-primary">
+                                    <option>Aceptados</option>
+                                    <option>No Aceptados</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    @else
+                        <input class="form-control border-secondary form-dark text-secondary" name="title" type="text" placeholder="Artículo" aria-label="Search">
+                        <input class="form-control border-secondary form-dark text-secondary" name="author" type="text" placeholder="Autor" aria-label="Search">
+                    @endif
+
+                    <div>
+                        <button class="btn btn-outline-accent" type="submit">Buscar</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -35,7 +55,7 @@
             <li class="list-group-item">
                 <!-- Custom content-->
                 <div class="media align-items-center d-flex justify-content-evenly flex-column  flex-lg-row p-3">
-                    <div class="media-body order-2 order-lg-1">
+                    <div class="media-body order-2 order-lg-1 w-100">
                         <h5 class="mt-0 font-weight-bold mb-2">{{$article->title}}</h5>
                         <p class="font-italic text-muted mb-0 small">{{$article->content}}</p>
                         <div class="d-flex align-items-center gap-5 mt-1">
@@ -62,4 +82,10 @@
         <!-- End -->
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 @endsection

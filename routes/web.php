@@ -22,6 +22,11 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
+// Test
+Route::get('/test', function () {
+    return view('common.add.article');
+});
+
 Auth::routes();
 
 // Home Controller
