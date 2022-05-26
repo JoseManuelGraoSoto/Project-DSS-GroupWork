@@ -34,7 +34,7 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
-Route::get('/article/{id}', [ArticlesController::class, 'showArticle'])->name('article');
+Route::get('/article/{id}', [HomeController::class, 'showArticle'])->name('article');
 
 Route::middleware('auth')->group(function () {
     // Ruta biblioteca

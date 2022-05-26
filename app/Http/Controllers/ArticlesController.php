@@ -7,7 +7,6 @@ use App\Models\Article;
 use App\Models\Article_user;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 
 use DB;
 
@@ -18,13 +17,6 @@ class ArticlesController extends Controller
     {
         $articles = Article::paginate(7);
         return view('admin.article', ['articles' => $articles]);
-    }
-
-    public function showArticle($id)
-    {
-        $article = Article::find($id);
-        $article->access()->attach(Auth::id());
-        return view('common.article', ['article' => $article]);
     }
 
     public function showAccessibleArticles()
