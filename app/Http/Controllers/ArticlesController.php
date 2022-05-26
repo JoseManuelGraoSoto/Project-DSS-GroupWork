@@ -17,6 +17,12 @@ class ArticlesController extends Controller
         return view('admin.article', ['articles' => $articles]);
     }
 
+    public function showArticle($id)
+    {
+        $article = Article::find($id);
+        return view('common.article', ['article' => $article]);
+    }
+
     public function showAccessibleArticles()
     {
         $articles = Article::select('articles.title', 'articles.content', 'articles.id', 'articles.created_at', DB::raw('AVG(valorations.value) as value'), 'users.name')->leftjoin('valorations', 'valorations.article_id', '=', 'articles.id')->leftjoin('users', 'users.id', '=', 'articles.user_id')->where('guestAccessible', 1)->where('acepted', 1)->groupby('articles.id')->get();
