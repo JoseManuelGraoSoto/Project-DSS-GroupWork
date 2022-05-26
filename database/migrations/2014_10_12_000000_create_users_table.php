@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('telephone');
-            $table->integer('numberDaysSuscripted');
+            $table->integer('numberDaysSuscripted')->default(0);
             $table->date('endSubscriptionDate')->nullable();
-            $table->string('imagen_path');
+            $table->string('imagen_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
