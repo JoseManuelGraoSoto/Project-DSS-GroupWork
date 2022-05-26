@@ -34,13 +34,14 @@
     <span class="display-data-label">Nombre</span>
     <span class="display-data-label">Tipo Usuario</span>
     <span class="display-data-label">Teléfono</span>
+    <span class="display-data-label">Nº de días</span>
     <span class="display-data-label">Fecha de creación</span>
     <div class="separator"></div>
 </div>
 
 @foreach($users as $user)
 <div class="info-db user">
-    <img src="{{ URL::asset('img/default.png'); }}" class="user-img" alt="Default user picture">
+    <img src="{{ URL::asset('storage/users/'. $user->imagen_path); }}" id="foto" class="user-img" alt="Default user picture">
     <span id="id" class="display-data">{{$user->id}}</span>
     <span class="display-data">{{$user->email}}</span>
     <div class="show-container flex-container flex-center">
@@ -62,6 +63,7 @@
         @endif
     </span>
     <span class="display-data">{{$user->telephone}}</span>
+    <span class="display-data">{{$user->numberDaysSuscripted}}</span>
     <span class="display-data">{{$user->created_at}}</span>
     <form action=" {{ route('user.updateForm') }}" method="GET">
         <input type="hidden" name="user_id" value="{{$user->id}}">

@@ -472,7 +472,7 @@
 }
 
 .valoration {
-    grid-template-columns: .5fr 1.5fr .5fr 1fr 3fr 1fr 1fr;
+    grid-template-columns: .5fr 1fr 1.5fr .5fr 1fr 3fr 1fr 1fr;
 }
 
 .info-db:hover {

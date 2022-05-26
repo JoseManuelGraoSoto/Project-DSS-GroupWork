@@ -23,4 +23,8 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Models\Valoration');
     }
+
+    public function category() {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

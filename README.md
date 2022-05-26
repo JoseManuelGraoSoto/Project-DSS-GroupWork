@@ -19,6 +19,20 @@ Descargar controlador de auth
 composer require laravel/ui
 php artisan ui bootstrap --auth
 ~~~
+Descargar controlador paypal
+~~~
+composer require "paypal/rest-api-sdk-php:*"
+~~~
+Y añadir al final del .env estas 3 líneas:
+~~~
+PAYPAL_CLIENT_ID=Acd9bIIq_tLLbmRnVeaTn2RNPyLQBMENQoVKaCBmPaFy1jmmWYXOakt0IkK0L3T_hTlc0CetG0VciM-j
+PAYPAL_SECRET=EEE6Se-HPKwOfRCqyBkBSN79GxUfiHI3qfYzkXqlAM_9I_MiwZMuwo3NSGymIV6HkUFt09F-gRLtikMS
+PAYPAL_MODE=sandbox
+~~~
+Correo de prueba:
+cuentapruebadss@gmail.com
+Contraseña:
+dssdssdss
 # Medidas para trabajar en colaborativo en Github-DSS
 
 - Comentarios en castellano

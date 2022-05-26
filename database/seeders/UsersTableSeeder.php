@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
+    const FILE_SRC = '';
     /**
      * Run the database seeds.
      *
@@ -31,7 +32,10 @@ class UsersTableSeeder extends Seeder
         $new_user->email = 'admin@admin.com';
         $new_user->password = Hash::make('admin');
         $new_user->telephone = $faker->tollFreeNumber;
-        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+        $new_user->numberDaysSuscripted = 365;
+        $name = "default";
+        $new_user->imagen_path = self::FILE_SRC . $name . '.png';
         $new_user->save();
 
         foreach (range(2, 500) as $index) {
@@ -41,7 +45,10 @@ class UsersTableSeeder extends Seeder
             $new_user->email = $faker->unique()->freeEmail;
             $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
-            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = "default";
+            $new_user->imagen_path = self::FILE_SRC . $name . '.png';
             $new_user->save();
         }
 
@@ -52,7 +59,10 @@ class UsersTableSeeder extends Seeder
             $new_user->email = $faker->unique()->freeEmail;
             $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
-            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = "default";
+            $new_user->imagen_path = self::FILE_SRC . $name . '.png';
             $new_user->save();
         }
 
@@ -63,7 +73,10 @@ class UsersTableSeeder extends Seeder
             $new_user->email = $faker->unique()->freeEmail;
             $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
-            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $name = "default";
+            $new_user->imagen_path = self::FILE_SRC . $name . '.png';
+            $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_user->save();
         }
     }

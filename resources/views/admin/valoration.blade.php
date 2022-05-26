@@ -18,7 +18,7 @@
     ELIMINAR VALORACIÓN
 </button>
 
-<a href="/createValorationForm" style="text-decoration: none; display: none;">
+<a href="{{ route('valoration.createForm') }}" style="text-decoration: none;">
     <i class='bx bx-plus'></i>
     AÑADIR VALORACIÓN
 </a>
@@ -27,6 +27,7 @@
 @section('display')
 <div class="upper-separator valoration">
     <span class="display-data-label">ID</span>
+    <span class="display-data-label">Artículo</span>
     <span class="display-data-label">Usuario</span>
     <span class="display-data-label">Valoración</span>
     <span class="display-data-label">Tipo Usuario</span>
@@ -38,6 +39,7 @@
 @foreach($valorations as $valoration)
 <div class="info-db valoration">
     <span id="id" class="display-data">{{$valoration->id}}</span>
+    <span class="display-data">{{$valoration->title}}</span>
     <span class="display-data">{{$valoration->email}}</span>
     <span class="display-data">{{$valoration->value}}</span>
     <span class="display-data">
@@ -55,7 +57,7 @@
     </span>
     <span class="display-data">{{$valoration->comment}}</span>
     <span class="display-data">{{$valoration->created_at}}</span>
-    <form hidden action=" {{ route('valorations') }}" method="GET">
+    <form action=" {{ route('valoration.updateForm') }}" method="GET">
         <input type="hidden" name="valoration_id" value="{{$valoration->id}}">
         <button class="edit-btn">
             <i class='bx bx-rotate-right'></i>
