@@ -29,11 +29,4 @@ class HomeController extends Controller
         $rewardsModerators = Reward::select('rewards.points', 'users.name')->leftjoin('users', 'users.id', '=', 'rewards.user_id')->where('isModerator', 1)->orderByDesc('points')->limit(20)->get();
         return view('welcome.landingpage', ['articles' => $articles, 'rewardsAuthors' => $rewardsAuthors, 'rewardsModerators' => $rewardsModerators]);
     }
-
-    public function showArticle($id)
-    {
-        $article = Article::find($id);
-        $article->access()->attach(Auth::id());
-        return view('common.article', ['article' => $article]);
-    }
 }
