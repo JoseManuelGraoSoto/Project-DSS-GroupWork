@@ -85,7 +85,7 @@ class PaymentController extends Controller
         if (!$paymentId || !$payerId || !$token) {
             $result = Null;
             $status = 'No se pudo procesar el pago a traves de PayPal';
-            return view('client.results', compact('status', 'result'));
+            return redirect()->route('login')->with('status', $status);
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -173,6 +173,6 @@ class PaymentController extends Controller
         }
 
         $status = 'Lo Sentimos! No se pudo realizar el pago a traves de PayPal';
-        return view('client.results', compact('status', 'result'));
+        return redirect()->route('login')->with('status', $status);
     }
 }
