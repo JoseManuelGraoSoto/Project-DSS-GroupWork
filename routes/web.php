@@ -153,7 +153,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/category', [CategoryController::class, 'search'])->name('category');
         Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
       
-        Route::get('/trans', function () {
+        Route::get('/transaction', function () {
           return view('admin.transaction');})->name('transaction');
     });
 });
