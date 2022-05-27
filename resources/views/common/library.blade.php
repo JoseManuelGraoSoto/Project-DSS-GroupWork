@@ -24,9 +24,9 @@
                         </div>
                         <div>
 
-                            <select class="selectpicker" title="Filtrar por estado..." multiple data-width="300px" multiple data-actions-box="true" data-style="btn-primary">
-                                <option>Aceptados</option>
-                                <option>No Aceptados</option>
+                            <select name="state[]" class="selectpicker" title="Filtrar por estado..." multiple data-width="300px" multiple data-actions-box="true" data-style="btn-primary">
+                                <option value="1">Aceptados</option>
+                                <option value="0">No Aceptados</option>
                             </select>
 
                         </div>
