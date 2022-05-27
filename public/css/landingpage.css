@@ -58,6 +58,7 @@ html {
     font-size: 28px;
     margin-bottom: 15px;
   }
+
   .section-title span {
     font-size: 38px;
   }
@@ -190,7 +191,7 @@ text.is-active {
   50% {
     fill: transparent;
   }
-  
+
   75% {
     fill: transparent;
     stroke-dashoffset: 0;
@@ -209,7 +210,7 @@ text.is-active {
 # Arrow
 # --------------------------------------------------------------
 */
-.arrow span{
+.arrow span {
   display: block;
   width: 30px;
   height: 30px;
@@ -220,27 +221,27 @@ text.is-active {
   animation: animate 2s infinite;
 }
 
-.arrow span:nth-child(2){
+.arrow span:nth-child(2) {
   animation-delay: -0.2s;
 }
 
-.arrow span:nth-child(3){
+.arrow span:nth-child(3) {
   animation-delay: -0.4s;
 }
 
 @keyframes animate {
-  0%{
+  0% {
     opacity: 0;
-    transform: rotate(45deg) translate(-20px,-20px);
+    transform: rotate(45deg) translate(-20px, -20px);
   }
 
-  50%{
+  50% {
     opacity: 1;
   }
 
-  100%{
+  100% {
     opacity: 0;
-    transform: rotate(45deg) translate(20px,20px);
+    transform: rotate(45deg) translate(20px, 20px);
   }
 }
 
@@ -253,7 +254,7 @@ text.is-active {
 .postcard {
   flex-wrap: wrap;
   display: flex;
-  
+
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;
@@ -275,7 +276,7 @@ text.is-active {
   color: inherit;
 }
 
-.postcard h1,	
+.postcard h1,
 .postcard .h1 {
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -368,7 +369,7 @@ text.is-active {
   .postcard {
     flex-wrap: inherit;
   }
-  
+
   .postcard .postcard__title {
     font-size: 2rem;
   }
@@ -421,58 +422,58 @@ text.is-active {
   }
 }
 
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 1024px) {
   .postcard__text {
     padding: 2rem 3.5rem;
   }
-  
+
   .postcard__text:before {
     content: "";
     position: absolute;
     display: block;
-    
+
     top: -20%;
     height: 130%;
     width: 55px;
   }
-	
+
   .postcard.dark .postcard__text:before {
     background: #18151f;
   }
 
-	.postcard.light .postcard__text:before {
-		background: #e1e5ea;
+  .postcard.light .postcard__text:before {
+    background: #e1e5ea;
   }
 }
 
 .postcard .postcard__tagbox .blue.play:hover {
-	background: #0076bd;
+  background: #0076bd;
 }
 
 .blue .postcard__title:hover {
-	color: #0076bd;
+  color: #0076bd;
 }
 
 .blue .postcard__bar {
-	background-color: #0076bd;
+  background-color: #0076bd;
 }
 
 .blue::before {
-	background-image: linear-gradient(-30deg, rgba(0, 118, 189, 0.1), transparent 50%);
+  background-image: linear-gradient(-30deg, rgba(0, 118, 189, 0.1), transparent 50%);
 }
 
 .blue:nth-child(2n)::before {
-	background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%);
+  background-image: linear-gradient(30deg, rgba(0, 118, 189, 0.1), transparent 50%);
 }
 
 @media screen and (min-width: 769px) {
-	.blue::before {
-		background-image: linear-gradient(-80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-	}
+  .blue::before {
+    background-image: linear-gradient(-80deg, rgba(0, 118, 189, 0.1), transparent 50%);
+  }
 
-	.blue:nth-child(2n)::before {
-		background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-	}
+  .blue:nth-child(2n)::before {
+    background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
+  }
 }
 
 /*
@@ -484,7 +485,7 @@ text.is-active {
   counter-reset: item;
 }
 
-.organized-list > li {
+.organized-list>li {
   background-color: var(--terciary-color);
   color: var(--secondary-color);
 }
@@ -552,18 +553,18 @@ text.is-active {
   perspective: 1000px;
 }
 
-.btn-sign-in a{
+.btn-sign-in a {
   font-size: 19px;
   letter-spacing: 1px;
   transform-style: preserve-3d;
   transform: translateZ(-25px);
   transition: transform .25s;
   font-family: 'Montserrat', sans-serif;
-  
+
 }
 
 .btn-sign-in a:before,
-.btn-sign-in a:after{
+.btn-sign-in a:after {
   position: absolute;
   content: "REGISTRATE";
   height: 55px;
@@ -576,17 +577,48 @@ text.is-active {
   border-radius: 5px;
 }
 
-.btn-sign-in a:before{
+.btn-sign-in a:before {
   color: #fff;
   background: var(--accent-color);
   transform: rotateY(0deg) translateZ(25px);
 }
 
-.btn-sign-in a:after{
+.btn-sign-in a:after {
   color: var(--accent-color);
   transform: rotateX(90deg) translateZ(25px);
 }
 
-.btn-sign-in a:hover{
+.btn-sign-in a:hover {
   transform: translateZ(-25px) rotateX(-90deg);
+}
+
+/*
+# --------------------------------------------------------------
+# Pop up
+# --------------------------------------------------------------
+*/
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
 }
