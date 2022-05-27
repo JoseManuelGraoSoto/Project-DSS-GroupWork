@@ -47,6 +47,8 @@ class UsersTableSeeder extends Seeder
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $new_user->endSubscriptionDate =  $faker->dateTimeBetween($startDate = 'now', $endDate = '1 year', $timezone = 'Europe/Madrid');
+
             $name = "default";
             $new_user->imagen_path = self::FILE_SRC . $name . '.png';
             $new_user->save();
@@ -61,6 +63,7 @@ class UsersTableSeeder extends Seeder
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $new_user->endSubscriptionDate =  $faker->dateTimeBetween($startDate = 'now', $endDate = '1 year', $timezone = 'Europe/Madrid');
             $name = "default";
             $new_user->imagen_path = self::FILE_SRC . $name . '.png';
             $new_user->save();
@@ -74,6 +77,7 @@ class UsersTableSeeder extends Seeder
             $new_user->password = Hash::make($faker->regexify('([A-Z]){2,3}([0-9]){2,3}([.@%]){1,2}([a-z]){3,4}'));
             $new_user->telephone = $faker->tollFreeNumber;
             $new_user->numberDaysSuscripted = $faker->numberBetween(0, 365);
+            $new_user->endSubscriptionDate =  $faker->dateTimeBetween($startDate = 'now', $endDate = '1 year', $timezone = 'Europe/Madrid');
             $name = "default";
             $new_user->imagen_path = self::FILE_SRC . $name . '.png';
             $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
