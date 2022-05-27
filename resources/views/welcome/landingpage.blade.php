@@ -49,6 +49,7 @@
                 </li>
             </ul>
         </div>
+        
         <a href="{{ route('library') }}" class="btn small btn-primary top-right-btn">biblioteca</a>
         @endguest
     </nav>

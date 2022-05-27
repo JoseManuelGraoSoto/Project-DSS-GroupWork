@@ -1,121 +1,75 @@
 @extends('layouts.general')
 
+@section('head')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{{ URL::asset('css/stars.css'); }}">
+@endsection
+
 @section('body-section')
 
+@auth
+@if(Auth::user()->type == 'moderator' && $article->acepted == 0)
+<form action=" {{ route('article.acept', ['id' => $article->id]) }}" method="POST" class="container pt-5 text-end">
+  @csrf
+  <button type="submit" class="btn btn-primary rounded-pill py-1 px-3 shadow">ACEPTAR</button>
+</form>
+@endif
+@endauth
+
 <div class="d-flex justify-content-center my-5">
-    <div class="shadow-lg" id="adobe-dc-view" style="width: 800px;"></div>
+  <div class="shadow-lg" id="adobe-dc-view" style="width: 800px;"></div>
 </div>
 
-<section>
-  <div class="container my-5 py-5">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8">
-        <div class="card shadow-lg">
-          <div class="card-body p-4">
-            <div class="row">
-              <div class="col">
-                <div class="d-flex flex-start">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
-                    height="65" />
-                  <div class="flex-grow-1 flex-shrink-1">
-                    <div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1">
-                          Maria Smantha <span class="small">- 2 hours ago</span>
-                        </p>
-                        <a href="#!" class="text-decoration-none"><i class='bx bxs-share text-accent' ></i><span class="small"> reply</span></a>
-                      </div>
-                      <p class="small mb-0">
-                        It is a long established fact that a reader will be distracted by
-                        the readable content of a page.
-                      </p>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              Simona Disa <span class="small">- 3 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            letters, as opposed to using 'Content here, content here',
-                            making it look like readable English.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="d-flex flex-start mt-4">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(12).webp" alt="avatar" width="65"
-                    height="65" />
-                  <div class="flex-grow-1 flex-shrink-1">
-                    <div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1">
-                          Natalie Smith <span class="small">- 2 hours ago</span>
-                        </p>
-                        <a href="#!" class="text-decoration-none"><i class='bx bxs-share text-accent' ></i><span class="small"> reply</span></a>
-                      </div>
-                      <p class="small mb-0">
-                        The standard chunk of Lorem Ipsum used since the 1500s is
-                        reproduced below for those interested. Sections 1.10.32 and
-                        1.10.33.
-                      </p>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              Lisa Cudrow <span class="small">- 4 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                            scelerisque ante sollicitudin commodo. Cras purus odio,
-                            vestibulum in vulputate at, tempus viverra turpis.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+@auth
+{{ $valoration }}
+<section class="mb-5">
+  <form action="{{ route('updateProfile') }}" method="POST" class="d-flex flex-column gap-3">
+    @csrf
+    <div class="stars container d-flex justify-content-center w-100">
+      <div>
+        <input class="star star-5" id="star-5" type="radio" name="star" />
+        <label class="star star-5" for="star-5"></label>
+        <input class="star star-4" id="star-4" type="radio" name="star" />
+        <label class="star star-4" for="star-4"></label>
+        <input class="star star-3" id="star-3" type="radio" name="star" />
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" id="star-2" type="radio" name="star" />
+        <label class="star star-2" for="star-2"></label>
+        <input class="star star-1" id="star-1" type="radio" name="star" />
+        <label class="star star-1" for="star-1"></label>
       </div>
     </div>
-  </div>
+
+    <div class="container text-center">
+      <button type="submit" class="btn btn-primary rounded-pill py-1 px-3 shadow">VALORAR</button>
+    </div>
+  </form>
 </section>
+@endauth
 
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 
 <script type="text/javascript">
-	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-		var adobeDCView = new AdobeDC.View({clientId: "39d623d0bca34c73ba77454131227cf3", divId: "adobe-dc-view"});
-		adobeDCView.previewFile({
-            content: {location: {url: "{{ URL::asset('sample.pdf'); }}"}},
-			metaData:{fileName: "sample.pdf"}
-		}, {embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false});
-	});
+  document.addEventListener("adobe_dc_view_sdk.ready", function() {
+    var adobeDCView = new AdobeDC.View({
+      clientId: "39d623d0bca34c73ba77454131227cf3",
+      divId: "adobe-dc-view"
+    });
+    adobeDCView.previewFile({
+      content: {
+        location: {
+          url: "{{ URL::asset('sample.pdf'); }}"
+        }
+      },
+      metaData: {
+        fileName: "sample.pdf"
+      }
+    }, {
+      embedMode: "IN_LINE",
+      showDownloadPDF: false,
+      showPrintPDF: false
+    });
+  });
 </script>
 
 @endsection

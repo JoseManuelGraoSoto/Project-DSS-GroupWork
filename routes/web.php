@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SingleArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +35,14 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
-Route::get('/article/{id}', function () {
-    return view('common.article');
-})->name('article');
+Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->name('article');
 
 Route::middleware('auth')->group(function () {
+    // Ruta aceptar articulo
+    Route::post('/article/{id}/accept', [SingleArticleController::class, 'aceptArticle'])->name('article.acept')->middleware('is_moderator');
+
     // Ruta biblioteca
-    Route::get(
-        '/library',
-        [LibraryController::class, 'search']
-    )->name('library');
+    Route::get('/library', [LibraryController::class, 'search'])->name('library');
 
     // Ruta perfil
     Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
