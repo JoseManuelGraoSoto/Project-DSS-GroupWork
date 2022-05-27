@@ -25,7 +25,7 @@ class CategoryController extends Controller {
         }
         $inputs = $validator->validated();
         $nombre = $request->input('categoria');
-        if(!$this->buscar($nombre, $request)) {
+        if(!$this->buscar($nombre)) {
             $new_category = new Category;
             //$new_category = Category::find($request->input('category_id'));
             $new_category->category = $nombre;
@@ -38,24 +38,12 @@ class CategoryController extends Controller {
 
     }
 
-    public function buscar($nombre, Request $request) {
-
-        //$category =  Category::where('category', '==', $nombre)->withQueryString();
-        try{
-            // $category =  Category::where('categoria', "=", $nombre);
-            $category =  Category::where('categoria');
-/*             $categorys = Category::all();
-            foreach ($categorys as $item) {
-                dd($item->attributes);
-            } */
-            foreach ($request->query() as $item) {
-                if ($category == $item) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } catch (QueryException $e) {
+    public function buscar($nombre) {
+        $categorys = Category::where('category', '=', $nombre)->get();
+        $existe = $categorys->count();
+        if ($existe == 1) {
+            return true;
+        } else {
             return false;
         }
     }
@@ -63,9 +51,9 @@ class CategoryController extends Controller {
     public function search(Request $request) {
         $nombre = $request->input('name');
         if($nombre == null) {
-            $categorys = Category::paginate(7);
+            $categorys = Category::all();
         } else {
-            $categorys =  Category::where('name', 'LIKE', '%'.$nombre.'%')->orderBy('name', 'desc')->paginate(7)->withQueryString();
+            $categorys =  Category::where('categoria', 'LIKE', '%'.$nombre.'%')->orderBy('name', 'desc');
         }
         return view('admin.category', ['categorys' => $categorys]);
     }

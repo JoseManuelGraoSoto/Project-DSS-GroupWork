@@ -34,20 +34,22 @@
         </div>
     </div>
     <div class="center-category">
-        <div class="upper-separator category">
-            <div class="separator">
-                <span class="display-data-label">Nombre</span>
+        <div class="container-category">
+            <div class="upper-separator category">
+                <div class="separator">
+                    <span class="display-data-label">Nombre</span>
+                </div>
             </div>
-        </div>
-        <form action="">
-            @foreach($categorys as $category)
-            <div class="info-db category">
-                <input type="checkbox" id="{{$category}}" name="{{$category}}" value="1" class="display-data">
-                <label for="{{$category}}">{{$category->category}}</label>
-            </div>
-        </form>
+            <form action="" class="categorias">
+                @foreach($categorys as $category)
+                <div class="info-db flex-container flex-aligned-center">
+                    <input type="checkbox" id="{{$category->category}}" name="categoria" value="1">
+                    <label for="{{$category->category}}">{{$category->category}}</label>
+                </div>
+                @endforeach
+            </form>
 
-        @endforeach
+        </div>
     </div>
     <div class="bottom-category main-panel">
         <div class="main-buttons bottom" id="boton_category">
