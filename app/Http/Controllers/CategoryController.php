@@ -59,11 +59,17 @@ class CategoryController extends Controller {
     }
 
     public function delete(Request $request) {
-        $categorys = json_decode($request->input('categorys'));
-        foreach ($categorys as $id) {
-            $category = Category::find($id);
-            $category->delete();
+        $categorias = $request->all();
+        dd($categorias);
+        foreach ($categorias as $id) {
+            echo $id;
+/*             if($id === array_key_first($categorias)) {
+            } else {
+                $borrar = Category::where('category', '=', $id);
+                $borrar->delete();
+            } */
         }
+        dd($categorias);
 
         return back()->withInput();
     }

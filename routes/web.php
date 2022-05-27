@@ -145,6 +145,7 @@ Route::middleware('auth')->group(function () {
         // Rutas category
         Route::get('/category', [CategoryController::class, 'search'])->name('category');
         Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
+        Route::get('/category/delete', [CategoryController::class, 'delete'])->name('category.delete');
     });
 });
 

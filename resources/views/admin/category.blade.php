@@ -17,6 +17,7 @@
         <div>
             <h1 class="category-text">Categorias</h1>
         </div>
+
         <div class="right main-panel">
             <form action="{{ route('category.create') }}" method="GET">
                 <div class="main-buttons">
@@ -27,37 +28,52 @@
                         </a>
                     </button>
                 </div>
-                <div>
+                <div class="botones">
                     <input type="text" name="categoria" id="categoria" placeholder="Categoría">
+                    <div class="filter-button">
+                        <button class="cssbuttons-io-button"> Buscar
+                            <div class="icon">
+                                <i class='bx bx-search-alt-2'></i>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="center-category">
-        <div class="container-category">
-            <div class="upper-separator category">
-                <div class="separator">
-                    <span class="display-data-label">Nombre</span>
+    <div>
+        <form action="{{ route('category.delete') }}" method="GET">
+            @csrf
+            <div class="center-category">
+                <div class="container-category">
+                    <div class="upper-separator category">
+                        <div class="separator">
+                            <span class="display-data-label">Nombre</span>
+                        </div>
+                    </div>
+                    <div class="categorias">
+                        @foreach($categorys as $category)
+                        <div class="info-db flex-container flex-aligned-center">
+                            <input type="checkbox" id="{{$category->category}}" name="{{$category->category}}"
+                                class="Checkbox" value="1">
+                            <label for="{{$category->category}}">{{$category->category}}</label>
+                        </div>
+                        @endforeach
+                    </div>
+
                 </div>
             </div>
-            <form action="" class="categorias">
-                @foreach($categorys as $category)
-                <div class="info-db flex-container flex-aligned-center">
-                    <input type="checkbox" id="{{$category->category}}" name="categoria" value="1">
-                    <label for="{{$category->category}}">{{$category->category}}</label>
+            <div>
+                <div class="bottom-category main-panel">
+                    <div class="main-buttons bottom" id="boton_category">
+                        <button class="basura" id="basura_category">
+                            <i class='bx bx-trash'></i>
+                            ELIMINAR CATEGORIA
+                        </button>
+                    </div>
                 </div>
-                @endforeach
-            </form>
-
-        </div>
-    </div>
-    <div class="bottom-category main-panel">
-        <div class="main-buttons bottom" id="boton_category">
-            <button class="basura" id="basura_category">
-                <i class='bx bx-trash'></i>
-                ELIMINAR CATEGORIA
-            </button>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

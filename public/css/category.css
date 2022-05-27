@@ -15,9 +15,7 @@
     margin-left: 5%;
     margin-top: 3%;
     display: flex;
-    justify-content: space-around;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .container {
@@ -38,7 +36,6 @@
 
 .center-category {
     /*background-color: #0E6EB8;*/
-    height: 70%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -48,7 +45,8 @@
 
 .container-category {
     background-color: var(--outline-color-weak);
-    overflow-y: auto;
+    position:relative;
+    width: 100%;
 }
 
 .right {
@@ -118,4 +116,67 @@
 
 .categorias {
     padding: 0 5em;
+    overflow-y: scroll;
+    height: 600px;
+}
+
+.botones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cssbuttons-io-button {
+    background: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em var(--accent-color);
+    overflow: hidden;
+    position: relative;
+    height: 2.5em;
+    padding-right: 3.3em;
+}
+   
+.cssbuttons-io-button .icon {
+    background: var(--secondary-color);
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    width: 2.2em;
+    border-radius: 4px;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em var(--accent-color);
+    right: 0.3em;
+    transition: all 0.3s;
+}
+   
+.cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+    cursor: pointer;
+}
+   
+.cssbuttons-io-button .icon i {
+    width: 1.1em;
+    color: var(--accent-color);
+    font-size: 18px;
+    transition: all .5s ease;
+}
+   
+.cssbuttons-io-button:hover .icon i {
+    transform: translateX(0.1em);
+    font-size: 24px;
+}
+   
+.cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
 }
