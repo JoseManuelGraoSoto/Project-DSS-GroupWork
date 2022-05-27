@@ -142,7 +142,8 @@ Route::middleware('auth')->group(function () {
 
 
         // Rutas category
-        Route::get('/category', function () { return view('admin.category'); })->name('category');
+        Route::get('/category', [CategoryController::class, 'search'])->name('category');
+        Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
     });
 });
 
@@ -151,7 +152,6 @@ Route::middleware('auth')->group(function () {
         return view('admin.category');
     })->name('category'); */
   
-    Route::get('/category', [CategoryController::class, 'search'])->name('category');
     // Rutas suscripcion
     Route::get('/subscrip', function () {
         return view('client.subscrip');
