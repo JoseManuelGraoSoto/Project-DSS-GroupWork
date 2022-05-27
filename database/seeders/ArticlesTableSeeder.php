@@ -30,7 +30,7 @@ class ArticlesTableSeeder extends Seeder
         foreach (range(1, 500) as $index) {
             $new_article = new Article;
             $new_article->title = $faker->text(15);
-            $new_article->category()->associate($faker->numberBetween(0, 4));
+            $new_article->category()->associate($faker->numberBetween(1, 4));
             $new_article->valoration = $faker->randomFloat(1, 0, 10);
             $new_article->content = $faker->paragraph;
             $new_article->acepted = $faker->boolean;
