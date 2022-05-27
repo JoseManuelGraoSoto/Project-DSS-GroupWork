@@ -11,7 +11,8 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -21,12 +22,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('telephone');
-            $table->integer('numberDaysSuscripted');
-            $table->string('imagen_path');
+            $table->integer('numberDaysSuscripted')->default(0);
+            $table->date('endSubscriptionDate')->nullable();
+            $table->string('imagen_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
     }
 
     /**

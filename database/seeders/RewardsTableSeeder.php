@@ -28,7 +28,7 @@ class RewardsTableSeeder extends Seeder
         foreach (range(1, 500) as $index) {
             $new_reward = new Reward;
             $new_reward->points = $faker->numberBetween(50, 500);
-            $new_reward->month = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_reward->month = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_reward->isModerator = $faker->boolean;
             $new_reward->user()->associate($faker->numberBetween(501, 700));
             $new_reward->save();

@@ -26,10 +26,10 @@ class ValorationsTableSeeder extends Seeder
 
         foreach (range(1, 350) as $index) {
             $new_valoration = new Valoration;
-            $new_valoration->value = $faker->numberBetween(0, 10);
+            $new_valoration->value = $faker->numberBetween(0, 5);
             $new_valoration->comment = '';
             $new_valoration->isModerator = $faker->boolean;
-            $new_valoration->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_valoration->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_valoration->user()->associate($faker->numberBetween(1, 700));
             $new_valoration->article()->associate($faker->numberBetween(1, 300));
             $new_valoration->save();
@@ -37,10 +37,10 @@ class ValorationsTableSeeder extends Seeder
 
         foreach (range(351, 500) as $index) {
             $new_valoration = new Valoration;
-            $new_valoration->value = $faker->numberBetween(0, 10);
+            $new_valoration->value = $faker->numberBetween(0, 5);
             $new_valoration->comment = $faker->sentence;
             $new_valoration->isModerator = True;
-            $new_valoration->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
+            $new_valoration->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_valoration->user()->associate($faker->numberBetween(701, 850));
             $new_valoration->article()->associate($faker->numberBetween(1, 300));
             $new_valoration->save();
