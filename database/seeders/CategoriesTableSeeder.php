@@ -3,8 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use App\Models\Category;
 
-class CategoryTableSeeder extends Seeder
+
+
+class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,9 +25,9 @@ class CategoryTableSeeder extends Seeder
             $category->delete();
         }
         $lista = ['Ciencia', 'Biologia', 'Computación', 'Machine Learning'];
-        for($i = 0; $i <= $lista.count(); $i++) {
+        foreach ($lista as $category) {
             $new_category = new Category;
-            $new_category->category = $lista[$i];
+            $new_category->category = $category;
             $name = $faker->bankAccountNumber;
             $new_category->save();
         }
