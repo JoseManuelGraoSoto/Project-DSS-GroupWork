@@ -142,4 +142,8 @@ Route::middleware('auth')->group(function () {
     //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
     Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
     Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('status');
+
+    Route::get('/trans', function () {
+        return view('admin.transaction');
+    })->name('transaction');
 });
