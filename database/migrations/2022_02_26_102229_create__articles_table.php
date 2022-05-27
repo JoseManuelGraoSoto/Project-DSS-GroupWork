@@ -22,7 +22,6 @@ class CreateArticlesTable extends Migration
             $table->boolean('acepted');
             $table->boolean('guestAccessible');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->binary('pdf_path');
             $table->timestamps();
         });
@@ -37,7 +36,6 @@ class CreateArticlesTable extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['category_id']);
         });
 
         Schema::dropIfExists('articles');
