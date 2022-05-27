@@ -42,7 +42,7 @@
         <form action="">
             @foreach($categorys as $category)
             <div class="info-db category">
-                <input type="radio" id="{{$category}}" name="{{$category}}" value="{{$category}}" class="display-data">
+                <input type="checkbox" id="{{$category}}" name="{{$category}}" value="1" class="display-data">
                 <label for="{{$category}}">{{$category->category}}</label>
             </div>
         </form>

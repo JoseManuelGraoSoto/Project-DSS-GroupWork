@@ -25,14 +25,12 @@ class CategoryController extends Controller {
         }
         $inputs = $validator->validated();
         $nombre = $request->input('categoria');
-        if(!$this->buscar($nombre)) {
-            dd(TRUE);
+        if(!$this->buscar($nombre, $request)) {
             $new_category = new Category;
             //$new_category = Category::find($request->input('category_id'));
             $new_category->category = $nombre;
             $new_category->save();
         }
-            dd(FALSE);
         return redirect()->action([CategoryController::class, 'search'])->withInput();
     }
     
@@ -40,17 +38,24 @@ class CategoryController extends Controller {
 
     }
 
-    public function buscar($nombre) {
+    public function buscar($nombre, Request $request) {
+
         //$category =  Category::where('category', '==', $nombre)->withQueryString();
         try{
-            $category =  Category::where('category',$nombre);
-            if ($category.wheres.count()) {
-                return true;
-            } else {
-                return false;
+            // $category =  Category::where('categoria', "=", $nombre);
+            $category =  Category::where('categoria');
+/*             $categorys = Category::all();
+            foreach ($categorys as $item) {
+                dd($item->attributes);
+            } */
+            foreach ($request->query() as $item) {
+                if ($category == $item) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } catch (QueryException $e) {
-                dd(TRUE);
             return false;
         }
     }
