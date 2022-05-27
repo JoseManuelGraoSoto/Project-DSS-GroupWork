@@ -16,7 +16,7 @@ class SingleArticleController extends Controller
     public function getArticle(Request $request, $id)
     {
         $article = Article::find($id);
-        $valoration = Valoration::where('user_id', Auth::user()->id)->first();
+        $valoration = Valoration::where('article_id', $id)->where('user_id', Auth::user()->id)->first();
         return view('common.article', ['article' => $article, 'valoration' => $valoration]);
     }
 
@@ -24,6 +24,25 @@ class SingleArticleController extends Controller
         $new_article = Article::find($id);
         $new_article->acepted = 1;
         $new_article->save();
+        return back();
+    }
+
+    public function updateValoration(Request $request, $id) {
+        $valoration = Valoration::where('article_id', $id)->where('user_id', Auth::user()->id)->first();
+        $valoration->value = ($request->input('star') == null) ? 0 : $request->input('star');
+        $valoration->save();
+        return back();
+    }
+
+    public function createValoration(Request $request, $id) {
+        $valoration = new Valoration();
+        $valoration->value = ($request->input('star') == null) ? 0 : $request->input('star');
+        $valoration->user_id = Auth::user()->id;
+        $valoration->article_id =$id;
+        // Hay que quitar lo siguiente
+        $valoration->comment = "";
+        $valoration->isModerator = 0;
+        $valoration->save();
         return back();
     }
 }

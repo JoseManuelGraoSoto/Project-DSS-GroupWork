@@ -38,9 +38,15 @@ Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->name('article');
 
 Route::middleware('auth')->group(function () {
-    // Ruta aceptar articulo
-    Route::post('/article/{id}/accept', [SingleArticleController::class, 'aceptArticle'])->name('article.acept')->middleware('is_moderator');
+    // Crear valoración
+    Route::post('/article/{id}/createValoration', [SingleArticleController::class, 'createValoration'])->name('article.valoration.create');
+    
+    // Actualizar valoración
+    Route::post('/article/{id}/updateValoration', [SingleArticleController::class, 'updateValoration'])->name('article.valoration.update');
 
+    // Ruta aceptar articulo
+    Route::post('/article/{id}/accept', [SingleArticleController::class, 'acceptArticle'])->name('article.acept')->middleware('is_moderator');
+    
     // Ruta biblioteca
     Route::get('/library', [LibraryController::class, 'search'])->name('library');
 

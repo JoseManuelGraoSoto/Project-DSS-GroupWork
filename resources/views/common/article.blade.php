@@ -21,31 +21,68 @@
 </div>
 
 @auth
-{{ $valoration }}
 <section class="mb-5">
-  <form action="{{ route('updateProfile') }}" method="POST" class="d-flex flex-column gap-3">
+  @if($valoration != NULL)
+  <form action="{{ route('article.valoration.update', ['id' => $article->id]) }}" method="POST" class="d-flex flex-column gap-3">
     @csrf
     <div class="stars container d-flex justify-content-center w-100">
       <div>
-        <input class="star star-5" id="star-5" type="radio" name="star" />
+        <input class="star star-5" id="star-5" type="radio" name="star" value="5" {{ ($valoration->value == "5")? "checked" : "" }} />
         <label class="star star-5" for="star-5"></label>
-        <input class="star star-4" id="star-4" type="radio" name="star" />
+        <input class="star star-4" id="star-4" type="radio" name="star" value="4" {{ ($valoration->value == "4")? "checked" : "" }} />
         <label class="star star-4" for="star-4"></label>
-        <input class="star star-3" id="star-3" type="radio" name="star" />
+        <input class="star star-3" id="star-3" type="radio" name="star" value="3" {{ ($valoration->value == "3")? "checked" : "" }} />
         <label class="star star-3" for="star-3"></label>
-        <input class="star star-2" id="star-2" type="radio" name="star" />
+        <input class="star star-2" id="star-2" type="radio" name="star" value="2" {{ ($valoration->value == "2")? "checked" : "" }} />
         <label class="star star-2" for="star-2"></label>
-        <input class="star star-1" id="star-1" type="radio" name="star" />
+        <input class="star star-1" id="star-1" type="radio" name="star" value="1" {{ ($valoration->value == "1")? "checked" : "" }} />
         <label class="star star-1" for="star-1"></label>
       </div>
     </div>
 
-    <div class="container text-center">
-      <button type="submit" class="btn btn-primary rounded-pill py-1 px-3 shadow">VALORAR</button>
+    <div class="d-flex justify-content-center gap-4">
+      <button type="button" id="clean-btn" class="btn btn-primary rounded-pill py-1 px-3 shadow">LIMPIAR</button>
+      <button type="submit" class="btn btn-outline-accent rounded-pill py-1 px-3 shadow">VALORAR</button>
     </div>
   </form>
+  @else
+  <form action="{{ route('article.valoration.create', ['id' => $article->id]) }}" method="POST" class="d-flex flex-column gap-3">
+    @csrf
+    <div class="stars container d-flex justify-content-center w-100">
+      <div>
+        <input class="star star-5" id="star-5" type="radio" name="star" value="5" />
+        <label class="star star-5" for="star-5"></label>
+        <input class="star star-4" id="star-4" type="radio" name="star" value="4" />
+        <label class="star star-4" for="star-4"></label>
+        <input class="star star-3" id="star-3" type="radio" name="star" value="3" />
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" id="star-2" type="radio" name="star" value="2" />
+        <label class="star star-2" for="star-2"></label>
+        <input class="star star-1" id="star-1" type="radio" name="star" value="1" />
+        <label class="star star-1" for="star-1"></label>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-4">
+      <button type="button" id="clean-btn" class="btn btn-primary rounded-pill py-1 px-3 shadow">LIMPIAR</button>
+      <button type="submit" class="btn btn-outline-accent rounded-pill py-1 px-3 shadow">VALORAR</button>
+    </div>
+  </form>
+  @endif
 </section>
 @endauth
+@endsection
+
+@section('scripts')
+<script>
+  document.getElementById('clean-btn').onclick = function() {
+    let inputs = document.querySelectorAll('.star')
+  
+    inputs.forEach(element => {
+      element.checked = false
+    });
+  }
+</script>
 
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 
