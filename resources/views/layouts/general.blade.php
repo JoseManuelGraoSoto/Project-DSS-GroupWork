@@ -9,7 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ URL::asset('css/bst_styles.css'); }}">
-    
+
+    @yield('head')
+
     <title>Invent</title>
 </head>
 
@@ -26,9 +28,11 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href=" {{ route('profile') }} ">Perfil</a></li>
+                @auth
                 @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
                 <li><a class="dropdown-item bg-accent" href=" {{ route('home') }} ">Añadir artículo</a></li>
                 @endif
+                @endauth
                 <div class="dropdown-divider"></div>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
