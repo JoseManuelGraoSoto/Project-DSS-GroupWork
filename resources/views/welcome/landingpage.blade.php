@@ -14,6 +14,8 @@
 </head>
 
 <body>
+    @if(!empty(Session::get('status')))
+    @endif
     <nav id="navbar" class="navbar fixed-top navbar-expand bg-none py-3 navbar-hide-on-scroll">
         <ul class="navbar-nav gap-lg-5 gap-2  ps-3 w-100 h-100 justify-content-start justify-content-md-center align-items-center">
             <li class="nav-item"><a class="nav-link init active" href="#init">Inicio</a></li>
@@ -94,7 +96,7 @@
                     <h1 class="postcard__title blue ps-1"><a href="#">{{$article->title}}</a></h1>
                     <div class="postcard__subtitle small">
                         <time datetime="{{ date('d/m/Y', strtotime($article->created_at)) }}" class="d-flex align-items-center gap-2">
-                            <i class='bx bx-calendar-alt fs-5' ></i>
+                            <i class='bx bx-calendar-alt fs-5'></i>
                             {{ date('d/m/Y', strtotime($article->created_at)) }}
                         </time>
                     </div>
@@ -104,15 +106,15 @@
                         <ul class="list-inline small">
                             @for($i = 0; $i < $article->value; $i++)
                                 <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                            @endfor
+                                @endfor
 
-                            @if(($article->value*10)%10 != 0)
+                                @if(($article->value*10)%10 != 0)
                                 <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
-                            @endif
+                                @endif
 
-                            @for($i = 0; $i < (10-$article->value); $i++) 
-                                <li class="list-inline-item m-0"><i class='bx bx-star' ></i></li>
-                            @endfor
+                                @for($i = 0; $i < (10-$article->value); $i++)
+                                    <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                    @endfor
                         </ul>
                         <span>{{ $article->name }}</span>
                     </div>

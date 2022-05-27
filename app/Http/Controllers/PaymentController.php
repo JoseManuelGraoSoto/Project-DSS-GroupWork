@@ -65,7 +65,7 @@ class PaymentController extends Controller
             $payment->create($this->apiContext);
             //echo $payment;
 
-            return redirect()->away($payment->getApprovalLink())->withInput(['hola' => 'a']);
+            return redirect()->away($payment->getApprovalLink());
         } catch (PayPalConnectionException $ex) {
 
             // This will print the detailed information on the exception.
@@ -76,7 +76,6 @@ class PaymentController extends Controller
 
     public function paypalStatus(Request $request)
     {
-        error_log('bvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv' . $request->input('hola'));
         $paymentId = $request->input(key: 'paymentId');
         $payerId = $request->input(key: 'PayerID');
         $token = $request->input(key: 'token');
@@ -96,7 +95,7 @@ class PaymentController extends Controller
             $user->endSubscriptionDate = date('Y-m-d');
             $user->save();
             $status = 'Gracias! El pago a traves de PayPal se ha realizado correctamente.';
-            return view('client.results', compact('status', 'result'));
+            return redirect()->route('home')->with('status', $status);
         }
 
         $status = 'Lo Sentimos! No se pudo realizar el pago a traves de PayPal';
