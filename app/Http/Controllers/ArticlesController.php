@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Article_user;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+
 use DB;
 
 class ArticlesController extends Controller
