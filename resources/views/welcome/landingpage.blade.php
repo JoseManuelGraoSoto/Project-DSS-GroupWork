@@ -89,7 +89,7 @@
             @foreach($articles as $article)
             <article class="postcard dark blue">
                 <a class="postcard__img_link" href="{{route('article', ['id' => $article->id])}}">
-                    <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="{{$article->title}}" />
+                    <img class="postcard__img" src="{{ URL::asset('img/postcard_bg.jpg'); }}" alt="{{$article->title}}" />
                 </a>
                 <div class="postcard__text">
                     <h1 class="postcard__title blue ps-1"><a href="{{route('article', ['id' => $article->id])}}">{{$article->title}}</a></h1>
@@ -101,20 +101,41 @@
                     </div>
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{$article->content}}</div>
-                    <div class="d-flex justify-content-between">
-                        <ul class="list-inline small">
-                            @for($i = 0; $i < $article->value; $i++)
-                                <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                                @endfor
-
+                    <div class="d-flex justify-content-between align-items-end mt-5">
+                        <div class="d-flex flex-column justify-content-between gap-1">
+                            <ul class="list-inline small m-0">                              
                                 @if(($article->value*10)%10 != 0)
-                                <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
-                                @endif
-
-                                @for($i = 0; $i < (10-$article->value); $i++)
-                                    <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                    @for($i = 0; $i < ($article->value-1); $i++)
+                                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
                                     @endfor
-                        </ul>
+
+                                    <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
+                                    
+                                    @for($i = 0; $i < (4-$article->value); $i++)
+                                        <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                    @endfor
+                                @else
+                                    @for($i = 0; $i < $article->value; $i++)
+                                        <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                                    @endfor
+
+                                    @for($i = 0; $i < (5-$article->value); $i++)
+                                        <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                    @endfor
+                                @endif
+                            </ul>
+                            <span class="small">
+                                @if(!$article->value)
+                                    0
+                                @else
+                                    @if(($article->value*10)%10 != 0)
+                                        {{ number_format($article->value, 1) }}
+                                    @else
+                                        {{ number_format($article->value, 0) }}
+                                    @endif
+                                @endif
+                            </span>
+                        </div>
                         <span>{{ $article->name }}</span>
                     </div>
                 </div>
