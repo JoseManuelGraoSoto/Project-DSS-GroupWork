@@ -24,7 +24,7 @@
     </select>
 
     <div class="upload-txt">
-        <input type="file" name="selec-txt" id="selec-txt" accept="text/plain, .pdf, .doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <input type="file" name="selec-txt" id="selec-txt" accept=".pdf">
         <label for="selec-txt">Contenido del artículo</label>
     </div>
 </div>

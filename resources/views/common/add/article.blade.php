@@ -58,7 +58,7 @@
 
                 <div class="d-flex flex-column justify-content-center gap-3 p-4">
                     <div class="container">
-                        <input type="file" name="selec-txt" class="form-control" id="ArticlePDF" accept="text/plain, .pdf, .doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                        <input type="file" name="selec-txt" class="form-control" id="ArticlePDF" accept=".pdf" />
                     </div>
 
                     <div class="d-flex justify-content-center">

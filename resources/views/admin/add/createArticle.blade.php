@@ -22,7 +22,7 @@
         <option value="Machine Learning" {{(strcmp(old('category'), 'Machine Learning') == 0) ? 'selected' : ''}}>Machine Learning</option>
     </select>
     <div class="upload-txt">
-        <input type="file" id="selec-txt" name="selec-txt" accept="text/plain, .pdf, .doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <input type="file" id="selec-txt" name="selec-txt" accept=".pdf">
         <label for="selec-txt">Contenido del artículo</label>
     </div>
 </div>
