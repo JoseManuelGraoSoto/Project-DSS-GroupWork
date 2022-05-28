@@ -31,7 +31,7 @@
                 </li>
                 @endforeach
                 <div id="addCategory" class="flex-container flex-center flex-aligned-center">
-                    <span>La categoría no existe, <a href="{{ route('category.create') }}"></a></span>
+                    <span>La categoría no existe, <a href="#"></a></span>
                 </div>
             </ul>
 
@@ -69,15 +69,16 @@
                 }
             });
 
-       if(count == 0) {
-            let route = '{{ route("category.create", ":filter") }}';
-            route = route.replace(":filter", $(filter).val());
-            $('#addCategory span a').attr('href', route);
-            $('#addCategory span a').text("crear la categoría " + $(filter).val());
-            $('#addCategory').fadeIn();
-        } else {
-            $('#addCategory').fadeOut();
-        }
+            if (count == 0) {
+                let route = '{{ route("category.create", ":filter") }}';
+                route = route.replace(":filter", $(filter).val());
+                $('#addCategory span a').attr('href', route);
+                $('#addCategory span a').text("crear la categoría " + $(filter).val());
+                $('#addCategory').fadeIn();
+            } else {
+                $('#addCategory').fadeOut();
+            }
+        });
     });
 </script>
 

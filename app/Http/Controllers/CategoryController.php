@@ -15,45 +15,18 @@ class CategoryController extends Controller
         return view('admin.category', ['category' => $categorys]);
     } */
 
-    public function create($name)
+    public function create(Request $request, $name)
     {
-        error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbb');
-        /*
-        $validator = Validator::make($request->all(), [
-            'search-category' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return redirect(route('category'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-        $inputs = $validator->validated();
-        $nombre = $inputs['search-category'];
-        if (!$this->buscar($nombre)) {
-            $new_category = new Category;
-            //$new_category = Category::find($request->input('category_id'));
-            $new_category->category = $nombre;
-            $new_category->save();
-        }
-        */
-        return redirect()->action([CategoryController::class, 'showAll'])->withInput();
+        $new_category = new Category;
+        $new_category->category = $name;
+        $new_category->save();
+        return back();
     }
 
     public function showAll()
     {
         $categorys = Category::all();
         return view('admin.category', ['categorys' => $categorys]);
-    }
-
-    public function buscar($nombre)
-    {
-        $categorys = Category::where('category', '=', $nombre)->get();
-        $existe = $categorys->count();
-        if ($existe == 1) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function delete(Request $request)
