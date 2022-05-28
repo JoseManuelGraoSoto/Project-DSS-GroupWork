@@ -20,7 +20,6 @@ use DateInterval;
 use DateTimeZone;
 use DateTime;
 
-
 class PaymentController extends Controller
 {
     private  $apiContext;
@@ -86,7 +85,7 @@ class PaymentController extends Controller
         if (!$paymentId || !$payerId || !$token) {
             $result = Null;
             $status = 'No se pudo procesar el pago a traves de PayPal';
-            return abort(409);
+            return abort(400);
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -164,7 +163,6 @@ class PaymentController extends Controller
                         break;
                     case 99.99:
                         $new_transaction->concept = '1 year subscription';
-
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -184,6 +182,6 @@ class PaymentController extends Controller
         }
 
         $status = 'Lo Sentimos! No se pudo realizar el pago a traves de PayPal';
-        return abort(409);
+        return abort(400);
     }
 }
