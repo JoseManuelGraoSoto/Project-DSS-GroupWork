@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <nav id="navbar" class="navbar fixed-top navbar-expand bg-none py-3 navbar-hide-on-scroll">
         <ul class="navbar-nav gap-lg-5 gap-2  ps-3 w-100 h-100 justify-content-start justify-content-md-center align-items-center">
             <li class="nav-item"><a class="nav-link init active" href="#init">Inicio</a></li>

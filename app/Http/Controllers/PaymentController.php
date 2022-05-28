@@ -13,6 +13,13 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use Paypal\Exception\PayPalConnectionException;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\TransactionUser;
+use DateInterval;
+use DateTimeZone;
+use DateTime;
+
 
 class PaymentController extends Controller
 {
@@ -20,21 +27,21 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $payPalConfig = Config::get(key:'paypal');
+        $payPalConfig = Config::get(key: 'paypal');
 
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
-              $payPalConfig['client_id'], 
-              $payPalConfig['secret']
+                $payPalConfig['client_id'],
+                $payPalConfig['secret']
             )
         );
     }
 
-    public function payWithPayPal(Request $request){
+    public function payWithPayPal(Request $request)
+    {
         // After Step 2
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
-        
 
         //Solo hay que cambiar esto, dependiendo el boton que se seleccione, el precio de la suscrpción cambiará
         $amount = new Amount();
@@ -45,7 +52,7 @@ class PaymentController extends Controller
         $transaction->setAmount($amount);
         $transaction->setDescription(description: 'Tu Plan ha sido activado');
 
-        $callBackUrl=url(path:'/paypal/status');
+        $callBackUrl = url(path: '/paypal/status');
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callBackUrl)
             ->setCancelUrl($callBackUrl);
@@ -56,40 +63,127 @@ class PaymentController extends Controller
             ->setTransactions(array($transaction))
             ->setRedirectUrls($redirectUrls);
 
+
         // After Step 3
         try {
             $payment->create($this->apiContext);
             //echo $payment;
+
             return redirect()->away($payment->getApprovalLink());
-        }
-        catch (PayPalConnectionException $ex) {
+        } catch (PayPalConnectionException $ex) {
+
             // This will print the detailed information on the exception.
             //REALLY HELPFUL FOR DEBUGGING
             echo $ex->getData();
         }
     }
 
-    public function paypalStatus(Request $request){
-        $paymentId = $request->input(key:'paymentId');
-        $payerId = $request->input(key:'PayerID');
-        $token = $request->input(key:'token');
-        if(!$paymentId || !$payerId || !$token){
+    public function paypalStatus(Request $request)
+    {
+        $paymentId = $request->input(key: 'paymentId');
+        $payerId = $request->input(key: 'PayerID');
+        $token = $request->input(key: 'token');
+        if (!$paymentId || !$payerId || !$token) {
             $result = Null;
             $status = 'No se pudo procesar el pago a traves de PayPal';
-            return view('client.results', compact('status', 'result'));
+            return abort(409);
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
+
         $execution = new PaymentExecution(); //Contiene al payerId
         $execution->setPayerId($payerId);
+
         $result = $payment->execute($execution, $this->apiContext);
-        
-        if($result->getState() === 'approved'){
+        $transaction = $payment->getTransactions()[0];
+        $amount = $transaction->getAmount()->total;
+        if ($result->getState() === 'approved') {
+            $user = User::find(Auth::id());
+            $new_transaction = new TransactionUser;
+            $new_transaction->user()->associate($user);
+            $new_transaction->price = $amount;
+            if ($user->type === 'Author') {
+                switch ($amount) {
+                    case 29.99:
+                        $new_transaction->concept = '1 month subscription';
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P1M'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                    case 74.99:
+                        $new_transaction->concept = '3 months subscription';
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P3M'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                    case 199.99:
+                        $new_transaction->concept = '1 year subscription';
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P1Y'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                }
+            } else {
+                switch ($amount) {
+                    case 9.99:
+                        $new_transaction->concept = '1 month subscription';
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P1M'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                    case 24.99:
+                        $new_transaction->concept = '3 months subscription';
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P3M'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                    case 99.99:
+                        $new_transaction->concept = '1 year subscription';
+
+                        $timeZone = new DateTimeZone('Europe/Madrid');
+                        $dateNow = new DateTime();
+                        $dateNow->setTimezone($timeZone);
+                        $start = $dateNow->getTimestamp();
+                        $dateNow->add(new DateInterval('P1Y'));
+                        $end = $dateNow->getTimestamp();
+                        $user->numberDaysSuscripted += ($end - $start) / 86400;
+                        $user->endSubscriptionDate = $dateNow->format('Y-m-d');
+                        break;
+                }
+            }
+            $new_transaction->save();
+            $user->save();
+
             $status = 'Gracias! El pago a traves de PayPal se ha realizado correctamente.';
-            return view('client.results', compact('status', 'result'));
+            return redirect()->route('home')->with('status', $status);
         }
 
         $status = 'Lo Sentimos! No se pudo realizar el pago a traves de PayPal';
-        return view('client.results', compact('status', 'result'));
+        return abort(409);
     }
 }
