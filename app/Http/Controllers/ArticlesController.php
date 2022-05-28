@@ -8,6 +8,7 @@ use App\Models\Article_user;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
 
@@ -84,6 +85,7 @@ class ArticlesController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'selec-txt' => 'required',
+            'description' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -100,13 +102,13 @@ class ArticlesController extends Controller
             $nombreImagen = $img->getClientOriginalName();
             \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
         }
-        $user = User::where('email', $inputs['author'])->firstOrFail();
-        $categoria = $inputs['category'];
+        $user = User::find(Auth::id());
+        $categoria = 'Ciencia';
         $categoria2 = Category::where('category', $categoria)->firstOrFail();
         $new_article = new Article;
         $new_article->title = $inputs['title'];
-        $new_article->category = 
-        $new_article->valoration = $inputs['quantity'];
+        $new_article->category = $categoria;
+        $new_article->valoration = 0;
         $new_article->pdf_path = $nombreImagen;
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = $request->has('accepted');
@@ -114,7 +116,7 @@ class ArticlesController extends Controller
         $new_article->category_id = $categoria2->id;
         $new_article->user()->associate($user);
         $new_article->save();
-        return redirect()->action([ArticlesController::class, 'search'])->withInput();
+        return back();
     }
     // Devuelve el formulario de actualización de Article
     public function updateArticleFormulary(Request $request)

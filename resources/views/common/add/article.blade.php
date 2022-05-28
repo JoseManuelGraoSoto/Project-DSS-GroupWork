@@ -11,7 +11,7 @@
         </div>
     </nav>
 
-    <form action="{{ route('createArticleUser') }}" method="POST">
+    <form action="{{ route('createArticleUser') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="tab-content card shadow mt-2 py-3" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -45,11 +45,6 @@
                         <textarea type="textarea" class="form-control" id="ArticleDescription" name="description"
                             rows="8"></textarea>
                     </div>
-
-                    <div class="container text-end">
-                        <button id="next-btn" class="btn btn-primary px-5" type="submit">Siguiente</button>
-                        <a class="btn btn-primary" href="#" id="btnReview">Review</a>
-                    </div>
                 </div>
             </div>
 
@@ -63,7 +58,7 @@
 
                 <div class="d-flex flex-column justify-content-center gap-3 p-4">
                     <div class="container">
-                        <input type="file" name="selec-txt" class="form-control" id="ArticlePDF" accept=".pdf" />
+                        <input type="file" name="selec-txt" class="form-control" id="ArticlePDF" accept="text/plain, .pdf, .doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
                     </div>
 
                     <div class="d-flex justify-content-center">
@@ -114,11 +109,11 @@ document.addEventListener("adobe_dc_view_sdk.ready", function() {
     adobeDCView.previewFile({
         content: {
             location: {
-                url: "{{ URL::asset('sample.pdf'); }}"
+                url: "{{  URL::asset('storage/articles/prueba.pdf');  }}"
             }
         },
         metaData: {
-            fileName: "sample.pdf"
+            fileName: "prueba.pdf",
         }
     }, {
         embedMode: "IN_LINE",
