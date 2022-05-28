@@ -161,7 +161,7 @@ Route::middleware('auth')->group(function () {
 // Rutas suscripcion
 Route::get('/subscrip', function () {
     return view('client.subscrip');
-})->name('suscripcion');
+})->name('subscribe');
 
 //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
 Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
