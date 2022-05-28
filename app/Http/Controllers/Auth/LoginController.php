@@ -34,7 +34,7 @@ class LoginController extends Controller
         if ($user->endSubscriptionDate >= date('Y-m-d')) {
             return RouteServiceProvider::HOME;
         } else {
-            return RouteServiceProvider::SUSCRIP;
+            return abort(409);
         }
     }
 
