@@ -1,7 +1,7 @@
 @extends('layouts.general')
 
 @section('body-section')
-<div class="row mt-5">
+<div class="row mt-5 w-100">
     <div class="col-11 col-sm-10 mx-auto">
         <div class="shadow bg-terciary text-secondary p-3">
             <div class="d-flex justify-content-spaced">
@@ -45,9 +45,8 @@
     </div>
 </div>
 
-<!-- 2 Ejemplos -->
-<div class="row mt-5">
-    <div class="col-lg-8 mx-auto">
+<div class="row mt-5 mx-0 w-100 d-flex justify-content-center">
+    <div class="col-lg-8">
         <!-- List group-->
         <ul class="list-group shadow">
             @foreach($articles as $article)
@@ -56,22 +55,54 @@
                 <!-- Custom content-->
                 <div class="media align-items-center d-flex justify-content-evenly flex-column  flex-lg-row p-3">
                     <div class="media-body order-2 order-lg-1 w-100">
-                        <h5 class="mt-0 font-weight-bold mb-2">
-                            <a href="{{ route('article', ['id' => $article->id]) }}" class="text-decoration-none text-primary">{{$article->title}}</a>
-                        </h5>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mt-0 font-weight-bold mb-2">
+                                <a href="{{ route('article', ['id' => $article->id]) }}" class="text-decoration-none text-primary">{{$article->title}}</a>
+                            </h5>
+                            <time datetime="{{ date('d/m/Y', strtotime($article->created_at)) }}" class="text-muted fst-italic">
+                                {{ date('d/m/Y', strtotime($article->created_at)) }}
+                            </time>
+                        </div>
                         <p class="font-italic text-muted mb-0 small">{{$article->content}}</p>
-                        <div class="d-flex align-items-center gap-5 mt-1">
+                        <div class="d-flex justify-content-between align-items-end mt-4">
                             <h6 class="font-weight-bold my-2">{{$article->name}}</h6>
 
-                            <ul class="list-inline small">
-                                @for($i = 0; $i < $article->value; $i++)
-                                    <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
-                                    @endfor
-                            </ul>
+                            <div class="d-flex flex-column align-items-end">
+                                <ul class="list-inline small">
+                                    @if(($article->value*10)%10 != 0)
+                                        @for($i = 0; $i < ($article->value-1); $i++)
+                                            <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                                        @endfor
+    
+                                        <li class="list-inline-item m-0"><i class='bx bxs-star-half'></i></li>
+                                        
+                                        @for($i = 0; $i < (4-$article->value); $i++)
+                                            <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                        @endfor
+                                    @else
+                                        @for($i = 0; $i < $article->value; $i++)
+                                            <li class="list-inline-item m-0"><i class='bx bxs-star'></i></li>
+                                        @endfor
+    
+                                        @for($i = 0; $i < (5-$article->value); $i++)
+                                            <li class="list-inline-item m-0"><i class='bx bx-star'></i></li>
+                                        @endfor
+                                    @endif
+                                </ul>
+                                <span class="small">
+                                    @if(!$article->value)
+                                        0
+                                    @else
+                                        @if(($article->value*10)%10 != 0)
+                                            {{ number_format($article->value, 1) }}
+                                        @else
+                                            {{ number_format($article->value, 0) }}
+                                        @endif
+                                    @endif
+                                </span>
+                            </div>
                         </div>
                     </div>
-
-                    <img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                 </div>
                 <!-- End -->
             </li>
@@ -81,6 +112,10 @@
         </ul>
         <!-- End -->
     </div>
+</div>
+
+<div class="d-flex justify-content-center py-5">
+    {{ $articles->links('vendor.pagination.bootstrap-4') }}
 </div>
 @endsection
 
