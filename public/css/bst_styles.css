@@ -95,6 +95,14 @@
     letter-spacing: 1px;
 }
 
+.alert-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.alert-accent {
+    background-color: var(--accent-color) !important;
+}
+
 .badge {
     width: 75px;
 }
