@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Reward;
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 use DB;
 
 class HomeController extends Controller

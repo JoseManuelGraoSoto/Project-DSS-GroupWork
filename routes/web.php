@@ -11,6 +11,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SingleArticleController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +36,20 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 
 // Ruta articulo
-Route::get('/article/{id}', function () {
-    return view('common.article');
-})->name('article');
+Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->name('article');
 
 Route::middleware('auth')->group(function () {
+    // Crear valoración
+    Route::post('/article/{id}/createValoration', [SingleArticleController::class, 'createValoration'])->name('article.valoration.create');
+
+    // Actualizar valoración
+    Route::post('/article/{id}/updateValoration', [SingleArticleController::class, 'updateValoration'])->name('article.valoration.update');
+
+    // Ruta aceptar articulo
+    Route::post('/article/{id}/accept', [SingleArticleController::class, 'acceptArticle'])->name('article.acept')->middleware('is_moderator');
+
     // Ruta biblioteca
-    Route::get(
-        '/library',
-        [LibraryController::class, 'search']
-    )->name('library');
+    Route::get('/library', [LibraryController::class, 'search'])->name('library');
 
     // Ruta perfil
     Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
@@ -53,7 +59,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('is_admin')->group(function () {
         //Rutas users
         //Getters
-        Route::get('/admin', function () { return view('admin.init'); })->name('adminHome');
+        Route::get('/admin', function () {
+            return view('admin.init');
+        })->name('adminHome');
 
         //Rutas users
         //Getters
@@ -143,20 +151,17 @@ Route::middleware('auth')->group(function () {
 
 
         // Rutas category
-        Route::get('/category', function () { return view('admin.category'); })->name('category');
+        Route::get('/category', [CategoryController::class, 'search'])->name('category');
+        Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
+
+        Route::get('/transaction', [TransactionController::class, 'search'])->name('transaction');
     });
 });
 
-    // Rutas category
-/*     Route::get('/category', function () {
-        return view('admin.category');
-    })->name('category'); */
-  
-    Route::get('/category', [CategoryController::class, 'search'])->name('category');
-    // Rutas suscripcion
-    Route::get('/subscrip', function () {
-        return view('client.subscrip');
-    })->name('suscripcion');
+// Rutas suscripcion
+Route::get('/subscrip', function () {
+    return view('client.subscrip');
+})->name('suscripcion');
 
 //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
 Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');

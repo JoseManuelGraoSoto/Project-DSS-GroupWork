@@ -50,6 +50,7 @@
                 </li>
             </ul>
         </div>
+        
         <a href="{{ route('library') }}" class="btn small btn-primary top-right-btn">biblioteca</a>
         @endguest
     </nav>
@@ -88,11 +89,11 @@
             </div>
             @foreach($articles as $article)
             <article class="postcard dark blue">
-                <a class="postcard__img_link" href="#">
+                <a class="postcard__img_link" href="{{route('article', ['id' => $article->id])}}">
                     <img class="postcard__img" src="{{ URL::asset('img/paper.png'); }}" alt="{{$article->title}}" />
                 </a>
                 <div class="postcard__text">
-                    <h1 class="postcard__title blue ps-1"><a href="#">{{$article->title}}</a></h1>
+                    <h1 class="postcard__title blue ps-1"><a href="{{route('article', ['id' => $article->id])}}">{{$article->title}}</a></h1>
                     <div class="postcard__subtitle small">
                         <time datetime="{{ date('d/m/Y', strtotime($article->created_at)) }}" class="d-flex align-items-center gap-2">
                             <i class='bx bx-calendar-alt fs-5'></i>

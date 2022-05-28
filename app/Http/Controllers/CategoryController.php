@@ -9,21 +9,26 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller { 
+/*     public function showAll($categorys) {
+        $categorys = Category::paginate(7);
+        return view('admin.category', ['category' => $categorys]);
+    } */
+
     public function create(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'categoria' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect(route('admin.category'))
+            return redirect(route('category'))
                 ->withErrors($validator)
                 ->withInput();
         }
         $inputs = $validator->validated();
-        $nombre = $request->input('name');
-        if(!buscar($nombre)) {
+        $nombre = $request->input('categoria');
+        if(!$this->buscar($nombre, $request)) {
             $new_category = new Category;
-            $new_category = Category::find($request->input('category_id'));
-            $new_category->name = $nombre;
+            //$new_category = Category::find($request->input('category_id'));
+            $new_category->category = $nombre;
             $new_category->save();
         }
         return redirect()->action([CategoryController::class, 'search'])->withInput();
@@ -33,18 +38,35 @@ class CategoryController extends Controller {
 
     }
 
-    public function buscar($nombre) {
-        $users =  Category::where('name', '==', '%'.$nombre.'%')->orderBy('name', 'desc')->withQueryString();
-        if ($users.count() == 1) {
-            return true;
-        } else {
+    public function buscar($nombre, Request $request) {
+
+        //$category =  Category::where('category', '==', $nombre)->withQueryString();
+        try{
+            // $category =  Category::where('categoria', "=", $nombre);
+            $category =  Category::where('categoria');
+/*             $categorys = Category::all();
+            foreach ($categorys as $item) {
+                dd($item->attributes);
+            } */
+            foreach ($request->query() as $item) {
+                if ($category == $item) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (QueryException $e) {
             return false;
         }
     }
 
     public function search(Request $request) {
         $nombre = $request->input('name');
-        $categorys =  Category::where('name', 'LIKE', '%'.$nombre.'%')->orderBy('name', 'desc')->withQueryString();
+        if($nombre == null) {
+            $categorys = Category::paginate(7);
+        } else {
+            $categorys =  Category::where('name', 'LIKE', '%'.$nombre.'%')->orderBy('name', 'desc')->paginate(7)->withQueryString();
+        }
         return view('admin.category', ['categorys' => $categorys]);
     }
 
