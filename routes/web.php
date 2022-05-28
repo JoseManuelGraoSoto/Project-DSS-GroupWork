@@ -149,7 +149,6 @@ Route::middleware('auth')->group(function () {
         //Delete
         Route::get('/rewards/delete', [RewardController::class, 'delete']);
 
-
         // Rutas category
         Route::get('/category', [CategoryController::class, 'search'])->name('category');
         Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
