@@ -20,6 +20,6 @@ class IsModerator
             return $next($request);
         }
    
-        return redirect('/')->with('error',"You don't have moderator privileges.");
+        return abort(403);
     }
 }
