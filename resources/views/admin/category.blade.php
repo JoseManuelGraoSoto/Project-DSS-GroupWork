@@ -69,17 +69,15 @@
                 }
             });
 
-
-            if (count == 0) {
-                let route = '{{ route("category.create", ":filter") }}';
-                route.replace(":filter", $(filter).val());
-                $('#addCategory span a').attr('href', route);
-                $('#addCategory span a').text("crear la categoría " + $(filter).val());
-                $('#addCategory').fadeIn();
-            } else {
-                $('#addCategory').fadeOut();
-            }
-        });
+       if(count == 0) {
+            let route = '{{ route("category.create", ":filter") }}';
+            route = route.replace(":filter", $(filter).val());
+            $('#addCategory span a').attr('href', route);
+            $('#addCategory span a').text("crear la categoría " + $(filter).val());
+            $('#addCategory').fadeIn();
+        } else {
+            $('#addCategory').fadeOut();
+        }
     });
 </script>
 
