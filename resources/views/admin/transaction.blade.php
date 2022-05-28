@@ -1,74 +1,84 @@
 @extends('layouts.adminDB')
 
 @section('text-inputs')
-<input type="text" name="title" id="title" placeholder="Titulo del artículo">
 <input type="text" name="email" id="email" placeholder="Email del usuario">
 @endsection
 
-@section('valorations-nav')
+@section('transactions-nav')
 <div class="nav-item selected flex-container flex-aligned-center">
-    <i class='bx bxs-star'></i>
-    <span class="nav-label">Valoraciones</span>
+    <i class='bx bx-money-withdraw'></i>
+    <span class="nav-label">Transacciónes</span>
 </div>
 @endsection
 
-@section('main-buttons')
-<button id="delete-btn" style="text-decoration: none;">
-    <i class='bx bx-trash'></i>
-    ELIMINAR VALORACIÓN
-</button>
+@section('user-type')
+<div class="user-type flex-container flex-vertical flex-aligned-center">
+    <div class="types flex-container">
+        <div class="type">
+            <input checked="" type="checkbox" name="authorCheckbox" id="author-type" class="hidden-xs-up">
+            <label for="author-type" class="cbx">
+                <div class="type-tooltip">
+                    <span>Autor</span>
+                    <i class='bx bxs-down-arrow'></i>
+                </div>
+            </label>
+        </div>
+        <div class="type">
+            <input checked="" type="checkbox" name="moderatorCheckbox" id="moderator-type" class="hidden-xs-up">
+            <label for="moderator-type" class="cbx">
+                <div class="type-tooltip">
+                    <span>Moderador</span>
+                    <i class='bx bxs-down-arrow'></i>
+                </div>
+            </label>
+        </div>
+        <div class="type">
+            <input checked="" type="checkbox" name="readerCheckbox" id="reader-type" class="hidden-xs-up">
+            <label for="reader-type" class="cbx">
+                <div class="type-tooltip">
+                    <span>Lector</span>
+                    <i class='bx bxs-down-arrow'></i>
+                </div>
+            </label>
+        </div>
+    </div>
 
-<a href="{{ route('valoration.createForm') }}" style="text-decoration: none;">
-    <i class='bx bx-plus'></i>
-    AÑADIR VALORACIÓN
-</a>
+    <span class="type-title">Tipo de usuario</span>
+</div>
 @endsection
 
 @section('display')
 <div class="upper-separator valoration">
     <span class="display-data-label">ID</span>
-    <span class="display-data-label">Artículo</span>
     <span class="display-data-label">Usuario</span>
-    <span class="display-data-label">Valoración</span>
-    <span class="display-data-label">Tipo Usuario</span>
-    <span class="display-data-label">Comentario</span>
+    <span class="display-data-label">Tipo de Usuario</span>
+    <span class="display-data-label">Precio</span>
+    <span class="display-data-label">Concepto</span>
     <span class="display-data-label">Fecha de creación</span>
     <div class="separator"></div>
 </div>
 
-@foreach($valorations as $valoration)
+@foreach($transactions as $transaction)
 <div class="info-db valoration">
-    <span id="id" class="display-data">{{$valoration->id}}</span>
-    <span class="display-data">{{$valoration->article->title}}</span>
-    <span class="display-data">{{$valoration->user->email}}</span>
-    <span class="display-data">{{$valoration->value}}</span>
-    <span class="display-data">
-        @if ($valoration->type == 'reader')
+    <span id="id" class="display-data">{{$transaction->id}}</span>
+    <span class="display-data">{{$transaction->email}}</span>
+    <span class="display-data">@if ($transaction->type == 'reader')
         Lector
-        @elseif ($valoration->type == 'author')
+        @elseif ($transaction->type == 'author')
         Autor
-        @elseif ($valoration->type == 'moderator')
+        @elseif ($transaction->type == 'moderator')
         Moderador
-        @elseif ($valoration->type == 'administrator')
-        Administrador
         @else
         No se ha identificado el tipo del usuario
-        @endif
-    </span>
-    <span class="display-data">{{$valoration->comment}}</span>
-    <span class="display-data">{{$valoration->created_at}}</span>
-    <form action=" {{ route('valoration.updateForm') }}" method="GET">
-        <input type="hidden" name="valoration_id" value="{{$valoration->id}}">
-        <button class="edit-btn">
-            <i class='bx bx-rotate-right'></i>
-            EDITAR
-        </button>
-    </form>
+        @endif</span>
+    <span class="display-data">{{$transaction->price}}</span>
+    <span class="display-data">{{$transaction->concept}}</span>
+    <span class="display-data">{{$transaction->created_at}}</span>
 </div>
 
 @endforeach
 @endsection
 
 @section('paginate')
-{{ $valorations->links('vendor.pagination.custom') }}
+{{ $transactions->links('vendor.pagination.custom') }}
 @endsection

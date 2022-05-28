@@ -12,6 +12,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SingleArticleController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,13 +41,13 @@ Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->nam
 Route::middleware('auth')->group(function () {
     // Crear valoración
     Route::post('/article/{id}/createValoration', [SingleArticleController::class, 'createValoration'])->name('article.valoration.create');
-    
+
     // Actualizar valoración
     Route::post('/article/{id}/updateValoration', [SingleArticleController::class, 'updateValoration'])->name('article.valoration.update');
 
     // Ruta aceptar articulo
     Route::post('/article/{id}/accept', [SingleArticleController::class, 'acceptArticle'])->name('article.acept')->middleware('is_moderator');
-    
+
     // Ruta biblioteca
     Route::get('/library', [LibraryController::class, 'search'])->name('library');
 
@@ -152,9 +153,8 @@ Route::middleware('auth')->group(function () {
         // Rutas category
         Route::get('/category', [CategoryController::class, 'search'])->name('category');
         Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
-      
-        Route::get('/trans', function () {
-          return view('admin.transaction');})->name('transaction');
+
+        Route::get('/transaction', [TransactionController::class, 'search'])->name('transaction');
     });
 });
 
@@ -166,4 +166,3 @@ Route::get('/subscrip', function () {
 //Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
 Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
 Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('status');
-

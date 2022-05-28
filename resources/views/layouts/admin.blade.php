@@ -85,6 +85,16 @@
                 <span class="nav-tooltip">Recompensas</span>
                 @show
             </li>
+
+            <li>
+                @section('transactions-nav')
+                <a href="{{ route('transaction') }}" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bx-money-withdraw'></i>
+                    <span class="nav-label">Transacciónes</span>
+                </a>
+                <span class="nav-tooltip">Transacciónes</span>
+                @show
+            </li>
         </ul>
 
         <div class="profile-content">
