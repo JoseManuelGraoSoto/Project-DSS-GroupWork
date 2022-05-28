@@ -99,9 +99,13 @@ class PaymentController extends Controller
         $amount = $transaction->getAmount()->total;
         if ($result->getState() === 'approved') {
             $user = User::find(Auth::id());
+            $new_transaction = new TransactionUser;
+            $new_transaction->user()->associate($user);
+            $new_transaction->price = $amount;
             if ($user->type === 'Author') {
                 switch ($amount) {
                     case 29.99:
+                        $new_transaction->concept = '1 month subscription';
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -112,6 +116,7 @@ class PaymentController extends Controller
                         $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                         break;
                     case 74.99:
+                        $new_transaction->concept = '3 months subscription';
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -122,6 +127,7 @@ class PaymentController extends Controller
                         $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                         break;
                     case 199.99:
+                        $new_transaction->concept = '1 year subscription';
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -135,6 +141,7 @@ class PaymentController extends Controller
             } else {
                 switch ($amount) {
                     case 9.99:
+                        $new_transaction->concept = '1 month subscription';
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -145,6 +152,7 @@ class PaymentController extends Controller
                         $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                         break;
                     case 24.99:
+                        $new_transaction->concept = '3 months subscription';
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -155,6 +163,8 @@ class PaymentController extends Controller
                         $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                         break;
                     case 99.99:
+                        $new_transaction->concept = '1 year subscription';
+
                         $timeZone = new DateTimeZone('Europe/Madrid');
                         $dateNow = new DateTime();
                         $dateNow->setTimezone($timeZone);
@@ -166,7 +176,7 @@ class PaymentController extends Controller
                         break;
                 }
             }
-
+            $new_transaction->save();
             $user->save();
 
             $status = 'Gracias! El pago a traves de PayPal se ha realizado correctamente.';

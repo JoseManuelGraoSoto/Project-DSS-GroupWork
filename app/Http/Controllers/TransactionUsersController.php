@@ -12,8 +12,8 @@ class TransactionUsersController extends Controller
     //Devuelve la vista articlesList pasándole como parámetro todos los articulos
     public function showAll()
     {
-        $transactionUsers = TransactionUser::paginate(7);
-        return view('admin.transaction', ['transactionUsers' => $transactionUsers]);
+        $transaction_users = TransactionUser::paginate(7);
+        return view('admin.transaction', ['transactions' => $transaction_users]);
     }
 
     public function extraerMes($mes)
@@ -94,68 +94,68 @@ class TransactionUsersController extends Controller
 
         $email = $request->input('email');
 
-        $transactionUsers = null;
+        $transaction_users = null;
         if ($email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
 
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             }
         } elseif ($email === null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
 
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             }
         } else {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transactionUsers.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('transaction_users.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 } else {
-                    $transactionUsers = TransactionUser::join('users', 'users.id', '=', 'transactionUsers.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transactionUsers.id', 'transactionUsers.price', 'transactionUsers.concept', 'transactionUsers.created_at', 'users.email', 'users.type'])->withQueryString();
+                    $transactions = TransactionUser::join('users', 'users.id', '=', 'transaction_users.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['transaction_users.id', 'transaction_users.price', 'transaction_users.concept', 'transaction_users.created_at', 'users.email', 'users.type'])->withQueryString();
                 }
             }
         }
 
-        return view('admin.transaction', compact('transactionUsers'));
+        return view('admin.transaction', compact('transactions'));
     }
 
     //Devuelve el formulario de borrado de transaction pasándole como parámetro los transaction
     public function deletetransactionFormulary()
     {
         $valo = TransactionUser::all();
-        return view('deletetransactionUsers', ['comment' => $valo]);
+        return view('deletetransaction_users', ['comment' => $valo]);
     }
 
     public function delete(Request $request)
     {
-        $transactionUsers = json_decode($request->input('transactionUsers'));
+        $transaction_users = json_decode($request->input('transaction_users'));
 
-        foreach ($transactionUsers as $id) {
+        foreach ($transaction_users as $id) {
             $transaction = TransactionUser::find($id);
             $transaction->delete();
         }
