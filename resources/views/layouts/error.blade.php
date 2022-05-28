@@ -13,7 +13,9 @@
     <div class="row justify-content-center w-100">
         <div class="col-10 col-lg-8 col-xl-5 text-center">
             @yield('illustration')
-            <a href="{{ route('home') }}" class="btn btn-primary rounded-pill px-4 m-2" s>Volver a inicio</a>
+            @section('home')
+                <a href="{{ route('home') }}" class="btn btn-primary rounded-pill px-4 m-2" s>Volver a inicio</a>
+            @show
         </div>
     </div>
 </body>
