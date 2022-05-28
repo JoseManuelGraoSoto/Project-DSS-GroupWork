@@ -12,7 +12,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SingleArticleController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,7 +154,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/category', [CategoryController::class, 'search'])->name('category');
         Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
 
-        Route::get('/transaction', [TransactionController::class, 'search'])->name('transaction');
+        Route::get('/transaction', [TransactionUsersController::class, 'search'])->name('transaction');
     });
 });
 

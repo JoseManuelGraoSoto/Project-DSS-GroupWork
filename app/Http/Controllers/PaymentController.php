@@ -15,6 +15,7 @@ use PayPal\Api\PaymentExecution;
 use Paypal\Exception\PayPalConnectionException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\TransactionUser;
 use DateInterval;
 use DateTimeZone;
 use DateTime;
@@ -85,7 +86,7 @@ class PaymentController extends Controller
         if (!$paymentId || !$payerId || !$token) {
             $result = Null;
             $status = 'No se pudo procesar el pago a traves de PayPal';
-            return redirect()->route('login')->with('status', $status);
+            return abort(409);
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -173,6 +174,6 @@ class PaymentController extends Controller
         }
 
         $status = 'Lo Sentimos! No se pudo realizar el pago a traves de PayPal';
-        return redirect()->route('login')->with('status', $status);
+        return abort(409);
     }
 }

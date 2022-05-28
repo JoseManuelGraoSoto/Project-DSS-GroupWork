@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use DB;
-use App\Models\Transaction;
+use App\Models\TransactionUser;
 use App\Models\User;
 
 
-class TransactionsTableSeeder extends Seeder
+class TransactionUsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class TransactionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $transactions = Transaction::all();
+        $transactions = TransactionUser::all();
         $faker = Faker::create();
         $faker->seed(1234);
 
@@ -27,7 +27,7 @@ class TransactionsTableSeeder extends Seeder
         }
 
         foreach (range(1, 350) as $index) {
-            $new_transaction = new Transaction;
+            $new_transaction = new TransactionUser;
             $new_transaction->user()->associate($faker->numberBetween(1, 700));
 
             if ($new_transaction->user->type === 'author' || $new_transaction->user->type === 'moderator') {
