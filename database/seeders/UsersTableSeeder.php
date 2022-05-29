@@ -7,6 +7,9 @@ use Faker\Factory as Faker;
 use Faker\Provider\es_ES\PhoneNumber;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 
 
 class UsersTableSeeder extends Seeder
@@ -34,6 +37,12 @@ class UsersTableSeeder extends Seeder
         $new_user->telephone = $faker->tollFreeNumber;
         $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
         $new_user->numberDaysSuscripted = 365;
+        $timeZone = new DateTimeZone('Europe/Madrid');
+        $dateNow = new DateTime();
+        $dateNow->setTimezone($timeZone);
+        $dateNow->add(new DateInterval('P10Y'));
+        $new_user->endSubscriptionDate = $dateNow->format('Y-m-d');
+
         $name = "default";
         $new_user->imagen_path = self::FILE_SRC . $name . '.png';
         $new_user->save();
