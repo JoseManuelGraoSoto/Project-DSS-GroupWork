@@ -9,3 +9,6 @@
 
 <a href="{{ route('subscribe') }}" class="btn btn-outline-accent m-2">Obtener suscripcion</a>
 @endsection
+
+@section('home')
+@endsection

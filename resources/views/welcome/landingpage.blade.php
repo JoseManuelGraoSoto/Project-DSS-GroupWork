@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <nav id="navbar" class="navbar fixed-top navbar-expand bg-none py-3 navbar-hide-on-scroll">
         <ul class="navbar-nav gap-lg-5 gap-2  ps-3 w-100 h-100 justify-content-start justify-content-md-center align-items-center">
             <li class="nav-item"><a class="nav-link init active" href="#init">Inicio</a></li>
@@ -53,8 +52,16 @@
         
         <a href="{{ route('library') }}" class="btn small btn-primary top-right-btn">biblioteca</a>
         @endguest
+
     </nav>
 
+    @if(!empty(Session::get('status')))
+        <div class="fixed-top alert alert-accent alert-dismissible fade show mx-3 shadow" style="top: 80px" role="alert">
+            <strong>Registro completado</strong> {{ Session::get('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    
     <section id="init" class="p-0">
         <div class="bg-terciary vh-100 p-0 d-flex flex-column align-items-center justify-content-center">
             <div class="row">
@@ -205,6 +212,10 @@
         </div>
     </section><!-- End Scores -->
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script>
         let selectHeader = document.querySelector('#navbar')
 
@@ -244,7 +255,6 @@
         }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

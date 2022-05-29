@@ -38,7 +38,7 @@ Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 // Ruta articulo
 Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->name('article');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->middleware('is_suscribed')->group(function () {
     // Crear valoración
     Route::post('/article/{id}/createValoration', [SingleArticleController::class, 'createValoration'])->name('article.valoration.create');
 
