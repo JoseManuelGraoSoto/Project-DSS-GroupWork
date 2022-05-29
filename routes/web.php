@@ -149,10 +149,10 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
         //Delete
         Route::get('/rewards/delete', [RewardController::class, 'delete']);
 
-
         // Rutas category
-        Route::get('/category', [CategoryController::class, 'search'])->name('category');
-        Route::get('/category/add', [CategoryController::class, 'create'])->name('category.create');
+        Route::get('/category', [CategoryController::class, 'showAll'])->name('category');
+        Route::get('/category/add/{name}', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/category/delete', [CategoryController::class, 'delete'])->name('category.delete');
 
         Route::get('/transaction', [TransactionUsersController::class, 'search'])->name('transaction');
     });
