@@ -161,6 +161,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Fecha de caducidad de suscripción</small>
                                 <small>{{Auth::user()->endSubscriptionDate}}</small>
+
                             </div>
 
                         </div>
