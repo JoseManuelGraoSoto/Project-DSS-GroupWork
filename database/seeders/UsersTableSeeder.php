@@ -38,7 +38,55 @@ class UsersTableSeeder extends Seeder
         $new_user->imagen_path = self::FILE_SRC . $name . '.png';
         $new_user->save();
 
-        foreach (range(2, 500) as $index) {
+        $new_user = new User;
+        $new_user->name = 'reader';
+        $new_user->type = 'reader';
+        $new_user->email = 'reader@reader.com';
+        $new_user->password = Hash::make('reader');
+        $new_user->telephone = $faker->tollFreeNumber;
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+        $new_user->numberDaysSuscripted = 365;
+        $name = "default";
+        $new_user->imagen_path = self::FILE_SRC . $name . '.png';
+        $new_user->save();
+
+        $new_user = new User;
+        $new_user->name = 'readerExpired';
+        $new_user->type = 'reader';
+        $new_user->email = 'reader@reader.com';
+        $new_user->password = Hash::make('reader');
+        $new_user->telephone = $faker->tollFreeNumber;
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+        $new_user->numberDaysSuscripted = 365;
+        $name = "default";
+        $new_user->imagen_path = self::FILE_SRC . $name . '.png';
+        $new_user->save();
+
+        $new_user = new User;
+        $new_user->name = 'admin';
+        $new_user->type = 'administrator';
+        $new_user->email = 'admin@admin.com';
+        $new_user->password = Hash::make('admin');
+        $new_user->telephone = $faker->tollFreeNumber;
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+        $new_user->numberDaysSuscripted = 365;
+        $name = "default";
+        $new_user->imagen_path = self::FILE_SRC . $name . '.png';
+        $new_user->save();
+
+        $new_user = new User;
+        $new_user->name = 'admin';
+        $new_user->type = 'administrator';
+        $new_user->email = 'admin@admin.com';
+        $new_user->password = Hash::make('admin');
+        $new_user->telephone = $faker->tollFreeNumber;
+        $new_user->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
+        $new_user->numberDaysSuscripted = 365;
+        $name = "default";
+        $new_user->imagen_path = self::FILE_SRC . $name . '.png';
+        $new_user->save();
+
+        foreach (range(2, 50) as $index) {
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = $faker->randomElement(['reader', 'author', 'moderator', 'administrator']);
@@ -54,7 +102,7 @@ class UsersTableSeeder extends Seeder
             $new_user->save();
         }
 
-        foreach (range(501, 700) as $index) {
+        foreach (range(52, 100) as $index) {
             $new_user = new User;
             $new_user->name = $faker->firstName;
             $new_user->type = 'author';
