@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Valoration;

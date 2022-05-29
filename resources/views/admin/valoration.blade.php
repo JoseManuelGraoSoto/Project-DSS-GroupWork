@@ -31,7 +31,6 @@
     <span class="display-data-label">Usuario</span>
     <span class="display-data-label">Valoración</span>
     <span class="display-data-label">Tipo Usuario</span>
-    <span class="display-data-label">Comentario</span>
     <span class="display-data-label">Fecha de creación</span>
     <div class="separator"></div>
 </div>
@@ -55,7 +54,6 @@
         No se ha identificado el tipo del usuario
         @endif
     </span>
-    <span class="display-data">{{$valoration->comment}}</span>
     <span class="display-data">{{$valoration->created_at}}</span>
     <form action=" {{ route('valoration.updateForm') }}" method="GET">
         <input type="hidden" name="valoration_id" value="{{$valoration->id}}">

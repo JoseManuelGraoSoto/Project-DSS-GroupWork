@@ -16,19 +16,9 @@
 <div class="inputs flex-container flex-vertical flex-center flex-aligned-center">
     <div class="number-input">
         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
-        <input class="quantity" min="0" max="10" name="quantity" value="{{old('quantity')}}" type="number">
+        <input class="quantity" min="0" max="5" name="quantity" value="{{old('quantity')}}" type="number">
         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
     </div>
-
-    <div style="margin-top: 20px;">
-        <div style="margin-top: 20px;">
-            <textarea class=" textbox flex-container flex-vertical flex-aligned-center flex-center" style="resize:none" name="comment" id="texto" rows="6" maxlength="255" cols="50" placeholder="Comentario de valoración" hidden>{{old('comment')}}</textarea>
-        </div>
-    </div>
-</div>
-<div class="checkbox-con flex-container flex-vertical flex-center flex-aligned-center">
-    <input id="checkbox" name="isModerator" type="checkbox" {{(old('isModerator')) ? 'checked' : ''}}>
-    <span style="color: var(--primary-color);">¿Moderador?</span>
 </div>
 @endsection
 

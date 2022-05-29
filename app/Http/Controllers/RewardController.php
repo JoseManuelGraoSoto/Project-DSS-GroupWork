@@ -85,17 +85,6 @@ class RewardController extends Controller
         $new_reward->user()->associate($user);
         $new_reward->save();
         return redirect()->action([RewardController::class, 'search'])->withInput();
-        /*
-        $user = User::where('email', $request->input('email'))->firstOrFail();
-        error_log($request->input('reward_id'));
-        $new_reward->points = $request->input('quantity');
-        $month = date('m');
-        $fecha = '2022-' . $month . '-01 00:00:00';
-        $new_reward->month = $fecha;
-        $new_reward->isModerator = $request->has('isModerator');
-        $new_reward->Reward()->associate($Reward);
-        $new_reward->save();
-        return redirect()->action([RewardController::class, 'showAll'])->withInput();*/
     }
 
     //Devuelve el formulario de borrado de Reward pasándole como parámetro los rewards

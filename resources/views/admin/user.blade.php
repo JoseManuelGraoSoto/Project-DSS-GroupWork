@@ -46,7 +46,7 @@
     <span class="display-data">{{$user->email}}</span>
     <div class="show-container flex-container flex-center">
         <i id="show" class='bx bx-low-vision'></i>
-        <div id="password">{{$user->password}}</div>
+        <div id="password" class="background-outline" style="padding: .25em; border-radius: 4px;">{{$user->password}}</div>
     </div>
     <span class="display-data">{{$user->name}}</span>
     <span class="display-data">

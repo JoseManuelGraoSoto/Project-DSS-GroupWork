@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('categories-nav')
-<div class="nav-item selected container flex-aligned-center">
-    <i class='bx bxs-face'></i>
-    <span class="nav-label">Categorias</span>
+<div class="nav-item selected flex-container flex-aligned-center">
+    <i class='bx bxs-category'></i>
+    <span class="nav-label">Categorías</span>
 </div>
 @endsection
 

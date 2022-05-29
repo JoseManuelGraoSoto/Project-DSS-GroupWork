@@ -4,17 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\Validator;
-use DB;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-    /*     public function showAll($categorys) {
-        $categorys = Category::paginate(7);
-        return view('admin.category', ['category' => $categorys]);
-    } */
-
     public function create(Request $request, $name)
     {
         $new_category = new Category;

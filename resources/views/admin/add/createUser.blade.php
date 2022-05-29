@@ -8,7 +8,7 @@
 @endsection
 
 @section('select-img')
-<div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center">
+<div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center" style="min-width: 300px;">
     <img class="user-image" src="{{URL::asset('public/img/default.png');}}" id="foto_add" alt="Imagen del usuario">
     <div class="upload-img">
         <input type="file" id="selec-img" name="selec-img" />
@@ -27,16 +27,6 @@
 <div class="text-inputs flex-container flex-aligned-center flex-center flex-vertical">
     <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Correo del usuario">
     <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="Teléfono del usuario">
-</div>
-<div class="flex-container flex-vertical flex-center flex-aligned-center">
-    <span style="color: var(--primary-color);">Numero de días suscrito</span>
-    <div class="number-input">
-        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
-        <input class="quantity" min="0" max="365" step="1" id="number_days" name="number_days"
-            value="{{old('number_days')}}" type="number">
-        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-            class="plus"></button>
-    </div>
 </div>
 <div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">

@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
-use DB;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -42,7 +41,6 @@ class UsersController extends Controller
                 ->symbols()
                 ->uncompromised()],
             'selec-img' => 'mimes:jpg,png,jpeg,webp|max:5048',
-            'number_days' => 'required|max:365|min:0',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -68,7 +66,6 @@ class UsersController extends Controller
         $new_user->password = Hash::make($inputs['password']);
         $new_user->telephone = $inputs['telephone'];
         $new_user->imagen_path = $nombreImagen;
-        $new_user->numberDaysSuscripted = $inputs['number_days'];
         $new_user->save();
         //TODO: cambiar a redirect
         return redirect()->action([UsersController::class, 'search'])->withInput();
@@ -97,7 +94,6 @@ class UsersController extends Controller
                 ->symbols()
                 ->uncompromised()],
             'selec-img' => 'required|mimes:jpg,png,jpeg,webp|max:5048',
-            'number_days' => 'required|max:365|min:0',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -120,7 +116,6 @@ class UsersController extends Controller
         $new_user->email = $inputs['email'];
         $new_user->password = Hash::make($inputs['password']);
         $new_user->imagen_path = $nombreImagen;
-        $new_user->numberDaysSuscripted = $inputs['number_days'];
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         return redirect()->action([UsersController::class, 'search'])->withInput();

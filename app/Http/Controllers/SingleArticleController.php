@@ -7,10 +7,8 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Valoration;
 use App\Models\Category;
-use App\Models\Article_user;
 
 use Illuminate\Support\Facades\Validator;
-use DB;
 use Illuminate\Support\Facades\Auth;
 
 class SingleArticleController extends Controller
@@ -25,8 +23,18 @@ class SingleArticleController extends Controller
         $user = Auth::id();
         $article->access()->attach($user);
 
-        $valoration = Valoration::where('article_id', $id)->where('user_id', Auth::user()->id)->first();
-        return view('common.article', ['article' => $article, 'valoration' => $valoration]);
+        if(!Auth::check()) {
+            if(!$article->guestAccessible)
+                abort(403);
+            else
+                return view('common.article', ['article' => $article]);
+        } else {
+            if(!$article->acepted && Auth::user()->type != 'moderator')
+                abort(403);
+    
+            $valoration = Valoration::where('article_id', $id)->where('user_id', Auth::user()->id)->first();
+            return view('common.article', ['article' => $article, 'valoration' => $valoration]);
+        }   
     }
 
     public function acceptArticle(Request $request, $id)

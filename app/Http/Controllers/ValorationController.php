@@ -18,9 +18,8 @@ class ValorationController extends Controller
     }
 
     //Devuelve el formulario de creación de valoration
-    public function createValorationFormulary(Request $request)
+    public function createValorationFormulary()
     {
-
         return view('admin.add.createValoration');
     }
 
@@ -38,22 +37,11 @@ class ValorationController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $moderador = $request->has('isModerator');
         $inputs = $validator->validated();
         $user = User::where('email', $inputs['email'])->first();
         $article = Article::where('title', $inputs['title'])->first();
         $new_valoration = new Valoration;
         $new_valoration->value = $inputs['quantity'];
-        if (!$moderador) {
-            $new_valoration->comment = '';
-        } else {
-            if ($request->input('comment') == null) {
-                $new_valoration->comment = '';
-            } else {
-                $new_valoration->comment = $request->input('comment');
-            }
-        }
-        $new_valoration->isModerator = $request->has('isModerator');
         $new_valoration->user()->associate($user);
         $new_valoration->article()->associate($article);
         $new_valoration->save();
@@ -72,36 +60,24 @@ class ValorationController extends Controller
     //Recibe la información de un valoration y lo añade a la base de datos: no integrado
     public function update(Request $request)
     {
-
         $validator = null;
-        $moderador = $request->has('isModerator');
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
             'title' => 'required|exists:articles,title',
             'quantity' => 'required|numeric|between:0,10',
         ]);
 
-
         if ($validator->fails()) {
             return redirect(route('valoration.updateForm'))
                 ->withErrors($validator)
                 ->withInput();
         }
+
         $inputs = $validator->validated();
         $user = User::where('email', $inputs['email'])->first();
         $article = Article::where('title', $inputs['title'])->first();
         $new_valoration = Valoration::find($request->input('valoration_id'));
         $new_valoration->value = $inputs['quantity'];
-        $new_valoration->isModerator = $moderador;
-        if (!$moderador) {
-            $new_valoration->comment = '';
-        } else {
-            if ($request->input('comment') == null) {
-                $new_valoration->comment = '';
-            } else {
-                $new_valoration->comment = $request->input('comment');
-            }
-        }
         $new_valoration->user()->associate($user);
         $new_valoration->article()->associate($article);
         $new_valoration->save();
@@ -195,74 +171,67 @@ class ValorationController extends Controller
         if ($title === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
 
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             }
         } elseif ($title !== null && $email === null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
 
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
 
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             }
         } elseif ($title === null && $email === null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
 
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             }
         } else {
             if ($fecha !== null) {
                 if ($descendente) {
 
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->whereBetween('valorations.created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id', 'desc')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 } else {
-                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.comment', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
+                    $valorations = Valoration::join('articles', 'articles.id', '=', 'valorations.article_id')->join('users', 'users.id', '=', 'valorations.user_id')->where('articles.title', 'LIKE', '%' . $title . '%')->whereIn('users.type', $types)->orWhere('users.email', 'LIKE', '%' . $email . '%')->whereIn('users.type', $types)->orderBy('id')->paginate($perPage = 7, $columns = ['valorations.id', 'valorations.value', 'valorations.created_at', 'users.email', 'users.type', 'articles.title'])->withQueryString();
                 }
             }
         }
 
         return view('admin.valoration', compact('valorations'));
-    }
-
-    //Devuelve el formulario de borrado de valoration pasándole como parámetro los valoration
-    public function deletevalorationFormulary()
-    {
-        $valo = valoration::all();
-        return view('deletevalorations', ['comment' => $valo]);
     }
 
     public function delete(Request $request)
