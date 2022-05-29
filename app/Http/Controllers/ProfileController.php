@@ -123,4 +123,12 @@ class ProfileController extends Controller
         $user = Auth::user();
         return redirect()->route('profile', ['user' => $user]);
     }
+
+    public function delete()
+    {
+        $user = User::find(Auth::id());
+        $user->delete();
+
+        return redirect()->route('login');
+    }
 }
