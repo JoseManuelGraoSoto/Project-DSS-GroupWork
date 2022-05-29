@@ -26,12 +26,12 @@ class ArticlesTableSeeder extends Seeder
         foreach ($articles as $article) {
             $article->delete();
         }
+
         $contador = 0;
-        foreach (range(1, 500) as $index) {
+        foreach (range(1, 200) as $index) {
             $new_article = new Article;
             $new_article->title = $faker->text(15);
             $new_article->category()->associate($faker->numberBetween(1, 4));
-            $new_article->valoration = $faker->randomFloat(1, 0, 10);
             $new_article->content = $faker->paragraph;
             $new_article->acepted = $faker->boolean;
             if ($contador < 6) {
@@ -42,7 +42,7 @@ class ArticlesTableSeeder extends Seeder
             }
             $new_article->pdf_path = 'prueba.pdf';
             $new_article->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
-            $new_article->user()->associate($faker->numberBetween(501, 700));
+            $new_article->user()->associate($faker->numberBetween(51, 100));
             $new_article->save();
         }
     }

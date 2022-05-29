@@ -28,7 +28,6 @@ class CategoriesTableSeeder extends Seeder
         foreach ($lista as $category) {
             $new_category = new Category;
             $new_category->category = $category;
-            $name = $faker->bankAccountNumber;
             $new_category->save();
         }
     }

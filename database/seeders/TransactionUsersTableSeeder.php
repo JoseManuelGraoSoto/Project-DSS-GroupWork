@@ -26,9 +26,9 @@ class TransactionUsersTableSeeder extends Seeder
             $transaction->delete();
         }
 
-        foreach (range(1, 350) as $index) {
+        foreach (range(6, 150) as $index) {
             $new_transaction = new TransactionUser;
-            $new_transaction->user()->associate($faker->numberBetween(1, 700));
+            $new_transaction->user()->associate($faker->numberBetween(5, 150));
 
             if ($new_transaction->user->type === 'author' || $new_transaction->user->type === 'moderator') {
                 $new_transaction->price = $faker->randomElement([29.99, 74.99, 199.99]);
