@@ -15,7 +15,7 @@
     @section('sidebar')
     <nav class="sidebar">
         <div class="logo-content">
-            <a href="{{ route('loggin') }}" class="logo flex-container flex-aligned-center">
+            <a href="{{ route('adminHome') }}" class="logo flex-container flex-aligned-center">
                 <i class='bx bx-pen'></i>
                 <div class="logo-name">Invent</div>
             </a>
@@ -85,6 +85,16 @@
                 <span class="nav-tooltip">Recompensas</span>
                 @show
             </li>
+
+            <li>
+                @section('transactions-nav')
+                <a href="{{ route('transaction') }}" class="nav-item flex-container flex-aligned-center">
+                    <i class='bx bx-money-withdraw'></i>
+                    <span class="nav-label">Transacciónes</span>
+                </a>
+                <span class="nav-tooltip">Transacciónes</span>
+                @show
+            </li>
         </ul>
 
         <div class="profile-content">
@@ -96,7 +106,12 @@
                         <div class="email">Temporal</div>
                     </div>
                 </div>
-                <a href="{{ route('loggin') }}" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;"></a>
+
+                <a href="{{ route('logout') }}" class='bx bx-log-out' id="log-out" style="text-decoration: none; color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                    @csrf
+                </form>
             </div>
         </div>
     </nav>

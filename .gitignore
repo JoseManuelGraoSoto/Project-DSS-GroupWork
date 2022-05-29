@@ -3,9 +3,10 @@
 # Default Laravel ignore
 /node_modules
 /public/hot
-/public/storage
 /storage/*.key
 /vendor
+/vendor/*
+composer.lock
 /resources/views/vistaPruebaControladores/*
 .env
 .env.backup

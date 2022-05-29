@@ -8,10 +8,10 @@
 @endsection
 
 @section('select-img')
-<div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center">
-    <img class="user-image" src="{{ URL::asset('img/default.png'); }}" alt="Imagen del usuario">
+<div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center" style="min-width: 300px;">
+    <img class="user-image" src="{{URL::asset('public/img/default.png');}}" id="foto_add" alt="Imagen del usuario">
     <div class="upload-img">
-        <input type="file" id="selec-img" />
+        <input type="file" id="selec-img" name="selec-img" />
         <label for="selec-img">Selecciona imagen</label>
     </div>
 </div>
@@ -28,7 +28,6 @@
     <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Correo del usuario">
     <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="Teléfono del usuario">
 </div>
-
 <div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">
         <input type="radio" name="radio" value="reader" id="radio_button1" checked />

@@ -15,7 +15,6 @@ class CreateRewardTable extends Migration
         Schema::create('rewards', function (Blueprint $table) {
             $table->id();
             $table->integer('points');
-            $table->timestamp('month');
             $table->boolean('isModerator');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

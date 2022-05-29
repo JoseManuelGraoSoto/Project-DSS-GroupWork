@@ -1,5 +1,52 @@
 # Medidas para trabajar en colaborativo en Github-DSS
 
+## Comandos necesarios
+Para ejecutar el servidor
+~~~
+php artisan serve
+~~~
+Dirección en el navegador: http://localhost:8000  
+Para modificar los seeders
+~~~
+php artisan migrate:refresh --seed
+~~~
+Para ejecutar los tests
+~~~
+vendor/bin/phpunit
+~~~
+Descargar controlador de auth
+~~~
+composer require laravel/ui
+php artisan ui bootstrap --auth
+~~~
+Descargar controlador paypal
+~~~
+composer require "paypal/rest-api-sdk-php:*"
+~~~
+Y añadir al final del .env estas 3 líneas:
+~~~
+PAYPAL_CLIENT_ID=Acd9bIIq_tLLbmRnVeaTn2RNPyLQBMENQoVKaCBmPaFy1jmmWYXOakt0IkK0L3T_hTlc0CetG0VciM-j
+PAYPAL_SECRET=EEE6Se-HPKwOfRCqyBkBSN79GxUfiHI3qfYzkXqlAM_9I_MiwZMuwo3NSGymIV6HkUFt09F-gRLtikMS
+PAYPAL_MODE=sandbox
+~~~
+Correo de prueba:
+
+
+cuentapruebadss@gmail.com
+
+
+Contraseña:
+
+
+dssdssdss
+
+Si quieres ver las imagenes y los pdfs tienes que poner:
+~~~
+php artisan storage
+> yes
+~~~
+# Medidas para trabajar en colaborativo en Github-DSS
+
 - Comentarios en castellano
 - Nombres de funciones y objetos en castellano
 - Los nombres de funciones, objetos y otros deben ser descriptivos

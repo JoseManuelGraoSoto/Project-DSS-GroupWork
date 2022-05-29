@@ -25,12 +25,19 @@ class RewardsTableSeeder extends Seeder
             $reward->delete();
         }
 
-        foreach (range(1, 500) as $index) {
+        foreach (range(51, 100) as $index) {
             $new_reward = new Reward;
-            $new_reward->points = $faker->numberBetween(50, 500);
-            $new_reward->month = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = null);
-            $new_reward->isModerator = $faker->boolean;
-            $new_reward->user()->associate($faker->numberBetween(501, 700));
+            $new_reward->points = $faker->numberBetween(0, 100);
+            $new_reward->isModerator = 0;
+            $new_reward->user()->associate($faker->numberBetween(51, 100));
+            $new_reward->save();
+        }
+
+        foreach (range(101, 150) as $index) {
+            $new_reward = new Reward;
+            $new_reward->points = $faker->numberBetween(0, 100);
+            $new_reward->isModerator = 1;
+            $new_reward->user()->associate($faker->numberBetween(101, 150));
             $new_reward->save();
         }
     }

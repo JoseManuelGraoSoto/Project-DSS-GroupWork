@@ -17,10 +17,11 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title');
             $table->enum('category', ['Ciencia', 'Biologia', 'Computación', 'Machine Learning']);
-            $table->float('valoration');
-            $table->string('content',16000);
+            $table->string('content', 16000);
             $table->boolean('acepted');
+            $table->boolean('guestAccessible');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->binary('pdf_path');
             $table->timestamps();
         });
     }

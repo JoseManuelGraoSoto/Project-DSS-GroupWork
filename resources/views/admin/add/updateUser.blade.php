@@ -9,9 +9,9 @@
 
 @section('select-img')
 <div class="user-image-selection flex-container flex-vertical flex-aligned-center flex-center">
-    <img class="user-image" src="{{ URL::asset('img/default.png'); }}" alt="Imagen del usuario">
+    <img class="user-image" src="{{URL::asset('storage/users/'. $user->imagen_path);}}" id="foto_add" alt="Imagen del usuario">
     <div class="upload-img">
-        <input type="file" id="selec-img" />
+        <input type="file" name="selec-img" id="selec-img" />
         <label for="selec-img">Selecciona imagen</label>
     </div>
 </div>
@@ -28,7 +28,16 @@
     <input type="text" name="email" id="email" placeholder="Correo del usuario" value="{{($user) ? $user->email : old('email')}}">
     <input type="text" name="telephone" id="telephone" placeholder="Teléfono del usuario" value="{{($user) ? $user->telephone : old('telephone')}}">
 </div>
-
+<div class="flex-container flex-vertical flex-center flex-aligned-center">
+    <span style="color: var(--primary-color);">Numero de días suscrito</span>
+    <div class="number-input">
+        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+        <input class="quantity" min="0" max="365" step="1" id="number_days" name="number_days"
+            value="{{old('number_days')}}" type="number">
+        <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+            class="plus"></button>
+    </div>
+</div>
 <div class="user-type flex-container flex-vertical flex-center">
     <label class="form-control">
         <input type="radio" name="radio" value="reader" id="radio_button1" checked />

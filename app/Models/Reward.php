@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Reward extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public static function getCurrentReward($user_id)
+    {
+        return Reward::where('user_id', $user_id)->whereYear('created_at', date('Y'))->whereMonth('created_at', date('m'))->first();
     }
 }

@@ -16,8 +16,6 @@ class CreateValorationTable extends Migration
         Schema::create('valorations', function (Blueprint $table) {
             $table->id();
             $table->integer('value');
-            $table->string('comment');
-            $table->boolean('isModerator');
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

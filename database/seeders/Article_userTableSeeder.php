@@ -24,10 +24,9 @@ class Article_userTableSeeder extends Seeder
         $faker = Faker::create();
         $faker->seed(1234);
 
-        foreach (range(1, 500) as $index) {
-            $article_user = Article::find($faker->numberBetween(1, 500));
-            $user = User::find($faker->numberBetween(1, 700));
-            $article_user->access()->attach($user->id);
+        foreach (range(1, 100) as $index) {
+            $article_user = Article::find($faker->numberBetween(1, 200));
+            $article_user->access()->attach($faker->numberBetween(6, 150));
             $article_user->save();
         }
     }

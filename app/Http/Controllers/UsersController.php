@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    const LOCATION = "storage/app/public/users/";
+    const GUARDAR = "public/users/";
     //Devuelve la vista usersProfile pasándole como parámetro todos los usuarios
     public function showAll($users)
     {
@@ -36,6 +40,7 @@ class UsersController extends Controller
                 ->numbers()
                 ->symbols()
                 ->uncompromised()],
+            'selec-img' => 'mimes:jpg,png,jpeg,webp|max:5048',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -46,12 +51,21 @@ class UsersController extends Controller
         }
 
         $inputs = $validator->validated();
+        //$request->file('selec-img')->storeAs(public_path('images'), $inputs['selec-img']);
+        $img = $inputs['selec-img'];
+        if ($img == null) {
+            $nombreImagen = "default.png";
+        } else {
+            $nombreImagen = $request->file('selec-img')->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
         $new_user = new User;
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
         $new_user->telephone = $inputs['telephone'];
+        $new_user->imagen_path = $nombreImagen;
         $new_user->save();
         //TODO: cambiar a redirect
         return redirect()->action([UsersController::class, 'search'])->withInput();
@@ -62,7 +76,7 @@ class UsersController extends Controller
     //Devuelve el formulario de actualización de user
     public function updateUserFormulary(Request $request)
     {
-        $user = User::find($request->input('user_id'));
+        $user = Auth::user();
         return view('admin.add.updateUser', ['user' => $user]);
     }
 
@@ -79,6 +93,7 @@ class UsersController extends Controller
                 ->numbers()
                 ->symbols()
                 ->uncompromised()],
+            'selec-img' => 'required|mimes:jpg,png,jpeg,webp|max:5048',
             'telephone' => 'required|regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
         ]);
 
@@ -87,13 +102,20 @@ class UsersController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
         $inputs = $validator->validated();
+        $img = $inputs['selec-img'];
+        if ($img == null) {
+            $nombreImagen = "default.png";
+        } else {
+            $nombreImagen = $request->file('selec-img')->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
         $new_user = User::find($request->input('user_id'));
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];
         $new_user->email = $inputs['email'];
-        $new_user->password = $inputs['password'];
+        $new_user->password = Hash::make($inputs['password']);
+        $new_user->imagen_path = $nombreImagen;
         $new_user->telephone = $inputs['telephone'];
         $new_user->save();
         return redirect()->action([UsersController::class, 'search'])->withInput();
@@ -168,8 +190,10 @@ class UsersController extends Controller
             $fecha = $anyo . '-' . $mes . '-' . $dia;
         }
 
-        $types = array();
-        //select * from users where type in ('reader', 'author')
+        $types = array('reader', 'author', 'moderator', 'administrator');
+        if ($request->has('readerCheckbox') || $request->has('authorCheckbox') || $request->has('moderatorCheckbox') || $request->has('administratorCheckbox')) {
+            $types = array();
+        }
         if ($request->has('readerCheckbox')) {
             $types[] = 'reader';
         }
@@ -185,30 +209,20 @@ class UsersController extends Controller
 
         $nombre = $request->input('name');
         $email = $request->input('email');
-        $primeraParteEmail = '';
-        for ($i = 0; $i < strlen($email); $i++) {
-            if ($email[$i] === '@') {
-                break;
-            }
-            $primeraParteEmail .= $email[$i];
-        }
-
-        //TODO: MODIFICAR PARA AÑADIR QUE SI EL $TYPES ESTÁ VACÍO SE HAGA UNA COSA O LA OTRA
-
 
         $users = null;
         if ($nombre === null && $email !== null && !empty($types)) {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
                 }
             } else {
                 if ($descendente) {
-                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->orderBy('id')->paginate(7)->withQueryString();
                 }
             }
         } elseif ($nombre !== null && $email === null && !empty($types)) {
@@ -228,17 +242,18 @@ class UsersController extends Controller
         } else {
             if ($fecha !== null) {
                 if ($descendente) {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
+
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', '%' . $email . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', $primeraParteEmail . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orWhere('email', 'LIKE', '%' . $email . '%')->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->orderBy('id')->paginate(7)->withQueryString();
                 }
                 //$usersName = User::where('name', 'LIKE', '%' . $nombre . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
-                //$usersEmail = User::where('email', 'LIKE', $primeraParteEmail . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
+                //$usersEmail = User::where('email', 'LIKE', '%' . $email . '%')->whereIn('type', $types)->whereBetween('created_at', [$fecha . ' 00:00:00', $fecha . ' 23:59:59'])->get();
             } else {
                 if ($descendente) {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id', 'desc')->paginate(7)->withQueryString();
                 } else {
-                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', $primeraParteEmail . '%')->orderBy('id')->paginate(7)->withQueryString();
+                    $users = User::where('name', 'LIKE', '%' . $nombre . '%')->orWhere('email', 'LIKE', '%' . $email . '%')->orderBy('id')->paginate(7)->withQueryString();
                 }
             }
         }
@@ -266,9 +281,9 @@ class UsersController extends Controller
     {
         $email = $request->input('email');
         $password = $request->input('password');
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $email)->firstOrFail();
         if ($user) {
-            if (strcmp($password, $user->password) === 0) {
+            if (Hash::check($password, $user->password)) {
                 if (strcmp($user->type, 'administrator') === 0) {
                     return redirect()->action([UsersController::class, 'logged']);
                 } else {

@@ -19,8 +19,12 @@ class Article extends Model
         return $this->belongsToMany('App\Models\User')->withTimestamps()->using('App\Models\Article_user');
     }
 
-    public function valoration()
+    public function valorations()
     {
         return $this->belongsToMany('App\Models\Valoration');
+    }
+
+    public function category() {
+        return $this->belongsTo('App\Models\Category');
     }
 }

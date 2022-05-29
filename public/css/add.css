@@ -10,7 +10,7 @@
 }
 
 .to-fill {
-    margin: 4em 15em;
+    margin: 2em;
 }
 
 .to-fill .user-image-selection .user-image {
@@ -52,6 +52,17 @@
 
 .upload-txt #selec-txt {
     display: none;
+}
+
+.textbox{
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px;
+    overflow: auto;
+    border-radius: 12px;
+    border:1px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
 }
 
 .upload-txt label {

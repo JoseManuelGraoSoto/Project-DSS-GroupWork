@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'telephone',
         'password',
+        'imagen_path',
+        'numberDaysSuscripted',
     ];
 
     /**
@@ -52,13 +55,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Article')->withTimestamps()->using('App\Models\Article_user');
     }
 
-    public function valoration()
+    public function valorations()
     {
         return $this->hasMany('App\Models\Valoration');
     }
 
-    public function reward()
+    public function rewards()
     {
         return $this->hasMany('App\Models\Reward');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\TransactionUser');
     }
 }
