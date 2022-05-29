@@ -77,49 +77,44 @@
 
 @section('scripts')
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
-
-<script>
-let uploadFile = document.getElementById('ArticlePDF')
-
-uploadFile.onchange = function() {
-    document.getElementById('adobe-dc-view').toggleAttribute('hidden')
-};
-</script>
 
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 
 <script type="text/javascript">
-let doOnLoad = function() {
-    let prueba = document.getElementById('send-btn')
-    prueba.classList.remove('disabled')
-}
+    $('#ArticlePDF').on("change", function(){
+        var files = $("#ArticlePDF").get(0).files;
+        if(files.length === 1 ){
+            $('#send-btn').removeClass('disabled');
+            $('#adobe-dc-view').removeAttr('hidden');
 
-let doOnFail = function() {
-    Error()
-}
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                var filePromise = Promise.resolve(e.target.result);
 
-document.addEventListener("adobe_dc_view_sdk.ready", function() {
-    var adobeDCView = new AdobeDC.View({
-        clientId: "39d623d0bca34c73ba77454131227cf3",
-        divId: "adobe-dc-view"
-    });
-    adobeDCView.previewFile({
-        content: {
-            location: {
-                url: "{{  URL::asset('storage/articles/prueba.pdf');  }}"
+                var adobeDCView = new AdobeDC.View({
+                    clientId: "39d623d0bca34c73ba77454131227cf3",
+                    divId: "adobe-dc-view"
+                });
+    
+                adobeDCView.previewFile({
+                    content: { promise: filePromise },
+                    metaData: { fileName: files[0].name }
+                }, {
+                    embedMode: "IN_LINE",
+                    showDownloadPDF: false,
+                    showPrintPDF: false
+                });
             }
-        },
-        metaData: {
-            fileName: "prueba.pdf",
+
+            reader.readAsArrayBuffer(files[0]);
+        } else {
+            $('#send-btn').addClass('disabled');
+            $('#adobe-dc-view').attr('hidden', true);
         }
-    }, {
-        embedMode: "IN_LINE",
-        showDownloadPDF: false,
-        showPrintPDF: false
-    }).then(doOnLoad(), doOnFail())
-});
+    });
 </script>
+
 @endsection
