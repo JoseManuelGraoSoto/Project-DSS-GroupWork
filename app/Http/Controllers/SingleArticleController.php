@@ -7,8 +7,7 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Valoration;
 use App\Models\Category;
-use App\Models\Article_user;
-
+use App\ServiceLayer\ArticleAcceptance;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -29,11 +28,9 @@ class SingleArticleController extends Controller
         return view('common.article', ['article' => $article, 'valoration' => $valoration]);
     }
 
-    public function acceptArticle(Request $request, $id)
+    public function acceptArticle(Request $request, $article_id)
     {
-        $new_article = Article::find($id);
-        $new_article->acepted = 1;
-        $new_article->save();
+        ArticleAcceptance::processAcept($article_id);
         return back();
     }
 
@@ -96,7 +93,7 @@ class SingleArticleController extends Controller
         $new_article->valoration = 0;
         $new_article->pdf_path = $nombreImagen;
         $new_article->content = $inputs['description']; //$request->input('content');
-        $new_article->acepted = $request->has('accepted');
+        $new_article->acepted = 0;
         $new_article->guestAccessible = 0;
         $new_article->category_id = $categoria->id;
         $new_article->user()->associate($user);
