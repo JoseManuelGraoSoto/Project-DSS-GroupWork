@@ -25,10 +25,7 @@ use App\Http\Controllers\TransactionUsersController;
 |
 */
 
-// Test
-Route::get('/test', function () {
-    return view('common.add.article');
-});
+
 
 Auth::routes();
 
@@ -48,6 +45,8 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
     // Ruta aceptar articulo
     Route::post('/article/{id}/accept', [SingleArticleController::class, 'acceptArticle'])->name('article.acept')->middleware('is_moderator');
 
+    // Ruta crear articulo
+    Route::get('/articleCreate', [SingleArticleController::class, 'createArticle'])->name('createArticle');
     // Ruta biblioteca
     Route::get('/library', [LibraryController::class, 'search'])->name('library');
 
@@ -55,7 +54,7 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
     Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
     Route::post('/profileUpdate', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 
-    Route::post('/anyadirArticulo', [ArticlesController::class, 'createArticleUser'])->name('createArticleUser');
+    Route::post('/anyadirArticulo', [SingleArticleController::class, 'createArticleUser'])->name('createArticleUser');
     /**************** RUTAS ADMIN ***************/
     Route::middleware('is_admin')->group(function () {
         //Rutas users
@@ -83,7 +82,6 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
         //Search
         Route::get('/searchUserForm', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
         Route::get('/comprobarUser', [UsersController::class, 'comprobarLogin'])->name('user.comprobarLogin');
-
 
         //Rutas articles
         //Getters

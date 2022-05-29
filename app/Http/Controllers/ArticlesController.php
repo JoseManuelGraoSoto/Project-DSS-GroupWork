@@ -79,45 +79,7 @@ class ArticlesController extends Controller
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
 
-    // Recibe la información de un artículo y lo añade a la base de datos
-    public function createArticleUser(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'selec-txt' => 'required',
-            'description' => 'required',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect(route('article.createForm'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $inputs = $validator->validated();
-        $img = $inputs['selec-txt'];
-        if ($img == null) {
-            $nombreImagen = "prueba.pdf";
-        } else {
-            $nombreImagen = $img->getClientOriginalName();
-            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
-        }
-        $user = User::find(Auth::id());
-        $categoria = 'Ciencia';
-        $categoria2 = Category::where('category', $categoria)->firstOrFail();
-        $new_article = new Article;
-        $new_article->title = $inputs['title'];
-        $new_article->category = $categoria;
-        $new_article->valoration = 0;
-        $new_article->pdf_path = $nombreImagen;
-        $new_article->content = 'Contenido de prueba'; //$request->input('content');
-        $new_article->acepted = $request->has('accepted');
-        $new_article->guestAccessible = 0;
-        $new_article->category_id = $categoria2->id;
-        $new_article->user()->associate($user);
-        $new_article->save();
-        return back();
-    }
     // Devuelve el formulario de actualización de Article
     public function updateArticleFormulary(Request $request)
     {

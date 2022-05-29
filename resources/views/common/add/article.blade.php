@@ -4,10 +4,8 @@
 <div class="container pt-5">
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active px-4" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos</button>
-            <button class="nav-link px-4" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Archivo</button>
+            <button class="nav-link active px-4" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Datos</button>
+            <button class="nav-link px-4" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Archivo</button>
         </div>
     </nav>
 
@@ -31,19 +29,17 @@
 
                         <div class="container d-flex flex-column">
                             <label class="form-check-label fs-5" for="ArticleCategory">Categoría</label>
-                            <select class="selectpicker w-100" id="ArticleCategory" data-live-search="true"
-                                title="Selecciona una de las siguientes...">
-                                <option data-tokens="1">Categoría 1</option>
-                                <option data-tokens="2">Categoría 2</option>
-                                <option data-tokens="3">Categoría 3</option>
+                            <select class="selectpicker w-100" id="ArticleCategory" data-live-search="true" name="category" title="Selecciona una de las siguientes...">
+                                @foreach($categories as $category)
+                                <option value={{$category->category}}>{{$category->category}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
                     <div class="container">
                         <label class="form-check-label fs-5" for="ArticleDescription">Descripción</label>
-                        <textarea type="textarea" class="form-control" id="ArticleDescription" name="description"
-                            rows="8"></textarea>
+                        <textarea type="textarea" class="form-control" id="ArticleDescription" name="description" rows="8"></textarea>
                     </div>
                 </div>
             </div>
@@ -83,14 +79,14 @@
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 
 <script type="text/javascript">
-    $('#ArticlePDF').on("change", function(){
+    $('#ArticlePDF').on("change", function() {
         var files = $("#ArticlePDF").get(0).files;
-        if(files.length === 1 ){
+        if (files.length === 1) {
             $('#send-btn').removeClass('disabled');
             $('#adobe-dc-view').removeAttr('hidden');
 
             var reader = new FileReader();
-            
+
             reader.onload = function(e) {
                 var filePromise = Promise.resolve(e.target.result);
 
@@ -98,10 +94,14 @@
                     clientId: "39d623d0bca34c73ba77454131227cf3",
                     divId: "adobe-dc-view"
                 });
-    
+
                 adobeDCView.previewFile({
-                    content: { promise: filePromise },
-                    metaData: { fileName: files[0].name }
+                    content: {
+                        promise: filePromise
+                    },
+                    metaData: {
+                        fileName: files[0].name
+                    }
                 }, {
                     embedMode: "IN_LINE",
                     showDownloadPDF: false,
