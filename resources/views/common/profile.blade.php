@@ -61,9 +61,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="container mt-3">
+            <div class="container d-flex flex-column gap-3 mt-3">
                 <a href="{{route('createArticle')}}" class="btn btn-primary w-100">Añadir Artículo</a>
+                <a href="{{route('deleteUser')}}" class="btn btn-danger w-100">Borrar Cuenta</a>
             </div>
+
             @endif
         </div>
 
