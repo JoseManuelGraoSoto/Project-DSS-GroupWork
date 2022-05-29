@@ -108,10 +108,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P1M'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
                 case 74.99:
@@ -120,10 +117,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P3M'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
                 case 199.99:
@@ -132,10 +126,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P1Y'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
                 case 9.99:
@@ -144,10 +135,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P1M'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
                 case 24.99:
@@ -156,10 +144,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P3M'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
                 case 99.99:
@@ -168,10 +153,7 @@ class PaymentController extends Controller
                     $timeZone = new DateTimeZone('Europe/Madrid');
                     $dateNow = new DateTime();
                     $dateNow->setTimezone($timeZone);
-                    $start = $dateNow->getTimestamp();
                     $dateNow->add(new DateInterval('P1Y'));
-                    $end = $dateNow->getTimestamp();
-                    $user->numberDaysSuscripted += ($end - $start) / 86400;
                     $user->endSubscriptionDate = $dateNow->format('Y-m-d');
                     break;
             }

@@ -1,6 +1,19 @@
 @extends('layouts.general')
 
 @section('body-section')
+
+{{-- Error messages --}}
+@if (count($errors) > 0)
+<div class="m-3 gap-3">
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-accent alert-dismissible fade show shadow w-100" role="alert">
+        <strong>Error: </strong> {{ $error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endforeach
+</div>
+@endif-
+
 <div class="container pt-5">
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
