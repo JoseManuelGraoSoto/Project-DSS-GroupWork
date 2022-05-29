@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Article_user;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
 
 class ArticlesController extends Controller
 {
+    const LOCATION = "storage/app/public/articles/";
+    const GUARDAR = "public/articles/";
     // Devuelve la vista articlesList pasándole como parámetro todos los articulos
     public function showAll()
     {
@@ -39,7 +43,7 @@ class ArticlesController extends Controller
             // Cambiar a email en vez de nombre?
             'author' => 'required|exists:users,email',
             'category' => 'required',
-            'image_path' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'selec-txt' => 'required',
             'quantity' => 'required|numeric|between:0,10'
             // Falta de terminar
         ]);
@@ -51,19 +55,30 @@ class ArticlesController extends Controller
         }
 
         $inputs = $validator->validated();
+        $img = $inputs['selec-txt'];
+        if ($img == null) {
+            $nombreImagen = "prueba.pdf";
+        } else {
+            $nombreImagen = $img->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
         $user = User::where('email', $inputs['author'])->firstOrFail();
-        $image = Image::where('', $inputs['author'])->firstOrFail();
+        $categoria = $inputs['category'];
+        $categoria2 = Category::where('category', $categoria)->firstOrFail();
         $new_article = new Article;
         $new_article->title = $inputs['title'];
-        $new_article->category = $inputs['category'];
+        $new_article->category = $categoria;
         $new_article->valoration = $inputs['quantity'];
-        $new_article->image()->associate($image);
+        $new_article->pdf_path = $nombreImagen;
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = $request->has('accepted');
+        $new_article->guestAccessible = 0;
+        $new_article->category_id = $categoria2->id;
         $new_article->user()->associate($user);
         $new_article->save();
         return redirect()->action([ArticlesController::class, 'search'])->withInput();
     }
+
 
     // Devuelve el formulario de actualización de Article
     public function updateArticleFormulary(Request $request)
@@ -80,6 +95,7 @@ class ArticlesController extends Controller
             'title' => 'required',
             // Cambiar a email en vez de nombre?
             'author' => 'required|exists:users,email',
+            'selec-txt' => 'required',
             'category' => 'required',
             'quantity' => 'required|numeric|between:0,10'
             // Falta de terminar
@@ -90,15 +106,26 @@ class ArticlesController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
         $inputs = $validator->validated();
+        $img = $inputs['selec-txt'];
+        if ($img == null) {
+            $nombreImagen = "prueba.pdf";
+        } else {
+            $nombreImagen = $img->getClientOriginalName();
+            \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
+        }
+        $categoria = $inputs['category'];
+        $categoria2 = Category::where('category', $categoria)->firstOrFail();
         $user = User::where('email', $inputs['author'])->firstOrFail();
         $new_article = Article::find($request->input('article_id'));
         $new_article->title = $inputs['title'];
-        $new_article->category = $inputs['category'];
+        $new_article->category = $categoria;
         $new_article->valoration = $inputs['quantity'];
+        $new_article->pdf_path = $nombreImagen;
         $new_article->content = 'Contenido de prueba'; //$request->input('content');
         $new_article->acepted = $request->has('accepted');
+        $new_article->guestAccessible = 0;
+        $new_article->category_id = $categoria2->id;
         $new_article->user()->associate($user);
         $new_article->save();
         return redirect()->action([ArticlesController::class, 'search'])->withInput();

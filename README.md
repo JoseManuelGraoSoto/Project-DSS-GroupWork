@@ -30,9 +30,21 @@ PAYPAL_SECRET=EEE6Se-HPKwOfRCqyBkBSN79GxUfiHI3qfYzkXqlAM_9I_MiwZMuwo3NSGymIV6HkU
 PAYPAL_MODE=sandbox
 ~~~
 Correo de prueba:
+
+
 cuentapruebadss@gmail.com
+
+
 Contraseña:
+
+
 dssdssdss
+
+Si quieres ver las imagenes y los pdfs tienes que poner:
+~~~
+php artisan storage
+> yes
+~~~
 # Medidas para trabajar en colaborativo en Github-DSS
 
 - Comentarios en castellano

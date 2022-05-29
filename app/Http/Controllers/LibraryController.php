@@ -59,7 +59,6 @@ class LibraryController extends Controller
             }
         }
 
-
         return view('common.library', ['articles' => $articles]);
     }
 }

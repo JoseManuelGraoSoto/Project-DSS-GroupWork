@@ -40,8 +40,7 @@ class ArticlesTableSeeder extends Seeder
             } else {
                 $new_article->guestAccessible = 0;
             }
-            $name = $faker->bankAccountNumber;
-            $new_article->pdf_path = $name . '.pdf';
+            $new_article->pdf_path = 'prueba.pdf';
             $new_article->created_at = $faker->dateTimeBetween($startDate = '-4 years', $endDate = 'now', $timezone = 'Europe/Madrid');
             $new_article->user()->associate($faker->numberBetween(501, 700));
             $new_article->save();
