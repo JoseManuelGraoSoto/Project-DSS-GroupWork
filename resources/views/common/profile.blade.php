@@ -117,9 +117,10 @@
                                         <h6 class="mb-0">Repetir contraseña</h6>
                                     </div>
                                     <div class="col-sm-9 text-accent">
-                                        <input type="password" class="form-control-plaintext" id="confirm-password" readonly>
+                                        <input type="password" class="form-control-plaintext" id="confirm-password" name="password_confirmation" readonly>
                                     </div>
                                 </div>
+
                                 <hr>
                             </div>
 

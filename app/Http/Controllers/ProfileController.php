@@ -48,7 +48,7 @@ class ProfileController extends Controller
             }
         } else if (empty($request->input('email')) && empty($request->input('telephone'))) {
             $validator = Validator::make($request->all(), [
-                'password' => [Password::min(8)
+                'password' => ['confirmed', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
@@ -61,11 +61,11 @@ class ProfileController extends Controller
             ]);
         } else if (empty($request->input('telephone')) && empty($request->input('password'))) {
             $validator = Validator::make($request->all(), [
-                'email' => 'email',
+                'email' => ['email', 'unique:users'],
             ]);
         } else if (empty($request->input('email'))) {
             $validator = Validator::make($request->all(), [
-                'password' => [Password::min(8)
+                'password' => ['confirmed', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
@@ -75,13 +75,13 @@ class ProfileController extends Controller
             ]);
         } else if (empty($request->input('password'))) {
             $validator = Validator::make($request->all(), [
-                'email' => 'email',
+                'email' => ['email', 'unique:users'],
                 'telephone' => 'regex:/([0-9]){3,3}([ ]){1,1}([0-9]){3,3}([ ]){1,1}([0-9]){3,3}/'
             ]);
         } else if (empty($request->input('telephone'))) {
             $validator = Validator::make($request->all(), [
-                'email' => 'email',
-                'password' => [Password::min(8)
+                'email' => ['email', 'unique:users'],
+                'password' => ['confirmed', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
@@ -90,8 +90,8 @@ class ProfileController extends Controller
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'email' => 'email',
-                'password' => [Password::min(8)
+                'email' => ['email', 'unique:users'],
+                'password' => ['confirmed', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
