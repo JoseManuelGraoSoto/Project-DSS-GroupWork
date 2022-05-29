@@ -42,7 +42,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach($articles as $article)
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{route('article', ['id' => $article->id])}}" class="text-decoration-none">
                                 <h6>{{$article->title}}</h6>
                             </a>
                         </li>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="container mt-3">
-                <a href="#" class="btn btn-primary w-100">Añadir Artículo</a>
+                <a href="{{route('createArticle')}}" class="btn btn-primary w-100">Añadir Artículo</a>
             </div>
             @endif
         </div>
