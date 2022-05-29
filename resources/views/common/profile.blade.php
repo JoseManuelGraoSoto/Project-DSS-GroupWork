@@ -44,6 +44,11 @@
                 </div>
             </div>
 
+            @if(Auth::user()->type == 'reader')
+            <div class="container d-flex flex-column gap-3 mt-3">
+                <a href="{{route('deleteUser')}}" class="btn btn-danger w-100">Borrar Cuenta</a>
+            </div>
+            @endif
             @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
             <div class="card mt-3">
                 <div class="card-header">
@@ -117,9 +122,10 @@
                                         <h6 class="mb-0">Repetir contraseña</h6>
                                     </div>
                                     <div class="col-sm-9 text-accent">
-                                        <input type="password" class="form-control-plaintext" id="confirm-password" readonly>
+                                        <input type="password" class="form-control-plaintext" id="confirm-password" name="password_confirmation" readonly>
                                     </div>
                                 </div>
+
                                 <hr>
                             </div>
 

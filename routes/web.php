@@ -25,8 +25,6 @@ use App\Http\Controllers\TransactionUsersController;
 |
 */
 
-
-
 Auth::routes();
 
 // Home Controller
