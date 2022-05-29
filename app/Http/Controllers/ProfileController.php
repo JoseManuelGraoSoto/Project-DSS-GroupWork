@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Valoration;
 use App\Models\Article_user;
+use App\Models\Reward;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +28,8 @@ class ProfileController extends Controller
         $numArticleAccess = $articleAccess->count();
         $articles = Article::where('user_id', $user->id)->get();
         $numArticle = $articles->count();
-        return view('common.profile', ['user' => $user, 'articles' => $articles, 'numValorations' => $numValorations, 'numArticleAccess' => $numArticleAccess, 'numArticle' => $numArticle]);
+        $reward = Reward::where('user_id', $user->id)->first();
+        return view('common.profile', ['user' => $user, 'articles' => $articles, 'numValorations' => $numValorations, 'numArticleAccess' => $numArticleAccess, 'numArticle' => $numArticle, 'reward' => $reward]);
     }
 
     public function updateProfile(Request $request)

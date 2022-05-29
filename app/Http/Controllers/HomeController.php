@@ -25,8 +25,8 @@ class HomeController extends Controller
     public function loadContent()
     {
         $articles = Article::select('articles.title', 'articles.content', 'articles.id', 'articles.created_at', DB::raw('AVG(valorations.value) as value'), 'users.name')->leftjoin('valorations', 'valorations.article_id', '=', 'articles.id')->leftjoin('users', 'users.id', '=', 'articles.user_id')->where('guestAccessible', 1)->where('acepted', 1)->groupby('articles.id')->get();
-        $rewardsAuthors = Reward::select('rewards.points', 'users.name')->leftjoin('users', 'users.id', '=', 'rewards.user_id')->where('isModerator', 0)->orderByDesc('points')->limit(20)->get();
-        $rewardsModerators = Reward::select('rewards.points', 'users.name')->leftjoin('users', 'users.id', '=', 'rewards.user_id')->where('isModerator', 1)->orderByDesc('points')->limit(20)->get();
+        $rewardsAuthors = Reward::select('rewards.points', 'users.name')->leftjoin('users', 'rewards.user_id', '=', 'users.id')->where('isModerator', 0)->whereYear('rewards.created_at', date('Y'))->whereMonth('rewards.created_at', date('m'))->orderByDesc('points')->limit(20)->get();
+        $rewardsModerators = Reward::select('rewards.points', 'users.name')->leftjoin('users', 'users.id', '=', 'rewards.user_id')->where('isModerator', 1)->whereYear('rewards.created_at', date('Y'))->whereMonth('rewards.created_at', date('m'))->orderByDesc('points')->limit(20)->get();
         return view('welcome.landingpage', ['articles' => $articles, 'rewardsAuthors' => $rewardsAuthors, 'rewardsModerators' => $rewardsModerators]);
     }
 }
