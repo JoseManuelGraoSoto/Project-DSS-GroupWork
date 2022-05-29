@@ -44,6 +44,11 @@
                 </div>
             </div>
 
+            @if(Auth::user()->type == 'reader')
+            <div class="container d-flex flex-column gap-3 mt-3">
+                <a href="{{route('deleteUser')}}" class="btn btn-danger w-100">Borrar Cuenta</a>
+            </div>
+            @endif
             @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
             <div class="card mt-3">
                 <div class="card-header">
@@ -61,9 +66,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="container mt-3">
+            <div class="container d-flex flex-column gap-3 mt-3">
                 <a href="{{route('createArticle')}}" class="btn btn-primary w-100">Añadir Artículo</a>
+                <a href="{{route('deleteUser')}}" class="btn btn-danger w-100">Borrar Cuenta</a>
             </div>
+
             @endif
         </div>
 
@@ -115,9 +122,10 @@
                                         <h6 class="mb-0">Repetir contraseña</h6>
                                     </div>
                                     <div class="col-sm-9 text-accent">
-                                        <input type="password" class="form-control-plaintext" id="confirm-password" readonly>
+                                        <input type="password" class="form-control-plaintext" id="confirm-password" name="password_confirmation" readonly>
                                     </div>
                                 </div>
+
                                 <hr>
                             </div>
 
@@ -159,6 +167,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <small>Fecha de caducidad de suscripción</small>
                                 <small>{{Auth::user()->endSubscriptionDate}}</small>
+
                             </div>
 
                         </div>

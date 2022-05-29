@@ -25,8 +25,6 @@ use App\Http\Controllers\TransactionUsersController;
 |
 */
 
-
-
 Auth::routes();
 
 // Home Controller
@@ -36,6 +34,9 @@ Route::get('/', [HomeController::class, 'loadContent'])->name('home');
 Route::get('/article/{id}', [SingleArticleController::class, 'getArticle'])->name('article');
 
 Route::middleware('auth')->middleware('is_suscribed')->group(function () {
+
+    Route::get('/user/delete', [ProfileController::class, 'delete'])->name('deleteUser');
+
     // Crear valoración
     Route::post('/article/{id}/createValoration', [SingleArticleController::class, 'createValoration'])->name('article.valoration.create');
 
@@ -77,7 +78,7 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
         Route::get('/volver', [UsersController::class, 'volver']);
 
         //Delete
-        Route::get('/users/delete', [UsersController::class, 'delete']);
+        Route::get('/users/delete', [UsersController::class, 'delete'])->name('user.delete');
 
         //Search
         Route::get('/searchUserForm', [UsersController::class, 'searchUserFormulary'])->name('user.serachForm');
