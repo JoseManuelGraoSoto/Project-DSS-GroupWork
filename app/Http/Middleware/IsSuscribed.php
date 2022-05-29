@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class IsSuscribed
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->type == 'administrator'){
+        if(auth()->user()->endSubscriptionDate >= date('Y-m-d')){
             return $next($request);
         }
    
-        return abort(403);
+        return abort(409);
     }
 }

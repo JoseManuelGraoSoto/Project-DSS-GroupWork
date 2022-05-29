@@ -475,6 +475,10 @@
     grid-template-columns: .5fr 1fr 1.5fr .5fr 1fr 3fr 1fr 1fr;
 }
 
+.transaccion {
+    grid-template-columns: .5fr 1fr 1.5fr .5fr 1fr 3fr 1fr 1fr;
+}
+
 .info-db:hover {
     border: 3px solid var(--outline-color-strong);
     border-left: none;

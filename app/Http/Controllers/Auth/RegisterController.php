@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
+
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -29,8 +32,20 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+        if ($user->endSubscriptionDate >= date('Y-m-d')) {
+            return RouteServiceProvider::HOME;
+        } else {
+            return RouteServiceProvider::SUSCRIP;
+        }
+    }
     /**
      * Create a new controller instance.
      *
