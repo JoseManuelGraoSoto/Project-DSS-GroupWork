@@ -33,7 +33,6 @@
     <span class="display-data-label">Titulo</span>
     <span class="display-data-label">Autor</span>
     <span class="display-data-label">Categoría</span>
-    <span class="display-data-label">Valoración</span>
     <span class="display-data-label">¿Aceptado?</span>
     <span class="display-data-label">Fecha de creación</span>
     <span class="display-data-label">Última modificación</span>
@@ -45,7 +44,6 @@
     <span class="display-data">{{$article->title}}</span>
     <span class="display-data">{{$article->user->email}}</span>
     <span class="display-data">{{$article->category}}</span>
-    <span class="display-data">{{$article->valoration}}</span>
     <span class="display-data">
         @if($article->acepted)
         Aceptado

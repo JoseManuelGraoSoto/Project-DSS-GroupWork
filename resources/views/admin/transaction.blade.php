@@ -48,7 +48,7 @@
 @endsection
 
 @section('display')
-<div class="upper-separator valoration">
+<div class="upper-separator transaction">
     <span class="display-data-label">ID</span>
     <span class="display-data-label">Usuario</span>
     <span class="display-data-label">Tipo de Usuario</span>
@@ -59,7 +59,7 @@
 </div>
 
 @foreach($transactions as $transaction)
-<div class="info-db valoration">
+<div class="info-db transaction">
     <span id="id" class="display-data">{{$transaction->id}}</span>
     <span class="display-data">{{$transaction->email}}</span>
     <span class="display-data">@if ($transaction->type == 'reader')

@@ -29,10 +29,15 @@
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href=" {{ route('profile') }} ">Perfil</a></li>
                 @auth
-                @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
-                <li><a class="dropdown-item bg-accent" href=" {{ route('createArticle') }} ">Añadir artículo</a></li>
-                @endif
+                    @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
+                    <li><a class="dropdown-item bg-accent" href=" {{ route('createArticle') }} ">Añadir artículo</a></li>
+                    @endif
+                    
+                    @if(Auth::user()->type == 'administrator')
+                    <li><a class="dropdown-item bg-accent" href=" {{ route('adminHome') }} ">Panel de administrador</a></li>
+                    @endif
                 @endauth
+                
                 <div class="dropdown-divider"></div>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

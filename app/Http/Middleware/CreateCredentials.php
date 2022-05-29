@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class IsSuscribed
+class CreateCredentials
 {
     /**
      * Handle an incoming request.
@@ -17,13 +16,10 @@ class IsSuscribed
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check())
-            return abort(403);
-
-        if(auth()->user()->endSubscriptionDate >= date('Y-m-d')){
+        if(auth()->user()->type == 'author' || auth()->user()->type == 'moderator'){
             return $next($request);
         }
    
-        return abort(409);
+        return abort(403);
     }
 }

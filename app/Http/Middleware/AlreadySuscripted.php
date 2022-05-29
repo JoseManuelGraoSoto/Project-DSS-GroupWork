@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
-class IsSuscribed
+class AlreadySuscripted
 {
     /**
      * Handle an incoming request.
@@ -17,13 +18,14 @@ class IsSuscribed
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check())
-            return abort(403);
+        $guards = empty($guards) ? [null] : $guards;
 
-        if(auth()->user()->endSubscriptionDate >= date('Y-m-d')){
-            return $next($request);
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check() && auth()->user()->endSubscriptionDate >= date('Y-m-d')) {
+                return redirect(RouteServiceProvider::HOME);
+            }
         }
-   
-        return abort(409);
+
+        return $next($request);
     }
 }

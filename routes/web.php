@@ -47,7 +47,7 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
     Route::post('/article/{id}/accept', [SingleArticleController::class, 'acceptArticle'])->name('article.acept')->middleware('is_moderator');
 
     // Ruta crear articulo
-    Route::get('/articleCreate', [SingleArticleController::class, 'createArticle'])->name('createArticle');
+    Route::get('/articleCreate', [SingleArticleController::class, 'createArticle'])->name('createArticle')->middleware('create_credentials');
     // Ruta biblioteca
     Route::get('/library', [LibraryController::class, 'search'])->name('library');
 
@@ -161,8 +161,7 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
 // Rutas suscripcion
 Route::get('/subscrip', function () {
     return view('client.subscrip');
-})->name('subscribe');
+})->name('subscribe')->middleware('already_suscripted');
 
-//Rutas plataforma de Pago, la segunda hay que modificarla en el controlador y mostrarla como un pop up y actualizar la base de datos
-Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay');
-Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('status');
+Route::get('/paypal/pay', [PaymentController::class, 'payWithPayPal'])->name('pay')->middleware('already_suscripted');
+Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('status')->middleware('already_suscripted');
