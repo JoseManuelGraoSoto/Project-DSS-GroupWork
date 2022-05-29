@@ -141,7 +141,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Meses suscrito</small>
+                                <small>Dias suscrito</small>
                                 <small>{{Auth::user()->numberDaysSuscripted}}</small>
                             </div>
 
