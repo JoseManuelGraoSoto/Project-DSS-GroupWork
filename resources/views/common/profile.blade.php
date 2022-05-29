@@ -44,6 +44,11 @@
                 </div>
             </div>
 
+            @if(Auth::user()->type == 'reader')
+            <div class="container d-flex flex-column gap-3 mt-3">
+                <a href="{{route('deleteUser')}}" class="btn btn-danger w-100">Borrar Cuenta</a>
+            </div>
+            @endif
             @if(Auth::user()->type == 'author' || Auth::user()->type == 'moderator')
             <div class="card mt-3">
                 <div class="card-header">
