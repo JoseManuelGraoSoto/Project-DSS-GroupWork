@@ -1,17 +1,6 @@
 @extends('layouts.general')
 
 @section('body-section')
-{{-- Error messages --}}
-@if (count($errors) > 0)
-<div class="m-3 gap-3">
-    @foreach ($errors->all() as $error)
-    <div class="alert alert-accent alert-dismissible fade show shadow w-100" role="alert">
-        <strong>Error: </strong> {{ $error}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endforeach
-</div>
-@endif
 
 <div class="container mt-3 pt-5">
     <div class="row gutters-sm">
@@ -152,7 +141,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Dias suscrito</small>
+                                <small>Meses suscrito</small>
                                 <small>{{Auth::user()->numberDaysSuscripted}}</small>
                             </div>
 

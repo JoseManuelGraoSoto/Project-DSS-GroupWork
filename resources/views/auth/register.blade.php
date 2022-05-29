@@ -494,7 +494,7 @@
                 <div class="d-flex flex-column">
                     <label for="telephone" class="form-label small ms-2">{{ __('Teléfono') }}</label>
 
-                    <input id="telephone" type="text" class="form-control @error('telephone') is-invalid @enderror" required name="telephone" value="{{ old('telephone') }}" autocomplete="telephone" placeholder="123 456 789">
+                    <input id="telephone" type="text" class="form-control @error('telephone') is-invalid @enderror" required name="telephone" value="{{ old('telephone') }}" autocomplete="telephone" placeholder="123 45 67 89">
 
                     @error('telephone')
                     <span class="invalid-feedback" role="alert">
@@ -505,11 +505,11 @@
             </div>
 
             <div class="row mb-3">
-
+                
                 <div class="d-flex flex-column">
                     <label for="password" class="form-label small ms-2">{{ __('Contraseña') }}</label>
 
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Ejemplo123@">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="ejemplo123">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -519,11 +519,11 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3">                
                 <div class="d-flex flex-column">
                     <label for="password-confirm" class="form-label small ms-2">{{ __('Repetir contraseña') }}</label>
-
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Ejemplo123@">
+                    
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="ejemplo123">
                 </div>
             </div>
 
