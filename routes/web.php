@@ -55,6 +55,7 @@ Route::middleware('auth')->middleware('is_suscribed')->group(function () {
     Route::get('/profile', [ProfileController::class, 'updateProfileFormulary'])->name('profile');
     Route::post('/profileUpdate', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 
+    Route::post('/anyadirArticulo', [ArticlesController::class, 'createArticleUser'])->name('createArticleUser');
     /**************** RUTAS ADMIN ***************/
     Route::middleware('is_admin')->group(function () {
         //Rutas users

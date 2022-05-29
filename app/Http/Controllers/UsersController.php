@@ -106,6 +106,7 @@ class UsersController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $inputs = $validator->validated();
         $img = $inputs['selec-img'];
         if ($img == null) {
             $nombreImagen = "default.png";
@@ -113,7 +114,6 @@ class UsersController extends Controller
             $nombreImagen = $request->file('selec-img')->getClientOriginalName();
             \Storage::disk('local')->put(self::GUARDAR . $nombreImagen, \File::get($img));
         }
-        $inputs = $validator->validated();
         $new_user = User::find($request->input('user_id'));
         $new_user->name = $inputs['name'];
         $new_user->type = $inputs['radio'];

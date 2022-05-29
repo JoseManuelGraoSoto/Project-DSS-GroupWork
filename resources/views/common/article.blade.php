@@ -95,11 +95,11 @@
     adobeDCView.previewFile({
       content: {
         location: {
-          url: "{{ URL::asset('sample.pdf'); }}"
+          url: "{{  URL::asset('storage/articles/'. $article->pdf_path);  }}"
         }
       },
       metaData: {
-        fileName: "sample.pdf"
+        fileName: "{{$article->pdf_path}}"
       }
     }, {
       embedMode: "IN_LINE",
