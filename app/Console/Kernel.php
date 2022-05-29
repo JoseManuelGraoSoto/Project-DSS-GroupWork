@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
                 $user->numberDaysSuscripted = $user->numberDaysSuscripted + 1;
                 $user->save();
             }
-        })->daily()->runInBackground();
+        })->everyMinute()->runInBackground()->timezone('Europe/Madrid'); //Está puesto everyMinute() para probar, deberia ponerse daily()
     }
 
     /**
