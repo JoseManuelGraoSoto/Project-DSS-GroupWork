@@ -23,18 +23,18 @@ class SingleArticleController extends Controller
         $user = Auth::id();
         $article->access()->attach($user);
 
-        if(!Auth::check()) {
-            if(!$article->guestAccessible)
+        if (!Auth::check()) {
+            if (!$article->guestAccessible)
                 abort(403);
             else
                 return view('common.article', ['article' => $article]);
         } else {
-            if(!$article->acepted && Auth::user()->type != 'moderator')
+            if (Auth::id() != $article->user_id && (!$article->acepted &&  Auth::user()->type != 'moderator')) {
                 abort(403);
-    
+            }
             $valoration = Valoration::where('article_id', $id)->where('user_id', Auth::user()->id)->first();
             return view('common.article', ['article' => $article, 'valoration' => $valoration]);
-        }   
+        }
     }
 
     public function acceptArticle(Request $request, $article_id)
@@ -57,9 +57,6 @@ class SingleArticleController extends Controller
         $valoration->value = ($request->input('star') == null) ? 0 : $request->input('star');
         $valoration->user_id = Auth::user()->id;
         $valoration->article_id = $id;
-        // Hay que quitar lo siguiente
-        $valoration->comment = "";
-        $valoration->isModerator = 0;
         $valoration->save();
         return back();
     }
