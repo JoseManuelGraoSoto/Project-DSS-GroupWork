@@ -179,8 +179,8 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Recompensas (?)</small>
-                                <small>3</small>
+                                <small>Recompensas</small>
+                                <small>{{($reward !== null) ? $reward->points : 0}}</small>
                             </div>
 
                         </div>
@@ -199,18 +199,8 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Veces en el podium de puntuaciones de autores</small>
-                                <small>23</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Veces en la lista de puntuaciones de autores</small>
-                                <small>12</small>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
-                                <small>Recompensas (?)</small>
-                                <small>3</small>
+                                <small>Recompensas</small>
+                                <small>{{($reward !== null) ? $reward->points : 0}}</small>
                             </div>
                         </div>
                     </div>
