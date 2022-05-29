@@ -90,7 +90,6 @@ class SingleArticleController extends Controller
         $new_article = new Article;
         $new_article->title = $inputs['title'];
         $new_article->category = $categoria->category;
-        $new_article->valoration = 0;
         $new_article->pdf_path = $nombreImagen;
         $new_article->content = $inputs['description']; //$request->input('content');
         $new_article->acepted = 0;
